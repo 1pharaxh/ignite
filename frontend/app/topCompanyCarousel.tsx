@@ -35,7 +35,7 @@ setCurrentIndex(currentIndex + 1);
 return (
     <div className="bg-white py-4 px-8 flex flex-col justify-center items-center">
     <span className="my-10">
-    <span className="text-black font-bold text-4xl">Current Top<span className="text-teal-700 font-bold text-4xl"> Companies</span></span>
+    <span className="text-black font-semibold text-4xl">Current Top<span className="text-teal-700 font-semibold text-4xl"> Companies</span></span>
     </span>
     <div className="relative">
 
