@@ -6,7 +6,7 @@ function Companies() {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch('https://ignite-25g9.onrender.com/getAll')
+            const response = await fetch('https://ignite-25g9.onrender.com/companies')
             const data = await response.json()
             setCompanies(data)
         }
