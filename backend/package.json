@@ -1,0 +1,14 @@
+{
+  "name": "ignite_backend",
+  "version": "1.0.0",
+  "description": "An express Js based backend responsible for manageing content between the frontend app and the MongoDb server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akarshan Mishra",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
