@@ -1,7 +1,17 @@
-import React from 'react'
-import test from '../static/logos/bj_capital.png'
+import React, { useState, useEffect } from 'react'
+
 function Companies() {
-    const googleDriveImage = 'https://drive.google.com/uc?export=view&id=1cib3mrG338kQbSrRKheh33Dh6tNEQVuR'
+    const googleDriveImage = 'https://drive.google.com/uc?export=view&id='
+    const [companies, setCompanies] = useState([])
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch('https://ignite-25g9.onrender.com/getAll')
+            const data = await response.json()
+            setCompanies(data)
+        }
+        fetchData()
+    }, [])
     return (
         <div className='flex flex-col relative h-full w-full'>
             {/*TEAL COLOR*/}
@@ -20,16 +30,20 @@ function Companies() {
                 </div>
             </div>
             <h1 className='text-4xl text-teal-700 font-medium content-center my-16 mx-16'> Our top recruiters!</h1>
-            <div class="grid grid-cols-4 gap-4 px-16">
+            <div className="grid grid-cols-4 gap-4 px-16">
 
-                <div className='bg-teal-700 h-44 w-9/12 items-center  rounded-xl p-5 justify-center flex flex-col' >
-                    <img className='rounded-md' src={googleDriveImage + "1cib3mrG338kQbSrRKheh33Dh6tNEQVuR"} width={200} ></img>
-                    <h1 className='text-xl text-white font-medium content-center'> Company Name</h1>
-                </div>
+                {companies.map(company => (
+                    console.log(company.name),
+                    < div key={company.name} className='bg-teal-700 h-44 w-9/12 items-center  rounded-xl p-5 justify-center flex flex-col' >
+                        <img className='rounded-md' src={googleDriveImage + company.image} width={200} ></img>
+                        <h1 className='text-xl text-white font-medium content-center'>{company.name}</h1>
+
+                    </div>
+                ))}
 
 
             </div>
-        </div>
+        </div >
     )
 }
 
