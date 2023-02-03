@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"); // MongoDB ODM
 
 const port = process.env.PORT || 3000;
 const dbUri = process.env.DB_URI;
