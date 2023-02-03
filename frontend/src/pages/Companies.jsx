@@ -33,8 +33,7 @@ function Companies() {
             <div className="grid grid-cols-4 gap-4 px-16">
 
                 {companies.map(company => (
-                    console.log(company.name),
-                    < div key={company.name} className='bg-teal-700 h-44 w-9/12 items-center  rounded-xl p-5 justify-center flex flex-col' >
+                    < div key={company._id} className='bg-teal-700 h-44 w-9/12 items-center  rounded-xl p-5 justify-center flex flex-col' >
                         <img className='rounded-md' src={googleDriveImage + company.image} width={200} ></img>
                         <h1 className='text-xl text-white font-medium content-center'>{company.name}</h1>
 
