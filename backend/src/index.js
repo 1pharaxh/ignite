@@ -29,7 +29,7 @@ const companySchema = new mongoose.Schema({
 
 const Company = mongoose.model("companies", companySchema);
 
-app.get("/getAll", (req, res) => {
+app.get("/companies", (req, res) => {
   Company.find({}, (err, companies) => {
     if (err) {
       return res.status(500).send(err);
