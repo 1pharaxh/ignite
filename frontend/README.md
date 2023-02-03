@@ -1,27 +1,17 @@
-# Next.js + Tailwind CSS Example
+<p align="center">
+  <h1>Vite + React + TailwindCss + JIT</h1>
+</p>
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+<p>
+<img src="https://img.shields.io/github/stars/vivekascoder/vite-react-tailwind-jit?style=for-the-badge">
+<img src="https://img.shields.io/github/forks/vivekascoder/vite-react-tailwind-jit?style=for-the-badge">
+</p>
 
-## Deploy your own
+This template allows you to quickly scaffold a React project with React Router, TailwindCss with JIT Compiler and vite as a bundler. We use Vite because it's much faster than webpack. We use tailwindcss JIT compiler because it makes tailwindcss build time negligible and offers more features that you can check here [Tailwind JIT](https://tailwindcss.com/docs/just-in-time-mode). Talking about Vite, you can find more information here [Vite](https://vitejs.dev/).
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## How to Install.
+First of all make sure you have yarn installed. If you have it you can create a new repo with this template and can clone it.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+![Use this template](https://i.imgur.com/Gtt5CPx.png)
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+After clonning it, you can simply go to the folder and type `yarn` to install the dependencies.
