@@ -39,6 +39,17 @@ app.get("/companies", (req, res) => {
   });
 });
 
+app.get("/companies/:id", (req, res) => {
+  const id = req.params.id;
+  Company.findOne({ _id: id }, (err, company) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    console.log(company);
+    return res.status(200).send(company);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
