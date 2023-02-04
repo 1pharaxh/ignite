@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners';
+import desk from '../static/images/desk.jpg'
 
 function Companies() {
     const googleDriveImage = 'https://drive.google.com/uc?export=view&id='
@@ -29,12 +30,23 @@ function Companies() {
 
 
             {/*TEAL COLOR*/}
-            <div className={`${!loading ? `opacity-100` : `opacity-50`} overflow-visible flex flex-col  mx-0 bg-teal-600 h-80 w-full overflow-auto`}>
-                <div className='flex items-center justify-center w-full h-full'>
-                    <h1 className='text-5xl text-white font-medium content-center'> Find your favourite company!</h1>
+
+            <div
+                style={{
+                    backgroundImage: `url(${desk})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                }} className={`${!loading ? `opacity-100` : `opacity-50`} overflow-visible flex flex-col bg-teal-600  mx-0 h-80 w-full overflow-auto`}>
+                <div style={{
+                    backgroundColor: 'rgba(13, 148, 136, 0.8)'
+                }} className='h-80 z-1'>
+                    <div className='flex items-center justify-center w-full h-full'>
+                        <h1 className='text-5xl text-white font-medium content-center'> Find your favourite company!</h1>
+                    </div>
                 </div>
+
                 {/* search BAR*/}
-                <div className='w-full justify-center items-center flex'>
+                <div className='w-full justify-center items-center flex '>
                     <div className='shadow-md absolute top-64 bottom-0 flex m-10 items-center bg-white h-20 w-11/12 rounded-lg mx-8 my-6 px-10'>
                         <input className='px-4 py-2 w-full text-sm outline-none' type='text' placeholder='Search...' />
                         <button className='flex items-center px-4 py-2 bg-teal-600 text-white hover:bg-teal-700 rounded-lg text-sm'>
