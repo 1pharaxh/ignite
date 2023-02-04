@@ -19,6 +19,7 @@ function Navbar() {
   // This is the hook that we will use to get the current location (URL parameters)
   // To highlight the current page in the navbar
   const location = useLocation();
+  console.log(location.pathname)
 
   // This is to manually invoke a link
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ function Navbar() {
           <ul className="flex items-center space-x-2 text-md mr-10">
             <NavBarTabs text="Home" link="/" bg={location.pathname == '/' ? 'bg-teal-700 text-white' : 'bg-white'} />
             <NavBarTabs text="About" link="/about" bg={location.pathname == '/about' ? 'bg-teal-700 text-white' : 'bg-white'} />
-            <NavBarTabs text="Companies" link="/companies" bg={location.pathname == '/companies' ? 'bg-teal-700 text-white' : 'bg-white'} />
+            <NavBarTabs text="Companies" link="/companies" bg={location.pathname.includes("compan") ? 'bg-teal-700 text-white' : 'bg-white'} />
             <NavBarTabs text="How to Apply" link="/how-to-apply" bg={location.pathname == '/how-to-apply' ? 'bg-teal-700 text-white' : 'bg-white'} />
             <NavBarTabs text="Resources" link="/resources" bg={location.pathname == '/resources' ? 'bg-teal-700 text-white' : 'bg-white'} />
             <NavBarTabs text="Contact Us" link="/contact-us" bg={location.pathname == '/contact-us' ? 'bg-teal-700 text-white' : 'bg-white'} />
