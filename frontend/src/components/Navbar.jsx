@@ -19,7 +19,6 @@ function Navbar() {
   // This is the hook that we will use to get the current location (URL parameters)
   // To highlight the current page in the navbar
   const location = useLocation();
-  console.log(location.pathname)
 
   // This is to manually invoke a link
   const navigate = useNavigate();
