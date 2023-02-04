@@ -24,7 +24,7 @@ function Navbar() {
   const navigate = useNavigate();
   const handleClick = useCallback(() => { navigate('/') }, [navigate]);
   return (
-    <div className="fixed px-5 left-0 right-0 top-0 h-20 shadow-md border-b-2 border-gray-100 bg-white">
+    <div className="z-10 fixed px-5 left-0 right-0 top-0 h-20 shadow-md border-b-2 border-gray-100 bg-white">
       <nav className="flex items-center container mx-auto h-full justify-between">
         {/* <h1 className="font-semibold uppercase text-lg text-gray-200">
           🔄 Demo App
