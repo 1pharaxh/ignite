@@ -36,7 +36,7 @@ function Companies() {
                     backgroundImage: `url(${desk})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
-                }} className={`${!loading ? `opacity-100` : `opacity-50`} overflow-visible flex flex-col bg-teal-600  mx-0 h-80 w-full overflow-auto`}>
+                }} className={`${!loading ? `opacity-100` : `opacity-50`} overflow-visible flex flex-col bg-teal-600  mx-0 h-80 w-full`}>
                 <div style={{
                     backgroundColor: 'rgba(13, 148, 136, 0.8)'
                 }} className='h-80 z-1'>
