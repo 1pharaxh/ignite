@@ -57,6 +57,27 @@ app.get("/companies/:id", (req, res) => {
   });
 });
 
+app.get("/search/:key", (req, res) => {
+  const key = req.params.key;
+  Company.find(
+    {
+      $or: [
+        { name: { $regex: key, $options: "i" } },
+        { "about.download_job_descrip": { $regex: key, $options: "i" } },
+        { "about.about_comp": { $regex: key, $options: "i" } },
+        { "about.website": { $regex: key, $options: "i" } },
+        { "about.work_location": { $regex: key, $options: "i" } },
+      ],
+    },
+    (err, companies) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      console.log(companies);
+      return res.status(200).send(companies);
+    }
+  );
+});
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
