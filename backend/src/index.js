@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
-const mongoose = require("mongoose"); // MongoDB ODM
+const mongoose = require("mongoose");
 
 const port = process.env.PORT || 3000;
 const dbUri = process.env.DB_URI;
@@ -34,16 +34,26 @@ const companySchema = new mongoose.Schema({
     profile: Object,
   },
 });
-
 const Company = mongoose.model("companies", companySchema);
 
-app.get("/getAll", (req, res) => {
+app.get("/companies", (req, res) => {
   Company.find({}, (err, companies) => {
     if (err) {
       return res.status(500).send(err);
     }
     console.log(companies);
     return res.status(200).send(companies);
+  });
+});
+
+app.get("/companies/:id", (req, res) => {
+  const id = req.params.id;
+  Company.findOne({ _id: id }, (err, company) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    console.log(company);
+    return res.status(200).send(company);
   });
 });
 
