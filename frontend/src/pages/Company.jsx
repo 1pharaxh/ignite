@@ -4,9 +4,17 @@ import desk from '../static/images/desk.jpg'
 import CompanyCard from '../components/CompanyCard';
 import JobCard from '../components/JobCard';
 import PerkAndEligibleCard from '../components/PerkAndEligibleCard';
+import Dropdown from '../components/Dropdown';
 function Company() {
     const [data, setData] = useState({});
     const [about, setAbout] = useState({});
+
+    // USE THIS HOOK and HANDLER TO GET DATA BACK FROM CHILD
+    const [name, setName] = useState('NO SHIT');
+    const handleNameChange = (newName) => {
+        setName(newName);
+    };
+
     const { id } = useParams();
     const googleDriveImage = 'https://drive.google.com/uc?export=view&id='
 
@@ -58,6 +66,7 @@ function Company() {
                     <div className='flex'>
                         <h1 className='text-lg'>
                             {about.about_comp}
+                            {name}
                         </h1>
                     </div>
                 </div>
@@ -67,7 +76,9 @@ function Company() {
                     <CompanyCard title={'Website'} icon={'fa fa-globe'} body={about.website} ></CompanyCard>
                     <CompanyCard title={'Work Location'} icon={'fa fa-building'} body={about.work_location} ></CompanyCard>
                     {/* {NEED TO COMPLETE THE ONE BELOW} */}
-                    <CompanyCard title={'Profile(s) included'} icon={'fa fa-suitcase'} body={about.profile} ></CompanyCard>
+
+                    <Dropdown onNameChange={handleNameChange} body={["X", "Y", "Z"]} />
+
                 </div>
             </div>
             <div className='flex flex-col mx-16 my-16 gap-10'>

@@ -6,9 +6,9 @@ export default function JobCard({ title, duration, roles, requirements }) {
             <h1 className="text-md font-semibold text-white">Duration: <span className="text-yellow-400">{duration}</span></h1>
             <h1 className="text-xl font-semibold text-yellow-400">Roles and Requirements</h1>
             <div className="row row-col gap-2 pl-5">
-                {roles.map((role) => {
+                {roles.map((role, index) => {
                     return (
-                        <div className="flex flex-row gap-4">
+                        <div className="flex flex-row gap-4" key={index}>
                             <h1 className="text-md font-semibold text-white">• </h1>
                             <h1 className="text-md font-semibold text-white">{role}</h1>
                         </div>
@@ -18,9 +18,9 @@ export default function JobCard({ title, duration, roles, requirements }) {
             </div>
             <h1 className="text-xl font-semibold text-yellow-400">Requirements</h1>
             <div className="row row-col gap-2 pl-5">
-                {requirements.map((requirement) => {
+                {requirements.map((requirement, index) => {
                     return (
-                        <div className="flex flex-row gap-4">
+                        <div className="flex flex-row gap-4" key={index}>
                             <h1 className="text-md font-semibold text-white">• </h1>
                             <h1 className="text-md font-semibold text-white">{requirement}</h1>
                         </div>
