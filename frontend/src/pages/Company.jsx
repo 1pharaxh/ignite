@@ -8,11 +8,12 @@ import Dropdown from '../components/Dropdown';
 function Company() {
     const [data, setData] = useState({});
     const [about, setAbout] = useState({});
+    const [profile, setProfile] = useState([]);
 
     // USE THIS HOOK and HANDLER TO GET DATA BACK FROM CHILD
-    const [name, setName] = useState('NO SHIT');
-    const handleNameChange = (newName) => {
-        setName(newName);
+    const [key, setKey] = useState('');
+    const handleNameChange = (newKey) => {
+        setKey(newKey);
     };
 
     const { id } = useParams();
@@ -20,14 +21,39 @@ function Company() {
 
     useEffect(() => {
         async function fetchData() {
+            var temp = []
             const response = await fetch('https://ignite-25g9.onrender.com/companies/' + id)
             const data = await response.json()
             setData(data)
             setAbout(data.about)
-
+            Object.keys(data.about.profile).forEach((key) => {
+                temp.push({ [key]: data.about.profile[key].name })
+            })
+            setProfile(temp)
+            console.log(data.about.job_profile_description)
         }
         fetchData()
+
     }, [])
+
+    const handleDownload = (linkText) => {
+        const link = document.createElement('a');
+        link.href = linkText;
+        link.download = 'file.pdf';
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    const slideLeft = () => {
+        var slider = document.getElementById('slider')
+        slider.scrollLeft = slider.scrollLeft - 500
+    }
+    const slideRight = () => {
+        var slider = document.getElementById('slider')
+        slider.scrollLeft = slider.scrollLeft + 500
+    }
     return (
         <>
             <div className='flex flex-col relative h-full w-full overflow-x-hidden'>
@@ -58,7 +84,9 @@ function Company() {
                             <button className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-teal-600 text-white mr-10 font-semibold hover:bg-teal-700 rounded-lg text-sm'>
                                 <i className='fa fa-check text-white mx-2 '></i> Apply now!
                             </button>
-                            <button className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-off-white text-teal-600 font-semibold hover:bg-gray-300 rounded-lg text-sm'>
+                            <button
+                                onClick={() => handleDownload(about.profile[key].link)}
+                                className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-off-white text-teal-600 font-semibold hover:bg-gray-300 rounded-lg text-sm'>
                                 <i className='fa fa-download text-teal-600 mx-2'></i> Download Job Description
                             </button>
                         </div>
@@ -66,52 +94,52 @@ function Company() {
                     <div className='flex'>
                         <h1 className='text-lg'>
                             {about.about_comp}
-                            {name}
                         </h1>
                     </div>
                 </div>
             </div >
             <div className='h-40 bg-teal-200 w-full'>
                 <div className='flex flex-row justify-between mx-16 my-10'>
-                    <CompanyCard title={'Website'} icon={'fa fa-globe'} body={about.website} ></CompanyCard>
+                    <div className='cursor-pointer' onClick={() => {
+                        window.location.href = about.website
+                    }}>
+                        <CompanyCard title={'Website'} icon={'fa fa-globe'} body={about.website} ></CompanyCard>
+                    </div>
                     <CompanyCard title={'Work Location'} icon={'fa fa-building'} body={about.work_location} ></CompanyCard>
                     {/* {NEED TO COMPLETE THE ONE BELOW} */}
 
-                    <Dropdown onNameChange={handleNameChange} body={["X", "Y", "Z"]} />
+                    <Dropdown onNameChange={handleNameChange} body={profile} />
 
                 </div>
             </div>
             <div className='flex flex-col mx-16 my-16 gap-10'>
                 <h1 className='font-bold text-4xl text-teal-600'>Job Profiles <span className='text-black'>and their description</span></h1>
-                <div className='
-                flex 
-                flex-row
-                gap-5
-                '>
-                    <JobCard
-                        title={'UI/UX Designer'}
-                        duration={'6 months'}
-                        roles={['Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit']}
-                        requirements={['Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit']} />
-                    <JobCard
-                        title={'UI/UX Designer'}
-                        duration={'6 months'}
-                        roles={['Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit']}
-                        requirements={['Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit']} />
-                    <JobCard
-                        title={'UI/UX Designer'}
-                        duration={'6 months'}
-                        roles={['Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit']}
-                        requirements={['Lorem ipsum dolor sit amet, consectetur adipiscing elit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit']} />
+                <div className='relative flex items-center'>
+                    <i className='fa fa-angle-left font-bold text-3xl mt-2 text-teal-600' onClick={slideLeft} />
+                    <div id='slider' className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
+                        {about.job_profile_description != undefined ? about.job_profile_description.map((el, index) => (
+                            <div className='inline-block p-5 cursor-pointer hover:scale-105 ease-in-out duration-300'>
+                                <JobCard
+                                    key={index}
+                                    title={el[0]}
+                                    duration={el[1]}
+                                    roles={el[2]}
+                                    requirements={el[3]} />
+                            </div>
+                        ))
+                            : (<></>)}
+
+
+                    </div>
+                    <i className='fa fa-angle-right font-bold text-3xl mt-2 text-teal-600' onClick={slideRight} />
                 </div>
-                <div className='flex flex-row justify-end gap-10'>
-                    <PerkAndEligibleCard titleTeal='Perks' titleBlack='about the internship' texts={['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor odio lobortis in viverra lacus rutrum. Euismod nec ut diam consecteur imperdiet euismod sed. Et.',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor odio lobortis in viverra lacus rutrum. Euismod nec ut diam consecteur imperdiet euismod sed. Et.',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor odio lobortis in viverra lacus rutrum. Euismod nec ut diam consecteur imperdiet euismod sed. Et.',]} />
-                    <PerkAndEligibleCard titleTeal='Eligibility' titleBlack='criteria' texts={['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor odio lobortis in viverra lacus rutrum. Euismod nec ut diam consecteur imperdiet euismod sed. Et.',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor odio lobortis in viverra lacus rutrum. Euismod nec ut diam consecteur imperdiet euismod sed. Et.',
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dolor odio lobortis in viverra lacus rutrum. Euismod nec ut diam consecteur imperdiet euismod sed. Et.',]} />
-                </div>
+                {key != '' ? (
+                    <div className='flex flex-row justify-end gap-10 '>
+                        <PerkAndEligibleCard titleTeal='Perks' titleBlack='about the internship' texts={about.profile[key].perks} />
+                        <PerkAndEligibleCard titleTeal='Eligibility' titleBlack='criteria' texts={about.profile[key].eligibility} />
+                    </div>
+                ) : (<></>)}
+
             </div>
 
         </>

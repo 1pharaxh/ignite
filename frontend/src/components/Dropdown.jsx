@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 export default function Dropdown({ body, onNameChange }) {
     const [showDropdown, setShowDropdown] = useState(false);
-    const [profile, setProfile] = useState("Please Select a profile");
-    function handler(text) {
-        setProfile(text);
+    const [profileDrop, setProfileDrop] = useState("Please Select a profile");
+    function handler(keys, vals) {
+        setProfileDrop(vals);
         setShowDropdown(!showDropdown)
-        onNameChange(text);
+        onNameChange(keys);
 
     }
 
@@ -23,7 +23,7 @@ export default function Dropdown({ body, onNameChange }) {
                         </div>
                         <div className="flex flex-col items-start justify-around">
                             <h1 className="text-teal-600 text-lg font-bold"> Profile(s) included</h1>
-                            <h1 className="text-black font-normal text-md"> {profile} </h1>
+                            <h1 className="text-black font-bold text-md"> {profileDrop} </h1>
                         </div>
                     </div>
                 </div>
@@ -32,18 +32,25 @@ export default function Dropdown({ body, onNameChange }) {
                 <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
                     <div className="bg-white rounded-md shadow-xs">
                         <div className="py-1">
-                            {body.map((el, index) => (
+                            {
+                                body.map((el, index) => (
+                                    < a
+                                        key={index}
+                                        href="#"
+                                        onClick={(event) => {
+                                            event.preventDefault();
+                                            handler(Object.keys(el)[0], Object.values(el)[0])
+                                        }}
 
-                                < a
-                                    key={index}
-                                    href="#"
-                                    onClick={() => handler(el)}
+                                        className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
+                                    >
+                                        {Object.values(el)[0]}
 
-                                    className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                                >
-                                    {el}
-                                </a>
-                            ))}
+                                    </a>
+                                ))
+                            }
+
+
 
                         </div>
                     </div>

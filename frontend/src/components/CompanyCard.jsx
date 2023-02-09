@@ -8,7 +8,7 @@ export default function CompanyCard({ title, icon, body }) {
                     <i className={`${icon} font-bold text-3xl mt-2 text-teal-600`}></i>
 
                 </div>
-                <div className="flex flex-col items-center justify-around">
+                <div className="flex flex-col items-start justify-around">
                     <h1 className="text-teal-600 text-lg font-bold"> {title}</h1>
                     <h1 className="text-black text-md"> {body}</h1>
                 </div>
