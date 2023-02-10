@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners';
 import desk from '../static/images/desk.jpg'
+import { motion } from "framer-motion";
+
 
 function Companies() {
     const googleDriveImage = 'https://drive.google.com/uc?export=view&id='
@@ -61,14 +63,19 @@ function Companies() {
             <div className={`${!loading ? `opacity-100` : `opacity-50`} grid grid-cols-4 gap-4 px-16`}>
 
                 {companies.map(company => (
-                    < div
-                        key={company._id}
-                        onClick={() => window.location.href = `/companies/${company._id}`}
-                        className='bg-teal-700 h-44 w-9/12 items-center  rounded-xl p-5 justify-center flex flex-col' >
-                        <img className='rounded-md' src={googleDriveImage + company.image} width={200} ></img>
-                        <h1 className='text-xl text-white font-medium content-center'>{company.name}</h1>
+                    <motion.button
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
+                    >
+                        < div
+                            key={company._id}
+                            onClick={() => window.location.href = `/companies/${company._id}`}
+                            className='bg-teal-700 h-44 w-9/12 items-center  rounded-xl p-5 justify-center flex flex-col' >
+                            <img className='rounded-md' src={googleDriveImage + company.image} width={200} ></img>
+                            <h1 className='text-xl text-white font-medium content-center'>{company.name}</h1>
 
-                    </div>
+                        </div>
+                    </motion.button>
                 ))}
 
 

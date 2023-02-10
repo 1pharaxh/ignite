@@ -5,6 +5,7 @@ import CompanyCard from '../components/CompanyCard';
 import JobCard from '../components/JobCard';
 import PerkAndEligibleCard from '../components/PerkAndEligibleCard';
 import Dropdown from '../components/Dropdown';
+import { motion } from 'framer-motion';
 function Company() {
     const [data, setData] = useState({});
     const [about, setAbout] = useState({});
@@ -115,23 +116,39 @@ function Company() {
             <div className='flex flex-col mx-16 my-16 gap-10'>
                 <h1 className='font-bold text-4xl text-teal-600'>Job Profiles <span className='text-black'>and their description</span></h1>
                 <div className='relative flex items-center'>
-                    <i className='fa fa-angle-left font-bold text-3xl mt-2 text-teal-600' onClick={slideLeft} />
+                    <motion.button
+                        whileHover={{ scale: 2.1 }}
+                        whileTap={{ scale: 0.9 }}
+
+                    ><i className='mr-5 fa fa-angle-left font-bold text-3xl mt-2 text-teal-600' onClick={slideLeft} /></motion.button>
+
+
                     <div id='slider' className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
                         {about.job_profile_description != undefined ? about.job_profile_description.map((el, index) => (
-                            <div className='inline-block p-5 cursor-pointer hover:scale-105 ease-in-out duration-300'>
-                                <JobCard
-                                    key={index}
-                                    title={el[0]}
-                                    duration={el[1]}
-                                    roles={el[2]}
-                                    requirements={el[3]} />
-                            </div>
+                            <motion.button
+                                whileTap={{ scale: 0.9 }}
+                            >
+                                <div className='inline-block p-5 cursor-pointer '>
+                                    <JobCard
+                                        key={index}
+                                        title={el[0]}
+                                        duration={el[1]}
+                                        roles={el[2]}
+                                        requirements={el[3]} />
+                                </div>
+                            </motion.button>
                         ))
                             : (<></>)}
 
 
                     </div>
-                    <i className='fa fa-angle-right font-bold text-3xl mt-2 text-teal-600' onClick={slideRight} />
+                    <motion.button
+                        whileHover={{ scale: 2.1 }}
+                        whileTap={{ scale: 0.9 }}
+
+                    >
+                        <i className='fa fa-angle-right font-bold text-3xl ml-5 mt-2 text-teal-600' onClick={slideRight} />
+                    </motion.button>
                 </div>
                 {key != '' ? (
                     <div className='flex flex-row justify-end gap-10 '>

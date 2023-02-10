@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import college from '../static/logos/logo_college.png';
 import ignite from '../static/logos/logo_ignite.png';
 import NavBarTabs from "./NavBarTabs";
+import { motion } from "framer-motion";
+
 function Button({ text, bg }) {
   return (
     <div>
@@ -41,8 +43,13 @@ function Navbar() {
             <NavBarTabs text="How to Apply" link="/how-to-apply" bg={location.pathname == '/how-to-apply' ? 'bg-teal-700 text-white' : 'bg-white'} />
             <NavBarTabs text="Resources" link="/resources" bg={location.pathname == '/resources' ? 'bg-teal-700 text-white' : 'bg-white'} />
             <NavBarTabs text="Contact Us" link="/contact-us" bg={location.pathname == '/contact-us' ? 'bg-teal-700 text-white' : 'bg-white'} />
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Button text="Login / Signup" bg="bg-white" />
 
-            <Button text="Login / Signup" bg="bg-white" />
+            </motion.button>
           </ul>
         </div>
       </nav>
