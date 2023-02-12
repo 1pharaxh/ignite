@@ -8,8 +8,9 @@ import { motion } from "framer-motion";
 function Button({ text, bg }) {
   return (
     <div>
-      <div className={
-        `cursor-pointer text-teal-700 border-2 border-teal-700 px-4 py-4 rounded-md ${bg || `bg-white`}`}>
+      <div
+        className={
+          `cursor-pointer text-teal-700 border-2 border-teal-700 px-4 py-4 rounded-md ${bg || `bg-white`}`}>
         <span>{text}</span>
       </div>
     </div>
@@ -25,6 +26,7 @@ function Navbar() {
   // This is to manually invoke a link
   const navigate = useNavigate();
   const handleClick = useCallback(() => { navigate('/') }, [navigate]);
+  const handleLogin = useCallback(() => { navigate('/login') }, [navigate]);
   return (
     <div className="z-10 fixed px-5 left-0 right-0 top-0 h-20 shadow-md border-b-2 border-gray-100 bg-white">
       <nav className="flex items-center container mx-auto h-full justify-between">
@@ -46,8 +48,11 @@ function Navbar() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
+              onClick={handleLogin}
             >
-              <Button text="Login / Signup" bg="bg-white" />
+              <Button text="Login / Signup" bg="bg-white"
+
+              />
 
             </motion.button>
           </ul>

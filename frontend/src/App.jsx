@@ -11,6 +11,7 @@ import Resources from './pages/Resources';
 import ContactUs from './pages/ContactUs';
 import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
+import LoginPage from './pages/LoginPage';
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
             <Route path="/how-to-apply" element={<HowToApply />} />
             <Route path="/resouces" element={<Resources />} />
             <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
