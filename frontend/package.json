@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^0.1.8",
+    "dotenv": "^16.0.3",
     "firebase": "^9.17.1",
     "framer-motion": "^5.0.0",
     "react": "^17.0.2",

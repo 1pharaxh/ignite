@@ -6,7 +6,7 @@ print("Connecting to DB")
 try:
     os.system("cls" if os.name == "nt" else "clear")
     client = pymongo.MongoClient(
-        "KEY_HERE")
+       "KEY_HERE")
     print("""
     /$$      /$$ /$$$$$$$$ /$$        /$$$$$$   /$$$$$$  /$$      /$$ /$$$$$$$$           /$$$
     | $$  /$ | $$| $$_____/| $$       /$$__  $$ /$$__  $$| $$$    /$$$| $$_____/          |_  $$

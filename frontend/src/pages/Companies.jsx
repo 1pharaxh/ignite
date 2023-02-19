@@ -64,11 +64,12 @@ function Companies() {
 
                 {companies.map(company => (
                     <motion.button
+                        key={company._id}
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                     >
                         < div
-                            key={company._id}
+
                             onClick={() => window.location.href = `/companies/${company._id}`}
                             className='bg-teal-700 h-44 w-9/12 items-center  rounded-xl p-5 justify-center flex flex-col' >
                             <img className='rounded-md' src={googleDriveImage + company.image} width={200} ></img>

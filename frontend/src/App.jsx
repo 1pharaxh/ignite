@@ -12,7 +12,10 @@ import ContactUs from './pages/ContactUs';
 import NotFound from './pages/NotFound';
 import Footer from './components/Footer';
 import LoginPage from './pages/LoginPage';
-
+import { AuthContextProvider } from './context/AuthContext';
+import AccountPage from './pages/AccountPage';
+import Protected from './pages/Protected';
+import Redirection from './pages/Redirection'
 
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
@@ -29,28 +32,31 @@ function App() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   return width >= 700 ? (
-    <Router>
-      <div className="
+    <AuthContextProvider>
+      <Router>
+        <div className="
           pt-20 
           relative 
           min-h-screen">
-        <Navbar className="fixed" />
-        <div className='flex flex-col min-h-screen'>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/companies" element={<Companies />} />
-            <Route path="/companies/:id" element={<Company />} />
-            <Route path="/how-to-apply" element={<HowToApply />} />
-            <Route path="/resouces" element={<Resources />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Navbar className="fixed" />
+          <div className='flex flex-col min-h-screen'>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/companies" element={<Companies />} />
+              <Route path="/companies/:id" element={<Company />} />
+              <Route path="/how-to-apply" element={<HowToApply />} />
+              <Route path="/resouces" element={<Resources />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/login" element={<Redirection><LoginPage /></Redirection>} />
+              <Route path="/account" element={<Protected><AccountPage /></Protected>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
-    </Router>
+      </Router>
+    </AuthContextProvider>
   ) : (
     <div className='mx-10'>
       <div className='flex flex-col justify-center items-center gap-8'>

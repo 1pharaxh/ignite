@@ -4,7 +4,7 @@ import college from '../static/logos/logo_college.png';
 import ignite from '../static/logos/logo_ignite.png';
 import NavBarTabs from "./NavBarTabs";
 import { motion } from "framer-motion";
-
+import { UserAuth } from '../context/AuthContext'
 function Button({ text, bg }) {
   return (
     <div>
@@ -19,6 +19,7 @@ function Button({ text, bg }) {
 
 
 function Navbar() {
+  const { user } = UserAuth();
   // This is the hook that we will use to get the current location (URL parameters)
   // To highlight the current page in the navbar
   const location = useLocation();
@@ -27,6 +28,7 @@ function Navbar() {
   const navigate = useNavigate();
   const handleClick = useCallback(() => { navigate('/') }, [navigate]);
   const handleLogin = useCallback(() => { navigate('/login') }, [navigate]);
+  const handleAccount = useCallback(() => { navigate('/account') }, [navigate]);
   return (
     <div className="z-10 fixed px-5 left-0 right-0 top-0 h-20 shadow-md border-b-2 border-gray-100 bg-white">
       <nav className="flex items-center container mx-auto h-full justify-between">
@@ -48,9 +50,9 @@ function Navbar() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              onClick={handleLogin}
+              onClick={user?.displayName ? handleAccount : handleLogin}
             >
-              <Button text="Login / Signup" bg="bg-white"
+              <Button text={user?.displayName ? "My Account" : "Login / Signup"} bg="bg-white"
 
               />
 
