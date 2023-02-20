@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners';
 import desk from '../static/images/desk.jpg'
 import { motion } from "framer-motion";
+import ReactPaginate from 'react-paginate';
+
 
 
 function Companies() {
@@ -50,8 +52,8 @@ function Companies() {
                 {/* search BAR*/}
                 <div className='w-full justify-center items-center flex '>
                     <div className='shadow-md absolute top-64 bottom-0 flex m-10 items-center bg-white h-20 w-11/12 rounded-lg mx-8 my-6 px-10'>
-                        <input className='px-4 py-2 w-full text-sm outline-none' type='text' placeholder='Search...' />
-                        <button className='flex items-center px-4 py-2 bg-teal-600 text-white hover:bg-teal-700 rounded-lg text-sm'>
+                        <input disabled={loading} className='px-4 py-2 w-full text-sm outline-none' type='text' placeholder='Search...' />
+                        <button disabled={loading} className='flex items-center px-4 py-2 bg-teal-600 text-white hover:bg-teal-700 rounded-lg text-sm'>
                             Search <i className='fas fa-search text-white ml-2'></i>
                         </button>
                     </div>
