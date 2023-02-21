@@ -18,7 +18,7 @@ function Login() {
     setFocus("username");
   }, [setFocus]);
   return (
-    <div>
+    <div className='scrollbar-hide'>
       <form id='formName' onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap justify-center items-center absolute w-full h-full z-10">
         <div className='flex flex-col rounded-lg p-4 w-64 md:w-96 bg-white mx-auto  gap-4'>
           <div className='flex flex-col items-center pt-20'>
@@ -64,6 +64,12 @@ function Login() {
       </form>
       <div className="area" >
         <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
           <li></li>
           <li></li>
           <li></li>
