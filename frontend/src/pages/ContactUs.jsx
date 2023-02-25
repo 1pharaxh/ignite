@@ -2,7 +2,7 @@ import React from 'react'
 
 function ContactUs() {
     return (
-        <div>
+        <div className="mt-20">
             <h1>This is contact us page.</h1>
         </div>
     )

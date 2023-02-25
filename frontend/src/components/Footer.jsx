@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import college from '../static/logos/logo_college.png';
 import ignite from '../static/logos/logo_ignite.png';
 function Footer() {
     const date = new Date();
     const year = date.getFullYear();
+    const [width, setWidth] = useState(window.innerWidth);
+    useEffect(() => {
+        const handleResize = () => setWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     return (
-        <div className="bg-teal-700 h-80">
-
-            <div className="mx-20">
-                <div className="flex flex-row justify-center pt-10 pb-2  gap-24">
+        < div className="bg-teal-700 relative bottom-0 top-10">
+            <div className="md:mx-20 ">
+                {width > 700 && <div className="flex flex-row justify-center pt-10 pb-2  gap-24">
                     <div className="flex flex-col gap-4">
                         <div>
                             <h1 className="text-white text-2xl font-medium">Ignite -The Placement Cell</h1>
@@ -95,10 +100,32 @@ function Footer() {
                             </div>
                         </div>
                     </div>
+                </div>}
+                {width > 700 && <hr className="w-full border-2 border-white" />}
+                <div className="md:hidden bg-teal-900 w-full">
+                    <div className="flex flex-col gap-4 items-center">
+                        <div className="mt-10">
+                            <img src={college} alt="logo" className="h-25" />
+                        </div>
+                        <div className="mt-2 text-center">
+                            <h1 className="text-white font-bold text-xl"> Internship Cell, Khalsa College</h1>
+                            <h1 className="text-white font-semibold text-sm mt-2"> Need help? Reach out to us!</h1>
+                        </div>
+
+                        <div className="flex flex-row gap-2">
+                            <i className='fab fa-linkedin-in text-white ml-0 text-lg cursor-pointer'></i>
+                            <i className='fab fa-instagram text-white ml-2 text-lg cursor-pointer'></i>
+                            <i className='fab fa-facebook text-white ml-2 text-lg cursor-pointer'></i>
+                            <i className='fab fa-whatsapp text-white ml-2 text-lg cursor-pointer'></i>
+                        </div>
+
+                    </div>
+
                 </div>
-                <hr className="w-full border-2 border-white" />
-                <div className="flex justify-center m-2">
-                    <h1 className="text-white text-md">Copyright © {year} | <span className="hover:underline cursor-pointer">Privacy Policy</span> </h1>
+                <div className="my-2 mx-5">
+                    <h1 className="text-white text-center text-md">Copyright © {year} Internship Cell, Khalsa College. All rights reserved.
+                        {/* | <span className="hover:underline cursor-pointer">Privacy Policy</span>  */}
+                    </h1>
                 </div>
             </div>
 

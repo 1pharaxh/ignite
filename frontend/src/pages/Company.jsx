@@ -33,6 +33,7 @@ function Company() {
 
 
     useEffect(() => {
+        console.log(key)
         async function fetchData() {
             if (user.uid) {
                 const docRef = doc(getDb, 'users', user.uid);
@@ -44,7 +45,7 @@ function Company() {
                     setHasResume('');
                     console.log('no resume');
                 }
-                if (key && applied == false) {
+                if (key != '') {
                     const collectionRef = collection(getDb, 'applications');
                     const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), where('profile.JobId', '==', about.profile[key].id)));
                     if (querySnapshot.empty) {
@@ -85,6 +86,9 @@ function Company() {
                 resume: hasResume,
             }).then(() => {
                 console.log("Document successfully written!");
+                // refresh the page
+                window.location.reload();
+
             });
         }
     }
@@ -127,10 +131,10 @@ function Company() {
                     </div>
 
                 </div>
-                <div className='flex flex-col my-16 mx-16 gap-10'>
+                <div className='flex flex-col md:my-16 md:mx-16 mx-4 my-8 gap-10'>
                     <div className='flex flex-row justify-between'>
                         <div className='basis-6/12 w-30'>
-                            <h1 className='text-black text-4xl font-bold' > About the<span className='text-teal-600'> Company</span> </h1>
+                            <h1 className='text-black md:text-4xl text-center text-3xl font-bold' > About the<span className='text-teal-600'> Company</span> </h1>
                         </div>
                         <div className='flex flex-row basis-6/12 auto w-64'>
                             <div className='flex flex-col w-full mr-4'>
@@ -155,7 +159,8 @@ function Company() {
                             <button
                                 onClick={() => handleDownload(about.profile[key].link)}
                                 className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-off-white text-teal-600 font-semibold hover:bg-gray-300 rounded-lg text-sm'>
-                                <i className='fa fa-download text-teal-600 mx-2'></i> Download Job Description
+                                <i className='fa fa-download text-teal-600 mx-2'></i> <span className='hidden md:block'> Download Job Description </span>
+                                <span className='block md:hidden'>Description </span>
                             </button>
                         </div>
                     </div>
@@ -166,8 +171,8 @@ function Company() {
                     </div>
                 </div>
             </div >
-            <div className='h-40 bg-teal-200 w-full'>
-                <div className='flex flex-row justify-between mx-16 my-10'>
+            <div className='h-auto bg-teal-200 w-full'>
+                <div className='flex items-center md:flex-row flex-col md:gap-0 gap-4 justify-between md:mx-16 mx-4 my-10'>
                     <div className='cursor-pointer' onClick={() => {
                         window.location.href = about.website
                     }}>
@@ -181,14 +186,14 @@ function Company() {
 
                 </div>
             </div>
-            <div className='flex flex-col mx-16 my-16 gap-10'>
-                <h1 className='font-bold text-4xl text-teal-600'>Job Profiles <span className='text-black'>and their description</span></h1>
+            <div className='flex flex-col md:mx-16 md:my-16 mx-3 my-8 gap-10 text-center'>
+                <h1 className='font-bold md:text-4xl text-3xl text-teal-600'>Job Profiles <span className='text-black'>and their description</span></h1>
                 <div className='relative flex items-center'>
                     <motion.button
                         whileHover={{ scale: 2.1 }}
                         whileTap={{ scale: 0.9 }}
 
-                    ><i className='mr-5 fa fa-angle-left font-bold text-3xl mt-2 text-teal-600' onClick={slideLeft} /></motion.button>
+                    ><i className='md:mr-5 mr-1 fa fa-angle-left font-bold text-3xl mt-2 text-teal-600' onClick={slideLeft} /></motion.button>
 
 
                     <div id='slider' className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
@@ -215,11 +220,11 @@ function Company() {
                         whileTap={{ scale: 0.9 }}
 
                     >
-                        <i className='fa fa-angle-right font-bold text-3xl ml-5 mt-2 text-teal-600' onClick={slideRight} />
+                        <i className='fa fa-angle-right font-bold text-3xl md:ml-5 ml-2 mt-2 text-teal-600' onClick={slideRight} />
                     </motion.button>
                 </div>
                 {key != '' ? (
-                    <div className='flex flex-row justify-end gap-10 '>
+                    <div className='flex md:flex-row flex-col justify-end md:gap-10 gap-5 '>
                         <PerkAndEligibleCard titleTeal='Perks' titleBlack='about the internship' texts={about.profile[key].perks} />
                         <PerkAndEligibleCard titleTeal='Eligibility' titleBlack='criteria' texts={about.profile[key].eligibility} />
                     </div>

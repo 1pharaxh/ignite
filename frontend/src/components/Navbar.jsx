@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import college from '../static/logos/logo_college.png';
 import ignite from '../static/logos/logo_ignite.png';
@@ -10,7 +10,7 @@ function Button({ text, bg }) {
     <div>
       <div
         className={
-          `cursor-pointer text-teal-700 border-2 border-teal-700 px-4 py-4 rounded-md ${bg || `bg-white`}`}>
+          `cursor-pointer text-teal-700 border-2 border-teal-700 px-4 py-4 rounded-md ${bg || `bg-slate-100`}`}>
         <span>{text}</span>
       </div>
     </div>
@@ -19,46 +19,69 @@ function Button({ text, bg }) {
 
 
 function Navbar() {
+  const [width, setWidth] = useState(window.innerWidth);
   const { user } = UserAuth();
   // This is the hook that we will use to get the current location (URL parameters)
   // To highlight the current page in the navbar
   const location = useLocation();
+  const [menu, setMenu] = useState(false);
 
   // This is to manually invoke a link
   const navigate = useNavigate();
   const handleClick = useCallback(() => { navigate('/') }, [navigate]);
   const handleLogin = useCallback(() => { navigate('/login') }, [navigate]);
   const handleAccount = useCallback(() => { navigate('/account') }, [navigate]);
+
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  useEffect(() => {
+    if (width > 700) {
+      setMenu(true);
+    } else {
+      setMenu(false);
+    }
+  }, [width]);
   return (
-    <div className="z-10 fixed px-5 left-0 right-0 top-0 h-20 shadow-md border-b-2 border-gray-100 bg-white">
-      <nav className="flex items-center container mx-auto h-full justify-between">
-        {/* <h1 className="font-semibold uppercase text-lg text-gray-200">
-          🔄 Demo App
-        </h1> */}
-        <div onClick={handleClick} className="flex cursor-pointer">
-          <img src={college} alt="logo" className="h-16 px-5" />
-          <img src={ignite} alt="logo" className="h-16 " />
+    <div className="z-50 fixed px-4 left-0 right-0 top-0 h-auto shadow-md border-b-2 border-gray-100 bg-slate-100">
+      <nav className="md:flex md:items-center mx-auto h-full md:justify-between">
+        <div className="flex justify-between items-center">
+          <span onClick={handleClick} className="cursor-pointer">
+            <img src={college} alt="logo" className="h-16 inline pr-5" />
+            <img src={ignite} alt="logo" className="h-16 inline " />
+          </span>
+
+          <span className="text-3xl md:hidden block cursor-pointer mx-2">
+            <i onClick={() => {
+              setMenu(!menu);
+            }} className={menu ? "fas fa-times" : "fas fa-bars"} aria-hidden="true"></i>
+          </span>
         </div>
-        <div>
-          <ul className="flex items-center space-x-2 text-md mr-10">
-            <NavBarTabs text="Home" link="/" bg={location.pathname == '/' ? 'bg-teal-700 text-white' : 'bg-white'} />
-            <NavBarTabs text="About" link="/about" bg={location.pathname == '/about' ? 'bg-teal-700 text-white' : 'bg-white'} />
-            <NavBarTabs text="Companies" link="/companies" bg={location.pathname.includes("compan") ? 'bg-teal-700 text-white' : 'bg-white'} />
-            <NavBarTabs text="How to Apply" link="/how-to-apply" bg={location.pathname == '/how-to-apply' ? 'bg-teal-700 text-white' : 'bg-white'} />
-            <NavBarTabs text="Resources" link="/resources" bg={location.pathname == '/resources' ? 'bg-teal-700 text-white' : 'bg-white'} />
-            <NavBarTabs text="Contact Us" link="/contact-us" bg={location.pathname == '/contact-us' ? 'bg-teal-700 text-white' : 'bg-white'} />
+
+        {menu && <ul id="list" className={`
+          md:flex md:items-center md:z-auto md:static md:w-auto md:py-0 md:opacity-100 
+          ${!menu ? 'opacity-0' : 'opacity-100'} items-center absolute space-x-2 mr-10 bg-slate-100
+          pl-5 md:pl-0 pr-5 md:pr-0 rounded-b-lg pb-4 w-full left-0 transition-all ease-in duration-500`}>
+          <NavBarTabs disable={menu} text="Home" link="/" bg={location.pathname == '/' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
+          <NavBarTabs disable={menu} text="About" link="/about" bg={location.pathname == '/about' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
+          <NavBarTabs disable={menu} text="Companies" link="/companies" bg={location.pathname.includes("compan") ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
+          <NavBarTabs disable={menu} text="How to Apply" link="/how-to-apply" bg={location.pathname == '/how-to-apply' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
+          <NavBarTabs disable={menu} text="Resources" link="/resources" bg={location.pathname == '/resources' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
+          <NavBarTabs disable={menu} text="Contact Us" link="/contact-us" bg={location.pathname == '/contact-us' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
+
+          <li>
             <motion.button
               whileHover={{ scale: 1.1 }}
+              className="flex justify-center items-center w-full"
               whileTap={{ scale: 0.9 }}
               onClick={user?.displayName ? handleAccount : handleLogin}
             >
-              <Button text={user?.displayName ? "My Account" : "Login / Signup"} bg="bg-white"
-
-              />
-
+              <Button text={user?.displayName ? "My Account" : "Login / Signup"} bg="bg-slate-100" />
             </motion.button>
-          </ul>
-        </div>
+          </li>
+        </ul>}
       </nav>
     </div>
   );

@@ -1,28 +1,28 @@
 import React from "react";
 export default function JobCard({ title, duration, roles, requirements }) {
     return (
-        <div className="bg-teal-600 rounded-lg p-10 w-full h-auto flex flex-col gap-4">
-            <h1 className="text-3xl font-semibold text-white">{title}</h1>
-            <h1 className="text-md font-semibold text-white">Duration: <span className="text-yellow-400">{duration}</span></h1>
-            <h1 className="text-xl font-semibold text-yellow-400">Roles and Requirements</h1>
-            <div className="row row-col gap-2 pl-5">
+        <div className="bg-teal-600 rounded-lg md:p-10 px-2 py-4 w-full h-auto flex flex-col md:gap-4 gap-3">
+            <h1 className="md:text-3xl text-2xl font-semibold text-white">{title}</h1>
+            <h1 className="text-base font-semibold text-white">Duration: <span className="text-yellow-400">{duration}</span></h1>
+            <h1 className="md:text-xl text-lg font-semibold text-yellow-400">Roles and Requirements</h1>
+            <div className="row row-col gap-2 md:pl-5 pl-2">
                 {roles.map((role, index) => {
                     return (
                         <div className="flex flex-row gap-4" key={index}>
-                            <h1 className="text-md font-semibold text-white">• </h1>
-                            <h1 className="text-md font-semibold text-white">{role}</h1>
+                            <h1 className="md:text-base text-sm font-semibold text-white">• </h1>
+                            <h1 className="md:text-base text-sm font-semibold text-white">{role}</h1>
                         </div>
 
                     )
                 })}
             </div>
-            <h1 className="text-xl font-semibold text-yellow-400">Requirements</h1>
-            <div className="row row-col gap-2 pl-5">
+            <h1 className="md:text-xl text-lg font-semibold text-yellow-400">Requirements</h1>
+            <div className="row row-col gap-2 md:pl-5 pl-2">
                 {requirements.map((requirement, index) => {
                     return (
                         <div className="flex flex-row gap-4" key={index}>
-                            <h1 className="text-md font-semibold text-white">• </h1>
-                            <h1 className="text-md font-semibold text-white">{requirement}</h1>
+                            <h1 className="md:text-base text-sm font-semibold text-white">• </h1>
+                            <h1 className="md:text-base text-sm font-semibold text-white">{requirement}</h1>
                         </div>
                     )
                 })}

@@ -45,7 +45,7 @@ function Companies() {
                     backgroundColor: 'rgba(13, 148, 136, 0.8)'
                 }} className='h-80 z-1'>
                     <div className='flex items-center justify-center w-full h-full'>
-                        <h1 className='text-5xl text-white font-medium content-center'> Find your favourite company!</h1>
+                        <h1 className='md:text-5xl font-bold text-4xl text-white md:font-medium text-center'> Find your favourite company!</h1>
                     </div>
                 </div>
 
@@ -61,8 +61,10 @@ function Companies() {
 
             </div>
             <HashLoader cssOverride={override} size={150} color={"#0f766e"} loading={loading} />
-            <h1 className={`${!loading ? `opacity-100` : `opacity-50`} text-4xl text-teal-700 font-medium content-center my-16 mx-16`}> Our top recruiters!</h1>
-            <div className={`${!loading ? `opacity-100` : `opacity-50`} grid grid-cols-4 gap-4 px-16`}>
+            <h1 className={`${!loading ? `opacity-100` : `opacity-50`} text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
+                Our top recruiters!
+            </h1>
+            <div className={`${!loading ? `opacity-100` : `opacity-50`} grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 md:px-16 px-4`}>
 
                 {companies.map(company => (
                     <motion.button
@@ -73,9 +75,9 @@ function Companies() {
                         < div
 
                             onClick={() => window.location.href = `/companies/${company._id}`}
-                            className='bg-teal-700 h-44 w-9/12 items-center  rounded-xl p-5 justify-center flex flex-col' >
+                            className='bg-teal-700 h-44 md:w-9/12 w-full items-center  rounded-xl p-5 justify-center flex flex-col' >
                             <img className='rounded-md' src={googleDriveImage + company.image} width={200} ></img>
-                            <h1 className='text-xl text-white font-medium content-center'>{company.name}</h1>
+                            <h1 className=' hidden md:block text-xl text-white font-medium content-center'>{company.name}</h1>
 
                         </div>
                     </motion.button>
