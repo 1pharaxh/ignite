@@ -16,12 +16,12 @@ import { AuthContextProvider } from './context/AuthContext';
 import AccountPage from './pages/AccountPage';
 import Protected from './pages/Protected';
 import Redirection from './pages/Redirection'
+import EditPage from './pages/EditPage';
 
 function App() {
 
   const location = useLocation();
-  const isLocation = location.pathname === '/login' || location.pathname === '/account';
-  console.log(isLocation)
+  const isLocation = location.pathname === '/login' || location.pathname === '/account' || location.pathname === '/edit';
 
   return (
 
@@ -33,6 +33,7 @@ function App() {
         <Navbar />
         <div className='flex flex-col'>
           <Routes>
+            <Route path="/edit" element={<Protected><EditPage /></Protected>} />
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/companies" element={<Companies />} />

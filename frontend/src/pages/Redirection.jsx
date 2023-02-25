@@ -4,7 +4,7 @@ import { UserAuth } from "../context/AuthContext";
 
 const Redirection = ({ children }) => {
     const { user } = UserAuth();
-    return user ? <Navigate to="/account" /> : children;
+    return user ? <Navigate to="/edit" /> : children;
 
 };
 
