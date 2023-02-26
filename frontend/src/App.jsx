@@ -17,6 +17,7 @@ import AccountPage from './pages/AccountPage';
 import Protected from './pages/Protected';
 import Redirection from './pages/Redirection'
 import EditPage from './pages/EditPage';
+import SignupPage from './pages/SignupPage';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/login" element={<Redirection><LoginPage /></Redirection>} />
             <Route path="/account" element={<Protected><AccountPage /></Protected>} />
+            <Route path="/signup" element={<SignupPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

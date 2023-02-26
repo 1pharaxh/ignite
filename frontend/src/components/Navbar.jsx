@@ -76,9 +76,9 @@ function Navbar() {
               whileHover={{ scale: 1.1 }}
               className="flex justify-center items-center w-full"
               whileTap={{ scale: 0.9 }}
-              onClick={user?.displayName ? handleAccount : handleLogin}
+              onClick={user?.email ? handleAccount : handleLogin}
             >
-              <Button text={user?.displayName ? "My Account" : "Login / Signup"} bg="bg-slate-100" />
+              <Button text={user?.email ? "My Account" : "Login / Signup"} bg="bg-slate-100" />
             </motion.button>
           </li>
         </ul>}

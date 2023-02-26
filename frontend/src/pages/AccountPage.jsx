@@ -11,6 +11,7 @@ export default function AccountPage({ }) {
     const [resume, setResume] = useState('');
     const [collegeName, setCollegeName] = useState('');
     const [degreeName, setDegreeName] = useState('');
+    const [imageLink, setImageLink] = useState('');
     const [year, setYear] = useState('');
     const [userFound, setUserFound] = useState(true);
 
@@ -31,6 +32,11 @@ export default function AccountPage({ }) {
                     setCollegeName(doc.data().university);
                     setDegreeName(doc.data().degree);
                     setYear(doc.data().year);
+                    if (doc.data().picture) {
+                        setImageLink(doc.data().picture);
+                    } else {
+                        setImageLink(user.photoURL);
+                    }
 
                 } else {
                     console.log("No such document!");
@@ -91,7 +97,7 @@ export default function AccountPage({ }) {
                     <div className='w-full justify-center items-center flex '>
                         <div className='shadow-md absolute top-52 bottom-0 flex flex-col gap-2 md:gap-4 m-10  bg-slate-200 h-max py-2 md:py-4 md:w-6/12 w-10/12 rounded-lg mx-8 my-6 px-10'>
                             <div className="flex flex-col items-center">
-                                <img className="rounded-full h-28" src={user.photoURL} alt='Profile Picture' />
+                                <img className="rounded-full h-28 w-28" src={imageLink} alt='Profile Picture' />
                                 <h1 className='text-2xl font-bold text-start'>{user.displayName}</h1>
                             </div>
 
