@@ -4,6 +4,7 @@ import { UserAuth, getDb } from "../context/AuthContext";
 import { doc, getDoc, collection, getDocs, query, where } from "firebase/firestore";
 import person from '../static/images/person.jpg'
 import { useNavigate } from "react-router-dom";
+import defaultt from '../static/images/default.png'
 
 export default function AccountPage({ }) {
     const [numApplications, setNumApplications] = useState(0);
@@ -35,12 +36,14 @@ export default function AccountPage({ }) {
                     if (doc.data().picture) {
                         setImageLink(doc.data().picture);
                     } else {
-                        setImageLink(user.photoURL);
+                        user.photoURL ? setImageLink(user.photoURL) : setImageLink(defaultt);
                     }
 
                 } else {
                     console.log("No such document!");
                     setUserFound(false);
+                    user.photoURL ? setImageLink(user.photoURL) : setImageLink(defaultt);
+
                 }
             });
         }
@@ -65,7 +68,6 @@ export default function AccountPage({ }) {
         return `${first.substring(0, 5)}...${extension}`;
     }
     function truncateEmail(email) {
-        console.log(email)
         if (!email) return 'None';
         const parts = email.split('@');
         const username = parts[0];
@@ -98,7 +100,7 @@ export default function AccountPage({ }) {
                         <div className='shadow-md absolute top-52 bottom-0 flex flex-col gap-2 md:gap-4 m-10  bg-slate-200 h-max py-2 md:py-4 md:w-6/12 w-10/12 rounded-lg mx-8 my-6 px-10'>
                             <div className="flex flex-col items-center">
                                 <img className="rounded-full h-28 w-28" src={imageLink} alt='Profile Picture' />
-                                <h1 className='text-2xl font-bold text-start'>{user.displayName}</h1>
+                                <h1 className='md:text-2xl text-xl font-bold text-start overflow-hidden whitespace-nowrap max-w-full'>{user.displayName}</h1>
                             </div>
 
                             {/* MAIN CONTENT */}
@@ -117,9 +119,7 @@ export default function AccountPage({ }) {
                                     <ion-icon size='large' name="reader-outline"></ion-icon> : {
                                         resume ? shortenFileName(resume) : 'None'
                                     }</h1>
-                                <h1 className='text-lg font-semibold'>
-                                    <ion-icon size="large" name="shield-checkmark-outline" />{user.emailVerified ? ' : Yes' : ' : No'}
-                                </h1>
+
                                 <h1 className='text-lg font-semibold'>
                                     <ion-icon size='large' name="school-outline" /> : {degreeName}
                                 </h1>

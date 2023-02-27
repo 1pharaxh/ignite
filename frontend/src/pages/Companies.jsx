@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners';
 import desk from '../static/images/desk.jpg'
 import { motion } from "framer-motion";
-import ReactPaginate from 'react-paginate';
 
 
 

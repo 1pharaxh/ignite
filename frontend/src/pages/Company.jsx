@@ -33,7 +33,7 @@ function Company() {
 
 
     useEffect(() => {
-        console.log(key)
+        document.getElementById('apply_button').disabled = false;
         async function fetchData() {
             if (user.uid) {
                 const docRef = doc(getDb, 'users', user.uid);
@@ -78,6 +78,7 @@ function Company() {
     }, [user, key])
 
     const handleApply = () => {
+        document.getElementById('apply_button').disabled = true;
         if (Object.keys(selectedJob).length != 0 && hasResume != '' && currentUser != undefined && applied == false) {
             addDoc(collection(getDb, "applications"), {
                 name: user.displayName,
@@ -91,6 +92,7 @@ function Company() {
 
             });
         }
+
     }
     const handleDownload = (linkText) => {
         const link = document.createElement('a');
@@ -139,6 +141,7 @@ function Company() {
                         <div className='flex flex-row basis-6/12 auto w-64'>
                             <div className='flex flex-col w-full mr-4'>
                                 <button
+                                    id='apply_button'
                                     onClick={() => handleApply()}
                                     disabled={currentUser == undefined || applied == true || Object.keys(selectedJob).length == 0 || hasResume == ''}
                                     className={`

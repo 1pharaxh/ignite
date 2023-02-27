@@ -4,10 +4,12 @@ import {
   signInWithPopup,
   signInWithRedirect,
   signOut,
+  sendPasswordResetEmail,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { auth, storage, db } from "../firebase";
 
@@ -29,20 +31,21 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   // Handle Sign Up
-  const signUp = async (email, password) => {
+  const signUp = async (email, password, name) => {
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
-      sendEmailVerification(auth.currentUser)
-        .then(() => {
-          console.log("Email verification sent");
-        }
-        )
-        .catch((error) => {
-          console.error("Error sending email verification", error);
-        }
-        );
+      if (user) {
+        await updateProfile(user, {
+          displayName: name,
+        });
+        await sendEmailVerification(auth.currentUser);
+        console.log("Email verification sent");
+      }
+      logOut();
+      return "signed up";
     } catch (error) {
       console.log(error);
+      return error;
     }
   };
 
@@ -51,11 +54,27 @@ export const AuthContextProvider = ({ children }) => {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       setUser(user);
-      return "signed in"
+      if (!user.emailVerified) {
+        logOut();
+        return "verify_email";
+      }
+      return "signed_in"
     } catch (error) {
       return error;
     }
   };
+
+  // Handle Forgot Password
+  const forgotPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      console.log("Password reset email sent");
+      return "success";
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
 
   useEffect(() => {
     const unscribe = onAuthStateChanged(auth, (user) => {
@@ -64,7 +83,7 @@ export const AuthContextProvider = ({ children }) => {
     return () => { unscribe() };
   }, []);
   return (
-    <AuthContext.Provider value={{ googleSignIn, logOut, user, signUp, signIn }}>
+    <AuthContext.Provider value={{ googleSignIn, logOut, user, signUp, signIn, forgotPassword }}>
       {children}
     </AuthContext.Provider>
   );

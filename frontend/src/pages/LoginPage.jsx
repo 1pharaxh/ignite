@@ -1,14 +1,17 @@
 import React, { useEffect, useCallback } from "react";
 import { useForm } from 'react-hook-form';
-import { getAuth } from 'firebase/auth';
 
 import { GoogleButton } from 'react-google-button'
 import { UserAuth } from '../context/AuthContext'
 import '../static/css/Login.css'
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 function LoginPage() {
-    const { googleSignIn, signIn } = UserAuth();
+    const MySwal = withReactContent(Swal)
+
+    const { googleSignIn, signIn, forgotPassword } = UserAuth();
     const handleGoogleSignIn = async () => {
         try {
             await googleSignIn();
@@ -17,18 +20,43 @@ function LoginPage() {
         }
     }
     const { register, handleSubmit, setFocus, setError, formState: { errors } } = useForm();
-    const auth = getAuth();
     const navigate = useNavigate();
     const handleSignup = useCallback(() => { navigate('/signup') }, [navigate]);
+    const handleEdit = useCallback(() => { navigate('/edit') }, [navigate]);
     const onSubmit = async (data) => {
         const email = data['username'];
         const password = data['password'];
         const signin = await signIn(email, password);
-        if (signin !== "signed in") {
+        if (signin !== "signed_in" && signin !== "verify_email") {
             const errorMessage = 'Invalid username or password';
             setError("password", { message: errorMessage });
+        } else if (signin === "verify_email") {
+            MySwal.fire({
+                title: 'Email not verified!',
+                text: 'Please check your email for the confirmation link',
+                icon: 'error',
+                confirmButtonText: 'Cool'
+            })
+        } else {
+            handleEdit();
         }
     };
+
+    const forgetPassword = async () => {
+        const email = document.getElementById('emailbox').value;
+        if (email === '') {
+            setError("username", { message: 'Please enter your email' });
+        } else {
+            const sendlink = await forgotPassword(email).then(
+                MySwal.fire({
+                    title: 'Email Sent!',
+                    text: 'Please check your email for the reset link',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                })
+            )
+        }
+    }
     useEffect(() => {
         setFocus("username");
     }, [setFocus]);
@@ -41,6 +69,7 @@ function LoginPage() {
                         <h1 className='font-semibold text-base mt-2 text-center text-slate-400'>Hey, Enter your details to sign in to your account</h1>
                     </div>
                     < input
+                        id='emailbox'
                         className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
                         type="text"
                         placeholder="Enter Email"
@@ -52,6 +81,16 @@ function LoginPage() {
                                     value: 5,
                                     message: 'must be 5 charcters'
                                 },
+                                validate: {
+                                    validEmail: (value) => {
+                                        const emailRegex = /\S+@\S+\.\S+/;
+                                        if (emailRegex.test(value)) {
+                                            return true;
+                                        } else {
+                                            return "Invalid email";
+                                        }
+                                    }
+                                }
                             })} />
                     {errors.username && (
                         <span className="text-red-500">{errors.username.message}</span>
@@ -71,7 +110,7 @@ function LoginPage() {
                     {errors.password && (
                         <span className="text-red-500">{errors.password.message}</span>
                     )}
-                    <div className='cursor-pointer flex flex-row items-start'>
+                    <div className='cursor-pointer flex flex-row items-start' onClick={forgetPassword}>
                         <h1 className="text-sm font-semibold text-grey-600">
                             Forgot Password?
                         </h1>

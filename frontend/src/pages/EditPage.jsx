@@ -2,13 +2,15 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { UserAuth, getStorage, getDb } from "../context/AuthContext";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 import { doc, getDoc, collection, setDoc } from "firebase/firestore";
 import person from '../static/images/person.jpg'
 import { useNavigate } from "react-router-dom";
 import defaultt from '../static/images/default.png'
 
 export default function AccountPage({ }) {
+    const MySwal = withReactContent(Swal)
     const [file, setFile] = useState("");
     const [picture, setPicture] = useState("");
     const [per, setPerc] = useState(null);
@@ -27,56 +29,83 @@ export default function AccountPage({ }) {
     // This is to manually invoke a link
     const navigate = useNavigate();
     const goBack = useCallback(() => { navigate('/account') }, [navigate]);
+    const upload = async (file, key) => {
+        if (!file) {
+            return;
+        }
+        const name = new Date().getTime() + file.name;
+        const storageRef = ref(getStorage, name);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        uploadTask.on("state_changed", (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("File upload is " + progress + "% done");
+            setPerc(progress);
+        });
+
+        await uploadTask;
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+
+        let updateObject = {};
+        updateObject[key] = downloadURL;
+
+        setDoc(doc(getDb, "users", user.uid), updateObject, { merge: true }).then(() => {
+            console.log("Document successfully updated!");
+        });
+        MySwal.fire({
+            title: 'Success!',
+            text: 'Changes have been saved',
+            icon: 'success',
+            timer: 2000,
+            confirmButtonText: 'Cool'
+        })
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         const degreeName = document.getElementById('degreeName').value;
         const collegeName = document.getElementById('collegeName').value;
         const year = document.getElementById('year').value;
-        if (!degreeName || !collegeName || !year || !file) {
-            alert('Please fill out all fields');
-            return;
+
+        if ((collegeName && degreeName && year) && (!file && !picture)) {
+            // Case 1: Update college name, degree, and year only
+            setDoc(doc(getDb, "users", user.uid), {
+                university: collegeName,
+                degree: degreeName,
+                year: year,
+            }, { merge: true }).then(() => {
+                console.log("Document successfully updated!");
+            });
+        } else if (file && !picture && !collegeName && !degreeName && !year) {
+            // Case 2: Update resume only
+            upload(file, "resume");
+        } else if (picture && !file && !collegeName && !degreeName && !year) {
+            // Case 3: Update picture only
+            upload(picture, "picture");
+        } else {
+            // Case 4: Update all fields
+            if (!degreeName || !collegeName || !year || (!file && !picture)) {
+                MySwal.fire({
+                    title: 'Error',
+                    text: 'Please fill all the fields',
+                    icon: 'error',
+                    timer: 2000,
+                    confirmButtonText: 'Cool'
+                })
+                return;
+            }
+            upload(file, "resume");
+            upload(picture, "picture");
+            setDoc(doc(getDb, "users", user.uid), {
+                name: user.displayName,
+                university: collegeName,
+                degree: degreeName,
+                year: year,
+            }, { merge: true }).then(() => {
+                console.log("Document successfully updated!");
+            });
+
         }
-        const name1 = new Date().getTime() + file.name;
-        const storageRef1 = ref(getStorage, name1);
-        const uploadTask1 = uploadBytesResumable(storageRef1, file);
-
-        const name2 = new Date().getTime() + picture.name;
-        const storageRef2 = ref(getStorage, name2);
-        const uploadTask2 = uploadBytesResumable(storageRef2, picture);
-
-        // Update progress for each file separately
-        uploadTask1.on("state_changed", (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("File 1 upload is " + progress + "% done");
-            setPerc(progress);
-        });
-
-        uploadTask2.on("state_changed", (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("File 2 upload is " + progress + "% done");
-            setPerc(progress);
-        });
-
-        // Wait for both uploads to complete before updating the database
-        await Promise.all([uploadTask1, uploadTask2]);
-
-        const downloadURL1 = await getDownloadURL(uploadTask1.snapshot.ref);
-        const downloadURL2 = await getDownloadURL(uploadTask2.snapshot.ref);
-
-        setDoc(doc(getDb, "users", user.uid), {
-            name: user.displayName,
-            resume: downloadURL1,
-            resumeName: name1,
-            picture: downloadURL2,
-            // pictureName: name2,
-            degree: degreeName,
-            university: collegeName,
-            year: year,
-        }).then(() => {
-            console.log("Document successfully written!");
-        });
-    };
-
+    }
     useEffect(() => {
         const collectonRef2 = collection(getDb, 'users');
 
@@ -118,7 +147,7 @@ export default function AccountPage({ }) {
                         <div className='shadow-md absolute top-52 bottom-0 flex flex-col gap-2 md:gap-4 m-10  bg-slate-200 h-max py-2 md:py-4 md:w-6/12 w-10/12 rounded-lg mx-8 my-6 px-10'>
                             <div className="flex flex-col items-center">
                                 <img className="rounded-full h-28 w-28" src={imageLink} alt='Profile Picture' />
-                                <h1 className='text-2xl font-bold text-start'>{user.displayName}</h1>
+                                <h1 className='md:text-2xl text-xl font-bold text-start overflow-hidden whitespace-nowrap max-w-full'>{user.displayName}</h1>
                                 <div className='text-lg font-semibold mb-2 md:mb-4'>
                                     <ion-icon size='large' className='text-2xl' name="cloud-upload-outline" />
                                     <label htmlFor="picture" className="ml-2 bg-transparent cursor-pointer focus:border-teal-600">
@@ -143,10 +172,6 @@ export default function AccountPage({ }) {
                             </div>
                             <h1 className='text-lg font-semibold'>
                                 <ion-icon size='large' className='text-2xl' name="at-outline"></ion-icon>  : {truncateEmail(user.email)}
-                            </h1>
-
-                            <h1 className='text-lg font-semibold'>
-                                <ion-icon size="large" name="shield-checkmark-outline" />{user.emailVerified ? ' : Yes' : ' : Please verify your email'}
                             </h1>
 
                             <div className="my-2">

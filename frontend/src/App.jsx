@@ -22,7 +22,7 @@ import SignupPage from './pages/SignupPage';
 function App() {
 
   const location = useLocation();
-  const isLocation = location.pathname === '/login' || location.pathname === '/account' || location.pathname === '/edit';
+  const isLocation = location.pathname === '/login' || location.pathname === '/account' || location.pathname === '/edit' || location.pathname === '/signup';
 
   return (
 
@@ -42,7 +42,7 @@ function App() {
             <Route path="/how-to-apply" element={<HowToApply />} />
             <Route path="/resouces" element={<Resources />} />
             <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/login" element={<Redirection><LoginPage /></Redirection>} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/account" element={<Protected><AccountPage /></Protected>} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="*" element={<NotFound />} />
