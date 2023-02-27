@@ -3,11 +3,3 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
-
-
-ion-icon {
-    --padding-end: 0px;
-    --inner-padding-end: 0px;
-    --inner-padding-start: 0px;
-    --padding-start: 0px;
-  }

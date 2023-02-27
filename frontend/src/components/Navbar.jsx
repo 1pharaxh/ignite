@@ -61,9 +61,9 @@ function Navbar() {
         </div>
 
         {menu && <ul id="list" className={`
-          md:flex md:items-center md:z-auto md:static md:w-auto md:py-0 md:opacity-100 
+          md:flex md:items-center md:z-auto md:static md:w-auto md:py-0 md:opacity-100 md:pl-0 pr-5 md:pr-0
           ${!menu ? 'opacity-0' : 'opacity-100'} items-center absolute space-x-2 mr-10 bg-slate-100
-          pl-5 md:pl-0 pr-5 md:pr-0 rounded-b-lg pb-4 w-full left-0 transition-all ease-in duration-500`}>
+          pl-5  rounded-b-lg pb-4 w-full left-0 transition-all ease-in duration-500`}>
           <NavBarTabs disable={menu} text="Home" link="/" bg={location.pathname == '/' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
           <NavBarTabs disable={menu} text="About" link="/about" bg={location.pathname == '/about' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
           <NavBarTabs disable={menu} text="Companies" link="/companies" bg={location.pathname.includes("compan") ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
