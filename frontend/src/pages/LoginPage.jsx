@@ -110,7 +110,7 @@ function LoginPage() {
                     {errors.password && (
                         <span className="text-red-500">{errors.password.message}</span>
                     )}
-                    <div className='cursor-pointer flex flex-row items-start' onClick={forgetPassword}>
+                    <div className='cursor-pointer flex flex-row items-end' onClick={forgetPassword}>
                         <h1 className="text-sm font-semibold text-grey-600">
                             Forgot Password?
                         </h1>
