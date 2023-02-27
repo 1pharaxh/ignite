@@ -28,9 +28,7 @@ function App() {
 
     <AuthContextProvider>
 
-      <div className="
-          relative 
-          ">
+      <div className="">
         <Navbar />
         <div className='flex flex-col'>
           <Routes>

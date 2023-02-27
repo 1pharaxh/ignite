@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import "../static/css/homebanner.css";
+import "../../static/css/homebanner.css";
 
 
 function HomeBanner({ imageArray }) {

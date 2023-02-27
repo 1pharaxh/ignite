@@ -6,7 +6,7 @@ function Footer() {
     const year = date.getFullYear();
 
     return (
-        < div className="bg-teal-700 relative bottom-0 top-10">
+        < div className="bg-teal-700 h-[330px]">
             <div className="md:mx-20 ">
                 <div className="hidden md:flex flex-row justify-center pt-10 pb-2  gap-24">
                     <div className="flex flex-col gap-4">

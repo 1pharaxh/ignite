@@ -1,9 +1,9 @@
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import React, { useEffect, useState } from 'react';
-import star from '../static/logos/star2.svg'
-import date from '../static/logos/date.svg'
-import '../static/css/parallax.css';
+import star from '../../static/logos/star2.svg'
+import date from '../../static/logos/date.svg'
+import '../../static/css/parallax.css';
 
 export default function HomeTimeline({ timelineArray }) {
     const [isMobile, setIsMobile] = useState(window.innerWidth < 700);

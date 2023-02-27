@@ -1,12 +1,13 @@
 import React from "react";
-import HomeBanner from "../components/HomeBanner";
-import HomeTopCompanies from "../components/HomeTopCompanies";
-import HomeStatistics from "../components/HomeStatistics";
+import HomeBanner from "../components/HomeComponents/HomeBanner";
+import HomeTopCompanies from "../components/HomeComponents/HomeTopCompanies";
+import HomeStatistics from "../components/HomeComponents/HomeStatistics";
 import home_top from "../static/images/testimages/home_topbanner.png";
-import HomeTimeline from "../components/HomeTimeline";
+import HomeTimeline from "../components/HomeComponents/HomeTimeline";
+import HomeReviewCard from "../components/HomeComponents/HomeReviewCard";
 function Home() {
   return (
-    <div className="md:mt-20 mt-[65px] flex flex-col md:gap-4 gap-3">
+    <div className="md:mt-20 mt-[65px] flex flex-col">
       <HomeBanner imageArray={[home_top, home_top, home_top, home_top]} />
 
       <div className="flex items-center justify-center">
@@ -30,6 +31,7 @@ function Home() {
       </div>
 
       <HomeStatistics
+
         Companies={'1000+'}
         applications={'11,000+'}
         registrations={'3,700+'}
@@ -40,6 +42,10 @@ function Home() {
         average_stipend={'₹ 50,000'}
       />
 
+
+
+
+      <HomeReviewCard />
 
       <div className="flex items-center justify-center">
         <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Schedule or </span><span className="text-[#0F6F7B]">Timeline</span></h1>
@@ -72,6 +78,7 @@ function Home() {
           },
         ]}
       />
+
     </div>
   );
 }

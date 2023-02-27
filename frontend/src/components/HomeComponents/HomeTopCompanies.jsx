@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
-import '../static/css/topcompanies.css'
+import '../../static/css/topcompanies.css'
 import { motion } from 'framer-motion';
 
 function HomeTopCompanies({ imageArray }) {
