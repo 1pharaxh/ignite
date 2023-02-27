@@ -1,14 +1,26 @@
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import star from '../static/logos/star2.svg'
 import date from '../static/logos/date.svg'
 import '../static/css/parallax.css';
 
 export default function HomeTimeline({ timelineArray }) {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+    useEffect(() => {
+        function handleResize() {
+            setIsMobile(window.innerWidth < 700);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, []);
     return (
-        <div className="parallax">
-            <div className="parallax-overlay">
+        <div className={isMobile ? '' : 'parallax'} >
+            <div className={isMobile ? '' : 'parallax-overlay'}>
                 <VerticalTimeline
                     lineColor={"#0f766e"}
                 >
