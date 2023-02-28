@@ -7,7 +7,7 @@ import HomeTimeline from "../components/HomeComponents/HomeTimeline";
 import HomeReviewCard from "../components/HomeComponents/HomeReviewCard";
 function Home() {
   return (
-    <div className="md:mt-20 mt-[65px] flex flex-col">
+    <div className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
       <HomeBanner imageArray={[home_top, home_top, home_top, home_top]} />
 
       <div className="flex items-center justify-center">
@@ -45,7 +45,32 @@ function Home() {
 
 
 
-      <HomeReviewCard />
+      <HomeReviewCard
+        reviews={{
+          "students": [
+            { id: 0, name: "John Doe", image: "https://picsum.photos/200/100", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 5 },
+            { id: 1, name: "John Green", image: "https://picsum.photos/200/101", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 4 },
+            { id: 2, name: "Kenny William", image: "https://picsum.photos/200/102", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 2 },
+            { id: 3, name: "Pravesh", image: "https://picsum.photos/200/150", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 3 },
+            { id: 4, name: "Cathy", image: "https://picsum.photos/200/155", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 5 },
+            { id: 5, name: "Rema", image: "https://picsum.photos/200/201", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 4 },
+            { id: 6, name: "Sameer", image: "https://picsum.photos/200/210", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 3 },
+            { id: 7, name: "Farukh", image: "https://picsum.photos/200/120", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 2 },
+            { id: 8, name: "Seema", image: "https://picsum.photos/200/170", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 5 },
+          ],
+          "employers": [
+            { id: 0, name: "Chegg", image: "https://picsum.photos/200/100", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 5 },
+            { id: 1, name: "Doubt net", image: "https://picsum.photos/200/101", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 4 },
+            { id: 2, name: "Times of India", image: "https://picsum.photos/200/102", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 2 },
+            { id: 3, name: "LensKart", image: "https://picsum.photos/200/150", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 3 },
+            { id: 4, name: "Bajaj", image: "https://picsum.photos/200/155", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 5 },
+            { id: 5, name: "Sony", image: "https://picsum.photos/200/201", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 4 },
+            { id: 6, name: "Infosys", image: "https://picsum.photos/200/210", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 3 },
+            { id: 7, name: "LG", image: "https://picsum.photos/200/120", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 2 },
+            { id: 8, name: "HCL", image: "https://picsum.photos/200/170", review: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.", stars: 5 },
+          ]
+        }}
+      />
 
       <div className="flex items-center justify-center">
         <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Schedule or </span><span className="text-[#0F6F7B]">Timeline</span></h1>
