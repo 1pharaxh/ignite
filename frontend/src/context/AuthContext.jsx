@@ -19,10 +19,11 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState({});
 
   // Handle Google Sign In
-  const googleSignIn = () => {
+  const googleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     // signInWithRedirect(auth, provider); FOR MOBILE
-    signInWithPopup(auth, provider);
+    await signInWithPopup(auth, provider);
+    return "signed_in";
   };
 
   // Handle Log Out

@@ -14,7 +14,11 @@ function LoginPage() {
     const { googleSignIn, signIn, forgotPassword } = UserAuth();
     const handleGoogleSignIn = async () => {
         try {
-            await googleSignIn();
+            const gSignin = await googleSignIn();
+            if (gSignin) {
+                alert('signedIn')
+                handleEdit();
+            }
         } catch (error) {
             console.log(error);
         }
