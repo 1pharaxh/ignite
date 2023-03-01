@@ -62,10 +62,24 @@ export default function HomeReviewCard({ reviews }) {
                                     <h1>{circularDivs[el].review}</h1>
                                     <div className="flex flex-row gap-10 items-center justify-center mt-4">
                                         <i className='fa fa-angle-left text-teal-500' style={{ fontSize: '1.5rem' }}
-                                            onClick={() => handleSelect(index - 1)}
+                                            onClick={() => {
+                                                if (index !== 0) {
+                                                    handleSelect(index - 1)
+                                                }
+                                                else {
+                                                    handleSelect(circularDivs.length - 1)
+                                                }
+                                            }}
                                         ></i>
                                         <i className='fa fa-angle-right text-teal-500' style={{ fontSize: '1.5rem' }}
-                                            onClick={() => handleSelect(index + 1)}
+                                            onClick={() => {
+                                                if (index !== circularDivs.length - 1) {
+                                                    handleSelect(index + 1)
+                                                }
+                                                else {
+                                                    handleSelect(0)
+                                                }
+                                            }}
                                         ></i>
                                     </div>
                                 </div>
