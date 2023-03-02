@@ -6,6 +6,12 @@ module.exports = {
     extend: {
       colors: {
         "off-white": "#FEFEFE",
+        "off-black": "#072033",
+        "dark-teal": "#0F6F7B",
+        "light-teal": "#17bec3",
+        "super-light-teal": "#8BDEE1",
+        "base-yellow": "#FEE21E",
+        "danger-red": "#F56A6A",
       },
     },
   },
