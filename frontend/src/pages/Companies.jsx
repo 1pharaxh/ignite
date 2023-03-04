@@ -29,20 +29,18 @@ function Companies() {
         fetchData()
     }, [])
     return (
-        <div className='flex flex-col relative h-full w-full'>
+        <div className='md:mt-20 mt-[65px] flex flex-col relative h-full w-full'>
 
 
             {/*TEAL COLOR*/}
 
             <div
                 style={{
-                    backgroundImage: `url(${desk})`,
+                    backgroundImage: `linear-gradient(0deg, rgba(15, 111, 123, 0.7), rgba(15, 111, 123, 0.7)) , url(${desk})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }} className={`${!loading ? `opacity-100` : `opacity-50`} overflow-visible flex flex-col bg-teal-600  mx-0 h-80 w-full`}>
-                <div style={{
-                    backgroundColor: 'rgba(13, 148, 136, 0.8)'
-                }} className='h-80 z-1'>
+                <div className='h-80 z-1'>
                     <div className='flex items-center justify-center w-full h-full'>
                         <h1 className='md:text-5xl font-bold text-4xl text-white md:font-medium text-center'> Find your favourite company!</h1>
                     </div>
