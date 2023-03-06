@@ -15,7 +15,6 @@ import LoginPage from './pages/LoginPage';
 import { AuthContextProvider } from './context/AuthContext';
 import AccountPage from './pages/AccountPage';
 import Protected from './pages/Protected';
-import Redirection from './pages/Redirection'
 import EditPage from './pages/EditPage';
 import SignupPage from './pages/SignupPage';
 
@@ -38,7 +37,7 @@ function App() {
             <Route path="/companies" element={<Companies />} />
             <Route path="/companies/:id" element={<Company />} />
             <Route path="/how-to-apply" element={<HowToApply />} />
-            <Route path="/resouces" element={<Resources />} />
+            <Route path="/resources" element={<Resources />} />
             <Route path="/contact-us" element={<ContactUs />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/account" element={<Protected><AccountPage /></Protected>} />
