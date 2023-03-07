@@ -6,7 +6,8 @@ function Footer() {
     const year = date.getFullYear();
 
     return (
-        < div className="bg-dark-teal h-[330px]">
+        // h-[330px]
+        < div className="bg-dark-teal h-fit absolute w-full ">
             <div className="md:mx-20 ">
                 <div className="hidden md:flex flex-row justify-center pt-10 pb-2  gap-24">
                     <div className="flex flex-col gap-4">
@@ -117,7 +118,7 @@ function Footer() {
                     </div>
 
                 </div>
-                <div className="my-2 mx-5">
+                <div className="pt-5 mx-5">
                     <h1 className="text-white text-center text-md">Copyright © {year} Internship Cell, Khalsa College. All rights reserved.
                         {/* | <span className="hover:underline cursor-pointer">Privacy Policy</span>  */}
                     </h1>

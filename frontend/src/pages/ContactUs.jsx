@@ -1,4 +1,5 @@
 import React from 'react'
+import QueryCards from '../components/ContactUsCards/QueryCards'
 import PageBanner from '../components/PageBanner'
 import banner from '../static/images/ContactUsBanner.jpg'
 
@@ -54,7 +55,49 @@ function ContactUs() {
 
             <div className='flex flex-col gap-4 h-[401px] bg-super-light-teal'>
                 <h1 className='text-3xl md:text-4xl m-14 font-semibold' > <span className='text-dark-teal'>For further queries, </span> contact</h1>
+
+                <QueryCards
+                    dataArray={[
+                        {
+                            name: 'Karan Murphy',
+                            number: '(+91) 9762422334',
+                            image: 'https://picsum.photos/200/210',
+                        },
+                        {
+                            name: 'Kathryn Murphy',
+                            number: '(+91) 9762422334',
+                            image: 'https://picsum.photos/200/220',
+                        },
+                        {
+                            name: 'Kathryn Murphy',
+                            number: '(+91) 9762422334',
+                            image: 'https://picsum.photos/200/100',
+                        },
+                        {
+                            name: 'Simran Khandelwal',
+                            number: '(+91) 9762422334',
+                            image: 'https://picsum.photos/200/150',
+                        },
+                        {
+                            name: 'Simran Khandelwal',
+                            number: '(+91) 9762422334',
+                            image: 'https://picsum.photos/200/150',
+                        },
+                        {
+                            name: 'Simran Khandelwal',
+                            number: '(+91) 9762422334',
+                            image: 'https://picsum.photos/200/10',
+                        },
+                        {
+                            name: 'Karan',
+                            number: '(+91) 9762422334',
+                            image: 'https://picsum.photos/200/300',
+                        }
+                    ]}
+                />
             </div>
+
+            <div className='h-[400px]'></div>
 
 
         </div>

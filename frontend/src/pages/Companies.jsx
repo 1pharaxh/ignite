@@ -61,7 +61,7 @@ function Companies() {
             <h1 className={`${!loading ? `opacity-100` : `opacity-50`} text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
                 Our top recruiters!
             </h1>
-            <div className={`${!loading ? `opacity-100` : `opacity-50`} grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 md:px-16 px-4`}>
+            <div className={`${!loading ? `opacity-100` : `opacity-50`} grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 md:px-16 px-4 mb-10`}>
 
                 {companies.map(company => (
                     <motion.button

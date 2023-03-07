@@ -27,7 +27,7 @@ function App() {
 
     <AuthContextProvider>
 
-      <div className="">
+      <div className="overflow-x-hidden">
         <Navbar />
         <div className='flex flex-col'>
           <Routes>
