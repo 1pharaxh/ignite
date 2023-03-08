@@ -2,10 +2,17 @@ import React from 'react'
 import QueryCards from '../components/ContactUsCards/QueryCards'
 import PageBanner from '../components/PageBanner'
 import banner from '../static/images/ContactUsBanner.jpg'
+import demoImage from '../static/images/testimages/principal.jpg'
+import { motion } from "framer-motion";
 
 function ContactUs() {
     return (
-        <div className="md:mt-20 mt-[65px] flex flex-col">
+        <motion.div
+            initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
+            transition={{ duration: 1 }}
+            className="md:mt-20 mt-[65px] flex flex-col">
             <PageBanner
                 bannerText={'Contact Us'}
                 image={banner}
@@ -61,37 +68,37 @@ function ContactUs() {
                         {
                             name: 'Karan Murphy',
                             number: '(+91) 9762422334',
-                            image: 'https://picsum.photos/200/210',
+                            image: demoImage,
                         },
                         {
                             name: 'Kathryn Murphy',
                             number: '(+91) 9762422334',
-                            image: 'https://picsum.photos/200/220',
+                            image: demoImage,
                         },
                         {
                             name: 'Kathryn Murphy',
                             number: '(+91) 9762422334',
-                            image: 'https://picsum.photos/200/100',
+                            image: demoImage,
                         },
                         {
                             name: 'Simran Khandelwal',
                             number: '(+91) 9762422334',
-                            image: 'https://picsum.photos/200/150',
+                            image: demoImage,
                         },
                         {
                             name: 'Simran Khandelwal',
                             number: '(+91) 9762422334',
-                            image: 'https://picsum.photos/200/150',
+                            image: demoImage,
                         },
                         {
                             name: 'Simran Khandelwal',
                             number: '(+91) 9762422334',
-                            image: 'https://picsum.photos/200/10',
+                            image: demoImage,
                         },
                         {
                             name: 'Karan',
                             number: '(+91) 9762422334',
-                            image: 'https://picsum.photos/200/300',
+                            image: demoImage,
                         }
                     ]}
                 />
@@ -100,7 +107,7 @@ function ContactUs() {
             <div className='h-[400px]'></div>
 
 
-        </div>
+        </motion.div>
     )
 }
 

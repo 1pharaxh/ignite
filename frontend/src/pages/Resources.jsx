@@ -1,10 +1,14 @@
 import React from 'react'
 import PageBanner from '../components/PageBanner'
 import banner from '../static/images/ResourcesBanner.jpg'
-
+import { motion } from "framer-motion";
 export default function Resources() {
     return (
-        <div className='md:mt-20 mt-[65px] flex flex-col'>
+        <motion.div
+            initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
+            transition={{ duration: 1 }} className='md:mt-20 mt-[65px] flex flex-col'>
             <PageBanner
                 image={banner}
                 bannerText={'Resources'}
@@ -51,6 +55,6 @@ export default function Resources() {
                 <h1>Download</h1>
             </div>
 
-        </div>
+        </motion.div>
     )
 }

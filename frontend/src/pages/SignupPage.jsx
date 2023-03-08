@@ -6,6 +6,7 @@ import '../static/css/Login.css'
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { motion } from 'framer-motion'
 function SignupPage() {
     const MySwal = withReactContent(Swal)
     const { register, handleSubmit, setFocus, setError, formState: { errors } } = useForm();
@@ -38,7 +39,12 @@ function SignupPage() {
         setFocus("username");
     }, [setFocus]);
     return (
-        <div className='scrollbar-hide'>
+        <motion.div
+            initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
+            transition={{ duration: 1 }}
+            className='scrollbar-hide'>
             <form id='formSignup' onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap justify-center items-center absolute w-full h-screen z-10">
                 <div className='flex flex-col rounded-lg p-4 w-96 md:w-96 bg-white mx-auto my-auto  gap-4'>
                     <div className='flex flex-col items-center pt-10 md:pt-20'>
@@ -157,7 +163,7 @@ function SignupPage() {
                     <li></li>
                 </ul>
             </div >
-        </div>
+        </motion.div>
     )
 }
 

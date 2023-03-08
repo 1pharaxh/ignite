@@ -29,7 +29,12 @@ function Companies() {
         fetchData()
     }, [])
     return (
-        <div className='md:mt-20 mt-[65px] flex flex-col relative h-full w-full'>
+        <motion.div
+            initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
+            transition={{ duration: 1 }}
+            className='md:mt-20 mt-[65px] flex flex-col relative h-full w-full'>
 
 
             {/*TEAL COLOR*/}
@@ -82,7 +87,7 @@ function Companies() {
 
 
             </div>
-        </div >
+        </motion.div >
     )
 }
 

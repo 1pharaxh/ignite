@@ -16,6 +16,7 @@
     "react-google-button": "^0.7.2",
     "react-hook-form": "^7.43.2",
     "react-id-swiper": "^4.0.0",
+    "react-intersection-observer": "^9.4.3",
     "react-router-dom": "^6.8.0",
     "react-spinners": "^0.13.8",
     "react-vertical-timeline-component": "^3.6.0",

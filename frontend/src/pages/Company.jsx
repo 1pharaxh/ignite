@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import desk from '../static/images/desk.jpg'
 import CompanyCard from '../components/CompanyCard';
 import JobCard from '../components/JobCard';
 import { UserAuth, getDb } from "../context/AuthContext";
 import { doc, getDocs, getDoc, addDoc, collection, query, where } from 'firebase/firestore';
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 import PerkAndEligibleCard from '../components/PerkAndEligibleCard';
 import Dropdown from '../components/Dropdown';
 import { motion } from 'framer-motion';
 function Company() {
+    const MySwal = withReactContent(Swal)
     const [data, setData] = useState({});
     const [about, setAbout] = useState({});
     const [currentUser, setCurrentUser] = useState('');
@@ -18,6 +22,8 @@ function Company() {
     const [hasResume, setHasResume] = useState('');
     const [applied, setApplied] = useState(false);
 
+    const navigate = useNavigate();
+    const backToCompanies = useCallback(() => { navigate('/companies') }, [navigate]);
 
 
     // USE THIS HOOK and HANDLER TO GET DATA BACK FROM CHILD
@@ -87,8 +93,8 @@ function Company() {
                 resume: hasResume,
             }).then(() => {
                 console.log("Document successfully written!");
-                // refresh the page
-                window.location.reload();
+                // go to companies page
+                backToCompanies();
 
             });
         }
@@ -113,32 +119,33 @@ function Company() {
         slider.scrollLeft = slider.scrollLeft + 500
     }
     return (
-        <>
-            <div className='flex flex-col relative h-full w-full overflow-x-hidden'>
+        <motion.div
+            initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
+            transition={{ duration: 1 }}>
+            <div className='relative overflow-x-hidden md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4'>
                 {/*TEAL COLOR*/}
                 <div
                     style={{
-                        backgroundImage: `url(${desk})`,
+                        backgroundImage: `linear-gradient(0deg, rgba(15, 111, 123, 0.7), rgba(15, 111, 123, 0.7)), url(${desk})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center'
-                    }} className={`opacity-100 overflow-visible flex flex-col bg-teal-600  mx-0 h-80 w-full elevation-5`}>
-                    <div style={{
-                        backgroundColor: 'rgba(13, 148, 136, 0.8)'
-                    }} className='h-80 z-1'>
+                    }} className={`opacity-100 overflow-visible bg-teal-600 mx-0 h-80 w-full`}>
+                    <div className='h-80 z-1'>
                         <div className='flex flex-col items-center justify-center w-full h-full mt-[3%]'>
                             <h1 className='text-5xl text-white font-medium content-center'> {data.name} </h1>
                             <img className='rounded-md mt-7' src={googleDriveImage + data.image} width={200} height={150} ></img>
                         </div>
-
                     </div>
 
                 </div>
-                <div className='flex flex-col md:my-16 md:mx-16 mx-4 my-8 gap-10'>
-                    <div className='flex flex-row justify-between'>
+                <div className='flex flex-col md:my-16 md:mx-16 mx-4 my-8 gap-4 md:gap-10'>
+                    <div className='flex flex-col md:flex-row items-center md:gap-0 gap-2 md:justify-between'>
                         <div className='basis-6/12 w-30'>
-                            <h1 className='text-black md:text-4xl text-center text-3xl font-bold' > About the<span className='text-teal-600'> Company</span> </h1>
+                            <h1 className='text-black md:text-4xl text-center md:mb-0 mb-3 text-3xl font-bold' > About the<span className='text-teal-600'> Company</span> </h1>
                         </div>
-                        <div className='flex flex-row basis-6/12 auto w-64'>
+                        <div className='flex flex-row w-full md:basis-6/12 auto md:w-64 justify-between'>
                             <div className='flex flex-col w-full mr-4'>
                                 <button
                                     id='apply_button'
@@ -167,6 +174,8 @@ function Company() {
                             </button>
                         </div>
                     </div>
+
+                    {/* ABOUT COMPANY TEXT */}
                     <div className='flex'>
                         <h1 className='text-lg'>
                             {about.about_comp}
@@ -235,7 +244,7 @@ function Company() {
 
             </div>
 
-        </>
+        </motion.div>
 
     )
 }

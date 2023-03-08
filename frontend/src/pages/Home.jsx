@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import HomeBanner from "../components/HomeComponents/HomeBanner";
 import HomeTopCompanies from "../components/HomeComponents/HomeTopCompanies";
 import HomeStatistics from "../components/HomeComponents/HomeStatistics";
@@ -7,7 +8,11 @@ import HomeTimeline from "../components/HomeComponents/HomeTimeline";
 import HomeReviewCard from "../components/HomeComponents/HomeReviewCard";
 function Home() {
   return (
-    <div className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
+    <motion.div
+      initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
+      animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
+      transition={{ duration: 1 }} className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
       <HomeBanner imageArray={[home_top, home_top, home_top, home_top]} />
 
       <div className="flex items-center justify-center">
@@ -27,9 +32,8 @@ function Home() {
       ]} />
 
       <div className="flex items-center justify-center">
-        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Current</span><span className="text-[#0F6F7B]"> Statistics</span></h1>
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Past</span><span className="text-[#0F6F7B]"> Statistics</span></h1>
       </div>
-
       <HomeStatistics
 
         Companies={'1000+'}
@@ -104,7 +108,7 @@ function Home() {
         ]}
       />
 
-    </div>
+    </motion.div>
   );
 }
 

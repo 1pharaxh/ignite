@@ -2,6 +2,8 @@ import React from 'react'
 import person from '../static/images/person.jpg'
 import logo1 from '../static/logos/about_page_logo.png'
 import logo2 from '..//static/logos/about_page_logo2.png'
+import { motion } from "framer-motion";
+
 import campusPic from '../static/images/testimages/college_campus.jpg'
 import principal from '../static/images/testimages/principal.jpg'
 import '../static/css/about_parallax.css';
@@ -14,7 +16,12 @@ import PageBanner from '../components/PageBanner'
 
 function About() {
   return (
-    <div className="md:mt-20 mt-[65px] flex flex-col">
+    <motion.div
+      initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
+      animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
+      transition={{ duration: 1 }}
+      className="md:mt-20 mt-[65px] flex flex-col">
       <PageBanner
         image={person}
         bannerText={'About Us'}
@@ -250,7 +257,7 @@ function About() {
         </div>
 
       </div>
-    </div>
+    </motion.div>
   )
 }
 

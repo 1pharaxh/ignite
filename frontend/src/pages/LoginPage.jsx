@@ -7,7 +7,7 @@ import '../static/css/Login.css'
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-
+import { motion } from 'framer-motion'
 function LoginPage() {
     const MySwal = withReactContent(Swal)
 
@@ -65,7 +65,12 @@ function LoginPage() {
         setFocus("username");
     }, [setFocus]);
     return (
-        <div className='scrollbar-hide'>
+        <motion.div
+            initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
+            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
+            transition={{ duration: 1 }}
+            className='scrollbar-hide'>
             <form id='formName' onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap justify-center items-center absolute w-full h-screen z-10">
                 <div className='flex flex-col rounded-lg p-4 w-96 md:w-96 bg-white mx-auto my-auto  gap-4'>
                     <div className='flex flex-col items-center pt-10 md:pt-20'>
@@ -122,13 +127,13 @@ function LoginPage() {
                     < button className='p-2 flex flex-col items-center rounded-md bg-purple-400 text-white font-semibold' type="submit" form="formName">
                         Sign in
                     </button>
-
-                    <div className="w-full h-5 border-b-[1px] border-b-gray-500 border-solid text-center">
-                        <span className="text-lg bg-white px-5 text-gray-500">
-                            or
-                        </span>
+                    <div class="
+                    text-center 
+                    text-gray-500
+                    w-full relative 
+                    after:absolute after:border-t-[2px] after:border-white-dark after:w-[150px] after:bottom-[50%] after:right-0 before:contents-[''] before:absolute before:border-t-[2px] before:border-white-dark before:w-[150px] before:bottom-[50%] before:left-0">
+                        OR
                     </div>
-
                     <div className='p-2 flex flex-col items-center mb-4' >
                         <GoogleButton type="light" className="rounded-full" onClick={handleGoogleSignIn} />
                         <h1 className=" mt-5 text-gray-600"><span>Don't have an account? </span><span onClick={handleSignup} className="font-bold cursor-pointer">Sign up now</span> </h1>
@@ -159,7 +164,7 @@ function LoginPage() {
                     <li></li>
                 </ul>
             </div >
-        </div>
+        </motion.div>
     )
 }
 
