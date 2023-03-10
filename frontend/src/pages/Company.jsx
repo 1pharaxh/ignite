@@ -226,7 +226,7 @@ function Company() {
                         }
                     }}
                     breakPoints={breakPoints}
-                    className="mt-10"
+                    className="mt-10 "
                     itemPadding={[10, 10]}
                     enableAutoPlay
                     autoPlaySpeed={5000}
