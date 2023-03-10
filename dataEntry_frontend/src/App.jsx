@@ -13,8 +13,8 @@ function App() {
     <LoginContextProvider>
       <Router>
         <Routes>
-          {/* <Route path="/" element={<Protected><Home /></Protected>} /> */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Protected><Home /></Protected>} />
+          {/* <Route path="/" element={<Home />} /> */}
 
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Error />} />
