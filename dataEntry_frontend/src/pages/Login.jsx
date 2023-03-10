@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import '../static/css/Login.css'
+import { LoginContext } from '../utils/LoginContextProvider';
 function Login() {
   const { register, handleSubmit, setFocus, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+  const { isLoggedIn, toggleLogin } = useContext(LoginContext);
+
   const onSubmit = (data) => {
     const username = import.meta.env.VITE_USERNAME || "";
     const password = import.meta.env.VITE_PASSWORD || "";
+
     if (data['username'] === username && data['password'] === password) {
       console.log('login success');
+      if (!isLoggedIn) {
+        toggleLogin();
+      }
     }
     else {
       console.log('login failed');
@@ -16,7 +25,10 @@ function Login() {
   };
   React.useEffect(() => {
     setFocus("username");
-  }, [setFocus]);
+    if (isLoggedIn) {
+      navigate('/');
+    }
+  }, [setFocus, isLoggedIn]);
   return (
     <div className='scrollbar-hide'>
       <form id='formName' onSubmit={handleSubmit(onSubmit)} className="flex flex-wrap justify-center items-center absolute w-full h-full z-10">
@@ -64,6 +76,14 @@ function Login() {
       </form>
       <div className="area" >
         <ul className="circles">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
           <li></li>
           <li></li>
           <li></li>
