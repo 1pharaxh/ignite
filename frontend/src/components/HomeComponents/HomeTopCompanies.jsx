@@ -41,8 +41,8 @@ function HomeTopCompanies({ imageArray }) {
                         }
                     }}
                     breakPoints={breakPoints}
-                    className="mt-10"
-                    itemPadding={[10, 10]}
+                    className="mt-0"
+                    itemPadding={[10, 0, 10, 0]}
                     enableAutoPlay
                     autoPlaySpeed={5000}
                     enableSwipe
