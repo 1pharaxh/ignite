@@ -18,6 +18,7 @@ import Protected from './pages/Protected';
 import EditPage from './pages/EditPage';
 import SignupPage from './pages/SignupPage';
 import { AnimatePresence } from 'framer-motion';
+import SliderTestPage from './pages/SliderTestPage';
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
               <Route path="/account" element={<Protected><AccountPage /></Protected>} />
               <Route path="/signup" element={<SignupPage />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/test" element={<SliderTestPage />} />
             </Routes>
           </AnimatePresence>
         </div>

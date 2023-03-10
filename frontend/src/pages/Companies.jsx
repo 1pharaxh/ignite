@@ -75,8 +75,7 @@ function Companies() {
                         whileTap={{ scale: 0.9 }}
                     >
                         < div
-
-                            onClick={() => window.location.href = `/companies/${company._id}`}
+                            onClick={() => window.open(`/companies/${company._id}`, "_blank")}
                             className='bg-teal-700 h-44 md:w-9/12 w-full items-center  rounded-xl p-5 justify-center flex flex-col' >
                             <img className='rounded-md' src={googleDriveImage + company.image} width={200} ></img>
                             <h1 className=' hidden md:block text-xl text-white font-medium content-center'>{company.name}</h1>

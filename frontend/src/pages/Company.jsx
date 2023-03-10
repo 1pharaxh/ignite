@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import desk from '../static/images/desk.jpg'
 import CompanyCard from '../components/CompanyCard';
 import JobCard from '../components/JobCard';
 import { UserAuth, getDb } from "../context/AuthContext";
 import { doc, getDocs, getDoc, addDoc, collection, query, where } from 'firebase/firestore';
+import '../static/css/job_profile_carousel.css'
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -12,7 +13,16 @@ import withReactContent from 'sweetalert2-react-content'
 import PerkAndEligibleCard from '../components/PerkAndEligibleCard';
 import Dropdown from '../components/Dropdown';
 import { motion } from 'framer-motion';
+import ReactElasticCarousel from 'react-elastic-carousel';
 function Company() {
+    const carouselRef = useRef(null);
+
+    const breakPoints = [
+        { width: 1, itemsToShow: 1 },
+        { width: 550, itemsToShow: 2 },
+        { width: 768, itemsToShow: 3 },
+        { width: 1200, itemsToShow: 4 },
+    ]
     const MySwal = withReactContent(Swal)
     const [data, setData] = useState({});
     const [about, setAbout] = useState({});
@@ -109,15 +119,8 @@ function Company() {
         link.click();
         document.body.removeChild(link);
     };
+    let resetTimeout;
 
-    const slideLeft = () => {
-        var slider = document.getElementById('slider')
-        slider.scrollLeft = slider.scrollLeft - 500
-    }
-    const slideRight = () => {
-        var slider = document.getElementById('slider')
-        slider.scrollLeft = slider.scrollLeft + 500
-    }
     return (
         <motion.div
             initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
@@ -183,7 +186,7 @@ function Company() {
                     </div>
                 </div>
             </div >
-            <div className='h-auto bg-teal-200 w-full'>
+            <div className='p-5 bg-teal-200 w-full'>
                 <div className='flex items-center md:flex-row flex-col md:gap-0 gap-4 justify-between md:mx-16 mx-4 my-10'>
                     <div className='cursor-pointer' onClick={() => {
                         window.location.href = about.website
@@ -198,45 +201,51 @@ function Company() {
 
                 </div>
             </div>
-            <div className='flex flex-col md:mx-16 md:my-16 mx-3 my-8 gap-10 text-center'>
+            <div className='flex flex-col md:mx-16 md:my-16 mx-3 my-8 md:gap-10 gap-0 text-center'>
                 <h1 className='font-bold md:text-4xl text-3xl text-teal-600'>Job Profiles <span className='text-black'>and their description</span></h1>
-                <div className='relative flex items-center'>
-                    <motion.button
-                        whileHover={{ scale: 2.1 }}
-                        whileTap={{ scale: 0.9 }}
+                <ReactElasticCarousel
+                    easing="cubic-bezier(1,.15,.55,1.54)"
+                    tiltEasing="cubic-bezier(0.110, 1, 1.000, 0.210)"
+                    transitionMs={700}
+                    onNextEnd={({ index }) => {
+                        if (
+                            carouselRef?.current.state.activePage ===
+                            carouselRef?.current.state.pages.length - 1
+                        ) {
+                            const itemsPerPage = Math.floor(
+                                carouselRef?.current.props.children.length /
+                                carouselRef?.current.getNumOfPages()
+                            );
 
-                    ><i className='md:mr-5 mr-1 fa fa-angle-left font-bold text-3xl mt-2 text-teal-600' onClick={slideLeft} /></motion.button>
+                            if (itemsPerPage === carouselRef?.current.state.activeIndex) {
+                                clearTimeout(resetTimeout);
+                                resetTimeout = setTimeout(() => {
+                                    carouselRef?.current?.goTo(0);
+                                }, 5000); // same time
+                            }
+                        }
+                    }}
+                    breakPoints={breakPoints}
+                    className="mt-10"
+                    itemPadding={[10, 10]}
+                    enableAutoPlay
+                    autoPlaySpeed={5000}
+                    enableSwipe
+                    ref={carouselRef}
+                >
+                    {about.job_profile_description != undefined ? about.job_profile_description.map((el, index) => (
+                        <JobCard
+                            key={index}
+                            title={el[0]}
+                            duration={el[1]}
+                            roles={el[2]}
+                            requirements={el[3]} />
+                    ))
+                        : (<></>)}
+                </ReactElasticCarousel>
 
-
-                    <div id='slider' className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
-                        {about.job_profile_description != undefined ? about.job_profile_description.map((el, index) => (
-                            <motion.button key={index}
-                                whileTap={{ scale: 0.9 }}
-                            >
-                                <div className='inline-block p-5 cursor-pointer '>
-                                    <JobCard
-                                        key={index}
-                                        title={el[0]}
-                                        duration={el[1]}
-                                        roles={el[2]}
-                                        requirements={el[3]} />
-                                </div>
-                            </motion.button>
-                        ))
-                            : (<></>)}
-
-
-                    </div>
-                    <motion.button
-                        whileHover={{ scale: 2.1 }}
-                        whileTap={{ scale: 0.9 }}
-
-                    >
-                        <i className='fa fa-angle-right font-bold text-3xl md:ml-5 ml-2 mt-2 text-teal-600' onClick={slideRight} />
-                    </motion.button>
-                </div>
                 {key != '' ? (
-                    <div className='flex md:flex-row flex-col justify-end md:gap-10 gap-5 '>
+                    <div className='flex md:flex-row flex-col justify-end md:gap-10 gap-5 mt-5'>
                         <PerkAndEligibleCard titleTeal='Perks' titleBlack='about the internship' texts={about.profile[key].perks} />
                         <PerkAndEligibleCard titleTeal='Eligibility' titleBlack='criteria' texts={about.profile[key].eligibility} />
                     </div>
