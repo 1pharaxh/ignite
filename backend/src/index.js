@@ -5,9 +5,13 @@ const mongoose = require("mongoose");
 
 const port = process.env.PORT || 3000;
 const dbUri = process.env.DB_URI;
+const postUri = process.env.POST_URI;
 
 var cors = require("cors");
 const app = express();
+
+app.use(express.json()); // Parse incoming request bodies as JSON
+app.use(express.urlencoded({ extended: true })); // Parse incoming request bodies with URL-encoded payloads
 app.use(cors());
 
 mongoose
@@ -78,6 +82,28 @@ app.get("/search/:key", (req, res) => {
     }
   );
 });
+
+app.post(postUri, (req, res) => {
+  if (!req.body.name || !req.body.image || !req.body.about) {
+    return res.status(400).send("Missing required fields");
+  }
+
+  const company = new Company({
+    name: req.body.name,
+    image: req.body.image,
+    about: req.body.about,
+  });
+
+  company.save((err, savedCompany) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send("Error creating company");
+    }
+    console.log(savedCompany);
+    return res.status(201).send(savedCompany);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
