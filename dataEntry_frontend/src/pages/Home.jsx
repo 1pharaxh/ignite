@@ -8,6 +8,9 @@ function Home() {
   const { register, handleSubmit, setFocus, formState: { errors } } = useForm();
   const [jobProfileDescriptionArray, updateJobProfile] = useState([]);
 
+  const [jobProfile, setJobProfile] = useState({});
+  const [profileKey, setProfileKey] = useState(1);
+
 
   const { toggleLogin } = useContext(LoginContext);
   const navigate = useNavigate();
@@ -248,7 +251,7 @@ function Home() {
                 roles,
                 requirementsArray
               ]);
-              if (temp[0][0] !== "" && temp[0][1] !== "" && temp[0][2] !== [""] && temp[0][3] !== [""]) {
+              if (temp[0][0] != "" && temp[0][1] != "" && temp[0][2] != [""] && temp[0][3] != [""]) {
                 console.log(temp)
                 updateJobProfile([...jobProfileDescriptionArray, ...temp]);
               }
