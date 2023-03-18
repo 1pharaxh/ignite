@@ -63,7 +63,7 @@ app.get("/filter/:key", (req, res) => {
   Company.find(
     {
       $or: [
-        { "about.paid_unpaid": { $regex: key, $options: "i" } },
+        { "about.paid_unpaid": { $regex: '\\b' + key + '\\b', $options: "i" } },
         { "about.work_location": { $regex: key, $options: "i" } },
       ],
     },
