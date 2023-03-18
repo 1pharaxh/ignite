@@ -75,7 +75,12 @@ app.get("/search/:key", (req, res) => {
     {
       $or: [
         { name: { $regex: key, $options: "i" } },
-        { "about.download_job_descrip": { $regex: key, $options: "i" } },
+        {
+          "about.job_profile_description": {
+            $elemMatch: { $elemMatch: { $regex: key, $options: "i" } },
+          },
+        },
+        { "about.paid_unpaid": { $regex: key, $options: "i" } },
         { "about.about_comp": { $regex: key, $options: "i" } },
         { "about.website": { $regex: key, $options: "i" } },
         { "about.work_location": { $regex: key, $options: "i" } },
