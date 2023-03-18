@@ -15,8 +15,8 @@ const app = express();
 app.use(express.json()); // Parse incoming request bodies as JSON
 app.use(express.urlencoded({ extended: true })); // Parse incoming request bodies with URL-encoded payloads
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://anubhava.ignitesgtb.com' ],
-  optionsSuccessStatus: 200
+  origin: ["http://localhost:3000", "https://anubhava.ignitesgtb.com"],
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
@@ -88,6 +88,16 @@ app.get("/search/:key", (req, res) => {
       return res.status(200).send(companies);
     }
   );
+});
+app.delete("/delete" + postUri + "/companies/:id", (req, res) => {
+  const id = req.params.id;
+  Company.findOneAndDelete({ _id: id }, (err, company) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    console.log(`Company ${id} has been deleted`);
+    return res.status(200).send(`Company ${id} has been deleted`);
+  });
 });
 
 app.post(postUri, (req, res) => {
