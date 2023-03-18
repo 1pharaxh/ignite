@@ -44,7 +44,6 @@ function Company() {
     };
 
     const { id } = useParams();
-    const googleDriveImage = 'https://drive.google.com/uc?export=view&id='
     const { user } = UserAuth();
 
 
@@ -138,7 +137,7 @@ function Company() {
                     <div className='h-80 z-1'>
                         <div className='flex flex-col items-center justify-center w-full h-full mt-[3%]'>
                             <h1 className='text-5xl text-white font-medium content-center'> {data.name} </h1>
-                            <img className='rounded-md mt-7' src={googleDriveImage + data.image} width={200} height={150} ></img>
+                            <img className='rounded-md mt-7' src={data.image} width={200} height={150} ></img>
                         </div>
                     </div>
 

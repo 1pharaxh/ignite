@@ -127,7 +127,7 @@ function LoginPage() {
                     < button className='p-2 flex flex-col items-center rounded-md bg-purple-400 text-white font-semibold' type="submit" form="formName">
                         Sign in
                     </button>
-                    <div class="
+                    <div className="
                     text-center 
                     text-gray-500
                     w-full relative 

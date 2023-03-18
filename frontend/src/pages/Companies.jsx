@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 
 
 function Companies() {
-    const googleDriveImage = 'https://drive.google.com/uc?export=view&id='
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -77,7 +76,7 @@ function Companies() {
                         < div
                             onClick={() => window.open(`/companies/${company._id}`, "_blank")}
                             className='bg-teal-700 h-44 md:w-9/12 w-full items-center  rounded-xl p-5 justify-center flex flex-col' >
-                            <img className='rounded-md' src={googleDriveImage + company.image} width={200} ></img>
+                            <img className='rounded-md' src={company.image} width={200} ></img>
                             <h1 className=' hidden md:block text-xl text-white font-medium content-center'>{company.name}</h1>
 
                         </div>

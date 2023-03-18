@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../static/css/Login.css'
 import { LoginContext } from '../utils/LoginContextProvider';
 function Login() {
-  const { register, handleSubmit, setFocus, formState: { errors } } = useForm();
+  const { register, handleSubmit, setFocus, setError, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const { isLoggedIn, toggleLogin } = useContext(LoginContext);
 
@@ -21,6 +21,8 @@ function Login() {
     }
     else {
       console.log('login failed');
+      // Cause an error on the password field
+      setError("password", { type: "manual", message: "Incorrect username or password" });
     }
   };
   React.useEffect(() => {
