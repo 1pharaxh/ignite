@@ -15,7 +15,8 @@ const app = express();
 app.use(express.json()); // Parse incoming request bodies as JSON
 app.use(express.urlencoded({ extended: true })); // Parse incoming request bodies with URL-encoded payloads
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://anubhava.ignitesgtb.com/' ]
+  origin: ['http://localhost:3000', 'https://anubhava.ignitesgtb.com' ],
+  optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
