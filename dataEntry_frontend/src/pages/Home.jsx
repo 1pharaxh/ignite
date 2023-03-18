@@ -67,6 +67,7 @@ function Home() {
               "about_comp": data.about_company,
               "website": data.company_website,
               "work_location": data.work_location,
+              "paid_unpaid": data.paid_unpaid,
               "job_profile_description": jobProfileDescriptionArray,
               "profile": jobPerksEligibilty
             }
@@ -79,6 +80,7 @@ function Home() {
             "about": {
               "about_comp": data.about_company,
               "website": data.company_website,
+              "paid_unpaid": data.paid_unpaid,
               "work_location": data.work_location,
               "job_profile_description": jobProfileDescriptionArray,
               "profile": jobPerksEligibilty
@@ -238,6 +240,23 @@ function Home() {
                 })} />
             {errors.work_location && (
               <span className="text-red-500">{errors.work_location.message}</span>
+            )}
+          </div>
+
+          <div className='flex flex-row gap-0 items-baseline'>
+            <h1 className='font-bold text-base text-slate-800 mr-[20px]'>
+              Paid / Unpaid:
+            </h1>
+            < input
+              className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
+              type="text"
+              placeholder="Work Location"
+              {...register("paid_unpaid",
+                {
+                  required: 'required',
+                })} />
+            {errors.paid_unpaid && (
+              <span className="text-red-500">{errors.paid_unpaid.message}</span>
             )}
           </div>
 
