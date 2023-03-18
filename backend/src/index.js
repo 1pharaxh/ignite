@@ -40,6 +40,7 @@ const companySchema = new mongoose.Schema({
     download_job_descrip: String,
     about_comp: String,
     website: String,
+    paid_unpaid: String,
     work_location: String,
     job_profile_description: Array,
     profile: Object,
