@@ -58,6 +58,25 @@ app.get("/companies", (req, res) => {
   });
 });
 
+app.get("/filter/:key", (req, res) => {
+  const key = req.params.key;
+  Company.find(
+    {
+      $or: [
+        { "about.paid_unpaid": { $regex: key, $options: "i" } },
+        { "about.work_location": { $regex: key, $options: "i" } },
+      ],
+    },
+    (err, companies) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      console.log(companies);
+      return res.status(200).send(companies);
+    }
+  );
+});
+
 app.get("/companies/:id", (req, res) => {
   const id = req.params.id;
   Company.findOne({ _id: id }, (err, company) => {
