@@ -47,6 +47,11 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+const corsOptions = {
+  origin: 'http://localhost:3000', // replace with your React app's URL
+};
+
+app.use(cors(corsOptions));
 app.get("/companies", (req, res) => {
   Company.find({}, (err, companies) => {
     if (err) {
