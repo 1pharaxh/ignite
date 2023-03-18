@@ -14,7 +14,11 @@ const app = express();
 
 app.use(express.json()); // Parse incoming request bodies as JSON
 app.use(express.urlencoded({ extended: true })); // Parse incoming request bodies with URL-encoded payloads
-app.use(cors());
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://anubhava.ignitesgtb.com/' ]
+};
+
+app.use(cors(corsOptions));
 
 mongoose
   .connect(dbUri, {
@@ -41,17 +45,6 @@ const companySchema = new mongoose.Schema({
   },
 });
 const Company = mongoose.model("companies", companySchema);
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-const corsOptions = {
-  origin: 'http://localhost:3000', // replace with your React app's URL
-};
-
-app.use(cors(corsOptions));
 app.get("/companies", (req, res) => {
   Company.find({}, (err, companies) => {
     if (err) {
