@@ -1,9 +1,9 @@
 import React, { createContext, useState } from "react";
 
-export const LoginContext = createContext(true);
+export const LoginContext = createContext(false);
 
 const LoginContextProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleLogin = () => {
     setIsLoggedIn(!isLoggedIn);
