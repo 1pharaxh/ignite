@@ -153,6 +153,7 @@ function Home() {
                 icon: 'success',
                 confirmButtonText: 'Cool'
               })
+              fetchDb();
             })
             .catch(error => {
               console.log('error', error)
