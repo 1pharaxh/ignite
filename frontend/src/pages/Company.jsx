@@ -75,7 +75,7 @@ function Company() {
 
 
             var temp = []
-            const response = await fetch('https://ignite-25g9.onrender.com/companies/' + id)
+            const response = await fetch('https://ignite-backend.onrender.com/companies/' + id)
             const data = await response.json()
             setData(data)
             setAbout(data.about)

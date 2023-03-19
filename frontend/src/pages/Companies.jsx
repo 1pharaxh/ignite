@@ -2,31 +2,74 @@ import React, { useState, useEffect } from 'react'
 import { HashLoader } from 'react-spinners';
 import desk from '../static/images/desk.jpg'
 import { motion } from "framer-motion";
-
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 
 function Companies() {
+
+    const MySwal = withReactContent(Swal)
     const [companies, setCompanies] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [searchString, setSearchString] = useState('');
-    const [width, setWidth] = useState(window.innerWidth);
     const [usersearched, setUserSearched] = useState(false);
-    // UseEffect for window resize
-    useEffect(() => {
-        const handleResize = () => {
-            console.log(window.innerWidth);
-            setWidth(window.innerWidth);
-        };
+    async function fetchData() {
+        setLoading(true)
 
-        window.addEventListener('resize', handleResize);
+        const response = await fetch('https://ignite-backend.onrender.com/companies')
+        const data = await response.json()
+        setCompanies(data)
+        setLoading(false)
+    }
+    const handleFilter = (e) => {
+        e.preventDefault();
+        const inputOptions = new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({
+                    'Remote': 'Remote Internship',
+                    // second row
+                    'Paid': 'Paid Internship',
+                })
+            }, 500)
+        })
+        MySwal.fire({
+            icon: "info",
+            title: "Filter by",
+            input: 'radio',
+            inputOptions: inputOptions,
+            inputAutoTrim: true,
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'You need to choose something!'
+                }
+                else {
+                    if (value === "Remote") {
+                        handleSearch('remote')
+                    }
+                    else if (value === "Paid") {
+                        handleSearch('paid')
+                    }
+                }
+            },
+        });
+    };
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+    const handleSearch = (val) => {
+        let search
+        if (val == "") {
+            search = document.getElementById('searchbox').value;
+            if (search == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please enter a search term!',
+                })
+                return;
+            }
 
-    const handleSearch = () => {
-        const search = document.getElementById('searchbox').value;
+        } else {
+            search = val;
+        }
         setSearchString(search);
         setUserSearched(true);
         setLoading(true)
@@ -38,14 +81,26 @@ function Companies() {
             .then(response => response.text())
             .then((result) => {
                 console.log(result)
-                setCompanies(JSON.parse(result))
+                if (result == "[]") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'No results found!',
+                    })
+                    setCompanies([])
+
+                } else {
+                    setCompanies(JSON.parse(result))
+                }
                 setLoading(false)
             })
             .catch(error => console.log('error', error));
+        search = "";
     }
     const clearSearch = () => {
         setSearchString("");
         document.getElementById('searchbox').value = '';
+        fetchData();
         setUserSearched(false);
     }
 
@@ -59,12 +114,6 @@ function Companies() {
     };
 
     useEffect(() => {
-        async function fetchData() {
-            const response = await fetch('https://ignite-backend.onrender.com/companies')
-            const data = await response.json()
-            setCompanies(data)
-            setLoading(false)
-        }
         fetchData()
     }, [])
     return (
@@ -97,7 +146,7 @@ function Companies() {
                             <div className='flex justify-between items-center w-12/12'>
                                 {/* // search icon */}
                                 <input id="searchbox" disabled={loading} className='p-2 text-sm outline-none w-full' type='text' placeholder='TITLE, KEYWORD OR PHRASE' />
-                                <svg className={`${usersearched ? 'hidden' : 'visible'} cursor-pointer`} onClick={handleSearch} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg className={`${usersearched ? 'hidden' : 'visible'} cursor-pointer`} onClick={() => handleSearch("")} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.5 11H11.71L11.43 10.73C12.41 9.59 13 8.11 13 6.5C13 2.91 10.09 0 6.5 0C2.91 0 0 2.91 0 6.5C0 10.09 2.91 13 6.5 13C8.11 13 9.59 12.41 10.73 11.43L11 11.71V12.5L16 17.49L17.49 16L12.5 11ZM6.5 11C4.01 11 2 8.99 2 6.5C2 4.01 4.01 2 6.5 2C8.99 2 11 4.01 11 6.5C11 8.99 8.99 11 6.5 11Z" fill="#0F6F7B" />
                                 </svg>
                                 <svg onClick={clearSearch} className={`${usersearched ? 'visible' : 'hidden'} cursor-pointer`} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +157,7 @@ function Companies() {
                             <div className='h-px w-12/12 bg-teal-600 my-0 mx-2'></div>
                         </div>
 
-                        <button disabled={loading} className='md:h-[62px] md:w-[200px] flex font-bold justify-center items-center px-4 py-2 bg-teal-600 text-white hover:bg-teal-700 rounded-lg text-sm'>
+                        <button onClick={handleFilter} disabled={loading} className='md:h-[62px] md:w-[200px] flex font-bold justify-center items-center px-4 py-2 bg-teal-600 text-white hover:bg-teal-700 rounded-lg text-sm'>
                             <svg className='mr-2' width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 12H11V10H7V12ZM0 0V2H18V0H0ZM3 7H15V5H3V7Z" fill="#FEFEFE" />
                             </svg>
