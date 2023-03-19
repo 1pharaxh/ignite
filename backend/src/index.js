@@ -99,7 +99,7 @@ app.get("/search/:key", (req, res) => {
             $elemMatch: { $elemMatch: { $regex: key, $options: "i" } },
           },
         },
-        { "about.paid_unpaid": { $regex: key, $options: "i" } },
+        { "about.paid_unpaid": { $regex: '\\b' + key + '\\b', $options: "i" } },
         { "about.about_comp": { $regex: key, $options: "i" } },
         { "about.website": { $regex: key, $options: "i" } },
         { "about.work_location": { $regex: key, $options: "i" } },
