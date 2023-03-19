@@ -33,7 +33,7 @@ function Home() {
       redirect: 'follow'
     };
 
-    fetch("https://ignite-25g9.onrender.com/companies", requestOptions)
+    fetch("https://ignite-backend.onrender.com/companies", requestOptions)
       .then(response => response.text())
       .then((result) => {
         updatePostingsArray(JSON.parse(result))
