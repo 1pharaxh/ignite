@@ -55,13 +55,15 @@ function Navbar() {
 
           <span className="text-3xl md:hidden block cursor-pointer mx-2">
             <i onClick={() => {
+              window.scrollTo(0, 0);
               setMenu(!menu);
             }} className={menu ? "fas fa-times" : "fas fa-bars"} aria-hidden="true"></i>
           </span>
         </div>
 
+
         {menu && <ul id="list"
-          onClick={() => { width < 700 ? setMenu(false) : '' }}
+          onClick={() => { window.scrollTo(0, 0); width < 700 ? setMenu(false) : '' }}
           className={`
           md:flex md:items-center md:z-auto md:static md:w-auto md:py-0 md:opacity-100 md:pl-0 pr-5 md:pr-0
           ${!menu ? 'opacity-0' : 'opacity-100'} items-center absolute space-x-2 mr-10 bg-slate-100

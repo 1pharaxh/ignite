@@ -12,8 +12,8 @@ import withReactContent from 'sweetalert2-react-content'
 
 import PerkAndEligibleCard from '../components/PerkAndEligibleCard';
 import Dropdown from '../components/Dropdown';
-import { motion } from 'framer-motion';
 import ReactElasticCarousel from 'react-elastic-carousel';
+import { HashLoader } from 'react-spinners';
 function Company() {
     const carouselRef = useRef(null);
 
@@ -25,6 +25,7 @@ function Company() {
     ]
     const MySwal = withReactContent(Swal)
     const [data, setData] = useState({});
+    const [loading, setLoading] = useState(true);
     const [about, setAbout] = useState({});
     const [currentUser, setCurrentUser] = useState('');
     const [profile, setProfile] = useState([]);
@@ -40,7 +41,7 @@ function Company() {
     const [key, setKey] = useState('');
     const handleNameChange = (newKey) => {
         setKey(newKey);
-        setSelectedJob({ 'Company': data.name, 'JobId': about.profile[newKey].id, 'JobTitle': about.profile[newKey].name })
+        setSelectedJob({ 'Company': data.name, 'JobId': newKey, 'JobTitle': about.profile[newKey].name })
     };
 
     const { id } = useParams();
@@ -60,9 +61,9 @@ function Company() {
                     setHasResume('');
                     console.log('no resume');
                 }
-                if (key != '') {
+                if (key != '' && about.profile) {
                     const collectionRef = collection(getDb, 'applications');
-                    const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), where('profile.JobId', '==', about.profile[key].id)));
+                    const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), where('profile.JobId', '==', key)));
                     if (querySnapshot.empty) {
                         console.log('Not Applied.');
                         setApplied(false);
@@ -77,6 +78,9 @@ function Company() {
             var temp = []
             const response = await fetch('https://ignite-backend.onrender.com/companies/' + id)
             const data = await response.json()
+            if (data != null) {
+                setLoading(false);
+            }
             setData(data)
             setAbout(data.about)
             Object.keys(data.about.profile).forEach((key) => {
@@ -121,11 +125,7 @@ function Company() {
     let resetTimeout;
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
-            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
-            transition={{ duration: 1 }}>
+        <div>
             <div className='relative overflow-x-hidden md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4'>
                 {/*TEAL COLOR*/}
                 <div
@@ -133,7 +133,8 @@ function Company() {
                         backgroundImage: `linear-gradient(0deg, rgba(15, 111, 123, 0.7), rgba(15, 111, 123, 0.7)), url(${desk})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center'
-                    }} className={`opacity-100 overflow-visible bg-teal-600 mx-0 h-80 w-full`}>
+                    }}
+                    className={`${!loading ? 'opacity-100' : 'opacity-50'} overflow-visible bg-teal-600 mx-0 h-80 w-full`}>
                     <div className='h-80 z-1'>
                         <div className='flex flex-col items-center justify-center w-full h-full mt-[3%]'>
                             <h1 className='text-5xl text-white font-medium content-center'> {data.name} </h1>
@@ -141,8 +142,18 @@ function Company() {
                         </div>
                     </div>
 
+                    <HashLoader cssOverride={{
+                        display: "block",
+                        margin: "auto",
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        padding: "0",
+                        opacity: 1,
+                    }} size={150} color={"#0f766e"} loading={loading} />
                 </div>
-                <div className='flex flex-col md:my-16 md:mx-16 mx-4 my-8 gap-4 md:gap-10'>
+                <div className={`flex flex-col md:my-16 md:mx-16 mx-4 my-8 gap-4 md:gap-10`}>
                     <div className='flex flex-col md:flex-row items-center md:gap-0 gap-2 md:justify-between'>
                         <div className='basis-6/12 w-30'>
                             <h1 className='text-black md:text-4xl text-center md:mb-0 mb-3 text-3xl font-bold' > About the<span className='text-teal-600'> Company</span> </h1>
@@ -185,7 +196,7 @@ function Company() {
                     </div>
                 </div>
             </div >
-            <div className='p-5 bg-teal-200 w-full'>
+            <div className={`${!loading ? 'opacity-100' : 'opacity-50'} p-5 bg-teal-200 w-full`}>
                 <div className='flex items-center md:flex-row flex-col md:gap-0 gap-4 justify-between md:mx-16 mx-4 my-10'>
                     <div className='cursor-pointer' onClick={() => {
                         window.location.href = about.website
@@ -200,7 +211,7 @@ function Company() {
 
                 </div>
             </div>
-            <div className='flex flex-col md:mx-16 md:my-16 mx-3 my-8 md:gap-10 gap-0 text-center'>
+            <div className={`${!loading ? 'opacity-100' : 'opacity-50'} flex flex-col md:mx-16 md:my-16 mx-3 my-8 md:gap-10 gap-0 text-center`}>
                 <h1 className='font-bold md:text-4xl text-3xl text-teal-600'>Job Profiles <span className='text-black'>and their description</span></h1>
                 <ReactElasticCarousel
                     easing="cubic-bezier(1,.15,.55,1.54)"
@@ -251,8 +262,7 @@ function Company() {
                 ) : (<></>)}
 
             </div>
-
-        </motion.div>
+        </div>
 
     )
 }

@@ -17,7 +17,6 @@ import AccountPage from './pages/AccountPage';
 import Protected from './pages/Protected';
 import EditPage from './pages/EditPage';
 import SignupPage from './pages/SignupPage';
-import { AnimatePresence } from 'framer-motion';
 import SliderTestPage from './pages/SliderTestPage';
 
 function App() {
@@ -31,23 +30,21 @@ function App() {
       <div className="overflow-x-hidden">
         <Navbar />
         <div className='flex flex-col'>
-          <AnimatePresence mode="wait" exitBeforeEnter>
-            <Routes key={location.pathname} location={location}>
-              <Route path="/edit" element={<Protected><EditPage /></Protected>} />
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/companies" element={<Companies />} />
-              <Route path="/companies/:id" element={<Company />} />
-              <Route path="/how-to-apply" element={<HowToApply />} />
-              <Route path="/resources" element={<Resources />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/account" element={<Protected><AccountPage /></Protected>} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="*" element={<NotFound />} />
-              <Route path="/test" element={<SliderTestPage />} />
-            </Routes>
-          </AnimatePresence>
+          <Routes key={location.pathname} location={location}>
+            <Route path="/edit" element={<Protected><EditPage /></Protected>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/companies" element={<Companies />} />
+            <Route path="/companies/:id" element={<Company />} />
+            <Route path="/how-to-apply" element={<HowToApply />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/account" element={<Protected><AccountPage /></Protected>} />
+            <Route path="/signup" element={<SignupPage />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/test" element={<SliderTestPage />} />
+          </Routes>
         </div>
         {!isLocation && <Footer />}
       </div>

@@ -4,14 +4,9 @@ import YouTubeBanner from '../components/HowToApplyComponents/YouTubeBanner'
 import PageBanner from '../components/PageBanner'
 import banner from '../static/images/HowToApplyBanner.jpg'
 import youtube from '../static/images/HowToApplyYoutube.png'
-import { motion } from "framer-motion";
 function HowToApply() {
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
-            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
-            transition={{ duration: 1 }} className="md:mt-20 mt-[65px] flex flex-col">
+        <div className="md:mt-20 mt-[65px] flex flex-col">
 
             <PageBanner
                 image={banner}
@@ -46,7 +41,7 @@ function HowToApply() {
                 />
 
             </div>
-        </motion.div>
+        </div>
     )
 }
 

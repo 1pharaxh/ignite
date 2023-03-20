@@ -7,12 +7,45 @@ import withReactContent from 'sweetalert2-react-content'
 
 
 function Companies() {
-
     const MySwal = withReactContent(Swal)
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchString, setSearchString] = useState('');
     const [usersearched, setUserSearched] = useState(false);
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 12;
+    let pagination = [];
+
+    const pagesCount = Math.ceil(companies.length / itemsPerPage);
+
+    if (pagesCount <= 3) {
+        pagination = Array.from({ length: pagesCount }, (_, i) => i + 1);
+    } else if (currentPage === 1 || currentPage === 2) {
+        pagination = [1, 2, 3];
+    } else if (currentPage === pagesCount || currentPage === pagesCount - 1) {
+        pagination = [pagesCount - 2, pagesCount - 1, pagesCount];
+    } else {
+        pagination = [currentPage - 1, currentPage, currentPage + 1];
+    }
+    const handleClick = (e, index) => {
+        e.preventDefault();
+        if (index !== currentPage && index > 0 && index <= pagesCount) {
+            setCurrentPage(index);
+        }
+    };
+
+    const renderItems = () => {
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        // Check if on last page
+        if (currentPage === pagesCount) {
+            return companies.slice(start)
+        } else {
+            return companies.slice(start, end)
+        }
+    };
+
     async function fetchData() {
         setLoading(true)
 
@@ -55,6 +88,7 @@ function Companies() {
     };
 
     const handleSearch = (val) => {
+        setCompanies([])
         let search
         if (val == "") {
             search = document.getElementById('searchbox').value;
@@ -117,16 +151,8 @@ function Companies() {
         fetchData()
     }, [])
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
-            animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
-            transition={{ duration: 1 }}
-            className='md:mt-20 mt-[65px] flex flex-col relative h-full w-full'>
-
-
+        <div className='md:mt-20 mt-[65px] flex flex-col relative h-full w-full'>
             {/*TEAL COLOR*/}
-
             <div
                 style={{
                     backgroundImage: `linear-gradient(0deg, rgba(15, 111, 123, 0.7), rgba(15, 111, 123, 0.7)) , url(${desk})`,
@@ -138,7 +164,6 @@ function Companies() {
                         <h1 className='md:text-5xl font-bold text-4xl text-white md:font-medium text-center'> Find your favourite company!</h1>
                     </div>
                 </div>
-
                 {/* search BAR*/}
                 <div className='w-full justify-center items-center flex '>
                     <div className='shadow-md absolute top-64 bottom-0 flex m-10 items-center bg-white h-20 w-11/12 rounded-lg mx-8 my-6 px-10'>
@@ -152,11 +177,9 @@ function Companies() {
                                 <svg onClick={clearSearch} className={`${usersearched ? 'visible' : 'hidden'} cursor-pointer`} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#0F6F7B" />
                                 </svg>
-
                             </div>
                             <div className='h-px w-12/12 bg-teal-600 my-0 mx-2'></div>
                         </div>
-
                         <button onClick={handleFilter} disabled={loading} className='md:h-[62px] md:w-[200px] flex font-bold justify-center items-center px-4 py-2 bg-teal-600 text-white hover:bg-teal-700 rounded-lg text-sm'>
                             <svg className='mr-2' width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 12H11V10H7V12ZM0 0V2H18V0H0ZM3 7H15V5H3V7Z" fill="#FEFEFE" />
@@ -166,14 +189,13 @@ function Companies() {
                     </div>
                 </div>
             </div>
-
             <HashLoader cssOverride={override} size={150} color={"#0f766e"} loading={loading} />
-            < div className={`${!usersearched ? `visible` : `hidden`}`}>
-                <h1 className={`${!loading ? `opacity-100` : `opacity-0`} text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
+            {!usersearched ? < div className={`${!usersearched ? `visible` : `hidden`}`}>
+                <h1 className='text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4'>
                     Our top recruiters!
                 </h1>
                 <div className={`${!loading ? `opacity-100` : `opacity-50`} grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 md:px-16 px-4 mb-10`}>
-                    {companies.map(company => (
+                    {renderItems().map(company => (
                         <motion.button
                             key={company._id}
                             whileHover={{ scale: 1.1 }}
@@ -189,50 +211,91 @@ function Companies() {
                         </motion.button>
                     ))}
                 </div>
-            </div >
+            </div > :
+                < div className={`${!usersearched ? `hidden` : `visible`}`}>
+                    <h1 className={`${!loading ? `opacity-100` : `opacity-0`} flex flex-row text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
+                        <svg onClick={clearSearch} className='cursor-pointer md:mr-5 mr-2 ' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" fill="#0F6F7B" />
+                        </svg>
+                        Search results for "<span className='text-black'>{searchString}</span>"
+                    </h1>
+                    <div className='items-start justify-start w-12/12 grid grid-row md:gap-4 gap-2 md:px-14 px-4 mb-10'>
+                        {companies.map(company => (
+                            <motion.button
+                                key={company._id}
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.9 }}
+                            >
+                                < div
+                                    onClick={() => window.open(`/companies/${company._id}`, "_blank")}
+                                    className={`bg-teal-700 h-44 w-full rounded-xl p-4 flex flex-row gap-4 items-center justify-center`} >
+                                    <img className='flex-col rounded-md w-[200px] h-[120px]' src={company.image} width={200}></img>
+                                    <div className='flex flex-col gap-5 justify-between my-10'>
+                                        <h1 className='md:block text-xl text-white font-medium text-start'>{company.name}</h1>
+                                        <h1 className='md:block text-lg text-white font-normal text-start' style={
+                                            {
+                                                overflow: "hidden",
+                                                textOverflow: "ellipsis",
+                                                display: "-webkit-box",
+                                                WebkitLineClamp: 3,
+                                                WebkitBoxOrient: "vertical"
 
-            < div className={`${!usersearched ? `hidden` : `visible`}`}>
-                <h1 className={`${!loading ? `opacity-100` : `opacity-0`} flex flex-row text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
-                    <svg onClick={clearSearch} className='cursor-pointer md:mr-5 mr-2 ' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" fill="#0F6F7B" />
-                    </svg>
-                    Search results for "<span className='text-black'>{searchString}</span>"
-                </h1>
-                <div className={`${!loading ? `opacity-100` : `opacity-50`} items-start justify-start w-12/12 grid grid-row md:gap-4 gap-2 md:px-14 px-4 mb-10`}>
-                    {companies.map(company => (
-                        <motion.button
-                            key={company._id}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                        >
-                            < div
-                                onClick={() => window.open(`/companies/${company._id}`, "_blank")}
-                                className={`bg-teal-700 h-44 w-full rounded-xl p-4 flex flex-row gap-4 items-center justify-center`} >
-                                <img className='flex-col rounded-md w-[200px] h-[120px]' src={company.image} width={200}></img>
-                                <div className='flex flex-col gap-5 justify-between my-10'>
-                                    <h1 className='md:block text-xl text-white font-medium text-start'>{company.name}</h1>
-                                    <h1 className='md:block text-lg text-white font-normal text-start' style={
-                                        {
-                                            overflow: "hidden",
-                                            textOverflow: "ellipsis",
-                                            display: "-webkit-box",
-                                            WebkitLineClamp: 3,
-                                            WebkitBoxOrient: "vertical"
+                                            }
+                                        } >{
+                                                company.about.about_comp
+                                            }</h1>
+                                    </div>
 
-                                        }
-                                    } >{
-                                            company.about.about_comp
-                                        }</h1>
                                 </div>
-
-                            </div>
-                        </motion.button>
+                            </motion.button>
+                        ))}
+                    </div>
+                </div >
+            }
+            <div className='flex flex-row justify-center items-center mb-5'>
+                <ul className="flex flex-row gap-2 ">
+                    <svg
+                        className="w-6 h-6 cursor-pointer m-auto text-teal-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        onClick={(e) => handleClick(e, currentPage - 1)}
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 19l-7-7 7-7"
+                        />
+                    </svg>
+                    {pagination.map((number) => (
+                        <li
+                            onClick={(e) => handleClick(e, number)}
+                            key={number} className={` h-[50px] w-[50px] border-solid border-2  cursor-pointer flex flex-row items-center justify-center  rounded-lg 
+                        ${currentPage === number ? "border-teal-500  font-bold text-teal-600" : "bg-teal-400 text-white font-semibold"}`}>
+                            <a className="my-auto" href="/" >{number}</a>
+                        </li>
                     ))}
-                </div>
-            </div >
+                    <svg
+                        className="w-6 h-6 cursor-pointer m-auto text-teal-600"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        onClick={(e) => handleClick(e, currentPage + 1)}
+                    >
+                        <path
 
-            {/*ANIMATION DIV*/}
-        </motion.div >
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                        />
+                    </svg>
+                </ul>
+            </div>
+        </div >
     )
 }
 

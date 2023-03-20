@@ -9,11 +9,7 @@ import HomeReviewCard from "../components/HomeComponents/HomeReviewCard";
 import HomeTimer from "../components/HomeComponents/HomeTimer";
 function Home() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
-      animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
-      transition={{ duration: 1 }} className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
+    <div className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
       <HomeBanner imageArray={[home_top, home_top, home_top, home_top]} />
 
       <div className="flex items-center justify-center">
@@ -82,7 +78,7 @@ function Home() {
         ]}
       />
 
-    </motion.div>
+    </div>
   );
 }
 

@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import person from '../static/images/person.jpg'
 import logo1 from '../static/logos/about_page_logo.png'
 import logo2 from '..//static/logos/about_page_logo2.png'
-import { motion } from "framer-motion";
 
 import campusPic from '../static/images/testimages/college_campus.jpg'
 import principal from '../static/images/testimages/principal.jpg'
@@ -13,251 +12,267 @@ import test from '../static/images/testimages/About_ProfilePicture.png';
 import AboutPrincipalMessage from '../components/AboutComponents/AboutPrincipalMessage'
 import AboutTopCards from '../components/AboutComponents/AboutTopCards'
 import PageBanner from '../components/PageBanner'
+// import { HashLoader } from 'react-spinners'
 
 function About() {
+  // TEMPORARY LOADING SCREEN
+  // const [isLoading, setIsLoading] = useState(true);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsLoading(false);
+  //   }, 1000); // set the timeout for 3 seconds, you can adjust it according to your needs
+  // }, []);
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
-      animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
-      transition={{ duration: 1 }}
-      className="md:mt-20 mt-[65px] flex flex-col">
-      <PageBanner
-        image={person}
-        bannerText={'About Us'}
-      />
-      {/* CONTENT */}
-      <div className="flex flex-col">
-        <AboutTopCards
-          logo1={logo1}
-          logo2={logo2} />
-
-        <AboutPrincipalMessage
-          campusPic={campusPic}
-          principal={principal}
-          message={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies euismod gravida tellus, blandit condimentum. Pretium sit sit cras facilisis ullamcorper. Semper maecenas sit integer in. Mattis egestas enim metus eget tempor. Malesuada ultrices id pretium ullamcorper praesent neque amet. '}
+    <div className="md:mt-20 mt-[65px] flex flex-col">
+      {/* <HashLoader cssOverride={{
+        display: "block",
+        margin: "auto",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        padding: "0",
+        opacity: 1,
+      }} size={150} color={"#0f766e"} loading={isLoading} />
+      <div className={`${!isLoading ? `opacity-100` : `opacity-50`}`}> */}
+      <div>
+        <PageBanner
+          image={person}
+          bannerText={'About Us'}
         />
+        {/* CONTENT */}
+        <div className="flex flex-col">
+          <AboutTopCards
+            logo1={logo1}
+            logo2={logo2} />
 
-        <div className='about_parallax'>
-          <div className="about_parallax_overlay"></div>
-          <div className='h-full w-full my-10 '>
-            <AboutTealCards
-              text="The Core Committee"
-              dataArray={[
-                {
-                  heading: 'Cameron Williamson',
-                  subheading: 'Software Engineer',
-                  body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
-                  image: test
-                },
-                {
-                  heading: 'Cameron Williamson',
-                  subheading: 'Software Engineer',
-                  body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
-                  image: test
-                },
-                {
-                  heading: 'Cameron Williamson',
-                  subheading: 'Software Engineer',
-                  body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
-                  image: test
-                },
-                {
-                  heading: 'Cameron Williamson',
-                  subheading: 'Software Engineer',
-                  body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
-                  image: test
-                },
-              ]}
-            />
+          <AboutPrincipalMessage
+            campusPic={campusPic}
+            principal={principal}
+            message={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies euismod gravida tellus, blandit condimentum. Pretium sit sit cras facilisis ullamcorper. Semper maecenas sit integer in. Mattis egestas enim metus eget tempor. Malesuada ultrices id pretium ullamcorper praesent neque amet. '}
+          />
 
-            <AboutWhiteCards
-              text="Board of Advisory"
-              imageArray={[
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-              ]}
-            />
+          <div className='about_parallax'>
+            <div className="about_parallax_overlay"></div>
+            <div className='h-full w-full my-10 '>
+              <AboutTealCards
+                text="The Core Committee"
+                dataArray={[
+                  {
+                    heading: 'Cameron Williamson',
+                    subheading: 'Software Engineer',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
+                    image: test
+                  },
+                  {
+                    heading: 'Cameron Williamson',
+                    subheading: 'Software Engineer',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
+                    image: test
+                  },
+                  {
+                    heading: 'Cameron Williamson',
+                    subheading: 'Software Engineer',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
+                    image: test
+                  },
+                  {
+                    heading: 'Cameron Williamson',
+                    subheading: 'Software Engineer',
+                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
+                    image: test
+                  },
+                ]}
+              />
 
-            <AboutWhiteCards
-              text="Senior Coordinators"
-              imageArray={[
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-              ]}
-            />
-            <AboutWhiteCards
-              text="Executive Members"
-              imageArray={[
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
-              ]}
-            />
-            <AboutWhiteCards
-              text="UI / UX Designer and Developer"
-              imageArray={[
-                {
-                  firstname: 'Akarshan',
-                  lastname: 'Mishra',
-                  image: test,
-                },
-                {
-                  firstname: 'Camerson',
-                  lastname: 'Williamson',
-                  image: test,
-                },
+              <AboutWhiteCards
+                text="Board of Advisory"
+                imageArray={[
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                ]}
+              />
 
-              ]}
-            />
+              <AboutWhiteCards
+                text="Senior Coordinators"
+                imageArray={[
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                ]}
+              />
+              <AboutWhiteCards
+                text="Executive Members"
+                imageArray={[
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+                ]}
+              />
+              <AboutWhiteCards
+                text="UI / UX Designer and Developer"
+                imageArray={[
+                  {
+                    firstname: 'Akarshan',
+                    lastname: 'Mishra',
+                    image: test,
+                  },
+                  {
+                    firstname: 'Camerson',
+                    lastname: 'Williamson',
+                    image: test,
+                  },
+
+                ]}
+              />
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 

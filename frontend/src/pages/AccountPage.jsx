@@ -80,12 +80,7 @@ export default function AccountPage({ }) {
     const handleEdit = useCallback(() => { navigate('/edit') }, [navigate]);
     return (
         <>
-            <motion.div
-                initial={{ opacity: 0, y: 100, x: 100, scale: 0.5 }}
-                animate={{ opacity: 1, y: 0, x: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -100, x: -100, scale: 0.5 }}
-                transition={{ duration: 1 }}
-                className='flex flex-col absolute h-full w-full'>
+            <div className='flex flex-col absolute h-full w-full'>
                 {/*TEAL COLOR*/}
                 <div
                     style={{
@@ -145,7 +140,7 @@ export default function AccountPage({ }) {
 
                 </div>
 
-            </motion.div>
+            </div>
 
         </>
     );
