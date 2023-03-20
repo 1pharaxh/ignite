@@ -51,7 +51,7 @@ function Company() {
     useEffect(() => {
         document.getElementById('apply_button').disabled = false;
         async function fetchData() {
-            if (user.uid) {
+            if (user != null && user != undefined && user.uid) {
                 const docRef = doc(getDb, 'users', user.uid);
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
@@ -97,6 +97,31 @@ function Company() {
     }, [user, key])
 
     const handleApply = () => {
+        if (currentUser == undefined || applied == true || Object.keys(selectedJob).length == 0 || hasResume == '') {
+            let errorString = '';
+            if (currentUser == undefined) {
+                errorString += "<h1> ● Please Login!";
+            }
+            if (Object.keys(selectedJob).length == 0) {
+                errorString += "<h1> ● Please select a Job!";
+            }
+            if (applied == true) {
+                errorString += "<h1> ● Already applied!";
+            }
+            if (hasResume == '') {
+                errorString += "<h1> ● Missing resume!";
+            }
+            Swal.fire({
+                icon: "error",
+                title: 'Error!',
+                html: "<div class='flex flex-col items-start gap-2 font-bold text-xl text-red-500'>"
+                    + errorString
+                    + "</div>",
+                confirmButtonColor: '#0D9488',
+                confirmButtonText: 'Cool'
+            });
+            return;
+        }
         document.getElementById('apply_button').disabled = true;
         if (Object.keys(selectedJob).length != 0 && hasResume != '' && currentUser != undefined && applied == false) {
             addDoc(collection(getDb, "applications"), {
@@ -163,19 +188,11 @@ function Company() {
                                 <button
                                     id='apply_button'
                                     onClick={() => handleApply()}
-                                    disabled={currentUser == undefined || applied == true || Object.keys(selectedJob).length == 0 || hasResume == ''}
                                     className={`
-                            flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg
-                            ${currentUser == undefined || applied == true || Object.keys(selectedJob).length == 0 || hasResume == '' ?
-                                            'bg-gray-300 text-gray-500' :
-                                            'bg-teal-600 text-white hover:bg-teal-700'}
+                            flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg bg-teal-600 text-white hover:bg-teal-700'}
                           mr-10 font-semibold rounded-lg text-sm`}>
                                     <i className='fa fa-check text-white mx-2 '></i> Apply now!
                                 </button>
-                                <p className={`${currentUser == undefined ? 'visible' : 'hidden'} text-red-600 font-semibold`}>Please Login!</p>
-                                <p className={`${Object.keys(selectedJob).length == 0 ? 'visible' : 'hidden'} text-red-600 font-semibold`}>Please select a Job!</p>
-                                <p className={`${applied == true ? 'visible' : 'hidden'} text-red-600 font-semibold`}>Already applied!</p>
-                                <p className={`${hasResume == '' ? 'visible' : 'hidden'} text-red-600 font-semibold`}>Missing resume!</p>
 
 
                             </div>

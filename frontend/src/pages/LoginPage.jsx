@@ -15,8 +15,14 @@ function LoginPage() {
         try {
             const gSignin = await googleSignIn();
             if (gSignin) {
-                alert('signedIn')
-                handleEdit();
+                MySwal.fire({
+                    title: 'Signed In!',
+                    text: 'You have successfully signed in',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                }).then(() => {
+                    handleEdit();
+                })
             }
         } catch (error) {
             console.log(error);
