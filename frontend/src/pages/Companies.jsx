@@ -7,6 +7,8 @@ import withReactContent from 'sweetalert2-react-content'
 
 
 function Companies() {
+    // scroll to top 
+    window.scrollTo(0, 0);
     const MySwal = withReactContent(Swal)
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(false);

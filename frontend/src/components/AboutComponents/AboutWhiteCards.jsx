@@ -1,31 +1,54 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from 'framer-motion';
 import test from '../../static/images/testimages/About_ProfilePicture.png';
+import ReactElasticCarousel from "react-elastic-carousel";
 
 function AboutWhiteCards({ imageArray, text }) {
-    const slideLeft = () => {
-        var slider = document.getElementById('slider')
-        slider.scrollLeft = slider.scrollLeft - 500
-    }
-    const slideRight = () => {
-        var slider = document.getElementById('slider')
-        slider.scrollLeft = slider.scrollLeft + 500
-    }
+    const breakPoints = [
+        { width: 1, itemsToShow: 1 },
+        { width: 550, itemsToShow: 2 },
+        { width: 768, itemsToShow: 3 },
+        { width: 1200, itemsToShow: 6 },
+    ]
+    const carouselRef = useRef(null);
+    let resetTimeout;
     return (
         <div className="flex flex-col mt-10">
             <div className='relative flex items-center md:mx-28 mx-12 mb-5'>
                 <h1 className='md:text-4xl text-3xl text-off-black font-[500] z-10'>{text}</h1>
             </div>
             <div className='relative flex items-center md:mx-10 mx-4'>
+                <ReactElasticCarousel
+                    showArrows={true}
+                    easing="cubic-bezier(1,.15,.55,1.54)"
+                    tiltEasing="cubic-bezier(0.110, 1, 1.000, 0.210)"
+                    transitionMs={700}
+                    onNextEnd={({ index }) => {
+                        if (
+                            carouselRef?.current.state.activePage ===
+                            carouselRef?.current.state.pages.length - 1
+                        ) {
+                            const itemsPerPage = Math.floor(
+                                carouselRef?.current.props.children.length /
+                                carouselRef?.current.getNumOfPages()
+                            );
 
-                <motion.button
-                    whileHover={{ scale: 2.1 }}
-                    whileTap={{ scale: 0.9 }}
-
-                ><i className='md:mr-5 mr-1 fa fa-angle-left font-bold text-3xl mt-2 text-teal-600' onClick={slideLeft} /></motion.button>
-
-
-                <div id='slider' className='w-full h-full overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
+                            if (itemsPerPage === carouselRef?.current.state.activeIndex) {
+                                clearTimeout(resetTimeout);
+                                resetTimeout = setTimeout(() => {
+                                    carouselRef?.current?.goTo(0);
+                                }, 5000); // same time
+                            }
+                        }
+                    }}
+                    breakPoints={breakPoints}
+                    className="mt-0"
+                    itemPadding={[10, 0, 10, 0]}
+                    enableAutoPlay
+                    autoPlaySpeed={5000}
+                    enableSwipe
+                    ref={carouselRef}
+                >
                     {imageArray.map((el, index) => (
                         <motion.button key={index}
                             whileHover={{ scale: 0.9 }}
@@ -48,16 +71,12 @@ function AboutWhiteCards({ imageArray, text }) {
                         </motion.button>
                     ))
                     }
+                </ReactElasticCarousel>
 
 
-                </div>
-                <motion.button
-                    whileHover={{ scale: 2.1 }}
-                    whileTap={{ scale: 0.9 }}
 
-                >
-                    <i className='fa fa-angle-right font-bold text-3xl md:ml-5 ml-2 mt-2 text-teal-600' onClick={slideRight} />
-                </motion.button>
+
+
             </div>
         </div>
     );

@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import college from '../static/logos/logo_college.png';
 import ignite from '../static/logos/logo_ignite.png';
 function Footer() {
     const date = new Date();
     const year = date.getFullYear();
+    const navigate = useNavigate();
+    const handleHome = useCallback(() => { navigate('/') }, [navigate]);
+    const handleAbout = useCallback(() => { navigate('/about') }, [navigate]);
+    const handleCompanies = useCallback(() => { navigate('/companies') }, [navigate]);
+    const handleHowToApply = useCallback(() => { navigate('/how-to-apply') }, [navigate]);
+    const handleResources = useCallback(() => { navigate('/resources') }, [navigate]);
+    const handleContact = useCallback(() => { navigate('/contact-us') }, [navigate]);
+
 
     return (
         // h-[330px]
         < div className="bg-dark-teal h-fit absolute w-full ">
             <div className="md:mx-20 ">
-                <div className="hidden md:flex flex-row justify-center pt-10 pb-2  gap-24">
+                <div className="hidden md:flex flex-row justify-between pt-10 pb-2  gap-24">
                     <div className="flex flex-col gap-4">
                         <div>
                             <h1 className="text-white text-2xl font-medium">Ignite -The Placement Cell</h1>
@@ -35,55 +44,32 @@ function Footer() {
                     </div>
                     <div className="flex flex-col gap-4">
                         <div>
-                            <h1 className="text-white text-lg font-medium">NEQUE ADIPISCING.</h1>
+                            <h1 className="text-white text-lg font-medium">QUICK LINKS.</h1>
                         </div>
                         <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
+                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHome}>Home</h1>
                         </div>
                         <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
+                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleAbout} >About</h1>
                         </div>
                         <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
+                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleCompanies}>Companies</h1>
                         </div>
                         <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
+                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHowToApply}>How to Apply</h1>
                         </div>
                     </div>
 
 
                     <div className="flex flex-col gap-4">
                         <div>
-                            <h1 className="text-white text-lg font-medium">NEQUE ADIPISCING.</h1>
+                            <h1 className="text-dark-teal text-lg font-medium hover:underline cursor-pointer"> .</h1>
                         </div>
                         <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
+                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleResources}>Resouces</h1>
                         </div>
                         <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div>
-                            <h1 className="text-white text-lg font-medium">NEQUE ADIPISCING.</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md">Nascetur eget eget.</h1>
+                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleContact}>Contact Us.</h1>
                         </div>
                     </div>
                     <div className="flex basis-1/5 justify-center items-center">
@@ -122,11 +108,15 @@ function Footer() {
                     <h1 className="text-white text-center text-md">Copyright © {year} Internship Cell, Khalsa College. All rights reserved.
                         {/* | <span className="hover:underline cursor-pointer">Privacy Policy</span>  */}
                     </h1>
+                    <h1 className="text-white text-center text-md">Website made by <span className="cursor-pointer hover:underline" onClick={
+                        () => {
+                            window.open("https://www.linkedin.com/in/akarshan-m-75577122a/", "_blank")
+                        }
+                    }>Akarshan Mishra</span></h1>
                 </div>
             </div>
-
-            <div className="m-10"></div>
-        </div>
+            <div className="m-2"></div>
+        </div >
     );
 }
 

@@ -38,16 +38,40 @@ export default function Resources() {
             <h1 className='my-5 px-12 text-3xl md:text-4xl md:4xl font-semibold'>
                 <span className='text-dark-teal'>Interview Preparation Kit</span>  (Quant, VA, LR, DI, Excel, Guesstimates, etc)
             </h1>
-
-            <div
-                onClick={() => {
-                    window.open('https://drive.google.com/file/d/1y1t4Y8YnZ2Q2Zm1mZ9X8Zn0d0Q2Jg1jV/view?usp=sharing')
-                }}
-                className="cursor-pointer mx-12 mt-2 mb-28 flex rounded-xl flex-row gap-2 w-[200px] h-[48px] bg-dark-teal items-center justify-center text-off-white font-semibold text-center">
-                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14.5 11V14H2.5V11H0.5V14C0.5 15.1 1.4 16 2.5 16H14.5C15.6 16 16.5 15.1 16.5 14V11H14.5ZM13.5 7L12.09 5.59L9.5 8.17V0H7.5V8.17L4.91 5.59L3.5 7L8.5 12L13.5 7Z" fill="white" />
+            <div className='flex flex-row gap-4 px-12 my-2 items-center mb-10'>
+                <svg width="310" height="380" viewBox="0 0 310 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="310" height="380" rx="12" fill="#C5EEF0" />
+                    <path d="M127.263 124.583C129.896 127.505 131.417 131.34 131.417 135.395V147.188C131.417 156.105 124.188 163.333 115.271 163.333H57.1458C48.2287 163.333 41 156.105 41 147.188V135.396C41 131.34 42.5205 127.505 45.1545 124.583H44.2292C42.4457 124.583 41 123.138 41 121.354C41 119.571 42.4457 118.125 44.2292 118.125H54.9603L68.149 110.764C63.3523 106.074 60.375 99.5304 60.375 92.2917C60.375 78.0243 71.941 66.4583 86.2083 66.4583C100.476 66.4583 112.042 78.0243 112.042 92.2917C112.042 92.8416 112.024 93.3875 111.991 93.9289L115.461 90.3696C113.305 87.2459 112.042 83.458 112.042 79.375C112.042 68.6745 120.716 60 131.417 60C142.117 60 150.792 68.6745 150.792 79.375C150.792 83.4529 149.532 87.2366 147.38 90.3581L147.405 90.3835L159.13 102.423C162.066 105.438 163.708 109.48 163.708 113.688V118.125H166.938C168.721 118.125 170.167 119.571 170.167 121.354C170.167 123.138 168.721 124.583 166.938 124.583H127.263ZM117.459 118.125H157.25V113.688C157.25 111.163 156.264 108.738 154.503 106.929L142.882 94.9954C139.671 97.3556 135.707 98.75 131.417 98.75C127.132 98.75 123.171 97.3589 119.963 95.0036L108.335 106.929C106.979 108.32 106.795 108.514 106.437 108.965C105.821 109.741 105.603 110.318 105.585 111.496L117.459 118.125ZM113.611 123.373L98.5741 114.979C94.9014 116.985 90.688 118.125 86.2083 118.125C81.73 118.125 77.5178 116.985 73.8459 114.98L52.4245 126.936C49.3584 128.648 47.4583 131.884 47.4583 135.396V147.188C47.4583 152.538 51.7956 156.875 57.1458 156.875H115.271C120.621 156.875 124.958 152.538 124.958 147.188V135.395C124.958 131.884 123.059 128.648 119.993 126.936L115.736 124.559C114.879 124.455 114.125 124.014 113.611 123.373ZM86.2083 111.667C96.9089 111.667 105.583 102.992 105.583 92.2917C105.583 81.5912 96.9089 72.9167 86.2083 72.9167C75.5078 72.9167 66.8333 81.5912 66.8333 92.2917C66.8333 102.992 75.5078 111.667 86.2083 111.667ZM131.417 92.2917C138.55 92.2917 144.333 86.5087 144.333 79.375C144.333 72.2413 138.55 66.4583 131.417 66.4583C124.283 66.4583 118.5 72.2413 118.5 79.375C118.5 86.5087 124.283 92.2917 131.417 92.2917Z" fill="#0F6F7B" />
+                    <mask id="path-3-inside-1_1_43" fill="white">
+                        <rect width="310" height="380" rx="12" />
+                    </mask>
+                    <rect width="310" height="380" rx="12" stroke="#0F6F7B" stroke-width="42" mask="url(#path-3-inside-1_1_43)" />
+                    <ellipse cx="187.25" cy="75" rx="5.25" ry="5" fill="#0F6F7B" />
+                    <rect x="203" y="70" width="52" height="10" rx="5" fill="#0F6F7B" />
+                    <ellipse cx="187.25" cy="105" rx="5.25" ry="5" fill="#0F6F7B" />
+                    <rect x="203" y="100" width="52" height="10" rx="5" fill="#0F6F7B" />
+                    <ellipse cx="187.25" cy="134" rx="5.25" ry="5" fill="#0F6F7B" />
+                    <rect x="203" y="129" width="52" height="10" rx="5" fill="#0F6F7B" />
+                    <rect x="102" y="201" width="150" height="10" rx="5" fill="#0F6F7B" />
+                    <ellipse cx="137.25" cy="232" rx="5.25" ry="5" fill="#0F6F7B" />
+                    <rect x="72" y="227" width="53" height="10" rx="5" fill="#0F6F7B" />
+                    <rect x="154" y="227" width="98" height="10" rx="5" fill="#0F6F7B" />
+                    <ellipse cx="186.75" cy="291" rx="5.25" ry="5" transform="rotate(-180 186.75 291)" fill="#0F6F7B" />
+                    <rect x="252" y="296" width="53" height="10" rx="5" transform="rotate(-180 252 296)" fill="#0F6F7B" />
+                    <rect x="170" y="296" width="98" height="10" rx="5" transform="rotate(-180 170 296)" fill="#0F6F7B" />
+                    <rect x="72" y="255" width="180" height="10" rx="5" fill="#0F6F7B" />
+                    <rect x="72" y="313" width="135" height="10" rx="5" fill="#0F6F7B" />
                 </svg>
-                <h1>Download</h1>
+                <div
+                    onClick={() => {
+                        window.open('https://drive.google.com/file/d/1y1t4Y8YnZ2Q2Zm1mZ9X8Zn0d0Q2Jg1jV/view?usp=sharing')
+                    }}
+                    className="cursor-pointer flex rounded-xl flex-row gap-2 w-[200px] h-[48px] bg-dark-teal items-center justify-center text-off-white font-semibold text-center">
+                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14.5 11V14H2.5V11H0.5V14C0.5 15.1 1.4 16 2.5 16H14.5C15.6 16 16.5 15.1 16.5 14V11H14.5ZM13.5 7L12.09 5.59L9.5 8.17V0H7.5V8.17L4.91 5.59L3.5 7L8.5 12L13.5 7Z" fill="white" />
+                    </svg>
+                    <h1>Download</h1>
+                </div>
             </div>
 
         </div>

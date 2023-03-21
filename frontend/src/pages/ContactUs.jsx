@@ -5,6 +5,8 @@ import banner from '../static/images/ContactUsBanner.jpg'
 import demoImage from '../static/images/testimages/principal.jpg'
 
 function ContactUs() {
+    // scroll to top 
+    window.scrollTo(0, 0);
     return (
         <div className="md:mt-20 mt-[65px] flex flex-col">
             <PageBanner
@@ -12,7 +14,7 @@ function ContactUs() {
                 image={banner}
             />
 
-            <div className="flex flex-col justify-center px-12 mt-10 mb-12">
+            <div className="flex flex-col justify-center items-center px-12 mt-10 mb-12 iten">
                 <h1 className='font-semibold text-3xl md:text-4xl'> <span className='text-dark-teal'>Company</span>  Help Desk</h1>
                 <div className='flex flex-col md:flex-row gap-2 my-10'>
 
@@ -54,8 +56,8 @@ function ContactUs() {
                 </div>
             </div>
 
-            <div className='flex flex-col gap-4 h-[401px] bg-super-light-teal'>
-                <h1 className='text-3xl md:text-4xl m-14 font-semibold' > <span className='text-dark-teal'>For further queries, </span> contact</h1>
+            <div className='flex flex-col gap-1 h-[450px] bg-super-light-teal'>
+                <h1 className='text-3xl md:text-4xl mx-14 my-10 font-semibold' > <span className='text-dark-teal'>For further queries, </span> contact</h1>
 
                 <QueryCards
                     dataArray={[

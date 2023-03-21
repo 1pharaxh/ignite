@@ -8,6 +8,8 @@ import HomeTimeline from "../components/HomeComponents/HomeTimeline";
 import HomeReviewCard from "../components/HomeComponents/HomeReviewCard";
 import HomeTimer from "../components/HomeComponents/HomeTimer";
 function Home() {
+  // scroll to top 
+  window.scrollTo(0, 0);
   return (
     <div className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
       <HomeBanner imageArray={[home_top, home_top, home_top, home_top]} />

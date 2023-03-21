@@ -12,9 +12,13 @@ import test from '../static/images/testimages/About_ProfilePicture.png';
 import AboutPrincipalMessage from '../components/AboutComponents/AboutPrincipalMessage'
 import AboutTopCards from '../components/AboutComponents/AboutTopCards'
 import PageBanner from '../components/PageBanner'
+import AboutBoardOfAdvisors from '../components/AboutComponents/AboutBoardOfAdvisors'
+import AboutCoreCommittee from '../components/AboutComponents/AboutCoreCommittee'
 // import { HashLoader } from 'react-spinners'
 
 function About() {
+  // scroll to top 
+  window.scrollTo(0, 0);
   // TEMPORARY LOADING SCREEN
   // const [isLoading, setIsLoading] = useState(true);
   // useEffect(() => {
@@ -55,147 +59,11 @@ function About() {
           <div className='about_parallax'>
             <div className="about_parallax_overlay"></div>
             <div className='h-full w-full my-10 '>
-              <AboutTealCards
-                text="The Core Committee"
-                dataArray={[
-                  {
-                    heading: 'Cameron Williamson',
-                    subheading: 'Software Engineer',
-                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
-                    image: test
-                  },
-                  {
-                    heading: 'Cameron Williamson',
-                    subheading: 'Software Engineer',
-                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
-                    image: test
-                  },
-                  {
-                    heading: 'Cameron Williamson',
-                    subheading: 'Software Engineer',
-                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
-                    image: test
-                  },
-                  {
-                    heading: 'Cameron Williamson',
-                    subheading: 'Software Engineer',
-                    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa posuere cras a non ipsum. Senectus.',
-                    image: test
-                  },
-                ]}
-              />
+              <AboutBoardOfAdvisors />
+              <AboutCoreCommittee />
 
-              <AboutWhiteCards
-                text="Board of Advisory"
-                imageArray={[
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                ]}
-              />
 
-              <AboutWhiteCards
-                text="Senior Coordinators"
-                imageArray={[
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-                ]}
-              />
+
               <AboutWhiteCards
                 text="Executive Members"
                 imageArray={[
@@ -249,22 +117,6 @@ function About() {
                     lastname: 'Williamson',
                     image: test,
                   },
-                ]}
-              />
-              <AboutWhiteCards
-                text="UI / UX Designer and Developer"
-                imageArray={[
-                  {
-                    firstname: 'Akarshan',
-                    lastname: 'Mishra',
-                    image: test,
-                  },
-                  {
-                    firstname: 'Camerson',
-                    lastname: 'Williamson',
-                    image: test,
-                  },
-
                 ]}
               />
             </div>

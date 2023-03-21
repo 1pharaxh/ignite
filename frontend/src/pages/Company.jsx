@@ -4,7 +4,7 @@ import desk from '../static/images/desk.jpg'
 import CompanyCard from '../components/CompanyCard';
 import JobCard from '../components/JobCard';
 import { UserAuth, getDb } from "../context/AuthContext";
-import { doc, getDocs, getDoc, addDoc, collection, query, where } from 'firebase/firestore';
+import { doc, getDocs, getDoc, addDoc, collection, query, where, writeBatch } from 'firebase/firestore';
 import '../static/css/job_profile_carousel.css'
 
 import Swal from 'sweetalert2'
@@ -15,6 +15,8 @@ import Dropdown from '../components/Dropdown';
 import ReactElasticCarousel from 'react-elastic-carousel';
 import { HashLoader } from 'react-spinners';
 function Company() {
+    // scroll to top 
+    window.scrollTo(0, 0);
     const carouselRef = useRef(null);
 
     const breakPoints = [
@@ -30,6 +32,8 @@ function Company() {
     const [currentUser, setCurrentUser] = useState('');
     const [profile, setProfile] = useState([]);
     const [selectedJob, setSelectedJob] = useState({});
+    const [selectedJobs, setSelectedJobs] = useState([]);
+    const [keys, setKeys] = useState([]);
     const [hasResume, setHasResume] = useState('');
     const [applied, setApplied] = useState(false);
 
@@ -40,10 +44,28 @@ function Company() {
     // USE THIS HOOK and HANDLER TO GET DATA BACK FROM CHILD
     const [key, setKey] = useState('');
     const handleNameChange = (newKey) => {
-        setKey(newKey);
-        setSelectedJob({ 'Company': data.name, 'JobId': newKey, 'JobTitle': about.profile[newKey].name })
-    };
+        if (typeof newKey === 'string') {
+            setKey(newKey);
+            setSelectedJob({ 'Company': data.name, 'JobId': newKey, 'JobTitle': about.profile[newKey].name })
+        } else {
+            setKey('Selected Multiple Jobs');
+            console.log(newKey)
+            setSelectedJobs(prevSelectedJobs => [
+                ...prevSelectedJobs,
+                ...newKey.map(key => ({
+                    'Company': data.name,
+                    'JobId': key,
+                    'JobTitle': about.profile[key].name
+                }))
+            ]);
+            setKeys(prevKeys => [
+                ...prevKeys,
+                ...newKey
+            ]);
+            console.log(selectedJobs)
 
+        };
+    };
     const { id } = useParams();
     const { user } = UserAuth();
 
@@ -61,7 +83,7 @@ function Company() {
                     setHasResume('');
                     console.log('no resume');
                 }
-                if (key != '' && about.profile) {
+                if (key != '' && key != 'Selected Multiple Jobs' && about.profile) {
                     const collectionRef = collection(getDb, 'applications');
                     const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), where('profile.JobId', '==', key)));
                     if (querySnapshot.empty) {
@@ -71,9 +93,18 @@ function Company() {
                         console.log('has applied');
                         setApplied(true);
                     }
+                } else if (key == 'Selected Multiple Jobs' && about.profile) {
+                    const collectionRef = collection(getDb, 'applications');
+                    const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), where('profile.JobId', 'in', keys)));
+                    if (querySnapshot.empty) {
+                        console.log('Not Applied.');
+                        setApplied(false);
+                    } else {
+                        console.log('has applied');
+                        setApplied(true);
+                    }
                 }
             }
-
 
             var temp = []
             const response = await fetch('https://ignite-backend.onrender.com/companies/' + id)
@@ -94,15 +125,15 @@ function Company() {
         fetchData()
 
 
-    }, [user, key])
+    }, [user, key, keys, selectedJobs])
 
     const handleApply = () => {
-        if (currentUser == undefined || applied == true || Object.keys(selectedJob).length == 0 || hasResume == '') {
+        if (currentUser == undefined || applied == true || (Object.keys(selectedJob).length == 0 && keys.length == 0) || hasResume == '') {
             let errorString = '';
             if (currentUser == undefined) {
                 errorString += "<h1> ● Please Login!";
             }
-            if (Object.keys(selectedJob).length == 0) {
+            if (Object.keys(selectedJob).length == 0 && key != 'Selected Multiple Jobs') {
                 errorString += "<h1> ● Please select a Job!";
             }
             if (applied == true) {
@@ -111,7 +142,7 @@ function Company() {
             if (hasResume == '') {
                 errorString += "<h1> ● Missing resume!";
             }
-            Swal.fire({
+            MySwal.fire({
                 icon: "error",
                 title: 'Error!',
                 html: "<div class='flex flex-col items-start gap-2 font-bold text-xl text-red-500'>"
@@ -135,10 +166,38 @@ function Company() {
                 backToCompanies();
 
             });
+        } else if (selectedJobs.length > 0 && hasResume != '' && currentUser != undefined && applied == false) {
+            const batch = writeBatch(getDb);
+            selectedJobs.forEach(job => {
+                const newDocRef = doc(collection(getDb, "applications"));
+                batch.set(newDocRef, {
+                    name: user.displayName,
+                    uid: user.uid,
+                    profile: job,
+                    resume: hasResume,
+                });
+            });
+            batch.commit().then(() => {
+                console.log("All documents written to the database successfully!");
+                // go to companies page
+                backToCompanies();
+            });
         }
 
+
     }
-    const handleDownload = (linkText) => {
+    const handleDownload = () => {
+        if (key == 'Selected Multiple Jobs' || key == '') {
+            MySwal.fire({
+                icon: "error",
+                title: 'Error!',
+                html: "<h1>Please select <span class='font-semibold'> a profile </span> to download the description !</h1><br/> <h1 class='text-sm text-slate-400'>Note: If you have selected multiple profiles then please select only 1 profile to download its description</h1>",
+                confirmButtonColor: '#0D9488',
+                confirmButtonText: 'Cool'
+            });
+            return;
+        }
+        let linkText = about.profile[key].link;
         const link = document.createElement('a');
         link.href = linkText;
         link.download = 'file.pdf';
@@ -197,7 +256,7 @@ function Company() {
 
                             </div>
                             <button
-                                onClick={() => handleDownload(about.profile[key].link)}
+                                onClick={handleDownload}
                                 className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-off-white text-teal-600 font-semibold hover:bg-gray-300 rounded-lg text-sm'>
                                 <i className='fa fa-download text-teal-600 mx-2'></i> <span className='hidden md:block'> Download Job Description </span>
                                 <span className='block md:hidden'>Description </span>
@@ -271,7 +330,7 @@ function Company() {
                         : (<></>)}
                 </ReactElasticCarousel>
 
-                {key != '' ? (
+                {key != '' && key != 'Selected Multiple Jobs' ? (
                     <div className='flex md:flex-row flex-col justify-end md:gap-10 gap-5 mt-5'>
                         <PerkAndEligibleCard titleTeal='Perks' titleBlack='about the internship' texts={about.profile[key].perks} />
                         <PerkAndEligibleCard titleTeal='Eligibility' titleBlack='criteria' texts={about.profile[key].eligibility} />
