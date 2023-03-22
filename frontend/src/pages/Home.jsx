@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import HomeBanner from "../components/HomeComponents/HomeBanner";
 import HomeTopCompanies from "../components/HomeComponents/HomeTopCompanies";
 import HomeStatistics from "../components/HomeComponents/HomeStatistics";
-import home_top from "../static/images/testimages/home_topbanner.png";
+import home_top from "../static/images/home_topbanner.png";
 import HomeTimeline from "../components/HomeComponents/HomeTimeline";
 import HomeReviewCard from "../components/HomeComponents/HomeReviewCard";
 import HomeTimer from "../components/HomeComponents/HomeTimer";

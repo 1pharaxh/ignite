@@ -31,7 +31,7 @@ function HomeBanner({ imageArray }) {
                 {imageArray.map((image, index) => {
                     return (
                         <SwiperSlide key={index} className="text-center  md:h-full h-80 flex justify-center items-center">
-                            <img className="object-cover w-full md:h-full h-80 block" src={image} />
+                            <img className="object-cover w-full md:h-full h-auto block" src={image} />
                         </SwiperSlide>
                     )
                 })}
