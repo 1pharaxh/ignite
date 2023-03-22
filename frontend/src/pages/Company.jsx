@@ -162,9 +162,16 @@ function Company() {
                 resume: hasResume,
             }).then(() => {
                 console.log("Document successfully written!");
+                // Get the existing "applied" value from localStorage
+                const userData = JSON.parse(localStorage.getItem(user.uid));
+                const applied = userData ? userData.applied : 0;
+                // Update the "applied" value in localStorage
+                localStorage.setItem(user.uid, JSON.stringify({
+                    ...(userData || {}),
+                    applied: applied + 1,
+                }));
                 // go to companies page
                 backToCompanies();
-
             });
         } else if (selectedJobs.length > 0 && hasResume != '' && currentUser != undefined && applied == false) {
             const batch = writeBatch(getDb);

@@ -44,34 +44,39 @@ function Footer() {
                     </div>
                     <div className="flex flex-col gap-4">
                         <div>
-                            <h1 className="text-white text-lg font-medium">QUICK LINKS.</h1>
+                            <h1 className="text-white text-xl font-medium text-center">QUICK LINKS.</h1>
                         </div>
-                        <div>
-                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHome}>Home</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleAbout} >About</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleCompanies}>Companies</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHowToApply}>How to Apply</h1>
+                        <div className="flex flex-row gap-4">
+                            <div className="flex flex-col gap-4">
+                                <div>
+                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHome}>● Home</h1>
+                                </div>
+                                <div>
+                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleAbout} >● About</h1>
+                                </div>
+                                <div>
+                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleCompanies}>● Companies</h1>
+                                </div>
+                                <div>
+                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHowToApply}>● How to Apply</h1>
+                                </div>
+                            </div>
+                            <div className="flex flex-col gap-4">
+                                <div>
+                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleResources}>● Resouces</h1>
+                                </div>
+                                <div>
+                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleContact}>● Contact Us.</h1>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
 
-                    <div className="flex flex-col gap-4">
-                        <div>
-                            <h1 className="text-dark-teal text-lg font-medium hover:underline cursor-pointer"> .</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleResources}>Resouces</h1>
-                        </div>
-                        <div>
-                            <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleContact}>Contact Us.</h1>
-                        </div>
-                    </div>
+
+
+
+
                     <div className="flex basis-1/5 justify-center items-center">
                         <div className="flex flex-row gap-4 rounded-full h-44 w-44 bg-teal-600 justify-center items-center">
                             <div className="flex justify-center items-center">

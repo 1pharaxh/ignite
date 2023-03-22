@@ -23,7 +23,7 @@ function LoginPage() {
                     icon: 'success',
                     confirmButtonText: 'Cool'
                 }).then(() => {
-                    handleEdit();
+                    handleAccount();
                 })
             }
         } catch (error) {
@@ -33,7 +33,7 @@ function LoginPage() {
     const { register, handleSubmit, setFocus, setError, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const handleSignup = useCallback(() => { navigate('/signup') }, [navigate]);
-    const handleEdit = useCallback(() => { navigate('/edit') }, [navigate]);
+    const handleAccount = useCallback(() => { navigate('/account') }, [navigate]);
     const onSubmit = async (data) => {
         const email = data['username'];
         const password = data['password'];
@@ -49,7 +49,7 @@ function LoginPage() {
                 confirmButtonText: 'Cool'
             })
         } else {
-            handleEdit();
+            handleAccount();
         }
     };
 

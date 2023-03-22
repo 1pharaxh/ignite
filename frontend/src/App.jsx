@@ -15,7 +15,6 @@ import LoginPage from './pages/LoginPage';
 import { AuthContextProvider } from './context/AuthContext';
 import AccountPage from './pages/AccountPage';
 import Protected from './pages/Protected';
-import EditPage from './pages/EditPage';
 import SignupPage from './pages/SignupPage';
 import SliderTestPage from './pages/SliderTestPage';
 
@@ -31,7 +30,6 @@ function App() {
         <Navbar />
         <div className='flex flex-col'>
           <Routes key={location.pathname} location={location}>
-            <Route path="/edit" element={<Protected><EditPage /></Protected>} />
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/companies" element={<Companies />} />
