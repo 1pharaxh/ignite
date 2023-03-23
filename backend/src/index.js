@@ -15,8 +15,12 @@ const app = express();
 app.use(express.json()); // parse incoming request
 app.use(express.urlencoded({ extended: true })); // Parse incoming request bodies with URL-encoded payloads
 const corsOptions = {
-  //   origin: ["http://localhost:3000", "https://admin-ignite.vercel.app/", "https://anubhava.ignitesgtb.com"],
-  origin: "*",
+  origin: [
+    "http://localhost:3000",
+    "https://admin-ignite.vercel.app/",
+    "https://anubhava.ignitesgtb.com",
+    "*",
+  ],
   optionsSuccessStatus: 200,
 };
 
