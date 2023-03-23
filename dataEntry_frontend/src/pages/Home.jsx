@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginContext } from '../utils/LoginContextProvider';
 import { useForm } from 'react-hook-form';
-import { v4 as uuidv4 } from 'uuid';
 import card1 from '../static/assets/card1.png';
 import card2 from '../static/assets/card2.png';
 import card3 from '../static/assets/card3.png';
@@ -17,8 +16,7 @@ function Home() {
   const MySwal = withReactContent(Swal)
   const { register, handleSubmit, setFocus, formState: { errors } } = useForm();
   const [uploading, setUploading] = useState(false);
-  const [jobProfileDescriptionArray, updateJobProfile] = useState([]);
-  const [jobPerksEligibilty, updatePerksEligibilty] = useState({});
+  const [jobProfileDescription, updateJobProfileDescription] = useState({});
   const [postingsarray, updatePostingsArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const { toggleLogin } = useContext(LoginContext);
@@ -81,8 +79,7 @@ function Home() {
     })
   };
   const onSubmit = (data) => {
-    console.log('onSubmit called');
-    if (jobProfileDescriptionArray.length === 0) {
+    if (Object.keys(jobProfileDescription).length === 0) {
       MySwal.fire({
         title: 'Error!',
         text: 'Please add atleast one job profile',
@@ -91,81 +88,83 @@ function Home() {
       })
       return;
     }
-    if (Object.keys(jobPerksEligibilty).length === 0) {
-      MySwal.fire({
-        title: 'Error!',
-        text: 'Please add atleast one job perk',
-        icon: 'error',
-        confirmButtonText: 'Cool'
-      })
-      return;
-    }
-    if (Object.keys(jobPerksEligibilty).length !== jobProfileDescriptionArray.length) {
-      MySwal.fire({
-        title: 'Error!',
-        text: 'Please add same number of Job perks and eligibilty as Job Profile',
-        icon: 'error',
-        confirmButtonText: 'Cool'
-      })
-      return;
-    } else {
-      upload(data.image[0]).then(
-        (downloadURL) => {
-          console.log({
-            "name": data.company_name,
-            "image": downloadURL,
-            "about": {
-              "about_comp": data.about_company,
-              "website": data.company_website,
-              "work_location": data.work_location,
-              "paid_unpaid": data.paid_unpaid,
-              "job_profile_description": jobProfileDescriptionArray,
-              "profile": jobPerksEligibilty
-            }
-          });
-          var myHeaders = new Headers();
-          myHeaders.append("Content-Type", "application/json");
-          var raw = JSON.stringify({
-            "name": data.company_name,
-            "image": downloadURL,
-            "about": {
-              "about_comp": data.about_company,
-              "website": data.company_website,
-              "paid_unpaid": data.paid_unpaid,
-              "work_location": data.work_location,
-              "job_profile_description": jobProfileDescriptionArray,
-              "profile": jobPerksEligibilty
-            }
-          })
-          var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-          };
-          fetch(backendURI, requestOptions)
-            .then(response => response.text())
-            .then(result => {
-              console.log(result)
-              MySwal.fire({
-                title: 'Success!',
-                text: 'Data added successfully',
-                icon: 'success',
-                confirmButtonText: 'Cool'
-              })
-              fetchDb();
-            })
-            .catch(error => {
-              console.log('error', error)
-              MySwal.fire({
-                title: 'Error!',
-                text: 'Failed to add data',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-              })
-            }
-            );
-        })
+    else {
+      const perks_arr = document.getElementById('perks').value;
+      const perks = perks_arr.split("/").map(str => str.trim());
+      const eligibility_arr = document.getElementById('eligibility_criteria').value;
+      const eligibility = eligibility_arr.split("/").map(str => str.trim());
+
+      upload(data.pdf[0]).then(
+        (downloadURLPDF) => {
+          upload(data.image[0]).then(
+            (
+              (downloadURLIMG) => {
+                console.log({
+                  "name": data.company_name,
+                  "image": downloadURLIMG,
+                  "pdfDescription": downloadURLPDF,
+                  "about_comp": data.about_company,
+                  "website": data.company_website,
+                  "work_location": data.work_location,
+                  "paid_unpaid": data.paid_unpaid,
+                  "job_profile_description": jobProfileDescription,
+                  "perks": perks,
+                  "eligibility": eligibility
+                });
+                var myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+                var raw = JSON.stringify({
+                  "name": data.company_name,
+                  "image": downloadURLIMG,
+                  "pdfDescription": downloadURLPDF,
+                  "about_comp": data.about_company,
+                  "website": data.company_website,
+                  "work_location": data.work_location,
+                  "paid_unpaid": data.paid_unpaid,
+                  "job_profile_description": jobProfileDescription,
+                  "perks": perks,
+                  "eligibility": eligibility
+                })
+                var requestOptions = {
+                  method: 'POST',
+                  headers: myHeaders,
+                  body: raw,
+                  redirect: 'follow'
+                };
+                fetch(backendURI, requestOptions)
+                  .then(response => response.text())
+                  .then(result => {
+                    console.log(result)
+                    MySwal.fire({
+                      title: 'Success!',
+                      text: 'Data added successfully',
+                      icon: 'success',
+                      confirmButtonText: 'Cool'
+                    })
+                    fetchDb();
+                  })
+                  .catch(error => {
+                    console.log('error', error)
+                    MySwal.fire({
+                      title: 'Error!',
+                      text: 'Failed to add data',
+                      icon: 'error',
+                      confirmButtonText: 'Ok'
+                    })
+                  });
+              }
+            )
+          )
+        }
+      )
+      // clear the form
+      document.getElementById("form").reset();
+      // clear the job profile description
+      updateJobProfileDescription({});
+      // clear the perks
+      document.getElementById("perks").value = "";
+      // clear the eligibility criteria
+      document.getElementById("eligibility_criteria").value = "";
     }
   };
   const upload = async (file) => {
@@ -235,6 +234,22 @@ function Home() {
                   })} />
               {errors.image && (
                 <span className="text-red-500">{errors.image.message}</span>
+              )}
+            </div>
+
+            <div className='flex flex-row gap-0 items-baseline'>
+              <h1 className='font-bold text-base text-slate-800 mr-[25px]'>
+                Company PDF:
+              </h1>
+              < input
+                className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
+                type="file"
+                {...register("pdf",
+                  {
+                    required: 'Please select a PDF file',
+                  })} />
+              {errors.pdf && (
+                <span className="text-red-500">{errors.pdf.message}</span>
               )}
             </div>
 
@@ -313,12 +328,90 @@ function Home() {
               )}
             </div>
 
+            {/* //////////////////////////////////////////////////////////////////////////////////////// */}
+            <div className='flex flex-row justify-center items-center gap-[210px] mb-10'>
+              <div className='flex flex-col'>
+                <h1 className='text-xl font-semibold text-slate-400 my-5 text-start'>
+                  Perks and Eligibility card
+                </h1>
+
+
+                {/* JOB PROFILE Perks and eligibilty */}
+
+                <div className='flex flex-row gap-0 items-baseline'>
+                  <h1 className='font-bold text-base text-slate-800 mr-[22px]'>
+                    Perks about the job:
+                    <span className='text-red-500'>
+                      <br />
+                      Please use '/' to
+                      <br />
+                      separate bullet points
+                    </span>
+                  </h1>
+                  < textarea
+                    id='perks'
+                    style={{ resize: "both" }}
+                    className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
+                    type="text"
+                    placeholder="Bullet 1 / Bullet 2 / Bullet 3"
+                    {...register("perks",
+                      {
+                        required: 'required',
+                        maxLength: {
+                          value: 1000,
+                          message: 'Max length is 100 characters'
+                        }
+                      })} />
+                  {errors.perks && (
+                    <span className="text-red-500">{errors.perks.message}</span>
+                  )}
+                </div>
+
+                <div className='flex flex-row gap-0 items-baseline '>
+                  <h1 className='font-bold text-base text-slate-800 mr-[22px]'>
+                    Eligibility Criteria:
+                    <span className='text-red-500'>
+                      <br />
+                      Please use '/' to
+                      <br />
+                      separate bullet points
+                    </span>
+                  </h1>
+                  < textarea
+                    id='eligibility_criteria'
+                    style={{ resize: "both" }}
+                    className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
+                    type="text"
+                    placeholder="Bullet 1 / Bullet 2 / Bullet 3"
+                    {...register("eligibility_criteria",
+                      {
+                        required: 'required',
+                        maxLength: {
+                          value: 1000,
+                          message: 'Max length is 100 characters'
+                        }
+                      })} />
+                  {errors.eligibility_criteria && (
+                    <span className="text-red-500">{errors.eligibility_criteria.message}</span>
+                  )}
+                </div>
+              </div>
+              <div>
+                <img className='flex flex-col h-[170px] w-[400px]' alt='alt' src={card2} />
+                <img className='flex flex-col h-[170px] w-[400px]' alt='alt' src={card3} />
+
+              </div>
+
+
+            </div>
+
             <div className='flex flex-row justify-center items-center gap-[250px] mb-10'>
 
               <div className='flex flex-col'>
-                <h1 className='text-xl font-semibold text-slate-400 my-5'>
-                  This is the card on company page
+                <h1 className='text-xl font-semibold text-slate-400 my-5 text-start'>
+                  Card on company page (Need at least 1)
                 </h1>
+
 
 
                 {/* JOB PROFILE DESCRIPTION */}
@@ -425,150 +518,26 @@ function Home() {
                     roles,
                     requirementsArray
                   ]);
-                  if (temp[0][0] != "" && temp[0][1] != "" && temp[0][2] != [""] && temp[0][3] != [""]) {
-                    updateJobProfile([...jobProfileDescriptionArray, ...temp]);
-                  }
-
-                }
-              }>
-                ADD CARD {jobProfileDescriptionArray.length}
-              </div>
-            </div>
-
-            {/* //////////////////////////////////////////////////////////////////////////////////////// */}
-            <div className='flex flex-row justify-center items-center gap-[210px] mb-10'>
-              <div className='flex flex-col'>
-                <h1 className='text-xl font-semibold text-slate-400 my-5'>
-                  This is the Perks and Eligibility card
-                </h1>
-
-
-                {/* JOB PROFILE Perks and eligibilty */}
-                <div className='flex flex-row gap-0 items-baseline'>
-                  <h1 className='font-bold text-base text-slate-800 mr-[108px]'>
-                    Job Name:
-                  </h1>
-                  < input
-                    id='job_name_2'
-                    className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
-                    type="text"
-                    placeholder="Job Name"
-                    {...register("job_name_2",
-                    )} />
-                </div>
-                <div className='flex flex-row gap-0 items-baseline'>
-                  <h1 className='font-bold text-base text-slate-800 mr-[100px]'>
-                    Link to pdf:
-                  </h1>
-                  < input
-                    id='link_to_pdf'
-                    className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
-                    type="text"
-                    placeholder="Link to job pdf"
-                    {...register("link_to_pdf",
-                      {
-                        maxLength: {
-                          value: 1000,
-                          message: 'Max length is 100 characters'
-                        }
-                      })} />
-                  {errors.link_to_pdf && (
-                    <span className="text-red-500">{errors.link_to_pdf.message}</span>
-                  )}
-                </div>
-                <div className='flex flex-row gap-0 items-baseline'>
-                  <h1 className='font-bold text-base text-slate-800 mr-[22px]'>
-                    Perks about the job:
-                    <span className='text-red-500'>
-                      <br />
-                      Please use '/' to
-                      <br />
-                      separate bullet points
-                    </span>
-                  </h1>
-                  < textarea
-                    id='perks'
-                    style={{ resize: "both" }}
-                    className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
-                    type="text"
-                    placeholder="Bullet 1 / Bullet 2 / Bullet 3"
-                    {...register("perks",
-                      {
-                        maxLength: {
-                          value: 1000,
-                          message: 'Max length is 100 characters'
-                        }
-                      })} />
-                  {errors.perks && (
-                    <span className="text-red-500">{errors.perks.message}</span>
-                  )}
-                </div>
-
-                <div className='flex flex-row gap-0 items-baseline '>
-                  <h1 className='font-bold text-base text-slate-800 mr-[22px]'>
-                    Eligibility Criteria:
-                    <span className='text-red-500'>
-                      <br />
-                      Please use '/' to
-                      <br />
-                      separate bullet points
-                    </span>
-                  </h1>
-                  < textarea
-                    id='eligibility_criteria'
-                    style={{ resize: "both" }}
-                    className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
-                    type="text"
-                    placeholder="Bullet 1 / Bullet 2 / Bullet 3"
-                    {...register("eligibility_criteria",
-                      {
-                        maxLength: {
-                          value: 1000,
-                          message: 'Max length is 100 characters'
-                        }
-                      })} />
-                  {errors.eligibility_criteria && (
-                    <span className="text-red-500">{errors.eligibility_criteria.message}</span>
-                  )}
-                </div>
-              </div>
-              <div>
-                <img className='flex flex-col h-[170px] w-[400px]' alt='alt' src={card2} />
-                <img className='flex flex-col h-[170px] w-[400px]' alt='alt' src={card3} />
-
-              </div>
-
-
-            </div>
-
-            <div className='flex flex-col items-end justify-end mx-auto'>
-              <div className='cursor-pointer p-2 flex flex-col items-center mb-4 rounded-md bg-teal-400 text-white font-semibold' onClick={
-                () => {
-                  const perks_arr = document.getElementById('perks').value;
-                  const perks = perks_arr.split("/").map(str => str.trim());
-
-                  const eligibility_arr = document.getElementById('eligibility_criteria').value;
-                  const eligibility = eligibility_arr.split("/").map(str => str.trim());
-                  let temp = {};
 
                   // create a unique ID
-                  const id = uuidv4();
-                  // grap the values from the form
-                  temp = {
-                    "name": document.getElementById('job_name_2').value,
-                    "link": document.getElementById('link_to_pdf').value,
-                    "eligibility": eligibility,
-                    "perks": perks
-                  };
-                  if (temp['name'] != "" && temp['link'] != "" && temp['eligibility'] != "" && temp['perks'] != "") {
-                    updatePerksEligibilty({ ...jobPerksEligibilty, [id]: temp });
-                  }
+                  const id = Date.now().toString();
 
+                  // if the values are not empty, update the state
+                  if (temp[0][0] != "" && temp[0][1] != "" && temp[0][2] != [""] && temp[0][3] != [""]) {
+                    updateJobProfileDescription({ ...jobProfileDescription, [id]: temp });
+                  }
+                  // Clear the form 
+                  document.getElementById('job_name').value = "";
+                  document.getElementById('job_duration').value = "";
+                  document.getElementById('role_requirements').value = "";
+                  document.getElementById('requirements').value = "";
                 }
               }>
-                ADD CARD {Object.keys(jobPerksEligibilty).length}
+                ADD CARD {jobProfileDescription && Object.keys(jobProfileDescription).length}
               </div>
             </div>
+
+
 
           </form>
 

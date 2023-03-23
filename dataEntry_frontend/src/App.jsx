@@ -8,14 +8,11 @@ import LoginContextProvider from './utils/LoginContextProvider';
 import Protected from './pages/Protected';
 
 function App() {
-
   return (
     <LoginContextProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Protected><Home /></Protected>} />
-          {/* <Route path="/" element={<Home />} /> */}
-
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Error />} />
         </Routes>
@@ -23,5 +20,4 @@ function App() {
     </LoginContextProvider>
   )
 }
-
 export default App
