@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { HashLoader } from 'react-spinners';
+import { DotLoader } from 'react-spinners';
 import desk from '../static/images/desk.jpg'
 import { motion } from "framer-motion";
 import Swal from 'sweetalert2'
@@ -191,7 +191,7 @@ function Companies() {
                     </div>
                 </div>
             </div>
-            <HashLoader cssOverride={override} size={150} color={"#0f766e"} loading={loading} />
+            <DotLoader cssOverride={override} size={150} color={"#0f766e"} loading={loading} />
             {!usersearched ? < div className={`${!usersearched ? `visible` : `hidden`}`}>
                 <h1 className='text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4'>
                     Our top recruiters!
@@ -246,7 +246,7 @@ function Companies() {
 
                                             }
                                         } >{
-                                                company.about.about_comp
+                                                company.about_comp
                                             }</h1>
                                     </div>
 

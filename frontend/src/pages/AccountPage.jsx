@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { UserAuth, getStorage, getDb } from "../context/AuthContext";
 import { doc, getDoc, collection, setDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { HashLoader } from "react-spinners";
+import { DotLoader } from "react-spinners";
 
 
 export default function AccountPage() {
@@ -260,7 +260,7 @@ export default function AccountPage() {
     };
     return (
         <div className="md:mt-20 mt-[65px] flex flex-col items-center justify-center">
-            <HashLoader cssOverride={{
+            <DotLoader cssOverride={{
                 display: "block",
                 margin: "auto",
                 position: "absolute",
