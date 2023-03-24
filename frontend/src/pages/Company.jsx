@@ -63,46 +63,8 @@ function Company() {
     useEffect(() => {
         setApplyText('');
         document.getElementById('apply_button').disabled = false;
+
         async function fetchData() {
-            if (user != null && user != undefined && user.uid) {
-                const docRef = doc(getDb, 'users', user.uid);
-                const docSnap = await getDoc(docRef);
-                if (docSnap.exists()) {
-                    // console.log('has resume', docSnap.data().resume);
-                    setHasResume(docSnap.data().resume);
-                } else {
-                    setHasResume('');
-                    console.log('no resume');
-                }
-                if (key != '' && key != 'Selected Multiple Jobs') {
-                    const docRef = doc(collection(getDb, 'applications'), `${user.uid}+${key}`);
-                    const docSnap = await getDoc(docRef);
-                    if (docSnap.empty) {
-                        console.log('Not Applied.');
-                        setApplied(false);
-                    } else {
-                        console.log('has applied');
-                        setApplied(true);
-                    }
-                } else if (key == 'Selected Multiple Jobs' && keys.length != 0 && selectedJobs.length != 0) {
-                    const collectionRef = collection(getDb, 'applications');
-                    for await (const key of keys) {
-                        const docId = `${user.uid}+${key}`;
-                        const docRef = doc(collectionRef, docId);
-                        const docSnap = await getDoc(docRef);
-
-                        if (docSnap.exists()) {
-                            console.log('has applied');
-                            setApplyText(prevApplyText => prevApplyText + docSnap.data().profile.JobTitle + ', ');
-                            setApplied(true);
-                        } else {
-                            console.log('Not Applied.');
-                            setApplied(false);
-                        }
-                    }
-                }
-            }
-
             const response = await fetch('https://ignite-backend.onrender.com/companies/' + id)
             const data = await response.json()
             if (data != null) {
@@ -112,6 +74,100 @@ function Company() {
             if (user) {
                 setCurrentUser(user.email)
             }
+            if (user != null && user != undefined && user.uid) {
+                // create a local storage for to cache applied jobs
+                const appliedCache = JSON.parse(localStorage.getItem("applied-" + user.uid));
+                if (appliedCache == null && user != null && user != undefined && user.uid) {
+                    localStorage.setItem("applied-" + user.uid, JSON.stringify([]));
+                }
+                // check if user has resume in cache
+                const userCache = JSON.parse(localStorage.getItem(user.uid));
+
+                // if not, check firestore
+                if (userCache == null) {
+                    console.log('no cache, calling firestore')
+                    const docRef = doc(getDb, 'users', user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        // console.log('has resume', docSnap.data().resume);
+                        if (docSnap.data().resume != undefined) {
+                            setHasResume(docSnap.data().resume);
+                        }
+                    } else {
+                        setHasResume('');
+                        console.log('no resume');
+                    }
+                } else {
+                    if (userCache.resume != undefined) {
+                        setHasResume(userCache.resume);
+                    } else {
+                        setHasResume('');
+                        console.log('no resume in cache');
+
+                    }
+                }
+
+
+                const applyCache = JSON.parse(localStorage.getItem("applied-" + user.uid));
+                if (applyCache == null || applyCache == []) {
+                    console.log('no cache, calling firestore');
+                    if (key != '' && key != 'Selected Multiple Jobs') {
+                        const docRef = doc(collection(getDb, 'applications'), `${user.uid}+${key}`);
+                        const docSnap = await getDoc(docRef);
+                        if (docSnap.empty) {
+                            console.log('Not Applied.');
+                            setApplied(false);
+                        } else {
+                            console.log('has applied');
+                            setApplied(true);
+                        }
+                    } else if (key == 'Selected Multiple Jobs' && keys.length != 0 && selectedJobs.length != 0) {
+                        const collectionRef = collection(getDb, 'applications');
+                        for await (const key of keys) {
+                            const docId = `${user.uid}+${key}`;
+                            const docRef = doc(collectionRef, docId);
+                            const docSnap = await getDoc(docRef);
+
+                            if (docSnap.exists()) {
+                                console.log('has applied');
+                                setApplyText(prevApplyText => prevApplyText + docSnap.data().profile.JobTitle + ', ');
+                                setApplied(true);
+                            } else {
+                                console.log('Not Applied.');
+                                setApplied(false);
+                            }
+                        }
+                    }
+                } else {
+                    if (key != '' && key != 'Selected Multiple Jobs') {
+                        if (applyCache.includes(key)) {
+                            console.log('has applied');
+                            setApplied(true);
+                        } else {
+                            console.log('Not Applied.');
+                            setApplied(false);
+                        }
+                    }
+                    else if (key == 'Selected Multiple Jobs' && keys.length != 0 && selectedJobs.length != 0) {
+                        for (const key of keys) {
+                            if (applyCache.includes(key)) {
+                                console.log('has applied');
+                                setApplyText(prevApplyText => prevApplyText + data.job_profile_description[key][0][0] + ', ');
+                                setApplied(true);
+
+
+                            } else {
+                                console.log('Not Applied.');
+                                setApplied(false);
+                            }
+                        }
+                    }
+                }
+
+            }
+
+
+
         }
         fetchData()
 
@@ -156,7 +212,11 @@ function Company() {
                 profile: selectedJob,
                 resume: hasResume,
             }).then(() => {
-                console.log("Document successfully written!");
+                // Update the "applied" value in localStorage
+                const appliedCache = JSON.parse(localStorage.getItem("applied-" + user.uid));
+                appliedCache.push(selectedJob);
+
+                console.log("Document successfully written to firestore and cache!");
                 // Get the existing "applied" value from localStorage
                 const userData = JSON.parse(localStorage.getItem(user.uid));
                 const applied = userData ? userData.applied : 0;
@@ -170,6 +230,8 @@ function Company() {
             });
         } else if (selectedJobs.length > 0 && hasResume != '' && currentUser != undefined && applied == false) {
             const batch = writeBatch(getDb);
+            const appliedCache = JSON.parse(localStorage.getItem("applied-" + user.uid));
+            let cachedApplied = [];
             selectedJobs.forEach(job => {
                 const newDocRef = doc(collection(getDb, "applications"), `${user.uid}+${job['JobId']}`);
                 batch.set(newDocRef, {
@@ -178,9 +240,21 @@ function Company() {
                     profile: job,
                     resume: hasResume,
                 });
+                cachedApplied.push(job['JobId']);
             });
             batch.commit().then(() => {
-                console.log("All documents written to the database successfully!");
+                // Update the "applied" value in localStorage
+                localStorage.setItem("applied-" + user.uid, JSON.stringify([...appliedCache, ...cachedApplied]));
+
+                console.log("All documents successfully written to firestore and cache!");
+                // Get the existing "applied" value from localStorage
+                const userData = JSON.parse(localStorage.getItem(user.uid));
+                const applied = userData ? userData.applied : 0;
+                // Update the "applied" value in localStorage
+                localStorage.setItem(user.uid, JSON.stringify({
+                    ...(userData || {}),
+                    applied: applied + selectedJobs.length,
+                }));
                 // go to companies page
                 backToCompanies();
             });

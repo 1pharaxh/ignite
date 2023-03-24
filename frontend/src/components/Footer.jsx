@@ -35,47 +35,15 @@ function Footer() {
                         <div>
                             <h1 className="text-white text-lg font-medium"></h1>
                         </div>
-                        <div className="flex flex-row gap-2">
-                            <i className='fab fa-linkedin-in text-white ml-0 text-lg cursor-pointer'></i>
-                            <i className='fab fa-instagram text-white ml-2 text-lg cursor-pointer'></i>
-                            <i className='fab fa-facebook text-white ml-2 text-lg cursor-pointer'></i>
-                            <i className='fab fa-whatsapp text-white ml-2 text-lg cursor-pointer'></i>
-                        </div>
-                    </div>
-                    <div className="flex flex-col gap-4">
-                        <div>
-                            <h1 className="text-white text-xl font-medium text-center">QUICK LINKS.</h1>
-                        </div>
-                        <div className="flex flex-row gap-4">
-                            <div className="flex flex-col gap-4">
-                                <div>
-                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHome}>● Home</h1>
-                                </div>
-                                <div>
-                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleAbout} >● About</h1>
-                                </div>
-                                <div>
-                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleCompanies}>● Companies</h1>
-                                </div>
-                                <div>
-                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHowToApply}>● How to Apply</h1>
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-4">
-                                <div>
-                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleResources}>● Resouces</h1>
-                                </div>
-                                <div>
-                                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleContact}>● Contact Us.</h1>
-                                </div>
+                        <div className="flex flex-col gap-2 justify-between w-full">
+                            <div className="flex flex-row">
+                                <i className='fab fa-linkedin-in text-white ml-0 text-lg cursor-pointer'></i>
+                                <i className='fab fa-instagram text-white ml-2 text-lg cursor-pointer'></i>
+                                <i className='fab fa-facebook text-white ml-2 text-lg cursor-pointer'></i>
+                                <i className='fab fa-whatsapp text-white ml-2 text-lg cursor-pointer'></i>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
 
                     <div className="flex basis-1/5 justify-center items-center">
                         <div className="flex flex-row gap-4 rounded-full h-44 w-44 bg-teal-600 justify-center items-center">
@@ -87,6 +55,14 @@ function Footer() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div className=" hidden md:flex flex-row gap-5 items-center justify-center mt-[-35px] mb-5">
+                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHome}>Home</h1>
+                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleAbout} >About</h1>
+                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleCompanies}>Companies</h1>
+                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleHowToApply}>How to Apply</h1>
+                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleResources}>Resouces</h1>
+                    <h1 className="text-white text-md hover:underline cursor-pointer" onClick={handleContact}>Contact Us.</h1>
                 </div>
                 <hr className="hidden md:block w-full border-2 border-white" />
                 <div className="md:hidden bg-teal-900 w-full">

@@ -16,7 +16,6 @@ export default function AccountPage() {
     const [yearOfStudy, setYearOfStudy] = useState("");
     const [college, setCollege] = useState(0);
     const [loading, setLoading] = useState(true);
-    const [documentExists, setDocumentExists] = useState(false);
     const { logOut, user } = UserAuth();
     const [Error, setError] = useState(false);
     const MySwal = withReactContent(Swal)
@@ -44,7 +43,6 @@ export default function AccountPage() {
                 if (JSON.parse(localStorage.getItem(user.uid)).applied) {
                     setnoApplication(false);
                 }
-                setDocumentExists(true);
 
 
             }
@@ -55,7 +53,6 @@ export default function AccountPage() {
                 const docRef = doc(collectonRef2, user.uid);
                 const docSnap = getDoc(docRef).then((doc) => {
                     if (doc.exists()) {
-                        setDocumentExists(true);
                         // if doc exists then copy it to local storage
                         localStorage.setItem(user.uid, JSON.stringify(doc.data()));
                         if (doc.data().contactNumber) {
@@ -95,7 +92,6 @@ export default function AccountPage() {
                 title: 'Error!',
                 text: 'File size is too large',
                 icon: 'error',
-                timer: 2000,
                 confirmButtonText: 'Cool'
             })
             return;
@@ -122,17 +118,30 @@ export default function AccountPage() {
             title: 'Success!',
             text: 'Your Resume has been uploaded!',
             icon: 'success',
-            timer: 2000,
             confirmButtonText: 'Cool'
+        }).then(() => {
+            window.location.reload();
         })
     };
 
     const handleSubmit = () => {
-        // save the data to the local storage
         if (contactNumber === "" || course === "" || yearOfStudy === "" || college === 0 || college === "Select your college") {
             MySwal.fire({
                 title: 'Error',
                 text: 'Please fill all the fields',
+                icon: 'error',
+                timer: 2000,
+                confirmButtonText: 'Cool'
+            })
+            return;
+        }
+        // check if the user has uploaded a resume by checking if a key by user uid exists in the local storage
+        const userData = JSON.parse(localStorage.getItem(user.uid));
+        const hasresume = userData != undefined ? true : false;
+        if (!hasresume) {
+            MySwal.fire({
+                title: 'Error',
+                text: 'Please upload a resume first',
                 icon: 'error',
                 timer: 2000,
                 confirmButtonText: 'Cool'
@@ -147,18 +156,20 @@ export default function AccountPage() {
             course: course,
             yearOfStudy: yearOfStudy,
             college: college,
-            applied: documentExists ? localStorage.getItem(user.uid).applied : 0,
+            // check if key exists in loca storage if it does then check if the user has applied or not if not then 0 else number of applications
+            applied: JSON.parse(localStorage.getItem(user.uid)).applied || 0,
         }, { merge: true }).then(() => {
             console.log("Document successfully updated!");
         }).then(() => {
             localStorage.setItem(user.uid, JSON.stringify({
                 name: user.displayName,
                 email: user.email,
+                resume: JSON.parse(localStorage.getItem(user.uid)).resume || "",
                 contactNumber: contactNumber,
                 course: course,
                 yearOfStudy: yearOfStudy,
                 college: college,
-                applied: documentExists ? localStorage.getItem(user.uid).applied : 0,
+                applied: localStorage.getItem(user.uid).applied || 0,
             }))
             setLoading(false);
             MySwal.fire({
@@ -172,6 +183,17 @@ export default function AccountPage() {
         });
     }
     const handleLogOut = async () => {
+        const userData = JSON.parse(localStorage.getItem(user.uid));
+        const applied = userData ? userData.applied : 0;
+        // convert the applied field to a number
+        if (parseInt(applied) > 0) {
+            // update the applied field in firestore database
+            setDoc(doc(getDb, "users", user.uid), {
+                applied: applied,
+            }, { merge: true }).then(() => {
+                console.log("Applied field successfully updated!");
+            });
+        }
         try {
             await logOut();
         } catch (error) {
@@ -230,7 +252,7 @@ export default function AccountPage() {
             const file = event.target.files[0];
             const reader = new FileReader();
             reader.onload = async () => {
-                await upload(file, "resume");
+                await upload(file, "resume")
             };
             reader.readAsArrayBuffer(file);
         };

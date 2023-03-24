@@ -142,6 +142,32 @@ function Home() {
                       confirmButtonText: 'Cool'
                     })
                     fetchDb();
+                    // clear the form
+                    document.getElementById("form").reset();
+                    // clear the job profile description
+                    updateJobProfileDescription({});
+                    // clear the perks
+                    document.getElementById("perks").value = "";
+                    // clear the eligibility criteria
+                    document.getElementById("eligibility_criteria").value = "";
+                    // clear the image
+                    document.getElementById("image").value = "";
+                    // clear the pdf
+                    document.getElementById("pdf").value = "";
+                    // clear the about company
+                    document.getElementById("about_company").value = "";
+                    // clear the company website
+                    document.getElementById("company_website").value = "";
+                    // clear the work location
+                    document.getElementById("work_location").value = "";
+                    // clear the paid unpaid
+                    document.getElementById("paid_unpaid").value = "";
+                    // clear the company name
+                    document.getElementById("company_name").value = "";
+                    document.getElementById('job_name').value = "";
+                    document.getElementById('job_duration').value = "";
+                    document.getElementById('role_requirements').value = "";
+                    document.getElementById('requirements').value = "";
                   })
                   .catch(error => {
                     console.log('error', error)
@@ -260,6 +286,7 @@ function Home() {
                 About Company:
               </h1>
               < textarea
+                id='about_company'
                 className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
                 type="text"
                 style={{ resize: "both" }}
@@ -526,11 +553,7 @@ function Home() {
                   if (temp[0][0] != "" && temp[0][1] != "" && temp[0][2] != [""] && temp[0][3] != [""]) {
                     updateJobProfileDescription({ ...jobProfileDescription, [id]: temp });
                   }
-                  // Clear the form 
-                  document.getElementById('job_name').value = "";
-                  document.getElementById('job_duration').value = "";
-                  document.getElementById('role_requirements').value = "";
-                  document.getElementById('requirements').value = "";
+
                 }
               }>
                 ADD CARD {jobProfileDescription && Object.keys(jobProfileDescription).length}
