@@ -13,7 +13,7 @@ import withReactContent from 'sweetalert2-react-content'
 import PerkAndEligibleCard from '../components/PerkAndEligibleCard';
 import Dropdown from '../components/Dropdown';
 import ReactElasticCarousel from 'react-elastic-carousel';
-import { HashLoader } from 'react-spinners';
+import { DotLoader } from 'react-spinners';
 function Company() {
     // scroll to top 
     window.scrollTo(0, 0);
@@ -292,7 +292,7 @@ function Company() {
                         </div>
                     </div>
 
-                    <HashLoader cssOverride={{
+                    <DotLoader cssOverride={{
                         display: "block",
                         margin: "auto",
                         position: "absolute",
