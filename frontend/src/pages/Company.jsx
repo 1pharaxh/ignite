@@ -4,7 +4,7 @@ import desk from '../static/images/desk.jpg'
 import CompanyCard from '../components/CompanyCard';
 import JobCard from '../components/JobCard';
 import { UserAuth, getDb } from "../context/AuthContext";
-import { doc, getDocs, getDoc, addDoc, collection, query, where, writeBatch } from 'firebase/firestore';
+import { doc, getDocs, getDoc, setDoc, collection, query, where, writeBatch } from 'firebase/firestore';
 import '../static/css/job_profile_carousel.css'
 
 import Swal from 'sweetalert2'
@@ -28,9 +28,8 @@ function Company() {
     const MySwal = withReactContent(Swal)
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
-    const [about, setAbout] = useState({});
     const [currentUser, setCurrentUser] = useState('');
-    const [profile, setProfile] = useState([]);
+    const [applyText, setApplyText] = useState('');
     const [selectedJob, setSelectedJob] = useState({});
     const [selectedJobs, setSelectedJobs] = useState([]);
     const [keys, setKeys] = useState([]);
@@ -46,24 +45,15 @@ function Company() {
     const handleNameChange = (newKey) => {
         if (typeof newKey === 'string') {
             setKey(newKey);
-            setSelectedJob({ 'Company': data.name, 'JobId': newKey, 'JobTitle': about.profile[newKey].name })
+            setSelectedJob({ 'Company': data.name, 'JobId': newKey, 'JobTitle': data.job_profile_description[newKey][0][0] })
         } else {
             setKey('Selected Multiple Jobs');
-            console.log(newKey)
-            setSelectedJobs(prevSelectedJobs => [
-                ...prevSelectedJobs,
-                ...newKey.map(key => ({
-                    'Company': data.name,
-                    'JobId': key,
-                    'JobTitle': about.profile[key].name
-                }))
-            ]);
-            setKeys(prevKeys => [
-                ...prevKeys,
-                ...newKey
-            ]);
-            console.log(selectedJobs)
-
+            const temp = []
+            for (let i = 0; i < newKey.length; i++) {
+                temp.push({ 'Company': data.name, 'JobId': newKey[i], 'JobTitle': data.job_profile_description[newKey[i]][0][0] })
+            }
+            setSelectedJobs(temp);
+            setKeys(newKey);
         };
     };
     const { id } = useParams();
@@ -71,6 +61,7 @@ function Company() {
 
 
     useEffect(() => {
+        setApplyText('');
         document.getElementById('apply_button').disabled = false;
         async function fetchData() {
             if (user != null && user != undefined && user.uid) {
@@ -83,41 +74,41 @@ function Company() {
                     setHasResume('');
                     console.log('no resume');
                 }
-                if (key != '' && key != 'Selected Multiple Jobs' && about.profile) {
-                    const collectionRef = collection(getDb, 'applications');
-                    const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), where('profile.JobId', '==', key)));
-                    if (querySnapshot.empty) {
+                if (key != '' && key != 'Selected Multiple Jobs') {
+                    const docRef = doc(collection(getDb, 'applications'), `${user.uid}+${key}`);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.empty) {
                         console.log('Not Applied.');
                         setApplied(false);
                     } else {
                         console.log('has applied');
                         setApplied(true);
                     }
-                } else if (key == 'Selected Multiple Jobs' && about.profile) {
+                } else if (key == 'Selected Multiple Jobs' && keys.length != 0 && selectedJobs.length != 0) {
                     const collectionRef = collection(getDb, 'applications');
-                    const querySnapshot = await getDocs(query(collectionRef, where('uid', '==', user.uid), where('profile.JobId', 'in', keys)));
-                    if (querySnapshot.empty) {
-                        console.log('Not Applied.');
-                        setApplied(false);
-                    } else {
-                        console.log('has applied');
-                        setApplied(true);
+                    for await (const key of keys) {
+                        const docId = `${user.uid}+${key}`;
+                        const docRef = doc(collectionRef, docId);
+                        const docSnap = await getDoc(docRef);
+
+                        if (docSnap.exists()) {
+                            console.log('has applied');
+                            setApplyText(prevApplyText => prevApplyText + docSnap.data().profile.JobTitle + ', ');
+                            setApplied(true);
+                        } else {
+                            console.log('Not Applied.');
+                            setApplied(false);
+                        }
                     }
                 }
             }
 
-            var temp = []
             const response = await fetch('https://ignite-backend.onrender.com/companies/' + id)
             const data = await response.json()
             if (data != null) {
                 setLoading(false);
             }
             setData(data)
-            setAbout(data.about)
-            Object.keys(data.about.profile).forEach((key) => {
-                temp.push({ [key]: data.about.profile[key].name })
-            })
-            setProfile(temp)
             if (user) {
                 setCurrentUser(user.email)
             }
@@ -125,7 +116,7 @@ function Company() {
         fetchData()
 
 
-    }, [user, key, keys, selectedJobs])
+    }, [user, key, keys])
 
     const handleApply = () => {
         if (currentUser == undefined || applied == true || (Object.keys(selectedJob).length == 0 && keys.length == 0) || hasResume == '') {
@@ -142,6 +133,9 @@ function Company() {
             if (hasResume == '') {
                 errorString += "<h1> ● Missing resume!";
             }
+            if (applyText != '') {
+                errorString += "<h1> ● Already applied for " + applyText;
+            }
             MySwal.fire({
                 icon: "error",
                 title: 'Error!',
@@ -155,7 +149,8 @@ function Company() {
         }
         document.getElementById('apply_button').disabled = true;
         if (Object.keys(selectedJob).length != 0 && hasResume != '' && currentUser != undefined && applied == false) {
-            addDoc(collection(getDb, "applications"), {
+            let docId = `${user.uid}+${key}`;
+            setDoc(doc(collection(getDb, "applications"), docId), {
                 name: user.displayName,
                 uid: user.uid,
                 profile: selectedJob,
@@ -176,7 +171,7 @@ function Company() {
         } else if (selectedJobs.length > 0 && hasResume != '' && currentUser != undefined && applied == false) {
             const batch = writeBatch(getDb);
             selectedJobs.forEach(job => {
-                const newDocRef = doc(collection(getDb, "applications"));
+                const newDocRef = doc(collection(getDb, "applications"), `${user.uid}+${job['JobId']}`);
                 batch.set(newDocRef, {
                     name: user.displayName,
                     uid: user.uid,
@@ -194,17 +189,7 @@ function Company() {
 
     }
     const handleDownload = () => {
-        if (key == 'Selected Multiple Jobs' || key == '') {
-            MySwal.fire({
-                icon: "error",
-                title: 'Error!',
-                html: "<h1>Please select <span class='font-semibold'> a profile </span> to download the description !</h1><br/> <h1 class='text-sm text-slate-400'>Note: If you have selected multiple profiles then please select only 1 profile to download its description</h1>",
-                confirmButtonColor: '#0D9488',
-                confirmButtonText: 'Cool'
-            });
-            return;
-        }
-        let linkText = about.profile[key].link;
+        let linkText = data.pdfDescription;
         const link = document.createElement('a');
         link.href = linkText;
         link.download = 'file.pdf';
@@ -226,10 +211,10 @@ function Company() {
                         backgroundPosition: 'center'
                     }}
                     className={`${!loading ? 'opacity-100' : 'opacity-50'} overflow-visible bg-teal-600 mx-0 h-80 w-full`}>
-                    <div className='h-80 z-1'>
+                    <div className='h-80 z-1 overflow-clip'>
                         <div className='flex flex-col items-center justify-center w-full h-full mt-[3%]'>
                             <h1 className='text-5xl text-white font-medium content-center'> {data.name} </h1>
-                            <img className='rounded-md mt-7' src={data.image} width={200} height={150} ></img>
+                            <img className='rounded-md mt-7' src={data.image}></img>
                         </div>
                     </div>
 
@@ -274,7 +259,7 @@ function Company() {
                     {/* ABOUT COMPANY TEXT */}
                     <div className='flex'>
                         <h1 className='text-lg'>
-                            {about.about_comp}
+                            {data.about_comp}
                         </h1>
                     </div>
                 </div>
@@ -284,12 +269,11 @@ function Company() {
                     <div className='cursor-pointer' onClick={() => {
                         window.location.href = about.website
                     }}>
-                        <CompanyCard title={'Website'} icon={'fa fa-globe'} body={about.website} ></CompanyCard>
+                        <CompanyCard title={'Website'} icon={'fa fa-globe'} body={data.website} ></CompanyCard>
                     </div>
-                    <CompanyCard title={'Work Location'} icon={'fa fa-building'} body={about.work_location} ></CompanyCard>
+                    <CompanyCard title={'Work Location'} icon={'fa fa-building'} body={data.work_location} ></CompanyCard>
                     {/* {NEED TO COMPLETE THE ONE BELOW} */}
-
-                    <Dropdown onNameChange={handleNameChange} body={profile} />
+                    {data.job_profile_description ? (<Dropdown onNameChange={handleNameChange} body={data.job_profile_description} />) : (<></>)}
 
 
                 </div>
@@ -326,21 +310,24 @@ function Company() {
                     enableSwipe
                     ref={carouselRef}
                 >
-                    {about.job_profile_description != undefined ? about.job_profile_description.map((el, index) => (
-                        <JobCard
-                            key={index}
-                            title={el[0]}
-                            duration={el[1]}
-                            roles={el[2]}
-                            requirements={el[3]} />
-                    ))
-                        : (<></>)}
+                    {data.job_profile_description ? Object.keys(data.job_profile_description).map((key) => {
+                        const job = data.job_profile_description[key][0];
+                        return (
+                            <JobCard
+                                key={key}
+                                title={job[0]}
+                                duration={job[1]}
+                                roles={job[2]}
+                                requirements={job[3]}
+                            />
+                        );
+                    }) : <></>}
                 </ReactElasticCarousel>
 
-                {key != '' && key != 'Selected Multiple Jobs' ? (
+                {data.perks && data.eligibility ? (
                     <div className='flex md:flex-row flex-col justify-end md:gap-10 gap-5 mt-5'>
-                        <PerkAndEligibleCard titleTeal='Perks' titleBlack='about the internship' texts={about.profile[key].perks} />
-                        <PerkAndEligibleCard titleTeal='Eligibility' titleBlack='criteria' texts={about.profile[key].eligibility} />
+                        <PerkAndEligibleCard titleTeal='Perks' titleBlack='about the internship' texts={data.perks} />
+                        <PerkAndEligibleCard titleTeal='Eligibility' titleBlack='criteria' texts={data.eligibility} />
                     </div>
                 ) : (<></>)}
 
