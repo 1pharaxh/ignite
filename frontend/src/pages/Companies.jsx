@@ -206,7 +206,7 @@ function Companies() {
                             < div
                                 onClick={() => window.open(`/companies/${company._id}`, "_blank")}
                                 className='bg-teal-700 h-44 md:w-9/12 w-full items-center  rounded-xl p-5 justify-center flex flex-col' >
-                                <div className='w-[180px] md:w-[250px] bg-white h-28 rounded-md items-center justify-center flex flex-row'>
+                                <div className='w-[180px] md:w-[250px] bg-white h-28 rounded-md items-center justify-center flex flex-row overflow-clip'>
                                     <img src={company.image} ></img>
                                 </div>
                                 <h1 className='text-xl text-white font-medium content-center'>{company.name}</h1>

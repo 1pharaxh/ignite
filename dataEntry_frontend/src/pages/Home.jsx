@@ -553,7 +553,11 @@ function Home() {
                   if (temp[0][0] != "" && temp[0][1] != "" && temp[0][2] != [""] && temp[0][3] != [""]) {
                     updateJobProfileDescription({ ...jobProfileDescription, [id]: temp });
                   }
-
+                  // Clear the form 
+                  document.getElementById('job_name').value = "";
+                  document.getElementById('job_duration').value = "";
+                  document.getElementById('role_requirements').value = "";
+                  document.getElementById('requirements').value = "";
                 }
               }>
                 ADD CARD {jobProfileDescription && Object.keys(jobProfileDescription).length}

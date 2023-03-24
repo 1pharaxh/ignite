@@ -284,7 +284,7 @@ function Company() {
                         backgroundSize: 'cover',
                         backgroundPosition: 'center'
                     }}
-                    className={`${!loading ? 'opacity-100' : 'opacity-50'} overflow-visible bg-teal-600 mx-0 h-80 w-full`}>
+                    className={`${!loading ? 'opacity-100' : 'opacity-50'} overflow-clip bg-teal-600 mx-0 h-80 w-full`}>
                     <div className='h-80 z-1 overflow-clip'>
                         <div className='flex flex-col items-center justify-center w-full h-full mt-[3%]'>
                             <h1 className='text-5xl text-white font-medium content-center'> {data.name} </h1>
