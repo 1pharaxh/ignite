@@ -56,6 +56,7 @@ const companySchema = new mongoose.Schema({
 // ping myself every 20 minutes to keep the server awake
 setInterval(function () {
   http.get("https://ignite-backend.onrender.com/companies");
+  console.log("pinged");
 }, 1200000);
 
 // return all companies
