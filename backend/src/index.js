@@ -1,4 +1,5 @@
 require("dotenv").config();
+const http = require("http");
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -15,12 +16,12 @@ const app = express();
 app.use(express.json()); // parse incoming request
 app.use(express.urlencoded({ extended: true })); // Parse incoming request bodies with URL-encoded payloads
 const corsOptions = {
-//   origin: [
-//     "http://localhost:3000",
-//     "https://admin-ignite.vercel.app/",
-//     "https://anubhava.ignitesgtb.com",
-//     "*",
-//   ],
+  //   origin: [
+  //     "http://localhost:3000",
+  //     "https://admin-ignite.vercel.app/",
+  //     "https://anubhava.ignitesgtb.com",
+  //     "*",
+  //   ],
   origin: "*",
   optionsSuccessStatus: 200,
 };
@@ -51,6 +52,11 @@ const companySchema = new mongoose.Schema({
   perks: Array,
   eligibility: Array,
 });
+
+// ping myself every 20 minutes to keep the server awake
+setInterval(function () {
+  http.get("https://ignite-backend.onrender.com/companies");
+}, 1200000);
 
 // return all companies
 const Company = mongoose.model("companies", companySchema);
