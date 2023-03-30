@@ -32,7 +32,7 @@ function SignupPage() {
                 title: 'Account made!',
                 text: 'Please check your email for the confirmation link',
                 icon: 'success',
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'Ok'
             })
         }
 

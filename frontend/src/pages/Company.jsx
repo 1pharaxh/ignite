@@ -199,7 +199,7 @@ function Company() {
                     + errorString
                     + "</div>",
                 confirmButtonColor: '#0D9488',
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'Ok'
             });
             return;
         }
@@ -306,7 +306,7 @@ function Company() {
                 <div className={`flex flex-col md:my-16 md:mx-16 mx-4 my-8 gap-4 md:gap-10`}>
                     <div className='flex flex-col md:flex-row items-center md:gap-0 gap-2 md:justify-between'>
                         <div className='basis-6/12 w-30'>
-                            <h1 className='text-black md:text-4xl text-center md:mb-0 mb-3 text-3xl font-bold' > About the<span className='text-teal-600'> Company</span> </h1>
+                            <h1 className='text-black md:text-4xl text-start md:mb-0 mb-3 text-3xl font-bold' > About the<span className='text-teal-600'> Company</span> </h1>
                         </div>
                         <div className='flex flex-row w-full md:basis-6/12 auto md:w-64 justify-between'>
                             <div className='flex flex-col w-full mr-4'>

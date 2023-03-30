@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 function HomeTopCompanies({ imageArray }) {
     const breakPoints = [
-        { width: 1, itemsToShow: 1 },
+        { width: 1, itemsToShow: 2 },
         { width: 550, itemsToShow: 2 },
         { width: 768, itemsToShow: 3 },
         { width: 1200, itemsToShow: 6 },
@@ -20,6 +20,7 @@ function HomeTopCompanies({ imageArray }) {
                 <Carousel
                     showArrows={false}
                     easing="cubic-bezier(1,.15,.55,1.54)"
+                    enableInfinite
                     tiltEasing="cubic-bezier(0.110, 1, 1.000, 0.210)"
                     transitionMs={700}
                     onNextEnd={({ index }) => {
@@ -53,9 +54,9 @@ function HomeTopCompanies({ imageArray }) {
 
                         < div
                             onClick={() => window.open(el['link'], '_blank')}
-                            key={index} className='inline-block p-2 cursor-pointer rounded-lg bg-slate-100 md:mx-4 mx-2 shadow-md' >
+                            key={index} className='inline-block p-2 cursor-pointer rounded-lg bg-slate-100 md:mx-4 mx-1 shadow-md' >
                             <img src={el['image']}
-                                alt='company' className='w-64 h-36 md:w-60 md:h-36 rounded-lg' />
+                                alt='company' className='w-60 h-32 md:w-60 md:h-36 rounded-lg' />
                         </div>
                     ))
                     }

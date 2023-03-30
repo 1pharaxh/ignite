@@ -5,9 +5,9 @@ import ReactElasticCarousel from "react-elastic-carousel";
 
 function AboutWhiteCards({ imageArray, text }) {
     const breakPoints = [
-        { width: 1, itemsToShow: 1 },
+        { width: 1, itemsToShow: 2 },
         { width: 550, itemsToShow: 2 },
-        { width: 768, itemsToShow: 3 },
+        { width: 768, itemsToShow: 4 },
         { width: 1200, itemsToShow: 6 },
     ]
     const carouselRef = useRef(null);
@@ -19,7 +19,7 @@ function AboutWhiteCards({ imageArray, text }) {
             </div>
             <div className='relative flex items-center md:mx-10 mx-4'>
                 <ReactElasticCarousel
-                    showArrows={true}
+                    showArrows={false}
                     easing="cubic-bezier(1,.15,.55,1.54)"
                     tiltEasing="cubic-bezier(0.110, 1, 1.000, 0.210)"
                     transitionMs={700}

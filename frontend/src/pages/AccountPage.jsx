@@ -92,7 +92,7 @@ export default function AccountPage() {
                 title: 'Error!',
                 text: 'File size is too large',
                 icon: 'error',
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'Ok'
             })
             return;
         }
@@ -118,7 +118,7 @@ export default function AccountPage() {
             title: 'Success!',
             text: 'Your Resume has been uploaded!',
             icon: 'success',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Ok'
         }).then(() => {
             window.location.reload();
         })
@@ -131,7 +131,7 @@ export default function AccountPage() {
                 text: 'Please fill all the fields',
                 icon: 'error',
                 timer: 2000,
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'Ok'
             })
             return;
         }
@@ -144,7 +144,7 @@ export default function AccountPage() {
                 text: 'Please upload a resume first',
                 icon: 'error',
                 timer: 2000,
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'Ok'
             })
             return;
         }
@@ -178,7 +178,7 @@ export default function AccountPage() {
                 text: 'Changes have been saved',
                 icon: 'success',
                 timer: 2000,
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'Ok'
             })
         });
     }
@@ -237,7 +237,7 @@ export default function AccountPage() {
             title: 'Success!',
             text: 'Successfully Updated resume!',
             confirmButtonColor: '#0D9488',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Ok'
 
         })
     }

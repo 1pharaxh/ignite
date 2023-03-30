@@ -1,11 +1,17 @@
 import React from "react";
-import { motion } from "framer-motion";
 import HomeBanner from "../components/HomeComponents/HomeBanner";
+import TheTimesOfIndia from "../static/images/testimages/The times of India.png";
+import BajajCapital from "../static/images/testimages/Bajaj capital.png";
+import Ketto from "../static/images/testimages/ketto.png";
+import LensKart from "../static/images/testimages/Lenskart.png";
+import FeedingIndia from "../static/images/testimages/feeding india by zomato.png";
+
+
+
 import HomeTopCompanies from "../components/HomeComponents/HomeTopCompanies";
 import HomeStatistics from "../components/HomeComponents/HomeStatistics";
 import home_top from "../static/images/home_topbanner.png";
 import HomeTimeline from "../components/HomeComponents/HomeTimeline";
-import HomeReviewCard from "../components/HomeComponents/HomeReviewCard";
 import HomeTimer from "../components/HomeComponents/HomeTimer";
 function Home() {
   // scroll to top 
@@ -19,17 +25,11 @@ function Home() {
       </div>
 
       <HomeTopCompanies imageArray={[
-        { image: 'https://drive.google.com/uc?export=view&id=1cib3mrG338kQbSrRKheh33Dh6tNEQVuR', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=16F76CQiHfzLoCrjKP-Ol-dWHr5wog8Zr', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=1FnCh8-GWvEW4R3xGd1qY43YEl589jdxl', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=1zWTecZElhFF_HEArLgNHe-3Ww9hs4wa4', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=1_K8brSr8Dgs7gThboSZz_Ku6jo941nme', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=1cib3mrG338kQbSrRKheh33Dh6tNEQVuR', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=16F76CQiHfzLoCrjKP-Ol-dWHr5wog8Zr', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=1FnCh8-GWvEW4R3xGd1qY43YEl589jdxl', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=1zWTecZElhFF_HEArLgNHe-3Ww9hs4wa4', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=1_K8brSr8Dgs7gThboSZz_Ku6jo941nme', link: 'https://www.google.com/' },
-        { image: 'https://drive.google.com/uc?export=view&id=1_K8brSr8Dgs7gThboSZz_Ku6jo941nme', link: 'https://www.google.com/' },
+        { image: TheTimesOfIndia, link: 'https://www.google.com/' },
+        { image: BajajCapital, link: 'https://www.google.com/' },
+        { image: Ketto, link: 'https://www.google.com/' },
+        { image: LensKart, link: 'https://www.google.com/' },
+        { image: FeedingIndia, link: 'https://www.google.com/' },
       ]} />
 
       <div className="flex items-center justify-center">

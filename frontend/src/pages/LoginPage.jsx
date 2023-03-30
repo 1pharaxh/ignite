@@ -21,7 +21,7 @@ function LoginPage() {
                     title: 'Signed In!',
                     text: 'You have successfully signed in',
                     icon: 'success',
-                    confirmButtonText: 'Cool'
+                    confirmButtonText: 'Ok'
                 }).then(() => {
                     handleAccount();
                 })
@@ -46,7 +46,7 @@ function LoginPage() {
                 title: 'Email not verified!',
                 text: 'Please check your email for the confirmation link',
                 icon: 'error',
-                confirmButtonText: 'Cool'
+                confirmButtonText: 'Ok'
             })
         } else {
             handleAccount();
@@ -63,7 +63,7 @@ function LoginPage() {
                     title: 'Email Sent!',
                     text: 'Please check your email for the reset link',
                     icon: 'success',
-                    confirmButtonText: 'Cool'
+                    confirmButtonText: 'Ok'
                 })
             )
         }

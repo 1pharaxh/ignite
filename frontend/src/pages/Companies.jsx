@@ -58,35 +58,47 @@ function Companies() {
     }
     const handleFilter = (e) => {
         e.preventDefault();
-        const inputOptions = new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({
-                    'Remote': 'Remote Internship',
-                    // second row
-                    'Paid': 'Paid Internship',
-                })
-            }, 500)
-        })
         MySwal.fire({
-            icon: "info",
-            title: "Filter by",
-            input: 'radio',
-            inputOptions: inputOptions,
-            inputAutoTrim: true,
-            inputValidator: (value) => {
-                if (!value) {
-                    return 'You need to choose something!'
-                }
-                else {
-                    if (value === "Remote") {
-                        handleSearch('remote')
-                    }
-                    else if (value === "Paid") {
-                        handleSearch('paid')
-                    }
-                }
+            icon: 'info',
+            title: 'Filter by Profile Type',
+            html:
+                '<div class="swal2-radio-container flex flex-col items-start">' +
+                '<div class="swal2-radio flex flex-row">' +
+                '<input type="radio" id="radio-marketing" name="radio" class="swal2-input" value="Marketing">' +
+                '<label for="radio-marketing">Marketing</label>' +
+                '</div>' +
+
+                '<div class="swal2-radio flex flex-row">' +
+                '<input type="radio" id="radio-sales" name="radio" class="swal2-input" value="Sales">' +
+                '<label for="radio-sales">Sales</label>' +
+                '</div>' +
+
+                '<div class="swal2-radio flex flex-row">' +
+                '<input type="radio" id="radio-finance" name="radio" class="swal2-input" value="Finance">' +
+                '<label for="radio-finance">Finance</label>' +
+                '</div>' +
+
+                '<div class="swal2-radio flex flex-row">' +
+                '<input type="radio" id="radio-hr" name="radio" class="swal2-input" value="HR">' +
+                '<label for="radio-hr">HR</label>' +
+                '</div>' +
+
+                '<div class="swal2-radio flex flex-row">' +
+                '<input type="radio" id="radio-others" name="radio" class="swal2-input" value="Others">' +
+                '<label for="radio-others">Others</label>' +
+                '</div>' +
+                '</div>',
+            focusConfirm: false,
+            showCloseButton: true,
+            preConfirm: () => {
+                const selectedValue = document.querySelector('input[name="radio"]:checked').value;
+                handleSearch(selectedValue);
             },
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            allowEnterKey: false
         });
+
     };
 
     const handleSearch = (val) => {
@@ -172,7 +184,11 @@ function Companies() {
                         <div className='flex flex-col w-full md:pr-10 pr-5'>
                             <div className='flex justify-between items-center w-12/12'>
                                 {/* // search icon */}
-                                <input id="searchbox" disabled={loading} className='p-2 text-sm outline-none w-full' type='text' placeholder='TITLE, KEYWORD OR PHRASE' />
+                                <input onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                        handleSearch(e.target.value);
+                                    }
+                                }} id="searchbox" disabled={loading} className='p-2 text-sm outline-none w-full' type='text' placeholder='COMPANIES OR PROFILES' />
                                 <svg className={`${usersearched ? 'hidden' : 'visible'} cursor-pointer`} onClick={() => handleSearch("")} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.5 11H11.71L11.43 10.73C12.41 9.59 13 8.11 13 6.5C13 2.91 10.09 0 6.5 0C2.91 0 0 2.91 0 6.5C0 10.09 2.91 13 6.5 13C8.11 13 9.59 12.41 10.73 11.43L11 11.71V12.5L16 17.49L17.49 16L12.5 11ZM6.5 11C4.01 11 2 8.99 2 6.5C2 4.01 4.01 2 6.5 2C8.99 2 11 4.01 11 6.5C11 8.99 8.99 11 6.5 11Z" fill="#0F6F7B" />
                                 </svg>

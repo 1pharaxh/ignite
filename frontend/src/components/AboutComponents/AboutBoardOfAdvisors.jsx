@@ -31,7 +31,7 @@ export default function AboutBoardOfAdvisors() {
     const breakPoints = [
         { width: 1, itemsToShow: 2 },
         { width: 550, itemsToShow: 2 },
-        { width: 768, itemsToShow: 6 },
+        { width: 768, itemsToShow: 4 },
         { width: 1200, itemsToShow: 6 },
     ]
     const carouselRef = useRef(null);
@@ -74,6 +74,7 @@ export default function AboutBoardOfAdvisors() {
                     enableSwipe
                     ref={carouselRef}
                 >
+
                     <motion.button
                         whileHover={{ scale: 0.9 }}
                         whileTap={{ scale: 0.9 }}
@@ -82,7 +83,22 @@ export default function AboutBoardOfAdvisors() {
                             setIsModalOpen(true);
                             setImageText("Dhruvi Tyagi");
                         }}
-                    ><img src={BOD1} alt="BOD1" className="h-[150px] md:h-[180px] md:w-[180px] w-[150px] z-10 rounded-lg" /></motion.button>
+                    >
+                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
+                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
+                                backdropFilter: 'blur(45px)',
+                                borderRadius: '12px',
+                            }}>
+
+                            <img src={BOD1} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
+                            <div>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Dhruvi</h1>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Tyagi</h1>
+                            </div>
+                        </div>
+                    </motion.button>
+                    {/* <img src={BOD1} alt="BOD1" className="h-[150px] md:h-[180px] md:w-[180px] w-[150px] z-10 rounded-lg" /></motion.button> */}
+
                     <motion.button
                         whileHover={{ scale: 0.9 }}
                         whileTap={{ scale: 0.9 }}
@@ -91,7 +107,21 @@ export default function AboutBoardOfAdvisors() {
                             setIsModalOpen(true);
                             setImageText("Hitesh Ahuja");
                         }}
-                    ><img src={BOD2} alt="BOD2" className="h-[150px] md:h-[180px] md:w-[180px] w-[150px] z-10 rounded-lg" /></motion.button>
+                    >
+                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
+                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
+                                backdropFilter: 'blur(45px)',
+                                borderRadius: '12px',
+                            }}>
+
+                            <img src={BOD2} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
+                            <div>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Hitesh</h1>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Ahuja</h1>
+                            </div>
+                        </div>
+                    </motion.button>
+
                     <motion.button
                         whileHover={{ scale: 0.9 }}
                         whileTap={{ scale: 0.9 }}
@@ -100,7 +130,21 @@ export default function AboutBoardOfAdvisors() {
                             setIsModalOpen(true);
                             setImageText("Khushi Jain");
                         }}
-                    ><img src={BOD3} alt="BOD3" className="h-[150px] md:h-[180px] md:w-[180px] w-[150px] z-10 rounded-lg" /></motion.button>
+                    >
+                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
+                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
+                                backdropFilter: 'blur(45px)',
+                                borderRadius: '12px',
+                            }}>
+
+                            <img src={BOD3} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
+                            <div>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Khushi</h1>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Jain</h1>
+                            </div>
+                        </div>
+                    </motion.button>
+
                     <motion.button
                         whileHover={{ scale: 0.9 }}
                         whileTap={{ scale: 0.9 }}
@@ -109,7 +153,21 @@ export default function AboutBoardOfAdvisors() {
                             setIsModalOpen(true);
                             setImageText("Parth Bhatia");
                         }}
-                    ><img src={BOD4} alt="BOD4" className="h-[150px] md:h-[180px] md:w-[180px] w-[150px] z-10 rounded-lg" /></motion.button>
+                    >
+                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
+                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
+                                backdropFilter: 'blur(45px)',
+                                borderRadius: '12px',
+                            }}>
+
+                            <img src={BOD4} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
+                            <div>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Parth</h1>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Bhatia</h1>
+                            </div>
+                        </div>
+                    </motion.button>
+
                     <motion.button
                         whileHover={{ scale: 0.9 }}
                         whileTap={{ scale: 0.9 }}
@@ -118,7 +176,20 @@ export default function AboutBoardOfAdvisors() {
                             setIsModalOpen(true);
                             setImageText("Shivansh Sharma");
                         }}
-                    ><img src={BOD5} alt="BOD5" className="h-[150px] md:h-[180px] md:w-[180px] w-[150px] z-10 rounded-lg" /></motion.button>
+                    >
+                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
+                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
+                                backdropFilter: 'blur(45px)',
+                                borderRadius: '12px',
+                            }}>
+
+                            <img src={BOD5} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
+                            <div>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Shivansh</h1>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Sharma</h1>
+                            </div>
+                        </div>
+                    </motion.button>
                     <motion.button
                         whileHover={{ scale: 0.9 }}
                         whileTap={{ scale: 0.9 }}
@@ -126,10 +197,22 @@ export default function AboutBoardOfAdvisors() {
                             setSelectedImage(BOD6);
                             setIsModalOpen(true);
                             setImageText("Uttam Singh");
-
-
                         }}
-                    ><img src={BOD6} alt="BOD6" className="h-[150px] md:h-[180px] md:w-[180px] w-[150px] z-10 rounded-lg" /></motion.button>
+                    >
+                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
+                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
+                                backdropFilter: 'blur(45px)',
+                                borderRadius: '12px',
+                            }}>
+
+                            <img src={BOD6} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
+                            <div>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Uttam</h1>
+                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Singh</h1>
+                            </div>
+                        </div>
+                    </motion.button>
+
                 </ReactElasticCarousel>
                 {isModalOpen && <Modal />}
 
