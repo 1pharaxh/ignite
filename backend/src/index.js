@@ -1,6 +1,4 @@
 require("dotenv").config();
-const http = require("http");
-
 const express = require("express");
 const mongoose = require("mongoose");
 
@@ -52,12 +50,6 @@ const companySchema = new mongoose.Schema({
   perks: Array,
   eligibility: Array,
 });
-
-// ping myself every 20 minutes to keep the server awake
-setInterval(function () {
-  http.get("https://ignite-backend.onrender.com/companies");
-  console.log("pinged");
-}, 1200000);
 
 // return all companies
 const Company = mongoose.model("companies", companySchema);
