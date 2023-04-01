@@ -295,8 +295,8 @@ function Home() {
                   {
                     required: 'Please select an image file',
                     maxLength: {
-                      value: 1000,
-                      message: 'Max length is 100 characters'
+                      value: 500,
+                      message: 'Max length is 600 characters'
                     }
                   })} />
               {errors.about_company && (
@@ -385,8 +385,8 @@ function Home() {
                       {
                         required: 'required',
                         maxLength: {
-                          value: 1000,
-                          message: 'Max length is 100 characters'
+                          value: 500,
+                          message: 'Max length is 600 characters'
                         }
                       })} />
                   {errors.perks && (
@@ -414,8 +414,8 @@ function Home() {
                       {
                         required: 'required',
                         maxLength: {
-                          value: 1000,
-                          message: 'Max length is 100 characters'
+                          value: 500,
+                          message: 'Max length is 600 characters'
                         }
                       })} />
                   {errors.eligibility_criteria && (
@@ -488,8 +488,8 @@ function Home() {
                     {...register("roles_requirements",
                       {
                         maxLength: {
-                          value: 1000,
-                          message: 'Max length is 100 characters'
+                          value: 500,
+                          message: 'Max length is 600 characters'
                         }
                       })} />
                   {errors.roles_requirements && (
@@ -516,8 +516,8 @@ function Home() {
                     {...register("requirements",
                       {
                         maxLength: {
-                          value: 1000,
-                          message: 'Max length is 100 characters'
+                          value: 500,
+                          message: 'Max length is 600 characters'
                         }
                       })} />
                   {errors.requirements && (
