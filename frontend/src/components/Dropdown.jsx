@@ -40,7 +40,7 @@ export default function Dropdown({ body, onNameChange }) {
                 onClick={() => setShowDropdown(!showDropdown)}
                 className="bg-white text-gray-800 font-medium rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline"
             >
-                <div className="flex flex-col w-80 h-20 bg-white rounded-lg shadow-lg p-4">
+                <div className="flex flex-col w-[350px] h-20 bg-white rounded-lg shadow-lg p-4">
                     <div className="flex flex-row gap-4">
                         <div className="flex flex-col items-center">
                             <i className='fa fa-suitcase font-bold text-3xl mt-2 text-teal-600'></i>

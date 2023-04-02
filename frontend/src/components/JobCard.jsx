@@ -1,7 +1,7 @@
 import React from "react";
 export default function JobCard({ title, duration, roles, requirements }) {
     return (
-        <div className="bg-teal-600 rounded-lg md:p-10 px-2 py-4 w-[440px] md:w-[550px] h-[760px] flex flex-col md:gap-4 gap-3 items-start justify-center">
+        <div className="bg-teal-600 rounded-lg md:p-10 px-2 py-4 w-[440px] md:w-[550px] h-[760px] flex flex-col md:gap-4 gap-3 items-start justify-start">
             <h1 className="md:text-3xl text-2xl font-semibold text-white">{title}</h1>
             <h1 className="text-base font-semibold text-white">Duration: <span className="text-yellow-400">{duration}</span></h1>
             <h1 className="md:text-xl text-lg font-semibold text-yellow-400">Roles and Responsibilites</h1>
