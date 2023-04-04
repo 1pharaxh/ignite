@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -7,7 +7,24 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import "../../static/css/homebanner.css";
 
 
-function HomeBanner({ imageArray }) {
+function HomeBanner({ imageArray, phoneImages }) {
+
+    const [screenSize, setScreenSize] = useState(window.innerWidth);
+    useEffect(() => {
+        function handleResize() {
+            setScreenSize(window.innerWidth);
+        }
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [screenSize]);
+
+    if (screenSize > 768) {
+        imageArray = imageArray;
+    } else {
+        imageArray = phoneImages;
+    }
+
+
     return (
         <div>
             <Swiper
@@ -37,7 +54,7 @@ function HomeBanner({ imageArray }) {
                 })}
 
                 <div className="absolute inset-y-1/2 left-0 z-50">
-                    <button className="swiper-prev bg-white border border-gray-500 rounded-full w-8 h-8 ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    <button className="swiper-prev bg-white border border-gray-500 rounded-full w-6 h-6 md:w-8 md:h-8 ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         <span className="sr-only">Previous</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +62,7 @@ function HomeBanner({ imageArray }) {
                             viewBox="0 0 24 24"
                             stroke="currentColor"
                             aria-hidden="true"
-                            className="w-8 h-8"
+                            className="w-6 h-6 md:w-8 md:h-8"
                         >
                             <path
                                 strokeLinecap="round"
@@ -58,7 +75,7 @@ function HomeBanner({ imageArray }) {
                     </button>
                 </div>
                 <div className="absolute inset-y-1/2 right-0 z-50">
-                    <button className="swiper-next bg-white border border-gray-500 rounded-full w-8 h-8 mr-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    <button className="swiper-next bg-white border border-gray-500 rounded-full w-6 h-6 md:w-8 md:h-8 mr-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         <span className="sr-only">Next</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +84,7 @@ function HomeBanner({ imageArray }) {
                             stroke="currentColor"
                             aria-hidden="true"
 
-                            className="w-8 h-8"
+                            className="w-6 h-6 md:w-8 md:h-8"
                         >
                             <path
                                 strokeLinecap="round"

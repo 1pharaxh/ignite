@@ -10,18 +10,23 @@ import FeedingIndia from "../static/images/testimages/feeding india by zomato.pn
 
 import HomeTopCompanies from "../components/HomeComponents/HomeTopCompanies";
 import HomeStatistics from "../components/HomeComponents/HomeStatistics";
-import home_top from "../static/images/home_topbanner.png";
+import banner from "../static/images/banner_1.jpg";
+import banner2 from "../static/images/banner_2.jpg";
+import phoneBanner from "../static/images/Phone_banner_1.jpg";
+import phoneBanner2 from "../static/images/Phone_banner_2.jpg";
+import home_carousel_image from "../static/images/home_carousel_image.png";
 import HomeTimeline from "../components/HomeComponents/HomeTimeline";
 import HomeTimer from "../components/HomeComponents/HomeTimer";
+import HomeImageContinueScroll from "../components/HomeComponents/HomeImageContinueScroll";
 function Home() {
   // scroll to top 
   window.scrollTo(0, 0);
   return (
     <div className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
-      <HomeBanner imageArray={[home_top, home_top, home_top, home_top]} />
+      <HomeBanner imageArray={[banner, banner2]} phoneImages={[phoneBanner, phoneBanner2]} />
 
       <div className="flex items-center justify-center">
-        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Current Top</span><span className="text-[#0F6F7B]"> Companies</span></h1>
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Our</span><span className="text-[#0F6F7B]"> Sponsors</span></h1>
       </div>
 
       <HomeTopCompanies imageArray={[
@@ -33,10 +38,14 @@ function Home() {
       ]} />
 
       <div className="flex items-center justify-center">
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Our top</span><span className="text-[#0F6F7B]"> Companies</span></h1>
+      </div>
+      <HomeImageContinueScroll />
+
+      <div className="flex items-center justify-center">
         <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Past</span><span className="text-[#0F6F7B]"> Statistics</span></h1>
       </div>
       <HomeStatistics
-
         Companies={'1000+'}
         applications={'11,000+'}
         registrations={'3,700+'}

@@ -34,7 +34,7 @@ export default function Dropdown({ body, onNameChange }) {
     }
 
     return (
-        <div className="relative">
+        <div className="relative z-10">
             <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={() => setShowDropdown(!showDropdown)}
@@ -53,7 +53,7 @@ export default function Dropdown({ body, onNameChange }) {
                 </div>
             </motion.button >
             {showDropdown && (
-                <div className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg">
+                <div className="origin-top-right absolute right-0 mt-2 w-[350px] rounded-md shadow-lg">
                     <div className="bg-white rounded-md shadow-xs">
                         <div className="py-1">
                             <h1 className="text-gray-500 font-semibold text-lg px-4 py-2">Select profiles</h1>

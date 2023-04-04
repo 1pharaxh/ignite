@@ -2,8 +2,6 @@ import React, { useRef } from "react";
 import Carousel from 'react-elastic-carousel';
 import '../../static/css/homepage_companies_carousel.css'
 
-import { motion } from 'framer-motion';
-
 function HomeTopCompanies({ imageArray }) {
     const breakPoints = [
         { width: 1, itemsToShow: 2 },
