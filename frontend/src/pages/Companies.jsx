@@ -9,7 +9,20 @@ import withReactContent from 'sweetalert2-react-content'
 function Companies() {
     // scroll to top 
     window.scrollTo(0, 0);
+    document.title = "Companies"
+
     const MySwal = withReactContent(Swal)
+
+    const [screenSize, setScreenSize] = useState(window.innerWidth);
+    useEffect(() => {
+        function handleResize() {
+            setScreenSize(window.innerWidth);
+        }
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, [screenSize]);
+
+
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searchString, setSearchString] = useState('');
@@ -225,7 +238,7 @@ function Companies() {
                                 <div className='w-[180px] md:w-[250px] bg-white h-28 rounded-md items-center justify-center flex flex-row overflow-hidden'>
                                     <img src={company.image} ></img>
                                 </div>
-                                <h1 className='text-xl text-white font-medium content-center'>{company.name}</h1>
+                                <h1 className='text-xl text-white font-medium content-center'>{screenSize < 768 ? company.name.length > 10 ? company.name.substring(0, 10) + '...' : company.name : company.name}</h1>
 
                             </div>
                         </motion.button>

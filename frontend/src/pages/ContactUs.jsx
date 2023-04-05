@@ -6,6 +6,8 @@ import demoImage from '../static/images/testimages/principal.jpg'
 import Accordion from '../components/HowToApplyComponents/AccordionComponent'
 
 function ContactUs() {
+    document.title = "Contact Us";
+
     // scroll to top 
     window.scrollTo(0, 0);
     return (

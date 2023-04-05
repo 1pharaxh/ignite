@@ -11,6 +11,8 @@ import { DotLoader } from "react-spinners";
 
 
 export default function AccountPage() {
+    document.title = "Account"
+
     const [contactNumber, setContactNumber] = useState("");
     const [course, setCourse] = useState("");
     const [yearOfStudy, setYearOfStudy] = useState("");

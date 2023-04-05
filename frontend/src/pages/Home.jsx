@@ -21,6 +21,8 @@ import HomeImageContinueScroll from "../components/HomeComponents/HomeImageConti
 function Home() {
   // scroll to top 
   window.scrollTo(0, 0);
+  document.title = "Anubhava";
+
   return (
     <div className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
       <HomeBanner imageArray={[banner, banner2]} phoneImages={[phoneBanner, phoneBanner2]} />

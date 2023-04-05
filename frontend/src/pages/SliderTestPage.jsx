@@ -1,5 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-export default function SliderTestPage() {
-    return (<div></div>);
-}
+const SliderTestPage = ({ }) => {
+    document.title = "Slider Test Page";
+
+    return (
+        <div className="carousel-container">
+
+        </div>
+    );
+};
+
+export default SliderTestPage;

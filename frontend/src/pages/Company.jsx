@@ -19,6 +19,7 @@ function Company() {
     window.scrollTo(0, 0);
     const carouselRef = useRef(null);
 
+
     const breakPoints = [
         { width: 1, itemsToShow: 1 },
         { width: 550, itemsToShow: 2 },
@@ -71,6 +72,8 @@ function Company() {
                 setLoading(false);
             }
             setData(data)
+            // set page title to company name
+            document.title = `${data.name} | Anubhava`;
             if (user) {
                 setCurrentUser(user.email)
             }

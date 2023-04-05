@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 function LoginPage() {
+    document.title = "Login";
     // scroll to top 
     window.scrollTo(0, 0);
     const MySwal = withReactContent(Swal)

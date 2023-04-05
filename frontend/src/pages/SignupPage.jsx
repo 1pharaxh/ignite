@@ -10,6 +10,7 @@ import { motion } from 'framer-motion'
 function SignupPage() {
     // scroll to top 
     window.scrollTo(0, 0);
+    document.title = "Sign Up";
     const MySwal = withReactContent(Swal)
     const { register, handleSubmit, setFocus, setError, formState: { errors } } = useForm();
     const navigate = useNavigate();

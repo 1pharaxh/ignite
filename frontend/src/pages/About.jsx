@@ -19,6 +19,7 @@ import AboutCoreCommittee from '../components/AboutComponents/AboutCoreCommittee
 function About() {
   // scroll to top 
   window.scrollTo(0, 0);
+  document.title = "About Us";
   // TEMPORARY LOADING SCREEN
   // const [isLoading, setIsLoading] = useState(true);
   // useEffect(() => {

@@ -5,6 +5,7 @@ import PageBanner from '../components/PageBanner'
 import banner from '../static/images/HowToApplyBanner.jpg'
 import youtube from '../static/images/HowToApplyYoutube.png'
 function HowToApply() {
+    document.title = "How To Apply";
     // scroll to top 
     window.scrollTo(0, 0);
     return (

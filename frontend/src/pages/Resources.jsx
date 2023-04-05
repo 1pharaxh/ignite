@@ -2,6 +2,9 @@ import React from 'react'
 import PageBanner from '../components/PageBanner'
 import banner from '../static/images/ResourcesBanner.jpg'
 export default function Resources() {
+    // scroll to top
+    window.scrollTo(0, 0);
+    document.title = "Resources";
     return (
         <div className='md:mt-20 mt-[65px] flex flex-col'>
             <PageBanner
