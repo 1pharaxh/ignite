@@ -5,6 +5,7 @@ import CompanyCard from '../components/CompanyCard';
 import JobCard from '../components/JobCard';
 import { UserAuth, getDb } from "../context/AuthContext";
 import { doc, getDocs, getDoc, setDoc, collection, query, where, writeBatch } from 'firebase/firestore';
+
 import '../static/css/job_profile_carousel.css'
 
 import Swal from 'sweetalert2'
@@ -13,7 +14,9 @@ import withReactContent from 'sweetalert2-react-content'
 import PerkAndEligibleCard from '../components/PerkAndEligibleCard';
 import Dropdown from '../components/Dropdown';
 import ReactElasticCarousel from 'react-elastic-carousel';
+import shareIcon from '../static/images/share-1-svgrepo-com.svg'
 import { DotLoader } from 'react-spinners';
+import { RWebShare } from 'react-web-share';
 function Company() {
     // scroll to top 
     window.scrollTo(0, 0);
@@ -320,12 +323,30 @@ function Company() {
 
 
                             </div>
-                            <button
-                                onClick={handleDownload}
-                                className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-off-white text-teal-600 font-semibold hover:bg-gray-300 rounded-lg text-sm'>
-                                <i className='fa fa-download text-teal-600 mx-2'></i> <span className='hidden md:block'> Download Job Description </span>
-                                <span className='block md:hidden'>Description </span>
-                            </button>
+                            {/* TO EDIT SHARE BUTTON AND DOWNLOAD BUTTON */}
+                            <div className='flex flex-col w-full gap-4'>
+                                <button
+                                    onClick={handleDownload}
+                                    className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-off-white text-teal-600 font-semibold hover:bg-gray-300 rounded-lg text-sm'>
+                                    <i className='fa fa-download text-teal-600 mx-2'></i> <span className='hidden md:block'> Download Job Description </span>
+                                    <span className='block md:hidden'>Description </span>
+                                </button>
+                                <RWebShare
+                                    data={{
+                                        text: "Check out this job!",
+                                        url: window.location.href,
+                                        title: "Job"
+                                    }}
+                                    onClick={() => console.log(window.location.href)}
+                                >
+                                    <button
+                                        className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-off-white text-teal-600 font-semibold hover:bg-gray-300 rounded-lg text-sm'>
+                                        <i className='fa fa-share text-teal-600 mx-2'></i> <span className='hidden md:block'> Share </span>
+                                        <span className='block md:hidden'>Share </span>
+                                    </button>
+                                </RWebShare>
+
+                            </div>
                         </div>
                     </div>
 

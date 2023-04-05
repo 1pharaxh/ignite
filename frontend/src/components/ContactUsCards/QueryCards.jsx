@@ -57,15 +57,16 @@ function QueryCards({ dataArray }) {
                                     boxShadow: "0px 1px 2px rgba(7, 32, 51, 0.4), 0px 2px 6px 2px rgba(7, 32, 51, 0.2)",
                                     borderRadius: '12px',
                                 }}>
-                                <div className="flex flex-row px-2 gap-2">
-                                    <img className="h-[60px] w-[60px] rounded-full" src={dataArray[index]['image']} alt="profile picture" />
+                                <div className="flex flex-row items-center px-1 gap-2">
+                                    <img className="h-auto w-[50px] rounded-full" src={dataArray[index]['image']} alt="profile picture" />
                                     <h1
                                         style={{
                                             whiteSpace: 'normal',
                                             overflowWrap: 'break-word',
-                                            textAlign: 'center'
+                                            textAlign: 'start'
                                         }}
-                                        className="text-lg font-semibold" >{dataArray[index]['name']}</h1>
+                                        className="text-lg font-semibold" >{dataArray[index]['name']}
+                                    </h1>
                                 </div>
                                 <h1>
                                     {dataArray[index]['number']}

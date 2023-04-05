@@ -38,7 +38,7 @@ function ContactUs() {
                         </div>
 
                         <h1 className='font-semibold text-xl'>E-mail Address : </h1>
-                        <h1 className='font-semibold text-xl'> alma.lawson@example.com</h1>
+                        <h1 className='font-semibold text-xl'> ignitepcinfo@gmail.com</h1>
                     </div>
 
                     <div className='rounded-lg bg-off-white flex-row flex gap-2 py-4 px-2'
@@ -54,7 +54,7 @@ function ContactUs() {
                         </div>
 
                         <h1 className='font-semibold text-xl'>Phone Number : </h1>
-                        <h1 className='font-semibold text-xl'>(+91) 976242334</h1>
+                        <h1 className='font-semibold text-xl'>(+91) 7807417341</h1>
                     </div>
                 </div>
             </div>
@@ -65,40 +65,30 @@ function ContactUs() {
                 <QueryCards
                     dataArray={[
                         {
-                            name: 'Karan Murphy',
-                            number: '(+91) 9762422334',
+                            name: 'Arpit Gupta',
+                            number: '(+91) 9540497325',
                             image: demoImage,
                         },
                         {
-                            name: 'Kathryn Murphy',
-                            number: '(+91) 9762422334',
+                            name: 'Parv Arora',
+                            number: '(+91) 9971386254',
                             image: demoImage,
                         },
                         {
-                            name: 'Kathryn Murphy',
-                            number: '(+91) 9762422334',
+                            name: 'Amandeep Chadha',
+                            number: '(+91) 8899209001',
                             image: demoImage,
                         },
                         {
-                            name: 'Simran Khandelwal',
-                            number: '(+91) 9762422334',
+                            name: 'Aashman Rawat',
+                            number: '(+91) 9205833905',
                             image: demoImage,
                         },
                         {
-                            name: 'Simran Khandelwal',
-                            number: '(+91) 9762422334',
+                            name: 'Arnav Arora',
+                            number: '(+91) 8272802249',
                             image: demoImage,
                         },
-                        {
-                            name: 'Simran Khandelwal',
-                            number: '(+91) 9762422334',
-                            image: demoImage,
-                        },
-                        {
-                            name: 'Karan',
-                            number: '(+91) 9762422334',
-                            image: demoImage,
-                        }
                     ]}
                 />
             </div>

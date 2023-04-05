@@ -141,7 +141,6 @@ function Companies() {
         fetch("https://ignite-backend.onrender.com/search/" + search, requestOptions)
             .then(response => response.text())
             .then((result) => {
-                console.log(result)
                 if (result == "[]") {
                     Swal.fire({
                         icon: 'error',
@@ -253,7 +252,7 @@ function Companies() {
                         Search results for "<span className='text-black'>{searchString}</span>"
                     </h1>
                     <div className='items-start justify-start w-12/12 grid grid-row md:gap-4 gap-2 md:px-14 px-4 mb-10'>
-                        {companies.map(company => (
+                        {renderItems().map(company => (
                             <motion.button
                                 key={company._id}
                                 whileHover={{ scale: 1.1 }}
@@ -262,7 +261,7 @@ function Companies() {
                                 < div
                                     onClick={() => window.open(`/companies/${company._id}`, "_blank")}
                                     className={`bg-teal-700 h-44 w-full rounded-xl p-4 flex flex-row gap-4 items-center justify-center`} >
-                                    <img className='flex-col rounded-md w-[200px] h-[120px]' src={company.image} width={200}></img>
+                                    <img className='w-[200px] h-[120px]  object-cover' src={company.image} ></img>
                                     <div className='flex flex-col gap-5 justify-between my-10'>
                                         <h1 className='md:block text-xl text-white font-medium text-start'>{company.name}</h1>
                                         <h1 className='md:block text-lg text-white font-normal text-start' style={
