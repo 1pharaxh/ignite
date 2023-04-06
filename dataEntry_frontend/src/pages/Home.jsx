@@ -94,9 +94,9 @@ function Home() {
       const eligibility_arr = document.getElementById('eligibility_criteria').value;
       const eligibility = eligibility_arr.split("/").map(str => str.trim());
 
-      upload(data.pdf[0]).then(
+      uploadPdf(data.pdf[0]).then(
         (downloadURLPDF) => {
-          upload(data.image[0]).then(
+          uploadImage(data.image[0]).then(
             (
               (downloadURLIMG) => {
                 console.log({
@@ -193,13 +193,26 @@ function Home() {
       document.getElementById("eligibility_criteria").value = "";
     }
   };
-  const upload = async (file) => {
+  const uploadPdf = async (pdfFile) => {
+    const company_name = "example_company"; // replace with actual company name
+    const pdf_path = `companyData/${company_name}/file.pdf`;
+    const pdfDownloadUrl = await upload(pdfFile, pdf_path);
+    return pdfDownloadUrl;
+  };
+
+  const uploadImage = async (imageFile) => {
+    const company_name = "example_company"; // replace with actual company name
+    const image_path = `companyData/${company_name}/image.jpg`;
+    const imageDownloadUrl = await upload(imageFile, image_path);
+    return imageDownloadUrl;
+  };
+  const upload = async (file, path) => {
     // disable the button OF ID final
     setUploading(true);
     if (!file) {
       return;
     }
-    const name = new Date().getTime() + file.name;
+    const name = `${path}/${new Date().getTime()}-${file.name}`;
     const storageRef = ref(storage, name);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
