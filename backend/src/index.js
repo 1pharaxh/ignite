@@ -44,6 +44,7 @@ const companySchema = new mongoose.Schema({
   pdfDescription: String,
   about_comp: String,
   website: String,
+  tags: String,
   work_location: String,
   paid_unpaid: String,
   job_profile_description: Object,
@@ -126,6 +127,7 @@ app.post(postUri, (req, res) => {
     !req.body.paid_unpaid ||
     !req.body.job_profile_description ||
     !req.body.perks ||
+    !req.body.tags ||
     !req.body.eligibility
   ) {
     return res.status(400).send("Missing required fields");
@@ -137,6 +139,7 @@ app.post(postUri, (req, res) => {
     pdfDescription: req.body.pdfDescription,
     about_comp: req.body.about_comp,
     website: req.body.website,
+    tags: req.body.tags,
     work_location: req.body.work_location,
     paid_unpaid: req.body.paid_unpaid,
     job_profile_description: req.body.job_profile_description,
