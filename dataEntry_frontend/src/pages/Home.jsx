@@ -194,15 +194,15 @@ function Home() {
     }
   };
   const uploadPdf = async (pdfFile) => {
-    const company_name = "example_company"; // replace with actual company name
-    const pdf_path = `companyData/${company_name}/file.pdf`;
+    const company_name = document.getElementById("company_name").value;
+    const pdf_path = `companyData/${company_name}`;
     const pdfDownloadUrl = await upload(pdfFile, pdf_path);
     return pdfDownloadUrl;
   };
 
   const uploadImage = async (imageFile) => {
-    const company_name = "example_company"; // replace with actual company name
-    const image_path = `companyData/${company_name}/image.jpg`;
+    const company_name = document.getElementById("company_name").value;
+    const image_path = `companyData/${company_name}`;
     const imageDownloadUrl = await upload(imageFile, image_path);
     return imageDownloadUrl;
   };
