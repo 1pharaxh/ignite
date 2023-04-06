@@ -93,10 +93,9 @@ function Home() {
       const perks = perks_arr.split("/").map(str => str.trim());
       const eligibility_arr = document.getElementById('eligibility_criteria').value;
       const eligibility = eligibility_arr.split("/").map(str => str.trim());
-
-      uploadPdf(data.pdf[0]).then(
+      uploadPdf(data.pdf[0], data.company_name).then(
         (downloadURLPDF) => {
-          uploadImage(data.image[0]).then(
+          uploadImage(data.image[0], data.company_name).then(
             (
               (downloadURLIMG) => {
                 console.log({
@@ -142,32 +141,36 @@ function Home() {
                       confirmButtonText: 'Cool'
                     })
                     fetchDb();
+
                     // clear the form
-                    document.getElementById("form").reset();
-                    // clear the job profile description
-                    updateJobProfileDescription({});
-                    // clear the perks
-                    document.getElementById("perks").value = "";
-                    // clear the eligibility criteria
-                    document.getElementById("eligibility_criteria").value = "";
-                    // clear the image
-                    document.getElementById("image").value = "";
-                    // clear the pdf
-                    document.getElementById("pdf").value = "";
-                    // clear the about company
-                    document.getElementById("about_company").value = "";
-                    // clear the company website
-                    document.getElementById("company_website").value = "";
-                    // clear the work location
-                    document.getElementById("work_location").value = "";
-                    // clear the paid unpaid
-                    document.getElementById("paid_unpaid").value = "";
-                    // clear the company name
-                    document.getElementById("company_name").value = "";
-                    document.getElementById('job_name').value = "";
-                    document.getElementById('job_duration').value = "";
-                    document.getElementById('role_requirements').value = "";
-                    document.getElementById('requirements').value = "";
+                    try {
+                      document.getElementById("form").reset();
+
+                      // clear the job profile description
+                      updateJobProfileDescription({});
+                      // clear the perks
+                      document.getElementById("perks").value = "";
+                      // clear the eligibility criteria
+                      document.getElementById("eligibility_criteria").value = "";
+                      // clear the image
+                      document.getElementById("image").value = "";
+                      // clear the pdf
+                      document.getElementById("pdf").value = "";
+                      // clear the about company
+                      document.getElementById("about_company").value = "";
+                      // clear the company website
+                      document.getElementById("company_website").value = "";
+                      // clear the work location
+                      document.getElementById("work_location").value = "";
+                      // clear the paid unpaid
+                      document.getElementById("paid_unpaid").value = "";
+                      // clear the company name
+                      document.getElementById("company_name").value = "";
+                      document.getElementById('job_name').value = "";
+                      document.getElementById('job_duration').value = "";
+                      document.getElementById('role_requirements').value = "";
+                      document.getElementById('requirements').value = "";
+                    } catch (error) { console.log(error) }
                   })
                   .catch(error => {
                     console.log('error', error)
@@ -177,7 +180,7 @@ function Home() {
                       icon: 'error',
                       confirmButtonText: 'Ok'
                     })
-                  });
+                  })
               }
             )
           )
@@ -193,16 +196,14 @@ function Home() {
       document.getElementById("eligibility_criteria").value = "";
     }
   };
-  const uploadPdf = async (pdfFile) => {
-    const company_name = document.getElementById("company_name").value;
-    const pdf_path = `companyData/${company_name}`;
+  const uploadPdf = async (pdfFile, name) => {
+    const pdf_path = `companyData/${name}`;
     const pdfDownloadUrl = await upload(pdfFile, pdf_path);
     return pdfDownloadUrl;
   };
 
-  const uploadImage = async (imageFile) => {
-    const company_name = document.getElementById("company_name").value;
-    const image_path = `companyData/${company_name}`;
+  const uploadImage = async (imageFile, name) => {
+    const image_path = `companyData/${name}`;
     const imageDownloadUrl = await upload(imageFile, image_path);
     return imageDownloadUrl;
   };
