@@ -1,14 +1,8 @@
 import React, { useRef, useState } from "react";
 import ReactElasticCarousel from "react-elastic-carousel";
-import BOD1 from '../../static/images/aboutpage/BOD_Dhruvi_Tyagi.png';
-import BOD2 from '../../static/images/aboutpage/BOD_Hitesh_Ahuja.png';
-import BOD3 from '../../static/images/aboutpage/BOD_Khushi_Jain.png';
-import BOD4 from '../../static/images/aboutpage/BOD_Parth_Bhatia.png';
-import BOD5 from '../../static/images/aboutpage/BOD_Shivansh_Sharma.png';
-import BOD6 from '../../static/images/aboutpage/BOD_Uttam_Singh.png';
 import { motion } from 'framer-motion';
 
-export default function AboutBoardOfAdvisors() {
+export default function AboutBoardOfAdvisors({ images, text }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [imageText, setImageText] = useState(null);
@@ -39,7 +33,7 @@ export default function AboutBoardOfAdvisors() {
     return (
         <div className="flex flex-col mt-10">
             <div className='relative flex items-center md:mx-28 mx-12 mb-5'>
-                <h1 className='md:text-4xl text-3xl text-off-black font-[500] z-10'>The Board of Directors</h1>
+                <h1 className='md:text-4xl text-3xl text-off-black font-[500] z-10'>{text}</h1>
             </div>
             <div className='relative flex items-center md:mx-10 mx-4'></div>
             <div className='relative flex items-center md:mx-10 mx-4'>
@@ -74,149 +68,34 @@ export default function AboutBoardOfAdvisors() {
                     enableSwipe
                     ref={carouselRef}
                 >
-
-                    <motion.button
-                        whileHover={{ scale: 0.9 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => {
-                            setSelectedImage(BOD1);
-                            setIsModalOpen(true);
-                            setImageText("Dhruvi Tyagi");
-                        }}
-                    >
-                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
+                    {images.map((image, index) => (
+                        <motion.button
+                            key={index}
+                            whileHover={{ scale: 0.9 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={() => {
+                                setSelectedImage(BOD1);
+                                setIsModalOpen(true);
+                                setImageText("Dhruvi Tyagi");
+                            }}
+                        >
+                            <div className='overflow-hidden md:w-[200px] md:h-[276px] 
                             bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
-                                backdropFilter: 'blur(45px)',
-                                borderRadius: '12px',
-                            }}>
+                                    backdropFilter: 'blur(45px)',
+                                    borderRadius: '12px',
+                                }}>
 
-                            <img src={BOD1} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
-                            <div>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Dhruvi</h1>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Tyagi</h1>
+                                <img src={image['img']} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
+                                <div>
+                                    <h1 className='md:text-xl text-lg text-dark-teal font-bold'> {image['first']} </h1>
+                                    <h1 className='md:text-xl text-lg text-dark-teal font-bold'> {image['last']} </h1>
+                                </div>
                             </div>
-                        </div>
-                    </motion.button>
+                        </motion.button>
+                    ))}
                     {/* <img src={BOD1} alt="BOD1" className="h-[150px] md:h-[180px] md:w-[180px] w-[150px] z-10 rounded-lg" /></motion.button> */}
-
-                    <motion.button
-                        whileHover={{ scale: 0.9 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => {
-                            setSelectedImage(BOD2);
-                            setIsModalOpen(true);
-                            setImageText("Hitesh Ahuja");
-                        }}
-                    >
-                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
-                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
-                                backdropFilter: 'blur(45px)',
-                                borderRadius: '12px',
-                            }}>
-
-                            <img src={BOD2} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
-                            <div>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Hitesh</h1>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Ahuja</h1>
-                            </div>
-                        </div>
-                    </motion.button>
-
-                    <motion.button
-                        whileHover={{ scale: 0.9 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => {
-                            setSelectedImage(BOD3);
-                            setIsModalOpen(true);
-                            setImageText("Khushi Jain");
-                        }}
-                    >
-                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
-                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
-                                backdropFilter: 'blur(45px)',
-                                borderRadius: '12px',
-                            }}>
-
-                            <img src={BOD3} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
-                            <div>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Khushi</h1>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Jain</h1>
-                            </div>
-                        </div>
-                    </motion.button>
-
-                    <motion.button
-                        whileHover={{ scale: 0.9 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => {
-                            setSelectedImage(BOD4);
-                            setIsModalOpen(true);
-                            setImageText("Parth Bhatia");
-                        }}
-                    >
-                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
-                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
-                                backdropFilter: 'blur(45px)',
-                                borderRadius: '12px',
-                            }}>
-
-                            <img src={BOD4} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
-                            <div>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Parth</h1>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Bhatia</h1>
-                            </div>
-                        </div>
-                    </motion.button>
-
-                    <motion.button
-                        whileHover={{ scale: 0.9 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => {
-                            setSelectedImage(BOD5);
-                            setIsModalOpen(true);
-                            setImageText("Shivansh Sharma");
-                        }}
-                    >
-                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
-                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
-                                backdropFilter: 'blur(45px)',
-                                borderRadius: '12px',
-                            }}>
-
-                            <img src={BOD5} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
-                            <div>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Shivansh</h1>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Sharma</h1>
-                            </div>
-                        </div>
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ scale: 0.9 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => {
-                            setSelectedImage(BOD6);
-                            setIsModalOpen(true);
-                            setImageText("Uttam Singh");
-                        }}
-                    >
-                        <div className='overflow-hidden md:w-[200px] md:h-[276px] 
-                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
-                                backdropFilter: 'blur(45px)',
-                                borderRadius: '12px',
-                            }}>
-
-                            <img src={BOD6} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
-                            <div>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Uttam</h1>
-                                <h1 className='md:text-xl text-lg text-dark-teal font-bold'>Singh</h1>
-                            </div>
-                        </div>
-                    </motion.button>
-
                 </ReactElasticCarousel>
                 {isModalOpen && <Modal />}
-
-
             </div>
         </div>
     );

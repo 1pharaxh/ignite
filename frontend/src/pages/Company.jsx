@@ -333,7 +333,7 @@ function Company() {
                                 </button>
                                 <RWebShare
                                     data={{
-                                        text: "Check out this job!",
+                                        text: "Hey! Check out this internship opportunity at Anubhava- the internship fair!",
                                         url: window.location.href,
                                         title: "Job"
                                     }}
