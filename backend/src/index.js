@@ -90,6 +90,7 @@ app.get("/search/:key", (req, res) => {
         },
         { paid_unpaid: { $regex: "\\b" + key + "\\b", $options: "i" } },
         { about_comp: { $regex: key, $options: "i" } },
+        { tags: { $regex: key, $options: "i" } },
         { website: { $regex: key, $options: "i" } },
         { work_location: { $regex: key, $options: "i" } },
       ],
