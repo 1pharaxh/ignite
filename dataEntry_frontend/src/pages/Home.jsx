@@ -106,6 +106,7 @@ function Home() {
                   "website": data.company_website,
                   "work_location": data.work_location,
                   "paid_unpaid": data.paid_unpaid,
+                  "tags": data.tags,
                   "job_profile_description": jobProfileDescription,
                   "perks": perks,
                   "eligibility": eligibility
@@ -120,6 +121,7 @@ function Home() {
                   "website": data.company_website,
                   "work_location": data.work_location,
                   "paid_unpaid": data.paid_unpaid,
+                  "tags": data.tags,
                   "job_profile_description": jobProfileDescription,
                   "perks": perks,
                   "eligibility": eligibility
@@ -131,6 +133,15 @@ function Home() {
                   redirect: 'follow'
                 };
                 fetch(backendURI, requestOptions)
+                  .catch(error => {
+                    console.log('error', error)
+                    MySwal.fire({
+                      title: 'Error!',
+                      text: 'Failed to add data',
+                      icon: 'error',
+                      confirmButtonText: 'Ok'
+                    })
+                  })
                   .then(response => response.text())
                   .then(result => {
                     console.log(result)
@@ -171,15 +182,6 @@ function Home() {
                       document.getElementById('role_requirements').value = "";
                       document.getElementById('requirements').value = "";
                     } catch (error) { console.log(error) }
-                  })
-                  .catch(error => {
-                    console.log('error', error)
-                    MySwal.fire({
-                      title: 'Error!',
-                      text: 'Failed to add data',
-                      icon: 'error',
-                      confirmButtonText: 'Ok'
-                    })
                   })
               }
             )
@@ -366,6 +368,32 @@ function Home() {
                   })} />
               {errors.paid_unpaid && (
                 <span className="text-red-500">{errors.paid_unpaid.message}</span>
+              )}
+            </div>
+
+            <div className='flex flex-row gap-0 items-baseline'>
+              <h1 className=' text-start font-bold text-base text-slate-800 mr-[5px]'>
+                Filter Tags:
+                <span className='text-red-500 text-start'>
+                  <br />
+                  Please put space
+                  <br />
+
+                  between tags
+                </span>
+              </h1>
+
+              < input
+                id="tags"
+                className='p-2 mt-3 flex flex-col items-start rounded-md bg-slate-200'
+                type="text"
+                placeholder="tag1 tag2 tag3"
+                {...register("tags",
+                  {
+                    required: 'required',
+                  })} />
+              {errors.tags && (
+                <span className="text-red-500">{errors.tags.message}</span>
               )}
             </div>
 
