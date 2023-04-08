@@ -234,12 +234,13 @@ function Companies() {
                             >
                                 < div
                                     onClick={() => window.open(`/companies/${company._id}`, "_blank")}
-                                    className='bg-teal-700 h-44 md:w-9/12 w-full items-center  rounded-xl p-5 justify-center flex flex-col overflow-hidden' >
-                                    <div className='w-[180px] md:w-[250px] bg-white h-28 rounded-md items-center justify-center flex flex-row overflow-hidden'>
-                                        <img src={company.image} ></img>
+                                    className='bg-teal-700 h-44 md:w-9/12 w-full items-center rounded-xl p-5 justify-center flex flex-col overflow-hidden' >
+                                    <div className='w-[180px] h-5/6 md:w-[250px] bg-white rounded-md items-center justify-center flex overflow-hidden'>
+                                        <img className='object-contain h-full w-full' src={company.image} ></img>
                                     </div>
-                                    <h1 className='text-xl text-white font-medium content-center'>{screenSize < 768 ? company.name.length > 10 ? company.name.substring(0, 10) + '...' : company.name : company.name}</h1>
-
+                                    <h1 className='text-xl h-1/6 text-white font-medium content-center'>
+                                        {screenSize < 768 ? company.name.length > 10 ? company.name.substring(0, 10) + '...' : company.name : company.name}
+                                    </h1>
                                 </div>
                             </motion.button>
                         ))}
@@ -265,8 +266,8 @@ function Companies() {
                                         < div
                                             onClick={() => window.open(`/companies/${company._id}`, "_blank")}
                                             className={`bg-teal-700 h-44 w-full rounded-xl p-5 flex flex-row gap-4 items-center justify-start`} >
-                                            <div className='bg-white h-[90px] w-2/12 md:h-[120px] flex items-center justify-center'>
-                                                <img className='h-full w-full object-cover' src={company.image} ></img>
+                                            <div className='bg-white h-[90px] w-2/12 md:h-[120px] p-2 flex items-center justify-center'>
+                                                <img className='h-full w-full object-contain' src={company.image} ></img>
                                             </div>
                                             <div className='flex flex-col gap-5 justify-between w-10/12 mx-4'>
                                                 <h1 className='md:block text-xl text-white font-medium text-start'>{company.name}</h1>
