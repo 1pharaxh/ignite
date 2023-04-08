@@ -1,15 +1,53 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import ReactElasticCarousel from "react-elastic-carousel";
 
 export default function AboutPrincipalMessage({ campusPic, principal, message, principal2, message2 }) {
+    const breakPoints = [
+        { width: 1, itemsToShow: 1 },
+        { width: 550, itemsToShow: 1 },
+        { width: 768, itemsToShow: 1 },
+        { width: 1200, itemsToShow: 1 },
+    ]
+    const carouselRef = useRef(null);
     return (
         <>
             {/* {Message from Principle} */}
             <div className="relative ">
-                <img src={campusPic} alt="campus_pic" className="w-full md:h-[500px] h-[680px] object-cover object-center " />
+                <img src={campusPic} alt="campus_pic" className="w-full md:h-[350px] object-cover object-center " />
 
                 <div className="absolute inset-0 bg-black opacity-50 "></div>
-                <div className="flex flex-col absolute inset-0 py-4 gap-4" >
-                    <div className="flex items-center  ">
+                <ReactElasticCarousel
+                    showArrows={false}
+                    easing="cubic-bezier(1,.15,.55,1.54)"
+                    tiltEasing="cubic-bezier(0.110, 1, 1.000, 0.210)"
+                    transitionMs={700}
+                    onNextEnd={({ index }) => {
+                        if (
+                            carouselRef?.current.state.activePage ===
+                            carouselRef?.current.state.pages.length - 1
+                        ) {
+                            const itemsPerPage = Math.floor(
+                                carouselRef?.current.props.children.length /
+                                carouselRef?.current.getNumOfPages()
+                            );
+
+                            if (itemsPerPage === carouselRef?.current.state.activeIndex) {
+                                clearTimeout(resetTimeout);
+                                resetTimeout = setTimeout(() => {
+                                    carouselRef?.current?.goTo(0);
+                                }, 5000); // same time
+                            }
+                        }
+                    }}
+                    breakPoints={breakPoints}
+                    className="inset-0 absolute items-center flex justify-center"
+                    itemPadding={[2, 0, 2, 0]}
+                    enableAutoPlay
+                    autoPlaySpeed={5000}
+                    enableSwipe
+                    ref={carouselRef}
+                >
+                    <div className="flex items-center">
                         <div className="parent mx-auto flex items-center md:px-20 px-3">
                             <img src={principal} alt="principle" className="md:h-56 h-[310px] flex-grow md:w-32 w-20 object-cover object-center rounded-l-xl" />
                             <div className=" flex-grow ml-4 md:px-4 md:py-5 py-2 px-2 flex flex-col md:gap-8 gap-5 text-white bg-off-black opacity-70 rounded-r-xl md:h-56 h-[310px]">
@@ -33,7 +71,7 @@ export default function AboutPrincipalMessage({ campusPic, principal, message, p
                             </div>
                         </div>
                     </div>
-                </div>
+                </ReactElasticCarousel>
             </div>
         </>
     )

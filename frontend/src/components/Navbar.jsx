@@ -50,7 +50,7 @@ function Navbar() {
         <div className="flex justify-between items-center">
           <span onClick={handleClick} className="cursor-pointer">
             <img src={college} alt="logo" className="h-16 inline pr-5" />
-            <img src={ignite} alt="logo" className="h-16 inline " />
+            <img src={ignite} alt="logo" className="h-16 inline mt-3" />
           </span>
 
           <span className="text-3xl md:hidden block cursor-pointer mx-2">

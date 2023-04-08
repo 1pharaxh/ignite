@@ -220,38 +220,12 @@ function Companies() {
                 </div>
             </div>
             <DotLoader cssOverride={override} size={150} color={"#0f766e"} loading={loading} />
-            {!usersearched ? < div className={`${!usersearched ? `visible` : `hidden`}`}>
-                <h1 className='text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4'>
-                    Our top recruiters!
-                </h1>
-                <div className={`${!loading ? `opacity-100` : `opacity-50`} grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 md:px-16 px-4 mb-10`}>
-                    {renderItems().map(company => (
-                        <motion.button
-                            key={company._id}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.9 }}
-                        >
-                            < div
-                                onClick={() => window.open(`/companies/${company._id}`, "_blank")}
-                                className='bg-teal-700 h-44 md:w-9/12 w-full items-center  rounded-xl p-5 justify-center flex flex-col overflow-hidden' >
-                                <div className='w-[180px] md:w-[250px] bg-white h-28 rounded-md items-center justify-center flex flex-row overflow-hidden'>
-                                    <img src={company.image} ></img>
-                                </div>
-                                <h1 className='text-xl text-white font-medium content-center'>{screenSize < 768 ? company.name.length > 10 ? company.name.substring(0, 10) + '...' : company.name : company.name}</h1>
-
-                            </div>
-                        </motion.button>
-                    ))}
-                </div>
-            </div > :
-                < div className={`${!usersearched ? `hidden` : `visible`}`}>
-                    <h1 className={`${!loading ? `opacity-100` : `opacity-0`} flex flex-row text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
-                        <svg onClick={clearSearch} className='cursor-pointer md:mr-5 mr-2 ' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" fill="#0F6F7B" />
-                        </svg>
-                        Search results for "<span className='text-black'>{searchString}</span>"
+            {!usersearched ?
+                < div className={`${!usersearched ? `visible` : `hidden`}`}>
+                    <h1 className='text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4'>
+                        Our top recruiters!
                     </h1>
-                    <div className='items-start justify-start w-12/12 grid grid-row md:gap-4 gap-2 md:px-14 px-4 mb-10'>
+                    <div className={`${!loading ? `opacity-100` : `opacity-50`} grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 md:px-16 px-4 mb-10`}>
                         {renderItems().map(company => (
                             <motion.button
                                 key={company._id}
@@ -260,27 +234,60 @@ function Companies() {
                             >
                                 < div
                                     onClick={() => window.open(`/companies/${company._id}`, "_blank")}
-                                    className={`bg-teal-700 h-44 w-full rounded-xl p-4 flex flex-row gap-4 items-center justify-center`} >
-                                    <img className='w-[200px] h-[120px]  object-cover' src={company.image} ></img>
-                                    <div className='flex flex-col gap-5 justify-between my-10'>
-                                        <h1 className='md:block text-xl text-white font-medium text-start'>{company.name}</h1>
-                                        <h1 className='md:block text-lg text-white font-normal text-start' style={
-                                            {
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                                display: "-webkit-box",
-                                                WebkitLineClamp: 3,
-                                                WebkitBoxOrient: "vertical"
-
-                                            }
-                                        } >{
-                                                company.about_comp
-                                            }</h1>
+                                    className='bg-teal-700 h-44 md:w-9/12 w-full items-center  rounded-xl p-5 justify-center flex flex-col overflow-hidden' >
+                                    <div className='w-[180px] md:w-[250px] bg-white h-28 rounded-md items-center justify-center flex flex-row overflow-hidden'>
+                                        <img src={company.image} ></img>
                                     </div>
+                                    <h1 className='text-xl text-white font-medium content-center'>{screenSize < 768 ? company.name.length > 10 ? company.name.substring(0, 10) + '...' : company.name : company.name}</h1>
 
                                 </div>
                             </motion.button>
                         ))}
+                    </div>
+                </div >
+                :
+                < div className={`${!usersearched ? `hidden` : `visible`}`}>
+                    <h1 className={`${!loading ? `opacity-100` : `opacity-0`} flex flex-row text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
+                        <svg onClick={clearSearch} className='cursor-pointer md:mr-5 mr-2 ' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" fill="#0F6F7B" />
+                        </svg>
+                        Search results for "<span className='text-black'>{searchString}</span>"
+                    </h1>
+                    <div className='items-start justify-start w-12/12 grid grid-row md:gap-4 gap-2 md:px-14 px-4 mb-10'>
+                        {
+                            renderItems().length > 0 ?
+                                renderItems().map(company => (
+                                    <motion.button
+                                        key={company._id}
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.9 }}
+                                    >
+                                        < div
+                                            onClick={() => window.open(`/companies/${company._id}`, "_blank")}
+                                            className={`bg-teal-700 h-44 w-full rounded-xl p-5 flex flex-row gap-4 items-center justify-start`} >
+                                            <div className='bg-white h-[90px] w-2/12 md:h-[120px] flex items-center justify-center'>
+                                                <img className='h-full w-full object-cover' src={company.image} ></img>
+                                            </div>
+                                            <div className='flex flex-col gap-5 justify-between w-10/12 mx-4'>
+                                                <h1 className='md:block text-xl text-white font-medium text-start'>{company.name}</h1>
+                                                <h1
+                                                    style={{
+                                                        overflow: "hidden",
+                                                        textOverflow: "ellipsis",
+                                                        display: "-webkit-box",
+                                                        WebkitLineClamp: 3,
+                                                        WebkitBoxOrient: "vertical"
+
+                                                    }}
+                                                    className=' text-start text-lg font-normal text-white md:block' >{company.about_comp}</h1>
+                                            </div>
+
+                                        </div>
+                                    </motion.button>
+                                ))
+                                : <div className='h-[500px] w-full flex flex-col justify-center items-center'>
+                                </div>
+                        }
                     </div>
                 </div >
             }

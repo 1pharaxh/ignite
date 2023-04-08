@@ -75,12 +75,12 @@ function Footer() {
                     </div>
 
                     <div className="flex basis-1/5 justify-center items-center">
-                        <div className="flex flex-row gap-4 rounded-full h-44 w-44 bg-teal-600 justify-center items-center">
+                        <div className="flex flex-row gap-0 rounded-full h-44 w-44 bg-teal-600 justify-center items-center">
                             <div className="flex justify-center items-center">
-                                <img src={college} alt="logo" className="h-10" />
+                                <img src={college} alt="logo" className="h-20" />
                             </div>
-                            <div className="flex justify-center items-center">
-                                <img src={ignite} alt="logo" className="h-10" />
+                            <div className="flex justify-center items-center pt-3">
+                                <img src={ignite} alt="logo" className="h-20" />
                             </div>
                         </div>
                     </div>
