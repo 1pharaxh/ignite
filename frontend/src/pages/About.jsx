@@ -4,9 +4,9 @@ import logo1 from '../static/logos/about_page_logo.png'
 import logo2 from '..//static/logos/about_page_logo2.png'
 
 import campusPic from '../static/images/testimages/college_campus.jpg'
-import principal from '../static/images/testimages/principal.jpg'
+import principal1 from '../static/images/principal1.jpg'
+import principal2 from '../static/images/principal2.jpg'
 import '../static/css/about_parallax.css';
-import AboutTealCards from '../components/AboutComponents/AboutTealCards'
 import AboutPrincipalMessage from '../components/AboutComponents/AboutPrincipalMessage'
 import AboutTopCards from '../components/AboutComponents/AboutTopCards'
 import PageBanner from '../components/PageBanner'
@@ -152,9 +152,9 @@ function About() {
 
           <AboutPrincipalMessage
             campusPic={campusPic}
-            principal={principal}
+            principal={principal1}
             message={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies euismod gravida tellus, blandit condimentum. Pretium sit sit cras facilisis ullamcorper. Semper maecenas sit integer in. Mattis egestas enim metus eget tempor. Malesuada ultrices id pretium ullamcorper praesent neque amet. '}
-            principal2={principal}
+            principal2={principal2}
             message2={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies euismod gravida tellus, blandit condimentum. Pretium sit sit cras facilisis ullamcorper. Semper maecenas sit integer in. Mattis egestas enim metus eget tempor. Malesuada ultrices id pretium ullamcorper praesent neque amet. '}
 
 
