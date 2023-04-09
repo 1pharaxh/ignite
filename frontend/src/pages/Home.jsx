@@ -65,29 +65,29 @@ function Home() {
       <HomeTimeline
         timelineArray={[
           {
-            date: '2023-08-01',
-            heading: 'Registration ',
+            date: '12 April 2023',
+            heading: 'Registration',
             subheading: 'Registration Opens!',
-            body: 'To participate in the event, register your team on the website.'
+            body: 'Visit our website to register for the fair. Once registered, you will receive more information about the fair and participating companies.'
           },
           {
-            date: '2023-08-12',
+            date: '18 April 2023',
             heading: 'Companies',
             subheading: 'Companies shortlisted!',
-            body: 'The names of participating companies would be live on the website.'
+            body: 'Research each company and their unique internship profiles that cater to various interests and skill sets.'
           },
           {
-            date: '2023-08-15',
+            date: '21 April 2023',
             heading: 'Applications OUT',
             subheading: 'Start applying!',
-            body: 'The registrants will be able to apply for the company of their interest when the fair goes online.'
+            body: 'Registered students can now apply for internships in multiple companies for various profiles.'
           },
           {
-            date: '2023-08-20',
+            date: '23 April 2023',
             heading: 'Final Selection',
             subheading: 'Final Selection and offer letters!',
-            body: 'Applicants will be informed about the further selection criteria.'
-          },
+            body: 'The hiring criteria of every organization is different and will be disclosed to the students as the procedure follows.'
+          }
         ]}
       />
 
