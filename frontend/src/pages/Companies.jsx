@@ -28,7 +28,7 @@ function Companies() {
     const [searchString, setSearchString] = useState('');
     const [usersearched, setUserSearched] = useState(false);
 
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(parseInt(localStorage.getItem('companiesPaginationIndex')) || 1);
     const itemsPerPage = 12;
     let pagination = [];
 
@@ -43,10 +43,12 @@ function Companies() {
     } else {
         pagination = [currentPage - 1, currentPage, currentPage + 1];
     }
+
     const handleClick = (e, index) => {
         e.preventDefault();
         if (index !== currentPage && index > 0 && index <= pagesCount) {
             setCurrentPage(index);
+            localStorage.setItem('companiesPaginationIndex', index)
         }
     };
 
@@ -61,6 +63,7 @@ function Companies() {
         }
     };
 
+
     async function fetchData() {
         setLoading(true)
 
@@ -68,6 +71,7 @@ function Companies() {
         const data = await response.json()
         setCompanies(data)
         setLoading(false)
+
     }
     const handleFilter = (e) => {
         e.preventDefault();
@@ -175,6 +179,10 @@ function Companies() {
 
     useEffect(() => {
         fetchData()
+        // check local storage for pagination index if it exists then do not do anything if it does not exist then set it to 0
+        if (localStorage.getItem('companiesPaginationIndex') === null) {
+            localStorage.setItem('companiesPaginationIndex', 0)
+        }
     }, [])
     return (
         <div className='md:mt-20 mt-[65px] flex flex-col relative h-full w-full'>
@@ -222,7 +230,7 @@ function Companies() {
                     </div>
                 </div>
             </div>
-            <DotLoader cssOverride={override} size={150} className='text-primary-color' loading={loading} />
+            <DotLoader cssOverride={override} size={150} className='text-primary-color' color='#36528b' loading={loading} />
             {!usersearched ?
                 < div className={`${!usersearched ? `visible` : `hidden`}`}>
                     <h1 className='text-2xl md:text-4xl text-primary-color font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4'>
@@ -295,6 +303,7 @@ function Companies() {
                     </div>
                 </div >
             }
+
             <div className='flex flex-row justify-center items-center mb-5'>
                 <ul className="flex flex-row gap-2 ">
                     <svg

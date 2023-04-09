@@ -14,11 +14,6 @@ module.exports = {
         "dark-color": "#072033", //  DO NOT CHANGE
         "warning-color": "#FEE21E", // DO NOT CHANGE
 
-        // "primary-color": "#58b368", // Can be changed   1
-        // "primary-light": "#dad873", // Hover Color      1
-        // "primary-dark": "#309975", // Can be changed    1
-        // "primary-lighter": "#efeeb4", // Can be changed 1
-
         // "primary-color": "#2b2d42", // Can be changed   1
         // "primary-light": "#778DA9", // Hover Color      1
         // "primary-dark": "#0D1B2A", // Can be changed    1

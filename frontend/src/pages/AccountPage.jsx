@@ -271,7 +271,7 @@ export default function AccountPage() {
                 transform: "translate(-50%, -50%)",
                 padding: "0",
                 opacity: 1,
-            }} size={150} className='text-primary-color'
+            }} size={150} color='#36528b' className='text-primary-color'
 
                 loading={loading} />
 
