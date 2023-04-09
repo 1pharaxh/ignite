@@ -37,10 +37,23 @@ function Footer() {
                         </div>
                         <div className="flex flex-col gap-2 justify-between w-full">
                             <div className="flex flex-row">
-                                <i className='fab fa-linkedin-in text-light-color ml-0 text-lg cursor-pointer'></i>
-                                <i className='fab fa-instagram text-light-color ml-2 text-lg cursor-pointer'></i>
-                                <i className='fab fa-facebook text-light-color ml-2 text-lg cursor-pointer'></i>
-                                <i className='fab fa-whatsapp text-light-color ml-2 text-lg cursor-pointer'></i>
+                                <i className='fab fa-linkedin-in text-light-color ml-0 text-lg cursor-pointer'
+                                    onClick={() => window.open('https://www.linkedin.com/school/the-placement-cell-sgtb-khalsa-college/')}>
+                                </i>
+                                <i className='fab fa-instagram text-light-color ml-2 text-lg cursor-pointer'
+                                    onClick={() => window.open('https://www.instagram.com/placementcell.sgtbkhalsa/?igshid=YmMyMTA2M2Y%3D')}
+
+                                ></i>
+                                <i className='fa fa-at text-light-color ml-2 text-lg cursor-pointer'
+                                    onClick={
+                                        () => {
+                                            window.open('mailto:' + 'ignitepcinfo@gmail.com')
+                                        }
+                                    }
+                                ></i>
+                                <i className='fab fa-whatsapp text-light-color ml-2 text-lg cursor-pointer'
+                                    onClick={() => window.open('https://api.whatsapp.com/send?phone=917807417341')}
+                                ></i>
                             </div>
                         </div>
                     </div>
@@ -106,17 +119,30 @@ function Footer() {
                         </div>
 
                         <div className="flex flex-row gap-2">
-                            <i className='fab fa-linkedin-in text-light-color ml-0 text-lg cursor-pointer'></i>
-                            <i className='fab fa-instagram text-light-color ml-2 text-lg cursor-pointer'></i>
-                            <i className='fab fa-facebook text-light-color ml-2 text-lg cursor-pointer'></i>
-                            <i className='fab fa-whatsapp text-light-color ml-2 text-lg cursor-pointer'></i>
+                            <i className='fab fa-linkedin-in text-light-color ml-0 text-lg cursor-pointer'
+                                onClick={() => window.open('https://www.linkedin.com/school/the-placement-cell-sgtb-khalsa-college/')}>
+                            </i>
+                            <i className='fab fa-instagram text-light-color ml-2 text-lg cursor-pointer'
+                                onClick={() => window.open('https://www.instagram.com/placementcell.sgtbkhalsa/?igshid=YmMyMTA2M2Y%3D')}
+
+                            ></i>
+                            <i className='fa fa-at text-light-color ml-2 text-lg cursor-pointer'
+                                onClick={
+                                    () => {
+                                        window.open('mailto:' + 'ignitepcinfo@gmail.com')
+                                    }
+                                }
+                            ></i>
+                            <i className='fab fa-whatsapp text-light-color ml-2 text-lg cursor-pointer'
+                                onClick={() => window.open('https://api.whatsapp.com/send?phone=917807417341')}
+                            ></i>
                         </div>
 
                     </div>
 
                 </div>
                 <div className="pt-5 mx-5">
-                    <h1 className="text-light-color text-center text-md">Copyright © {year} Internship Cell, Khalsa College. All rights reserved.
+                    <h1 className="text-light-color text-center text-md">Copyright © {year} The Placement Cell, SGTB Khalsa College. All rights reserved.
                         {/* | <span className="hover:underline cursor-pointer">Privacy Policy</span>  */}
                     </h1>
                     <h1 className="text-light-color text-center text-md">Website made by <span className="cursor-pointer hover:underline" onClick={

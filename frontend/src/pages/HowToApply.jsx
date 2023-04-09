@@ -31,16 +31,36 @@ function HowToApply() {
                 </div>
 
                 <Accordion
-                    title={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque arcu id varius turpis eu enim. Lectus id.'}
-                    children={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Venenatis vestibulum risus volutpat in sit porta maecenas quis. Odio scelerisque neque nisi sed amet, libero. Molestie libero imperdiet accumsan suspendisse consequat ac nisl sit. At eu tellus donec venenatis tempus enim. Porttitor quis in mi morbi id nunc. Odio.'}
+                    title={'How to apply for Anubhava ?'}
+                    children={`Sign up on Anubhava’s website with your email address and mobile number. Once your
+                    email address is verified, login to your profile and generate a resume to submit for various
+                    internships. Look up all the profiles for which you are qualified, then apply for the ones that
+                    interest you.
+                    `}
                 />
                 <Accordion
-                    title={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque arcu id varius turpis eu enim. Lectus id.'}
-                    children={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Venenatis vestibulum risus volutpat in sit porta maecenas quis. Odio scelerisque neque nisi sed amet, libero. Molestie libero imperdiet accumsan suspendisse consequat ac nisl sit. At eu tellus donec venenatis tempus enim. Porttitor quis in mi morbi id nunc. Odio.'}
+                    title={'Who all are eligible for the Internship Fair ?'}
+                    children={`
+                    Candidates from all universities and domains such as UG, PG and PhD, are eligible.
+                    `}
                 />
                 <Accordion
-                    title={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Natoque arcu id varius turpis eu enim. Lectus id.'}
-                    children={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Venenatis vestibulum risus volutpat in sit porta maecenas quis. Odio scelerisque neque nisi sed amet, libero. Molestie libero imperdiet accumsan suspendisse consequat ac nisl sit. At eu tellus donec venenatis tempus enim. Porttitor quis in mi morbi id nunc. Odio.'}
+                    title={'In how many companies can one candidate apply for an internship ?'}
+                    children={`
+                    There is no restriction on the number of companies that a single candidate can apply in.`}
+                />
+                <Accordion
+                    title={'How to track the opportunity that one applies for ?'}
+                    children={`
+                    All the further updates regarding your application will be communicated on your
+                    registered email address or whatsapp number.
+                    `}
+                />
+                <Accordion
+                    title={'Is the Internship Fair free or paid ?'}
+                    children={`
+                    Anubhava is a completely free Internship Fair
+                    `}
                 />
 
             </div>

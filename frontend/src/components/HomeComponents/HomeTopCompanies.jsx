@@ -1,8 +1,21 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Carousel from 'react-elastic-carousel';
 import '../../static/css/homepage_companies_carousel.css'
 
 function HomeTopCompanies({ imageArray }) {
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+    useEffect(() => {
+        function handleResize() {
+            setIsMobile(window.innerWidth < 700);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, []);
+
     const breakPoints = [
         { width: 1, itemsToShow: 2 },
         { width: 550, itemsToShow: 2 },
@@ -16,7 +29,7 @@ function HomeTopCompanies({ imageArray }) {
         <>
             <div className='relative flex items-center md:mx-5 mx-4'>
                 <Carousel
-                    showArrows={false}
+                    showArrows={isMobile ? false : true}
                     easing="cubic-bezier(1,.15,.55,1.54)"
                     enableInfinite
                     tiltEasing="cubic-bezier(0.110, 1, 1.000, 0.210)"

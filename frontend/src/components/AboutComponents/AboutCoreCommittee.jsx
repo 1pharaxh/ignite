@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactElasticCarousel from "react-elastic-carousel";
 import CC_1 from '../../static/images/aboutpage/CC_1.png';
 import CC_2 from '../../static/images/aboutpage/CC_2.png';
@@ -16,6 +16,20 @@ export default function AboutCoreCommittee() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [imageText, setImageText] = useState(null);
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+    useEffect(() => {
+        function handleResize() {
+            setIsMobile(window.innerWidth < 700);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, []);
+
     const Modal = () => {
         return (
             <div className="fixed top-0 left-0 w-screen h-screen bg-dark-color bg-opacity-80 flex items-center justify-center z-50">
@@ -48,7 +62,7 @@ export default function AboutCoreCommittee() {
             <div className='relative flex items-center md:mx-10 mx-4'></div>
             <div className='relative flex items-center md:mx-10 mx-4'>
                 <ReactElasticCarousel
-                    showArrows={false}
+                    showArrows={isMobile ? false : true}
                     easing="cubic-bezier(1,.15,.55,1.54)"
                     tiltEasing="cubic-bezier(0.110, 1, 1.000, 0.210)"
                     transitionMs={700}

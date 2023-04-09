@@ -20,7 +20,7 @@ import BOD4 from '../static/images/aboutpage/BOD_Parth_Bhatia.png';
 import BOD5 from '../static/images/aboutpage/BOD_Shivansh_Sharma.png';
 import BOD6 from '../static/images/aboutpage/BOD_Uttam_Singh.png';
 const images = [{ 'img': BOD1, 'first': 'Dhruvi', 'last': 'Tyagi' }, { 'img': BOD2, 'first': 'Hitesh', 'last': 'Ahuja' }, { 'img': BOD3, 'first': 'Khushi', 'last': 'Jain' }, { 'img': BOD4, 'first': 'Parth', 'last': 'Bhatia' }, { 'img': BOD5, 'first': 'Shivansh', 'last': 'Sharma' }, { 'img': BOD6, 'first': 'Uttam', 'last': 'Singh' }];
-import img1 from '../static/images/aboutpage/Aashman_Rawat.png';
+import img1 from '../static/images/aboutpage/Aashman_Rawat.jpg';
 import img2 from '../static/images/aboutpage/Achint_Kaur.png';
 import img3 from '../static/images/aboutpage/Amandeep_Singh.png';
 import img4 from '../static/images/aboutpage/Arnav_Arora.png';
@@ -99,7 +99,7 @@ const images2 = [{
 {
   'img': img13,
   'first': 'Sameeksha',
-  'last': 'Singh'
+  'last': 'Srivastava'
 },
 {
   'img': img14,
@@ -154,9 +154,9 @@ function About() {
           <AboutPrincipalMessage
             campusPic={campusPic}
             principal={principal1}
-            message={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies euismod gravida tellus, blandit condimentum. Pretium sit sit cras facilisis ullamcorper. Semper maecenas sit integer in. Mattis egestas enim metus eget tempor. Malesuada ultrices id pretium ullamcorper praesent neque amet. '}
+            message={"The college has a rich history of quality education. It has invested heavily in new teaching facilities, including a library, labs, auditorium, and seminar halls, as well as sports upgrades. With a dedicated faculty and skilled staff, it provides an excellent start to your career"}
             principal2={principal2}
-            message2={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ultricies euismod gravida tellus, blandit condimentum. Pretium sit sit cras facilisis ullamcorper. Semper maecenas sit integer in. Mattis egestas enim metus eget tempor. Malesuada ultrices id pretium ullamcorper praesent neque amet. '}
+            message2={"Our placement cell began in 2006-07, thanks to the Principal and student Dashmeet Kaur. Initially, few BPOs and KPOs visited, but now banks, consultancies, media, pharmaceuticals, and NGOs inquire about recruitment."}
 
 
           />

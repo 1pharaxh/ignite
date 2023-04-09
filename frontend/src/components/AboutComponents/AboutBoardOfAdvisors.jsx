@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactElasticCarousel from "react-elastic-carousel";
 import { motion } from 'framer-motion';
 
@@ -6,6 +6,20 @@ export default function AboutBoardOfAdvisors({ images, text }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [imageText, setImageText] = useState(null);
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
+    useEffect(() => {
+        function handleResize() {
+            setIsMobile(window.innerWidth < 700);
+        }
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        }
+    }, []);
+
     const Modal = () => {
         return (
             <div className="fixed top-0 left-0 w-screen h-screen bg-dark-color bg-opacity-80 flex items-center justify-center z-50">
@@ -38,7 +52,7 @@ export default function AboutBoardOfAdvisors({ images, text }) {
             <div className='relative flex items-center md:mx-10 mx-4'></div>
             <div className='relative flex items-center md:mx-10 mx-4'>
                 <ReactElasticCarousel
-                    showArrows={false}
+                    showArrows={isMobile ? false : true}
                     easing="cubic-bezier(1,.15,.55,1.54)"
                     tiltEasing="cubic-bezier(0.110, 1, 1.000, 0.210)"
                     transitionMs={700}
@@ -80,12 +94,12 @@ export default function AboutBoardOfAdvisors({ images, text }) {
                             }}
                         >
                             <div className='overflow-hidden md:w-[200px] md:h-[276px] 
-                            bg-light-color flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
+                            bg-light-color flex flex-col justify-center items-center p-2 md:p-8 gap-4 mx-4 md:mx-8' style={{
                                     backdropFilter: 'blur(45px)',
                                     borderRadius: '12px',
                                 }}>
 
-                                <img src={image['img']} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
+                                <img src={image['img']} alt="image" className='w-[144px] h-[144px] rounded-xl' />
                                 <div>
                                     <h1 className='md:text-xl text-lg text-primary-color font-bold'> {image['first']} </h1>
                                     <h1 className='md:text-xl text-lg text-primary-color font-bold'> {image['last']} </h1>
