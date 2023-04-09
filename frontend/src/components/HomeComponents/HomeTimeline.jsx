@@ -24,7 +24,8 @@ export default function HomeTimeline({ timelineArray }) {
                 <VerticalTimeline
                     className="vertical-timeline-custom-line"
                     // lineColor={"#0f766e"} // default
-                    lineColor={'#58b368'}
+                    // lineColor={'#58b368'} // 1
+                    lineColor={'#2b2d42'} // 2
                 >
                     {timelineArray && timelineArray.map((item, index) => {
                         return (
@@ -35,7 +36,8 @@ export default function HomeTimeline({ timelineArray }) {
                                 contentStyle={{ background: 'rgb(255, 255, 255)', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)' }}
                                 icon={<img className='md:h-12 md:ml-[6px] md:mt-[6px] h-8 ml-[4px] mt-[4px]' src={date} alt="date" />}
                                 // iconStyle={{ background: '#0ea5e9', color: '#0f766e' }} // default
-                                iconStyle={{ background: '#58b368', color: '#0f766e' }}
+                                // iconStyle={{ background: '#58b368', color: '#0f766e' }} // 1
+                                iconStyle={{ background: '#2b2d42', color: '#0f766e' }} // 2
                             >
                                 <div className='flex flex-row justify-center items-center gap-4'>
                                     <div className='flex flex-col'>
@@ -60,7 +62,8 @@ export default function HomeTimeline({ timelineArray }) {
 
                     <VerticalTimelineElement
                         // iconStyle={{ background: '#2dd4bf', color: '#fff' }} // default
-                        iconStyle={{ background: '#309975', color: '#309975' }}
+                        // iconStyle={{ background: '#309975', color: '#309975' }} // 1
+                        iconStyle={{ background: '#0D1B2A', color: '#0d1b2a' }} // 2
                         icon={<img className='md:h-12 md:ml-[6px] md:mt-[6px]' src={star} alt="star" />}
                     />
                 </VerticalTimeline>
