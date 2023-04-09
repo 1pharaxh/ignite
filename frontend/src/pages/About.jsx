@@ -175,7 +175,6 @@ function About() {
                 text="Executive Members"
                 images={images2}
               />
-
             </div>
           </div>
 

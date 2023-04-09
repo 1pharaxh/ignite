@@ -52,7 +52,7 @@ export default function AboutPrincipalMessage({ campusPic, principal, message, p
                         <div className="parent mx-auto flex items-center md:px-20 px-3">
                             <img src={principal} alt="principle" className="md:h-56 h-[350px] flex-grow md:w-32 w-20 object-contain object-center rounded-l-xl" />
                             <div className=" flex-grow ml-4 md:px-4 md:py-5 py-2 px-2 flex flex-col md:gap-8 gap-5 text-light-color bg-dark-color opacity-70 rounded-r-xl md:h-56 h-[310px]">
-                                <h1 className='md:text-4xl text-2xl' >Message from <span className='text-warning-color'>Principle</span></h1>
+                                <h1 className='md:text-4xl text-2xl' >Message from <span className='text-warning-color'>Principal</span></h1>
                                 <h1>{message}</h1>
                                 <div className="flex flex-row justify-between">
                                     <h1 className="font-bold text-xl text-light-color">- Dr Jaswinder Singh</h1>

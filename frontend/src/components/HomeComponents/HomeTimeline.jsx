@@ -25,7 +25,8 @@ export default function HomeTimeline({ timelineArray }) {
                     className="vertical-timeline-custom-line"
                     // lineColor={"#0f766e"} // default
                     // lineColor={'#58b368'} // 1
-                    lineColor={'#2b2d42'} // 2
+                    // lineColor={'#2b2d42'} // 2 // BLACK
+                    lineColor={'#36528b'} // 3
                 >
                     {timelineArray && timelineArray.map((item, index) => {
                         return (
@@ -63,7 +64,9 @@ export default function HomeTimeline({ timelineArray }) {
                     <VerticalTimelineElement
                         // iconStyle={{ background: '#2dd4bf', color: '#fff' }} // default
                         // iconStyle={{ background: '#309975', color: '#309975' }} // 1
-                        iconStyle={{ background: '#0D1B2A', color: '#0d1b2a' }} // 2
+                        // iconStyle={{ background: '#0D1B2A', color: '#0d1b2a' }} // 2 // BLACK
+                        iconStyle={{ background: '#36528b', color: '#36528b' }} // 3
+
                         icon={<img className='md:h-12 md:ml-[6px] md:mt-[6px]' src={star} alt="star" />}
                     />
                 </VerticalTimeline>

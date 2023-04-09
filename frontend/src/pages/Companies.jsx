@@ -183,7 +183,8 @@ function Companies() {
                 style={{
                     // backgroundImage: `linear-gradient(0deg, rgba(15, 111, 123, 0.7), rgba(15, 111, 123, 0.7)) , url(${desk})`, // default
                     // backgroundImage: `linear-gradient(0deg, rgba(48, 153, 117, 0.7), rgba(48, 153, 117, 0.7)) , url(${desk})`, // 1
-                    backgroundImage: `linear-gradient(0deg, rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.7)), url(${desk})`, // 2
+                    // backgroundImage: `linear-gradient(0deg, rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.7)), url(${desk})`, // 2 // Black
+                    backgroundImage: `linear-gradient(0deg, rgba(15, 37, 80, 0.7), rgba(15, 37, 80, 0.7)), url(${desk})`, // 3
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
                 }} className={`${!loading ? `opacity-100` : `opacity-50`} overflow-visible flex flex-col bg-primary-color  mx-0 h-80 w-full`}>

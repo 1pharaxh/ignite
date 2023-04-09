@@ -114,7 +114,7 @@ function Footer() {
                             <img src={college} alt="logo" className="h-25" />
                         </div>
                         <div className="mt-2 text-center">
-                            <h1 className="text-light-color font-bold text-xl"> Internship Cell, Khalsa College</h1>
+                            <h1 className="text-light-color font-bold text-xl"> The Placement Cell, SGTB Khalsa College.</h1>
                             <h1 className="text-light-color font-semibold text-sm mt-2"> Need help? Reach out to us!</h1>
                         </div>
 
