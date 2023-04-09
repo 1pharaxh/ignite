@@ -1,6 +1,6 @@
 .parallax {
     /* background-image: url('../images/parallax.png'); */
-    background-color: white;
+    @apply bg-light-color;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -21,7 +21,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: white;
+    @apply bg-light-color;
 
     /* background-image: url('../images/parallax.png'); */
     background-repeat: no-repeat;
@@ -30,3 +30,7 @@
     opacity: 1;
 
 }
+
+/* .vertical-timeline-custom-line {
+    --line-color: #e0e0e0;
+} */

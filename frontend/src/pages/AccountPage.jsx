@@ -280,7 +280,7 @@ export default function AccountPage() {
 
             <div className={`${!loading ? 'opacity-100 ' : 'opacity-50'} flex flex-col gap-4 md:gap-8 md:px-10 px-4 items-center justify-center`}>
                 <div>
-                    <motion.button disabled={loading} whileTap={{ scale: 0.9 }} onClick={handleUploadClick} className={`${loading ? '' : 'hover:bg-teal-300'} cursor-pointer md:w-[860px] md:h-[72px] bg-dark-teal text-white font-bold py-2 px-4 rounded-lg mt-10 flex items-center justify-center flex-row gap-2`}>
+                    <motion.button disabled={loading} whileTap={{ scale: 0.9 }} onClick={handleUploadClick} className={`${loading ? '' : 'hover:bg-primary-light'} cursor-pointer md:w-[860px] md:h-[72px] bg-primary-color text-light-color font-bold py-2 px-4 rounded-lg mt-10 flex items-center justify-center flex-row gap-2`}>
                         <svg width="17" height="20" viewBox="0 0 17 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10.5 0H2.5C1.4 0 0.51 0.9 0.51 2L0.5 18C0.5 19.1 1.39 20 2.49 20H14.5C15.6 20 16.5 19.1 16.5 18V6L10.5 0ZM14.5 18H2.5V2H9.5V7H14.5V18ZM4.5 13.01L5.91 14.42L7.5 12.84V17H9.5V12.84L11.09 14.43L12.5 13.01L8.51 9L4.5 13.01Z" fill="#FEFEFE" />
                         </svg>
@@ -297,7 +297,7 @@ export default function AccountPage() {
                     </h1>
                     <h1
                         id="number_of_applications"
-                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-teal-600 w-72 md:w-[860px]'>
+                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-primary-color w-72 md:w-[860px]'>
                         {user ? user.email : 'No applications yet'}
                     </h1>
                 </div>
@@ -307,7 +307,7 @@ export default function AccountPage() {
                     </h1>
                     <h1
                         id="number_of_applications"
-                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-teal-600 w-72 md:w-[860px]'>
+                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-primary-color w-72 md:w-[860px]'>
                         {noapplication ? 'No applications yet' : JSON.parse(localStorage.getItem(user.uid)).applied}
                     </h1>
                 </div>
@@ -323,14 +323,14 @@ export default function AccountPage() {
                         id="contact_number"
                         type="number"
                         placeholder='Enter your contact number'
-                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-teal-600 w-72 md:w-[860px]' />
+                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-primary-color w-72 md:w-[860px]' />
                 </div>
 
                 <div className="flex flex-col">
                     <label htmlFor="college" className='text-lg font-semibold'>
                         College <span className="text-red-500">*</span>
                     </label>
-                    <select value={college} disabled={loading} onChange={(e) => handleCollegeChange(e.target.value)} id="college" name="college" className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-teal-600 w-72 md:w-[860px]'>
+                    <select value={college} disabled={loading} onChange={(e) => handleCollegeChange(e.target.value)} id="college" name="college" className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-primary-color w-72 md:w-[860px]'>
                         {collegeList.map((college, index) => {
                             return (
                                 <option key={index} value={college}>{college}</option>
@@ -351,7 +351,7 @@ export default function AccountPage() {
                         id="course"
                         type="text"
                         placeholder='Enter your course name'
-                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-teal-600 w-72 md:w-[860px]' />
+                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-primary-color w-72 md:w-[860px]' />
                 </div>
 
                 <div className="flex flex-col">
@@ -365,14 +365,14 @@ export default function AccountPage() {
                         id="year_of_study"
                         type="number"
                         placeholder='Enter your current year of study'
-                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-teal-600 w-72 md:w-[860px]' />
+                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-primary-color w-72 md:w-[860px]' />
                 </div>
             </div>
             {Error && <h1 className="mt-10 text-red-500 text-xl font-semibold">No Data found! Please fill the form! </h1>}
-            <motion.button whileTap={{ scale: 0.9 }} onClick={handleSubmit} className={`${!loading ? 'opacity-100 hover:bg-teal-300' : 'opacity-50'} md:w-[420px] w-36 cursor-pointer md:h-[46px] rounded-lg bg-dark-teal text-white font-bold py-2 px-4 mt-10 flex items-center justify-center flex-row `}>
+            <motion.button whileTap={{ scale: 0.9 }} onClick={handleSubmit} className={`${!loading ? 'opacity-100 hover:bg-primary-light' : 'opacity-50'} md:w-[420px] w-36 cursor-pointer md:h-[46px] rounded-lg bg-primary-color text-light-color font-bold py-2 px-4 mt-10 flex items-center justify-center flex-row `}>
                 Submit
             </motion.button>
-            <motion.button onClick={handleLogOut} className={`${!loading ? 'opacity-100 hover:bg-red-300' : 'opacity-50'} md:mb-20 mb-10 md:w-[420px] w-36 cursor-pointer md:h-[46px] rounded-lg bg-red-500 text-white font-bold py-2 px-4 mt-5 flex items-center justify-center flex-row `}>Log Out</motion.button >
+            <motion.button onClick={handleLogOut} className={`${!loading ? 'opacity-100 hover:bg-red-300' : 'opacity-50'} md:mb-20 mb-10 md:w-[420px] w-36 cursor-pointer md:h-[46px] rounded-lg bg-red-500 text-light-color font-bold py-2 px-4 mt-5 flex items-center justify-center flex-row `}>Log Out</motion.button >
 
         </div>
     );

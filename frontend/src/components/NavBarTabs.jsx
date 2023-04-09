@@ -8,7 +8,7 @@ function NavBarTabs({ text, link, bg }) {
     return (
         <li className="my-3 flex">
             <motion.button
-                className={`cursor-pointer flex-1 ${bg || `bg-slate-100 text-black`} rounded-md px-4 py-4 hover:text-white hover:bg-teal-500`}
+                className={`cursor-pointer flex-1 ${bg || `bg-light-color text-dark-color`} rounded-md px-4 py-4 hover:text-light-color hover:bg-primary-light`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={() => navigate(link)}

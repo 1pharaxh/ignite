@@ -184,15 +184,15 @@ function Companies() {
                     backgroundImage: `linear-gradient(0deg, rgba(15, 111, 123, 0.7), rgba(15, 111, 123, 0.7)) , url(${desk})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center'
-                }} className={`${!loading ? `opacity-100` : `opacity-50`} overflow-visible flex flex-col bg-teal-600  mx-0 h-80 w-full`}>
+                }} className={`${!loading ? `opacity-100` : `opacity-50`} overflow-visible flex flex-col bg-primary-color  mx-0 h-80 w-full`}>
                 <div className='h-80 z-1'>
                     <div className='flex items-center justify-center w-full h-full'>
-                        <h1 className='md:text-5xl font-bold text-4xl text-white md:font-medium text-center'> Find your favourite company!</h1>
+                        <h1 className='md:text-5xl font-bold text-4xl text-light-color md:font-medium text-center'> Find your favourite company!</h1>
                     </div>
                 </div>
                 {/* search BAR*/}
                 <div className='w-full justify-center items-center flex '>
-                    <div className='shadow-md absolute top-64 bottom-0 flex m-10 items-center bg-white h-20 w-11/12 rounded-lg mx-8 my-6 px-10'>
+                    <div className='shadow-md absolute top-64 bottom-0 flex m-10 items-center bg-light-color h-20 w-11/12 rounded-lg mx-8 my-6 px-10'>
                         <div className='flex flex-col w-full md:pr-10 pr-5'>
                             <div className='flex justify-between items-center w-12/12'>
                                 {/* // search icon */}
@@ -200,7 +200,7 @@ function Companies() {
                                     if (e.key === 'Enter') {
                                         handleSearch(e.target.value);
                                     }
-                                }} id="searchbox" disabled={loading} className='p-2 text-sm outline-none w-full' type='text' placeholder='COMPANIES OR PROFILES' />
+                                }} id="searchbox" disabled={loading} className='bg-light-color p-2 text-sm outline-none w-full' type='text' placeholder='COMPANIES OR PROFILES' />
                                 <svg className={`${usersearched ? 'hidden' : 'visible'} cursor-pointer`} onClick={() => handleSearch("")} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.5 11H11.71L11.43 10.73C12.41 9.59 13 8.11 13 6.5C13 2.91 10.09 0 6.5 0C2.91 0 0 2.91 0 6.5C0 10.09 2.91 13 6.5 13C8.11 13 9.59 12.41 10.73 11.43L11 11.71V12.5L16 17.49L17.49 16L12.5 11ZM6.5 11C4.01 11 2 8.99 2 6.5C2 4.01 4.01 2 6.5 2C8.99 2 11 4.01 11 6.5C11 8.99 8.99 11 6.5 11Z" fill="#0F6F7B" />
                                 </svg>
@@ -208,9 +208,9 @@ function Companies() {
                                     <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#0F6F7B" />
                                 </svg>
                             </div>
-                            <div className='h-px w-12/12 bg-teal-600 my-0 mx-2'></div>
+                            <div className='h-px w-12/12 bg-primary-color my-0 mx-2'></div>
                         </div>
-                        <button onClick={handleFilter} disabled={loading} className='md:h-[62px] md:w-[200px] flex font-bold justify-center items-center px-4 py-2 bg-teal-600 text-white hover:bg-teal-700 rounded-lg text-sm'>
+                        <button onClick={handleFilter} disabled={loading} className='md:h-[62px] md:w-[200px] flex font-bold justify-center items-center px-4 py-2 bg-primary-color text-light-color hover:bg-primary-color rounded-lg text-sm'>
                             <svg className='mr-2' width="18" height="12" viewBox="0 0 18 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 12H11V10H7V12ZM0 0V2H18V0H0ZM3 7H15V5H3V7Z" fill="#FEFEFE" />
                             </svg>
@@ -222,7 +222,7 @@ function Companies() {
             <DotLoader cssOverride={override} size={150} color={"#0f766e"} loading={loading} />
             {!usersearched ?
                 < div className={`${!usersearched ? `visible` : `hidden`}`}>
-                    <h1 className='text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4'>
+                    <h1 className='text-2xl md:text-4xl text-primary-color font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4'>
                         Our top recruiters!
                     </h1>
                     <div className={`${!loading ? `opacity-100` : `opacity-50`} grid grid-cols-2 md:grid-cols-4 md:gap-4 gap-2 md:px-16 px-4 mb-10`}>
@@ -234,11 +234,11 @@ function Companies() {
                             >
                                 < div
                                     onClick={() => window.open(`/companies/${company._id}`, "_blank")}
-                                    className='bg-teal-700 h-44 md:w-9/12 w-full items-center rounded-xl p-5 justify-center flex flex-col overflow-hidden' >
-                                    <div className='w-[180px] h-5/6 md:w-[250px] bg-white rounded-md items-center justify-center flex overflow-hidden'>
+                                    className='bg-primary-color h-56 md:w-9/12 w-full items-center rounded-xl p-5 justify-center flex flex-col overflow-hidden' >
+                                    <div className='w-[180px] h-5/6 md:w-[250px] bg-light-color rounded-md items-center justify-center flex overflow-hidden'>
                                         <img className='object-contain h-full w-full' src={company.image} ></img>
                                     </div>
-                                    <h1 className='text-xl h-1/6 text-white font-medium content-center'>
+                                    <h1 className='text-xl h-1/6 text-light-color font-medium content-center'>
                                         {screenSize < 768 ? company.name.length > 10 ? company.name.substring(0, 10) + '...' : company.name : company.name}
                                     </h1>
                                 </div>
@@ -248,11 +248,11 @@ function Companies() {
                 </div >
                 :
                 < div className={`${!usersearched ? `hidden` : `visible`}`}>
-                    <h1 className={`${!loading ? `opacity-100` : `opacity-0`} flex flex-row text-2xl md:text-4xl text-teal-700 font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
+                    <h1 className={`${!loading ? `opacity-100` : `opacity-0`} flex flex-row text-2xl md:text-4xl text-primary-color font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
                         <svg onClick={clearSearch} className='cursor-pointer md:mr-5 mr-2 ' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" fill="#0F6F7B" />
                         </svg>
-                        Search results for "<span className='text-black'>{searchString}</span>"
+                        Search results for "<span className='text-dark-color'>{searchString}</span>"
                     </h1>
                     <div className='items-start justify-start w-12/12 grid grid-row md:gap-4 gap-2 md:px-14 px-4 mb-10'>
                         {
@@ -265,12 +265,12 @@ function Companies() {
                                     >
                                         < div
                                             onClick={() => window.open(`/companies/${company._id}`, "_blank")}
-                                            className={`bg-teal-700 h-44 w-full rounded-xl p-5 flex flex-row gap-4 items-center justify-start`} >
-                                            <div className='bg-white h-[90px] w-2/12 md:h-[120px] p-2 flex items-center justify-center'>
+                                            className={`bg-primary-color h-44 w-full rounded-xl p-5 flex flex-row gap-4 items-center justify-start`} >
+                                            <div className='bg-light-color h-[90px] w-2/12 md:h-[120px] p-2 flex items-center justify-center'>
                                                 <img className='h-full w-full object-contain' src={company.image} ></img>
                                             </div>
                                             <div className='flex flex-col gap-5 justify-between w-10/12 mx-4'>
-                                                <h1 className='md:block text-xl text-white font-medium text-start'>{company.name}</h1>
+                                                <h1 className='md:block text-xl text-light-color font-medium text-start'>{company.name}</h1>
                                                 <h1
                                                     style={{
                                                         overflow: "hidden",
@@ -280,7 +280,7 @@ function Companies() {
                                                         WebkitBoxOrient: "vertical"
 
                                                     }}
-                                                    className=' text-start text-lg font-normal text-white md:block' >{company.about_comp}</h1>
+                                                    className=' text-start text-lg font-normal text-light-color md:block' >{company.about_comp}</h1>
                                             </div>
 
                                         </div>
@@ -295,7 +295,7 @@ function Companies() {
             <div className='flex flex-row justify-center items-center mb-5'>
                 <ul className="flex flex-row gap-2 ">
                     <svg
-                        className="w-6 h-6 cursor-pointer m-auto text-teal-600"
+                        className="w-6 h-6 cursor-pointer m-auto text-primary-color"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -313,12 +313,12 @@ function Companies() {
                         <li
                             onClick={(e) => handleClick(e, number)}
                             key={number} className={` h-[50px] w-[50px] border-solid border-2  cursor-pointer flex flex-row items-center justify-center  rounded-lg 
-                        ${currentPage === number ? "border-teal-500  font-bold text-teal-600" : "bg-teal-400 text-white font-semibold"}`}>
+                        ${currentPage === number ? "border-primary-light  font-bold text-primary-color" : "bg-primary-light text-light-color font-semibold"}`}>
                             <a className="my-auto" href="/" >{number}</a>
                         </li>
                     ))}
                     <svg
-                        className="w-6 h-6 cursor-pointer m-auto text-teal-600"
+                        className="w-6 h-6 cursor-pointer m-auto text-primary-color"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"

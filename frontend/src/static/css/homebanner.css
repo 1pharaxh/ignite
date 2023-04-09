@@ -7,12 +7,17 @@
     color: #ffffff; /* change to your desired previous button color */
   }
 
-  .swiper-pagination-bullet {
-    background-color: #c2c8cd; /* change to your desired active bullet color */
-    height: 16px;
-    width: 16px;
-  }
-  
+
+
+
+
+    .swiper-pagination-bullet {
+      @apply bg-gray-400;
+      height: 16px;
+      width: 16px;
+      
+    }
+    
     .swiper-pagination-bullet-active {
-        background-color: #ffffff; /* change to your desired inactive bullet color */
+      @apply bg-primary-color;
     }

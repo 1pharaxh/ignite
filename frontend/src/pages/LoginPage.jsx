@@ -127,7 +127,7 @@ function LoginPage() {
                             Forgot Password?
                         </h1>
                     </div>
-                    < button className='p-2 flex flex-col items-center rounded-md bg-purple-400 text-white font-semibold' type="submit" form="formName">
+                    < button className='p-2 flex flex-col items-center rounded-md bg-primary-color text-white font-semibold' type="submit" form="formName">
                         Sign in
                     </button>
                     <div className="

@@ -10,14 +10,14 @@ export default function AboutBoardOfAdvisors({ images, text }) {
         return (
             <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-80 flex items-center justify-center z-50">
                 <div className="p-8 rounded-lg">
-                    <button className="absolute top-10 right-10 text-white" onClick={() => setIsModalOpen(false)}>
+                    <button className="absolute top-10 right-10 text-light-color" onClick={() => setIsModalOpen(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
 
                     <img src={selectedImage} alt="Selected" className="mx-auto w-[512px] h-auto" />
-                    <p className="text-center text-2xl mt-4 text-white">{selectedImage && `${imageText}`}</p>
+                    <p className="text-center text-2xl mt-4 text-light-color">{selectedImage && `${imageText}`}</p>
                 </div>
             </div>
         );
@@ -87,8 +87,8 @@ export default function AboutBoardOfAdvisors({ images, text }) {
 
                                 <img src={image['img']} alt="BOD1" className='md:w-[144px] md:h-[144px] w-[100px] h-[100px] rounded-xl' />
                                 <div>
-                                    <h1 className='md:text-xl text-lg text-dark-teal font-bold'> {image['first']} </h1>
-                                    <h1 className='md:text-xl text-lg text-dark-teal font-bold'> {image['last']} </h1>
+                                    <h1 className='md:text-xl text-lg text-primary-color font-bold'> {image['first']} </h1>
+                                    <h1 className='md:text-xl text-lg text-primary-color font-bold'> {image['last']} </h1>
                                 </div>
                             </div>
                         </motion.button>

@@ -21,7 +21,7 @@ import SliderTestPage from './pages/SliderTestPage';
 function App() {
 
   const location = useLocation();
-  const isLocation = location.pathname === '/login' || location.pathname === '/account' || location.pathname === '/edit' || location.pathname === '/signup';
+  const isLocation = location.pathname === '/login' || location.pathname === '/signup';
 
   return (
     <AuthContextProvider>

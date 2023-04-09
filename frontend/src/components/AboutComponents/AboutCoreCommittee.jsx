@@ -18,16 +18,16 @@ export default function AboutCoreCommittee() {
     const [imageText, setImageText] = useState(null);
     const Modal = () => {
         return (
-            <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-80 flex items-center justify-center z-50">
+            <div className="fixed top-0 left-0 w-screen h-screen bg-dark-color bg-opacity-80 flex items-center justify-center z-50">
                 <div className="p-8 rounded-lg">
-                    <button className="absolute top-10 right-10 text-white" onClick={() => setIsModalOpen(false)}>
+                    <button className="absolute top-10 right-10 text-light-color" onClick={() => setIsModalOpen(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
 
                     <img src={selectedImage} alt="Selected" className="mx-auto w-[740px] h-auto" />
-                    <p className="text-center text-2xl mt-4 text-white">{selectedImage && `${imageText}`}</p>
+                    <p className="text-center text-2xl mt-4 text-light-color">{selectedImage && `${imageText}`}</p>
                 </div>
             </div>
         );
@@ -43,7 +43,7 @@ export default function AboutCoreCommittee() {
     return (
         <div className="flex flex-col mt-10">
             <div className='relative flex items-center md:mx-28 mx-12 mb-5'>
-                <h1 className='md:text-4xl text-3xl text-off-black font-[500] z-10'>The Core Committee</h1>
+                <h1 className='md:text-4xl text-3xl text-dark-color font-[500] z-10'>The Core Committee</h1>
             </div>
             <div className='relative flex items-center md:mx-10 mx-4'></div>
             <div className='relative flex items-center md:mx-10 mx-4'>
@@ -176,8 +176,6 @@ export default function AboutCoreCommittee() {
                         }}>
                         <img src={CC_9} alt="BOD1" className="h-[190px]  w-[320px] z-10 rounded-lg" />
                     </motion.button>
-
-
                 </ReactElasticCarousel>
                 {isModalOpen && <Modal />}
 

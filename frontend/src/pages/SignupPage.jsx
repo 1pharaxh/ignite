@@ -6,7 +6,6 @@ import '../static/css/Login.css'
 import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import { motion } from 'framer-motion'
 function SignupPage() {
     // scroll to top 
     window.scrollTo(0, 0);
@@ -132,7 +131,7 @@ function SignupPage() {
                         <span className="text-red-500">{errors.confirmpassword.message}</span>
                     )}
 
-                    < button className='p-2 flex flex-col items-center rounded-md bg-purple-400 text-white font-semibold' type="submit" form="formSignup">
+                    < button className='p-2 flex flex-col items-center rounded-md bg-primary-color text-white font-semibold' type="submit" form="formSignup">
                         Sign up
                     </button>
                     <div className='p-2 flex flex-col items-center mb-4' >

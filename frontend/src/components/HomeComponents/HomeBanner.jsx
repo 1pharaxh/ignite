@@ -36,6 +36,8 @@ function HomeBanner({ imageArray, phoneImages }) {
                 }}
                 pagination={{
                     clickable: true,
+                    bulletClass: 'swiper-pagination-bullet',
+                    bulletActiveClass: 'swiper-pagination-bullet-active',
                 }}
                 navigation={{
                     prevEl: ".swiper-prev",
@@ -54,7 +56,7 @@ function HomeBanner({ imageArray, phoneImages }) {
                 })}
 
                 <div className="absolute inset-y-1/2 left-0 z-50">
-                    <button className="swiper-prev bg-white border border-gray-500 rounded-full w-6 h-6 md:w-8 md:h-8 ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    <button className="swiper-prev bg-light-color border border-dark-color rounded-full w-6 h-6 md:w-8 md:h-8 ml-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         <span className="sr-only">Previous</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -68,14 +70,14 @@ function HomeBanner({ imageArray, phoneImages }) {
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
                                 strokeWidth={2}
-                                className="stroke-teal-500"
+                                className="stroke-primary-color"
                                 d="M13 18.5l-7-7 7-7"
                             />
                         </svg>
                     </button>
                 </div>
                 <div className="absolute inset-y-1/2 right-0 z-50">
-                    <button className="swiper-next bg-white border border-gray-500 rounded-full w-6 h-6 md:w-8 md:h-8 mr-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                    <button className="swiper-next bg-light-color border border-dark-color rounded-full w-6 h-6 md:w-8 md:h-8 mr-4 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                         <span className="sr-only">Next</span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +91,7 @@ function HomeBanner({ imageArray, phoneImages }) {
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                className="stroke-teal-500"
+                                className="stroke-primary-color"
                                 strokeWidth={2}
                                 d="M9 5l7 7-7 7"
                             />

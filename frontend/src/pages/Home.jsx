@@ -28,7 +28,7 @@ function Home() {
       <HomeBanner imageArray={[banner, banner2]} phoneImages={[phoneBanner, phoneBanner2]} />
 
       <div className="flex items-center justify-center">
-        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Our</span><span className="text-[#0F6F7B]"> Sponsors</span></h1>
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Our</span><span className="text-primary-color"> Sponsors</span></h1>
       </div>
 
       <HomeTopCompanies imageArray={[
@@ -40,12 +40,12 @@ function Home() {
       ]} />
 
       <div className="flex items-center justify-center">
-        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Our top</span><span className="text-[#0F6F7B]"> Companies</span></h1>
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Our top</span><span className="text-primary-color"> Companies</span></h1>
       </div>
       <HomeImageContinueScroll />
 
       <div className="flex items-center justify-center">
-        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Past</span><span className="text-[#0F6F7B]"> Statistics</span></h1>
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Past</span><span className="text-primary-color"> Statistics</span></h1>
       </div>
       <HomeStatistics
         Companies={'1000+'}
@@ -60,7 +60,7 @@ function Home() {
       <HomeTimer />
 
       <div className="flex items-center justify-center">
-        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-[#072033]">Schedule or </span><span className="text-[#0F6F7B]">Timeline</span></h1>
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Schedule or </span><span className="text-primary-color">Timeline</span></h1>
       </div>
       <HomeTimeline
         timelineArray={[

@@ -15,7 +15,7 @@ export default function AboutPrincipalMessage({ campusPic, principal, message, p
             <div className="relative ">
                 <img src={campusPic} alt="campus_pic" className="w-full md:h-[350px] object-cover object-center " />
 
-                <div className="absolute inset-0 bg-black opacity-50 "></div>
+                <div className="absolute inset-0 bg-dark-color opacity-50 "></div>
                 <ReactElasticCarousel
                     showArrows={false}
                     easing="cubic-bezier(1,.15,.55,1.54)"
@@ -50,11 +50,11 @@ export default function AboutPrincipalMessage({ campusPic, principal, message, p
                     <div className="flex items-center">
                         <div className="parent mx-auto flex items-center md:px-20 px-3">
                             <img src={principal} alt="principle" className="md:h-56 h-[310px] flex-grow md:w-32 w-20 object-cover object-center rounded-l-xl" />
-                            <div className=" flex-grow ml-4 md:px-4 md:py-5 py-2 px-2 flex flex-col md:gap-8 gap-5 text-white bg-off-black opacity-70 rounded-r-xl md:h-56 h-[310px]">
-                                <h1 className='md:text-4xl text-2xl' >Message from <span className='text-base-yellow'>Principle</span></h1>
+                            <div className=" flex-grow ml-4 md:px-4 md:py-5 py-2 px-2 flex flex-col md:gap-8 gap-5 text-light-color bg-dark-color opacity-70 rounded-r-xl md:h-56 h-[310px]">
+                                <h1 className='md:text-4xl text-2xl' >Message from <span className='text-warning-color'>Principle</span></h1>
                                 <h1>{message}</h1>
                                 <div className='w-full flex flex-row justify-end'>
-                                    <i className="fa fa-quote-right text-base-yellow text-xl" aria-hidden="true"></i>
+                                    <i className="fa fa-quote-right text-warning-color text-xl" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
@@ -62,11 +62,11 @@ export default function AboutPrincipalMessage({ campusPic, principal, message, p
                     <div className="flex items-center">
                         <div className=" flex items-center md:px-20 px-3">
                             <img src={principal2} alt="principle2" className="md:h-56 h-[310px] flex-grow md:w-32 w-20 object-cover object-center rounded-l-xl" />
-                            <div className=" flex-grow ml-4 md:px-4 md:py-5 py-2 px-2 flex flex-col md:gap-8 gap-5 text-white bg-off-black opacity-70 rounded-r-xl md:h-56 h-[310px]">
-                                <h1 className='md:text-4xl text-2xl' >Message from <span className='text-base-yellow'>Principal 2</span></h1>
+                            <div className=" flex-grow ml-4 md:px-4 md:py-5 py-2 px-2 flex flex-col md:gap-8 gap-5 text-light-color bg-dark-color opacity-70 rounded-r-xl md:h-56 h-[310px]">
+                                <h1 className='md:text-4xl text-2xl' >Message from <span className='text-warning-color'>Principal 2</span></h1>
                                 <h1>{message2}</h1>
                                 <div className='w-full flex flex-row justify-end'>
-                                    <i className="fa fa-quote-right text-base-yellow text-xl" aria-hidden="true"></i>
+                                    <i className="fa fa-quote-right text-warning-color text-xl" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>

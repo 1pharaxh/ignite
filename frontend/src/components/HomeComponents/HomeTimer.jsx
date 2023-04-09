@@ -21,56 +21,56 @@ export default function HomeTimer() {
   }, []);
 
   return (
-    <div className='bg-teal-200 md:p-10 p-5 w-full md:h-96 h-64 flex-col flex items-center justify-center gap-4 md:mt-10 mt-3'>
-      <h1 className="font-bold md:text-5xl text-3xl text-center text-teal-800">
+    <div className='bg-primary-lighter md:p-10 p-5 w-full md:h-96 h-64 flex-col flex items-center justify-center gap-4 md:mt-10 mt-3'>
+      <h1 className="font-bold md:text-5xl text-3xl text-center text-primary-color">
         LIVE-IN
       </h1>
       <div className='flex flex-row items-center justify-centermd:gap-4 gap-2'>
         <div className='flex flex-col items-center justify-center'>
-          <h1 className='font-bold text-dark-teal md:text-9xl text-6xl ' >
+          <h1 className='font-bold text-primary-color md:text-9xl text-6xl ' >
             {days.toString().padStart(2, '0')}
           </h1>
-          <h1 className='font-semibold text-dark-teal'>
+          <h1 className='font-semibold text-primary-color'>
             DAYS
           </h1>
         </div>
 
-        <div className="h-full w-[2px] bg-dark-teal"></div>
+        <div className="h-full w-[2px] bg-primary-color"></div>
 
         <div className='flex flex-col items-center justify-center'>
-          <h1 className='font-bold text-dark-teal md:text-9xl text-6xl '>
+          <h1 className='font-bold text-primary-color md:text-9xl text-6xl '>
             {hours.toString().padStart(2, '0')}
           </h1>
-          <h1 className='font-semibold text-dark-teal'>
+          <h1 className='font-semibold text-primary-color'>
             HOURS
           </h1>
         </div>
-        <div className="h-full w-[2px] bg-dark-teal"></div>
+        <div className="h-full w-[2px] bg-primary-color"></div>
 
         <div className='flex flex-col items-center justify-center'>
-          <h1 className='font-bold text-dark-teal md:text-9xl text-6xl '>
+          <h1 className='font-bold text-primary-color md:text-9xl text-6xl '>
             {minutes.toString().padStart(2, '0')}
           </h1>
-          <h1 className='font-semibold text-dark-teal'>
+          <h1 className='font-semibold text-primary-color'>
             MINUTES
           </h1>
         </div>
-        <div className="h-full w-[2px] bg-dark-teal"></div>
+        <div className="h-full w-[2px] bg-primary-color"></div>
 
         <div className='flex flex-col items-center justify-center'>
-          <h1 className='font-bold text-dark-teal md:text-9xl text-6xl '>
+          <h1 className='font-bold text-primary-color md:text-9xl text-6xl '>
             {seconds.toString().padStart(2, '0')}
           </h1>
-          <h1 className='font-semibold text-dark-teal'>
+          <h1 className='font-semibold text-primary-color'>
             SECONDS
           </h1>
         </div>
       </div>
 
-      <h1 className='mt-5'>Check the schedule</h1>
+      <h1 className='mt-5 text-primary-color font-bold'>Check the schedule</h1>
       <div>
-        <svg className='transform -rotate-90' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" fill="#0F6F7B" />
+        <svg className='transform -rotate-90 fill-primary-color' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" />
         </svg>
       </div>
     </div>

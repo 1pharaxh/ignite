@@ -10,7 +10,7 @@ function Button({ text, bg }) {
     <div>
       <div
         className={
-          `cursor-pointer text-teal-700 border-2 border-teal-700 px-4 py-4 rounded-md ${bg || `bg-slate-100`}`}>
+          `cursor-pointer text-primary-color border-2 border-primary-color px-4 py-4 rounded-md ${bg || `bg-light-color`}`}>
         <span>{text}</span>
       </div>
     </div>
@@ -45,7 +45,7 @@ function Navbar() {
     }
   }, [width]);
   return (
-    <div className="z-50 fixed px-4 left-0 right-0 top-0 h-auto shadow-md border-b-2 border-gray-100 bg-slate-100">
+    <div className="z-50 fixed px-4 left-0 right-0 top-0 h-auto shadow-md border-b-2 border-light-color bg-light-color">
       <nav className="md:flex md:items-center mx-auto h-full md:justify-between">
         <div className="flex justify-between items-center">
           <span onClick={handleClick} className="cursor-pointer">
@@ -66,14 +66,14 @@ function Navbar() {
           onClick={() => { window.scrollTo(0, 0); width < 700 ? setMenu(false) : '' }}
           className={`
           md:flex md:items-center md:z-auto md:static md:w-auto md:py-0 md:opacity-100 md:pl-0 pr-5 md:pr-0
-          ${!menu ? 'opacity-0' : 'opacity-100'} items-center absolute space-x-2 mr-10 bg-slate-100
+          ${!menu ? 'opacity-0' : 'opacity-100'} items-center absolute space-x-2 mr-10 bg-light-color
           pl-5  rounded-b-lg pb-4 w-full left-0 transition-all ease-in duration-500`}>
-          <NavBarTabs disable={menu} text="Home" link="/" bg={location.pathname == '/' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
-          <NavBarTabs disable={menu} text="About" link="/about" bg={location.pathname == '/about' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
-          <NavBarTabs disable={menu} text="Companies" link="/companies" bg={location.pathname.includes("compan") ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
-          <NavBarTabs disable={menu} text="How to Apply" link="/how-to-apply" bg={location.pathname == '/how-to-apply' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
-          <NavBarTabs disable={menu} text="Resources" link="/resources" bg={location.pathname == '/resources' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
-          <NavBarTabs disable={menu} text="Contact Us" link="/contact-us" bg={location.pathname == '/contact-us' ? 'bg-teal-700 text-white font-bold' : 'bg-slate-100'} />
+          <NavBarTabs disable={menu} text="Home" link="/" bg={location.pathname == '/' ? 'bg-primary-color text-light-color font-bold' : 'bg-light-color'} />
+          <NavBarTabs disable={menu} text="About" link="/about" bg={location.pathname == '/about' ? 'bg-primary-color text-light-color font-bold' : 'bg-light-color'} />
+          <NavBarTabs disable={menu} text="Companies" link="/companies" bg={location.pathname.includes("compan") ? 'bg-primary-color text-light-color font-bold' : 'bg-light-color'} />
+          <NavBarTabs disable={menu} text="How to Apply" link="/how-to-apply" bg={location.pathname == '/how-to-apply' ? 'bg-primary-color text-light-color font-bold' : 'bg-light-color'} />
+          <NavBarTabs disable={menu} text="Resources" link="/resources" bg={location.pathname == '/resources' ? 'bg-primary-color text-light-color font-bold' : 'bg-light-color'} />
+          <NavBarTabs disable={menu} text="Contact Us" link="/contact-us" bg={location.pathname == '/contact-us' ? 'bg-primary-color text-light-color font-bold' : 'bg-light-color'} />
 
           <li>
             <motion.button
@@ -82,7 +82,7 @@ function Navbar() {
               whileTap={{ scale: 0.9 }}
               onClick={user?.email ? handleAccount : handleLogin}
             >
-              <Button text={user?.email ? "My Account" : "Login / Signup"} bg="bg-slate-100" />
+              <Button text={user?.email ? "My Account" : "Login / Signup"} bg="bg-light-color" />
             </motion.button>
           </li>
         </ul>}
