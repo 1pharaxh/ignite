@@ -305,7 +305,7 @@ function Company() {
                         transform: "translate(-50%, -50%)",
                         padding: "0",
                         opacity: 1,
-                    }} size={150} color={"#0f766e"} loading={loading} />
+                    }} size={150} className='text-primary-color' loading={loading} />
                 </div>
                 <div className={`flex flex-col md:my-16 md:mx-16 mx-4 my-8 gap-4 md:gap-10`}>
                     <div className='flex flex-col md:flex-row items-center md:gap-0 gap-2 md:justify-between'>

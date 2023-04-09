@@ -203,8 +203,8 @@ function Companies() {
                                         handleSearch(e.target.value);
                                     }
                                 }} id="searchbox" disabled={loading} className='bg-light-color p-2 text-sm outline-none w-full' type='text' placeholder='COMPANIES OR PROFILES' />
-                                <svg className={`${usersearched ? 'hidden' : 'visible'} cursor-pointer`} onClick={() => handleSearch("")} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.5 11H11.71L11.43 10.73C12.41 9.59 13 8.11 13 6.5C13 2.91 10.09 0 6.5 0C2.91 0 0 2.91 0 6.5C0 10.09 2.91 13 6.5 13C8.11 13 9.59 12.41 10.73 11.43L11 11.71V12.5L16 17.49L17.49 16L12.5 11ZM6.5 11C4.01 11 2 8.99 2 6.5C2 4.01 4.01 2 6.5 2C8.99 2 11 4.01 11 6.5C11 8.99 8.99 11 6.5 11Z" fill="#0F6F7B" />
+                                <svg className={`${usersearched ? 'hidden' : 'visible'} cursor-pointer fill-primary-color`} onClick={() => handleSearch("")} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.5 11H11.71L11.43 10.73C12.41 9.59 13 8.11 13 6.5C13 2.91 10.09 0 6.5 0C2.91 0 0 2.91 0 6.5C0 10.09 2.91 13 6.5 13C8.11 13 9.59 12.41 10.73 11.43L11 11.71V12.5L16 17.49L17.49 16L12.5 11ZM6.5 11C4.01 11 2 8.99 2 6.5C2 4.01 4.01 2 6.5 2C8.99 2 11 4.01 11 6.5C11 8.99 8.99 11 6.5 11Z" />
                                 </svg>
                                 <svg onClick={clearSearch} className={`${usersearched ? 'visible' : 'hidden'} cursor-pointer`} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#0F6F7B" />
@@ -221,7 +221,7 @@ function Companies() {
                     </div>
                 </div>
             </div>
-            <DotLoader cssOverride={override} size={150} color={"#0f766e"} loading={loading} />
+            <DotLoader cssOverride={override} size={150} className='text-primary-color' loading={loading} />
             {!usersearched ?
                 < div className={`${!usersearched ? `visible` : `hidden`}`}>
                     <h1 className='text-2xl md:text-4xl text-primary-color font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4'>
