@@ -8,7 +8,7 @@ export default function AboutBoardOfAdvisors({ images, text }) {
     const [imageText, setImageText] = useState(null);
     const Modal = () => {
         return (
-            <div className="fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-80 flex items-center justify-center z-50">
+            <div className="fixed top-0 left-0 w-screen h-screen bg-dark-color bg-opacity-80 flex items-center justify-center z-50">
                 <div className="p-8 rounded-lg">
                     <button className="absolute top-10 right-10 text-light-color" onClick={() => setIsModalOpen(false)}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -74,13 +74,13 @@ export default function AboutBoardOfAdvisors({ images, text }) {
                             whileHover={{ scale: 0.9 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={() => {
-                                setSelectedImage(BOD1);
+                                setSelectedImage(image['img']);
                                 setIsModalOpen(true);
-                                setImageText("Dhruvi Tyagi");
+                                setImageText(image['first'] + ' ' + image['last']);
                             }}
                         >
                             <div className='overflow-hidden md:w-[200px] md:h-[276px] 
-                            bg-off-white flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
+                            bg-light-color flex flex-col justify-center items-center p-8 gap-4 mx-4 md:mx-8' style={{
                                     backdropFilter: 'blur(45px)',
                                     borderRadius: '12px',
                                 }}>

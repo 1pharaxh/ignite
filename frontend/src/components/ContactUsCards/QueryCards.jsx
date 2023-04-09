@@ -52,7 +52,7 @@ function QueryCards({ dataArray }) {
                             whileTap={{ scale: 0.9 }}
 
                         >
-                            <div className='overflow-hidden w-[200px] h-[200px] gap-2
+                            <div className='overflow-hidden w-[200px] h-[200px] gap-2 bg-light-color
                             bg-off-white flex flex-col justify-center items-center p-2 md:p-4 mx-4 md:mx-8' style={{
                                     boxShadow: "0px 1px 2px rgba(7, 32, 51, 0.4), 0px 2px 6px 2px rgba(7, 32, 51, 0.2)",
                                     borderRadius: '12px',

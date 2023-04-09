@@ -9,6 +9,7 @@ export default function AboutPrincipalMessage({ campusPic, principal, message, p
         { width: 1200, itemsToShow: 1 },
     ]
     const carouselRef = useRef(null);
+    let resetTimeout;
     return (
         <>
             {/* {Message from Principle} */}

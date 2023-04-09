@@ -1,6 +1,6 @@
 .parallax {
     /* background-image: url('../images/parallax.png'); */
-    @apply bg-light-color;
+    @apply bg-white;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -21,7 +21,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    @apply bg-light-color;
+    @apply bg-white;
 
     /* background-image: url('../images/parallax.png'); */
     background-repeat: no-repeat;

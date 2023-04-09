@@ -11,3 +11,20 @@
 
   
 
+
+
+  .rec.rec-arrow {
+    @apply bg-primary-color;
+    @apply text-light-color;
+  }
+  /* round buttons on hover */
+  
+  .rec.rec-arrow:hover {
+    @apply bg-primary-light !important;
+    @apply text-light-color !important;
+  }
+
+  .dkEaAU:hover:enabled, .dkEaAU:focus:enabled {
+    @apply bg-primary-light !important;
+    @apply text-light-color !important;
+  }

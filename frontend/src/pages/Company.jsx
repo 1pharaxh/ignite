@@ -286,10 +286,10 @@ function Company() {
                         backgroundSize: 'cover',
                         backgroundPosition: 'center'
                     }}
-                    className={`${!loading ? 'opacity-100' : 'opacity-50'} overflow-clip bg-teal-600 mx-0 h-80 w-full`}>
+                    className={`${!loading ? 'opacity-100' : 'opacity-50'} overflow-clip bg-primary-color mx-0 h-80 w-full`}>
                     <div className='h-80 z-1 overflow-clip justify-center items-center flex-col flex'>
                         <div className='flex flex-col items-center justify-center mb-10 h-full mt-[3%]'>
-                            <h1 className='text-4xl text-white font-medium content-center'> {data.name} </h1>
+                            <h1 className='text-4xl text-light-color font-medium content-center'> {data.name} </h1>
                             <img className='rounded-md mt-7 w-[150px]' src={data.image}></img>
                         </div>
                     </div>
@@ -308,7 +308,7 @@ function Company() {
                 <div className={`flex flex-col md:my-16 md:mx-16 mx-4 my-8 gap-4 md:gap-10`}>
                     <div className='flex flex-col md:flex-row items-center md:gap-0 gap-2 md:justify-between'>
                         <div className='basis-6/12 w-30'>
-                            <h1 className='text-black md:text-4xl text-start md:mb-0 mb-3 text-3xl font-bold' > About the<span className='text-teal-600'> Company</span> </h1>
+                            <h1 className='text-dark-color md:text-4xl text-start md:mb-0 mb-3 text-3xl font-bold' > About the<span className='text-primary-color'> Company</span> </h1>
                         </div>
                         <div className='flex flex-row w-full md:basis-6/12 auto md:w-64 justify-between'>
                             <div className='flex flex-col w-full mr-4'>
@@ -316,9 +316,9 @@ function Company() {
                                     id='apply_button'
                                     onClick={() => handleApply()}
                                     className={`
-                            flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg bg-teal-600 text-white hover:bg-teal-700'}
+                            flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg bg-primary-color text-light-color hover:bg-primary-light
                           mr-10 font-semibold rounded-lg text-sm`}>
-                                    <i className='fa fa-check text-white mx-2 '></i> Apply now!
+                                    <i className='fa fa-check text-light-color mx-2 '></i> Apply now!
                                 </button>
 
 
@@ -327,8 +327,8 @@ function Company() {
                             <div className='flex flex-col w-full gap-4'>
                                 <button
                                     onClick={handleDownload}
-                                    className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-off-white text-teal-600 font-semibold hover:bg-gray-300 rounded-lg text-sm'>
-                                    <i className='fa fa-download text-teal-600 mx-2'></i> <span className='hidden md:block'> Download Job Description </span>
+                                    className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-light-color text-primary-color font-semibold hover:bg-gray-300 rounded-lg text-sm'>
+                                    <i className='fa fa-download text-primary-color mx-2'></i> <span className='hidden md:block'> Download Job Description </span>
                                     <span className='block md:hidden'>Description </span>
                                 </button>
                                 <RWebShare
@@ -340,8 +340,8 @@ function Company() {
                                     onClick={() => console.log(window.location.href)}
                                 >
                                     <button
-                                        className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-off-white text-teal-600 font-semibold hover:bg-gray-300 rounded-lg text-sm'>
-                                        <i className='fa fa-share text-teal-600 mx-2'></i> <span className='hidden md:block'> Share </span>
+                                        className='flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg  bg-light-color text-primary-color font-semibold hover:bg-gray-300 rounded-lg text-sm'>
+                                        <i className='fa fa-share text-primary-color mx-2'></i> <span className='hidden md:block'> Share </span>
                                         <span className='block md:hidden'>Share </span>
                                     </button>
                                 </RWebShare>
@@ -358,7 +358,7 @@ function Company() {
                     </div>
                 </div>
             </div >
-            <div className={`${!loading ? 'opacity-100' : 'opacity-50'} p-5 bg-teal-200 w-full`}>
+            <div className={`${!loading ? 'opacity-100' : 'opacity-50'} p-5 bg-primary-lighter w-full`}>
                 <div className='flex items-center md:flex-row flex-col md:gap-0 gap-4 justify-between md:mx-16 mx-4 my-10'>
                     <div className='cursor-pointer' onClick={() => {
                         window.location.href = about.website
@@ -373,7 +373,7 @@ function Company() {
                 </div>
             </div>
             <div className={`${!loading ? 'opacity-100' : 'opacity-50'} flex flex-col md:mx-16 md:my-16 mx-3 my-8 md:gap-10 gap-0 text-center`}>
-                <h1 className='font-bold md:text-4xl text-3xl text-teal-600'>Job Profiles <span className='text-black'>and their description</span></h1>
+                <h1 className='font-bold md:text-4xl text-3xl text-primary-color'>Job Profiles <span className='text-dark-color'>and their description</span></h1>
                 <ReactElasticCarousel
                     easing="cubic-bezier(1,.15,.55,1.54)"
                     tiltEasing="cubic-bezier(0.110, 1, 1.000, 0.210)"
@@ -399,7 +399,7 @@ function Company() {
                     breakPoints={breakPoints}
                     className="mt-10 "
                     itemPadding={[10, 10]}
-                    enableAutoPlay
+                    // enableAutoPlay
                     autoPlaySpeed={5000}
                     enableSwipe
                     ref={carouselRef}

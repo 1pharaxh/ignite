@@ -13,6 +13,7 @@ import PageBanner from '../components/PageBanner'
 import AboutBoardOfAdvisors from '../components/AboutComponents/AboutBoardOfAdvisors'
 import AboutCoreCommittee from '../components/AboutComponents/AboutCoreCommittee'
 import BOD1 from '../static/images/aboutpage/BOD_Dhruvi_Tyagi.png';
+
 import BOD2 from '../static/images/aboutpage/BOD_Hitesh_Ahuja.png';
 import BOD3 from '../static/images/aboutpage/BOD_Khushi_Jain.png';
 import BOD4 from '../static/images/aboutpage/BOD_Parth_Bhatia.png';

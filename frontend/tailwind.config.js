@@ -6,13 +6,13 @@ module.exports = {
     extend: {
       colors: {
         // THEME COLORS
-        "primary-color": "#0F6F7B", // navbar select color
-        "primary-light": "#17bec3", // navbar hover color
-        "primary-lighter": "#8BDEE1",
-        "light-color": "#f1f5f9", // white
-        "dark-color": "#072033", // black
-        "primary-dark": "#042f2e",
-        "warning-color": "#FEE21E",
+        "primary-color": "#0F6F7B", // Can be changed
+        "primary-light": "#17bec3", // Hover Color
+        "primary-dark": "#042f2e", // Can be changed
+        "primary-lighter": "#8BDEE1", // Can be changed
+        "light-color": "#f1f5f9", // DO NOT CHANGE
+        "dark-color": "#072033", //  DO NOT CHANGE
+        "warning-color": "#FEE21E", // DO NOT CHANGE
       },
     },
   },
