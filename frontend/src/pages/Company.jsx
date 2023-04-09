@@ -282,7 +282,8 @@ function Company() {
                 {/*TEAL COLOR*/}
                 <div
                     style={{
-                        backgroundImage: `linear-gradient(0deg, rgba(15, 111, 123, 0.7), rgba(15, 111, 123, 0.7)), url(${desk})`,
+                        // backgroundImage: `linear-gradient(0deg, rgba(15, 111, 123, 0.7), rgba(15, 111, 123, 0.7)), url(${desk})`, // default
+                        backgroundImage: `linear-gradient(0deg, rgba(48, 153, 117, 0.7), rgba(48, 153, 117, 0.7)) , url(${desk})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center'
                     }}

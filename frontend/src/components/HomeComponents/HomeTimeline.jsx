@@ -23,7 +23,8 @@ export default function HomeTimeline({ timelineArray }) {
             <div className={isMobile ? '' : 'parallax-overlay'}>
                 <VerticalTimeline
                     className="vertical-timeline-custom-line"
-                    lineColor={"#0f766e"}
+                    // lineColor={"#0f766e"} // default
+                    lineColor={'#58b368'}
                 >
                     {timelineArray && timelineArray.map((item, index) => {
                         return (
@@ -33,7 +34,8 @@ export default function HomeTimeline({ timelineArray }) {
                                 date={item['date']}
                                 contentStyle={{ background: 'rgb(255, 255, 255)', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)' }}
                                 icon={<img className='md:h-12 md:ml-[6px] md:mt-[6px] h-8 ml-[4px] mt-[4px]' src={date} alt="date" />}
-                                iconStyle={{ background: '#0ea5e9', color: '#0f766e' }}
+                                // iconStyle={{ background: '#0ea5e9', color: '#0f766e' }} // default
+                                iconStyle={{ background: '#58b368', color: '#0f766e' }}
                             >
                                 <div className='flex flex-row justify-center items-center gap-4'>
                                     <div className='flex flex-col'>
@@ -57,7 +59,8 @@ export default function HomeTimeline({ timelineArray }) {
                     })}
 
                     <VerticalTimelineElement
-                        iconStyle={{ background: '#2dd4bf', color: '#fff' }}
+                        // iconStyle={{ background: '#2dd4bf', color: '#fff' }} // default
+                        iconStyle={{ background: '#309975', color: '#309975' }}
                         icon={<img className='md:h-12 md:ml-[6px] md:mt-[6px]' src={star} alt="star" />}
                     />
                 </VerticalTimeline>
