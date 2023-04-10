@@ -38,5 +38,5 @@ module.exports = {
  * \src\components\HomeComponents\HomeTimeline.jsx,
  * \src\pages\Company.jsx,
  * \src\pages\Companies.jsx
- *
+ * primary-color wherever you find MySwal in the code
  */

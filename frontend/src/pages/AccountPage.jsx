@@ -12,16 +12,15 @@ import { DotLoader } from "react-spinners";
 
 export default function AccountPage() {
     document.title = "Account"
-
     const [contactNumber, setContactNumber] = useState("");
     const [course, setCourse] = useState("");
     const [yearOfStudy, setYearOfStudy] = useState("");
-    const [college, setCollege] = useState(0);
+    const [college, setCollege] = useState("");
     const [loading, setLoading] = useState(true);
+    const [applied, setApplied] = useState(0);
     const { logOut, user } = UserAuth();
     const [Error, setError] = useState(false);
     const MySwal = withReactContent(Swal)
-    const [noapplication, setnoApplication] = useState(true);
 
     useEffect(() => {
         if (user.uid !== null && user.uid !== undefined) {
@@ -43,7 +42,7 @@ export default function AccountPage() {
                     setCollege(JSON.parse(localStorage.getItem(user.uid)).college);
                 }
                 if (JSON.parse(localStorage.getItem(user.uid)).applied) {
-                    setnoApplication(false);
+                    setApplied(JSON.parse(localStorage.getItem(user.uid)).applied.length);
                 }
 
 
@@ -68,6 +67,9 @@ export default function AccountPage() {
                         }
                         if (doc.data().college) {
                             setCollege(doc.data().college);
+                        }
+                        // applied is an array of strings which contains the id of the job the user has applied to
+                        if (doc.data().applied) {
                         }
                         setLoading(false);
                     } else {
@@ -94,10 +96,12 @@ export default function AccountPage() {
                 title: 'Error!',
                 text: 'File size is too large',
                 icon: 'error',
+                confirmButtonColor: '#36528b', // primary-color
                 confirmButtonText: 'Ok'
             })
             return;
         }
+        setLoading(true);
         const name = new Date().getTime() + file.name;
         const storageRef = ref(getStorage, name);
         const uploadTask = uploadBytesResumable(storageRef, file);
@@ -116,10 +120,22 @@ export default function AccountPage() {
         setDoc(doc(getDb, "users", user.uid), updateObject, { merge: true }).then(() => {
             console.log("Document successfully updated!");
         });
+        // copy the updated data to local storage
+        let userData = JSON.parse(localStorage.getItem(user.uid));
+        if (userData === null) {
+            userData = {};
+        }
+        console.log(userData)
+        userData[key] = downloadURL;
+        localStorage.setItem(user.uid, JSON.stringify(userData));
+
+        setLoading(false);
         MySwal.fire({
             title: 'Success!',
             text: 'Your Resume has been uploaded!',
             icon: 'success',
+            confirmButtonColor: '#36528b', // primary-color
+
             confirmButtonText: 'Ok'
         }).then(() => {
             window.location.reload();
@@ -127,12 +143,31 @@ export default function AccountPage() {
     };
 
     const handleSubmit = () => {
-        if (contactNumber === "" || course === "" || yearOfStudy === "" || college === 0 || college === "Select your college") {
+        // Check if there is a timeOut from local storage only allow the user to submit the form if we exceed the timeOut by 5 minutes
+        const timeOut = JSON.parse(localStorage.getItem("timeOut"));
+        if (timeOut !== null) {
+            const timeOutDate = new Date(timeOut);
+            const currentDate = new Date();
+            const diff = Math.abs(currentDate - timeOutDate);
+            const diffMinutes = Math.floor((diff / 1000) / 60);
+            if (diffMinutes < 5) {
+                MySwal.fire({
+                    title: 'Error',
+                    html: "<div class='text-xl text-red-500 font-bold'>" +
+                        " ● You have already submitted the form. Please wait for 5 minutes before submitting again " + "</div>",
+                    icon: 'error',
+                    confirmButtonColor: '#36528b', // primary-color
+                    confirmButtonText: 'Ok'
+                })
+                return;
+            }
+        }
+        if (contactNumber === "" || course === "" || yearOfStudy === "" || college === 0 || college === "") {
             MySwal.fire({
                 title: 'Error',
                 text: 'Please fill all the fields',
                 icon: 'error',
-                timer: 2000,
+                confirmButtonColor: '#36528b', // primary-color
                 confirmButtonText: 'Ok'
             })
             return;
@@ -145,12 +180,14 @@ export default function AccountPage() {
                 title: 'Error',
                 text: 'Please upload a resume first',
                 icon: 'error',
-                timer: 2000,
+                confirmButtonColor: '#36528b', // primary-color
                 confirmButtonText: 'Ok'
             })
             return;
         }
         setLoading(true);
+        const temp_arr = JSON.parse(localStorage.getItem(user.uid)).applied || [];
+        console.log(temp_arr)
         setDoc(doc(getDb, "users", user.uid), {
             name: user.displayName,
             email: user.email,
@@ -159,7 +196,7 @@ export default function AccountPage() {
             yearOfStudy: yearOfStudy,
             college: college,
             // check if key exists in loca storage if it does then check if the user has applied or not if not then 0 else number of applications
-            applied: JSON.parse(localStorage.getItem(user.uid)).applied || 0,
+            applied: temp_arr,
         }, { merge: true }).then(() => {
             console.log("Document successfully updated!");
         }).then(() => {
@@ -171,31 +208,21 @@ export default function AccountPage() {
                 course: course,
                 yearOfStudy: yearOfStudy,
                 college: college,
-                applied: localStorage.getItem(user.uid).applied || 0,
+                applied: temp_arr,
             }))
             setLoading(false);
             MySwal.fire({
-
                 title: 'Success!',
                 text: 'Changes have been saved',
                 icon: 'success',
-                timer: 2000,
+                confirmButtonColor: '#36528b', // primary-color
                 confirmButtonText: 'Ok'
             })
+            localStorage.setItem("timeOut", JSON.stringify(new Date()));
         });
+
     }
     const handleLogOut = async () => {
-        const userData = JSON.parse(localStorage.getItem(user.uid));
-        const applied = userData ? userData.applied : 0;
-        // convert the applied field to a number
-        if (parseInt(applied) > 0) {
-            // update the applied field in firestore database
-            setDoc(doc(getDb, "users", user.uid), {
-                applied: applied,
-            }, { merge: true }).then(() => {
-                console.log("Applied field successfully updated!");
-            });
-        }
         try {
             await logOut();
         } catch (error) {
@@ -219,27 +246,15 @@ export default function AccountPage() {
         setCollege(val);
     };
 
-    const collegeList = [
-        "Select your college",
-        "Acharya Nagarjuna University",
-        "Andhra University",
-        "Annamacharya University",
-        "Bapatla Engineering College",
-        "Indian Institute of Technology, Kharagpur",
-        "Jawaharlal Nehru Technological University, Hyderabad",
-        "Jawaharlal Nehru Technological University, Kakinada",
-        "Jawaharlal Nehru Technological University, Anantapur",
-        "Indian Institute of Technology, Hyderabad",
-        "Jawaharlal Nehru Technological University, Hyderabad",
-    ]
 
     const clickHandler = () => {
         MySwal.fire({
             icon: "success",
             title: 'Success!',
             text: 'Successfully Updated resume!',
-            confirmButtonColor: '#0D9488',
+            confirmButtonColor: '#36528b', // primary-color
             confirmButtonText: 'Ok'
+
 
         })
     }
@@ -258,6 +273,7 @@ export default function AccountPage() {
             };
             reader.readAsArrayBuffer(file);
         };
+        // trigger the click event
         input.click();
     };
     return (
@@ -310,7 +326,7 @@ export default function AccountPage() {
                     <h1
                         id="number_of_applications"
                         className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-primary-color w-72 md:w-[860px]'>
-                        {noapplication ? 'No applications yet' : JSON.parse(localStorage.getItem(user.uid)).applied}
+                        {applied}
                     </h1>
                 </div>
 
@@ -329,17 +345,17 @@ export default function AccountPage() {
                 </div>
 
                 <div className="flex flex-col">
-                    <label htmlFor="college" className='text-lg font-semibold'>
+                    <h1 className='text-lg font-semibold'>
                         College <span className="text-red-500">*</span>
-                    </label>
-                    <select value={college} disabled={loading} onChange={(e) => handleCollegeChange(e.target.value)} id="college" name="college" className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-primary-color w-72 md:w-[860px]'>
-                        {collegeList.map((college, index) => {
-                            return (
-                                <option key={index} value={college}>{college}</option>
-                            )
-                        })
-                        }
-                    </select>
+                    </h1>
+                    <input
+                        disabled={loading}
+                        value={college}
+                        onChange={(e) => handleCollegeChange(e.target.value)}
+                        id="course"
+                        type="text"
+                        placeholder='Enter your College name'
+                        className='bg-transparent border-b-2 border-gray-500 focus:outline-none focus:border-primary-color w-72 md:w-[860px]' />
                 </div>
 
                 <div className="flex flex-col">

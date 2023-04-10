@@ -22,6 +22,8 @@ function LoginPage() {
                     title: 'Signed In!',
                     text: 'You have successfully signed in',
                     icon: 'success',
+                    confirmButtonColor: '#36528b', // primary-color
+
                     confirmButtonText: 'Ok'
                 }).then(() => {
                     handleAccount();
@@ -45,6 +47,8 @@ function LoginPage() {
         } else if (signin === "verify_email") {
             MySwal.fire({
                 title: 'Email not verified!',
+                confirmButtonColor: '#36528b', // primary-color
+
                 text: 'Please check your email for the confirmation link',
                 icon: 'error',
                 confirmButtonText: 'Ok'
@@ -64,6 +68,8 @@ function LoginPage() {
                     title: 'Email Sent!',
                     text: 'Please check your email for the reset link',
                     icon: 'success',
+                    confirmButtonColor: '#36528b', // primary-color
+
                     confirmButtonText: 'Ok'
                 })
             )

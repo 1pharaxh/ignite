@@ -32,6 +32,8 @@ function SignupPage() {
                 title: 'Account made!',
                 text: 'Please check your email for the confirmation link',
                 icon: 'success',
+                confirmButtonColor: '#36528b', // primary-color
+
                 confirmButtonText: 'Ok'
             })
         }

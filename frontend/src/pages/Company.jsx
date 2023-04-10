@@ -4,7 +4,7 @@ import desk from '../static/images/desk.jpg'
 import CompanyCard from '../components/CompanyCard';
 import JobCard from '../components/JobCard';
 import { UserAuth, getDb } from "../context/AuthContext";
-import { doc, getDocs, getDoc, setDoc, collection, query, where, writeBatch } from 'firebase/firestore';
+import { doc, getDocs, getDoc, setDoc, collection, query, where, writeBatch, arrayUnion, updateDoc } from 'firebase/firestore';
 
 import '../static/css/job_profile_carousel.css'
 
@@ -17,7 +17,10 @@ import ReactElasticCarousel from 'react-elastic-carousel';
 import shareIcon from '../static/images/share-1-svgrepo-com.svg'
 import { DotLoader } from 'react-spinners';
 import { RWebShare } from 'react-web-share';
+
 function Company() {
+    // change 08 -> 17
+    const date = new Date('2023-04-08T00:00:00+05:30') < new Date();
     // scroll to top 
     window.scrollTo(0, 0);
     const carouselRef = useRef(null);
@@ -32,10 +35,8 @@ function Company() {
     const MySwal = withReactContent(Swal)
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
-    const [currentUser, setCurrentUser] = useState('');
     const [applyText, setApplyText] = useState('');
-    const [selectedJob, setSelectedJob] = useState({});
-    const [selectedJobs, setSelectedJobs] = useState([]);
+
     const [keys, setKeys] = useState([]);
     const [hasResume, setHasResume] = useState('');
     const [applied, setApplied] = useState(false);
@@ -43,227 +44,154 @@ function Company() {
     const navigate = useNavigate();
     const backToCompanies = useCallback(() => { navigate('/companies') }, [navigate]);
 
-
     // USE THIS HOOK and HANDLER TO GET DATA BACK FROM CHILD
-    const [key, setKey] = useState('');
+
     const handleNameChange = (newKey) => {
-        if (typeof newKey === 'string') {
-            setKey(newKey);
-            setSelectedJob({ 'Company': data.name, 'JobId': newKey, 'JobTitle': data.job_profile_description[newKey][0][0] })
-        } else {
-            setKey('Selected Multiple Jobs');
-            const temp = []
-            for (let i = 0; i < newKey.length; i++) {
-                temp.push({ 'Company': data.name, 'JobId': newKey[i], 'JobTitle': data.job_profile_description[newKey[i]][0][0] })
-            }
-            setSelectedJobs(temp);
-            setKeys(newKey);
-        };
+        setKeys(newKey);
     };
     const { id } = useParams();
-    const { user } = UserAuth();
+    const { user, logOut } = UserAuth();
 
-
+    async function fetchData() {
+        const response = await fetch('https://ignite-backend.onrender.com/companies/' + id)
+        const data = await response.json()
+        if (data != null) {
+            setLoading(false);
+        }
+        setData(data)
+        // set page title to company name
+        document.title = `${data.name} | Anubhava`;
+        // Check if user is logged in
+        if (user != null && user != undefined && user.uid) {
+            // Check if the localStorage has user data
+            const userCache = JSON.parse(localStorage.getItem(user.uid));
+            // If it does not then logout the user
+            if (userCache == null) {
+                logOut();
+            }
+        }
+    }
+    const checkResume = async () => {
+        const userCache = JSON.parse(localStorage.getItem(user.uid));
+        if (userCache != null) {
+            if (userCache.resume != undefined) {
+                setHasResume(userCache.resume);
+            }
+        } else {
+            // if there is no cache then get the data from firestore READ_ONLY
+            const collectonRef2 = collection(getDb, 'users');
+            const docRef = doc(collectonRef2, user.uid);
+            const docSnap = await getDoc(docRef);
+            const resume = docSnap.data().resume;
+            if (resume != undefined) {
+                setHasResume(resume);
+            }
+        }
+    }
+    // This useEffect is used to fetch data from the backend
     useEffect(() => {
         setApplyText('');
-        document.getElementById('apply_button').disabled = false;
-
-        async function fetchData() {
-            const response = await fetch('https://ignite-backend.onrender.com/companies/' + id)
-            const data = await response.json()
-            if (data != null) {
-                setLoading(false);
-            }
-            setData(data)
-            // set page title to company name
-            document.title = `${data.name} | Anubhava`;
-            if (user) {
-                setCurrentUser(user.email)
-            }
-            if (user != null && user != undefined && user.uid) {
-                // create a local storage for to cache applied jobs
-                const appliedCache = JSON.parse(localStorage.getItem("applied-" + user.uid));
-                if (appliedCache == null && user != null && user != undefined && user.uid) {
-                    localStorage.setItem("applied-" + user.uid, JSON.stringify([]));
-                }
-                // check if user has resume in cache
-                const userCache = JSON.parse(localStorage.getItem(user.uid));
-
-                // if not, check firestore
-                if (userCache == null) {
-                    console.log('no cache, calling firestore')
-                    const docRef = doc(getDb, 'users', user.uid);
-                    const docSnap = await getDoc(docRef);
-                    if (docSnap.exists()) {
-                        // console.log('has resume', docSnap.data().resume);
-                        if (docSnap.data().resume != undefined) {
-                            setHasResume(docSnap.data().resume);
-                        }
-                    } else {
-                        setHasResume('');
-                        console.log('no resume');
-                    }
-                } else {
-                    if (userCache.resume != undefined) {
-                        setHasResume(userCache.resume);
-                    } else {
-                        setHasResume('');
-                        console.log('no resume in cache');
-
-                    }
-                }
-                const applyCache = JSON.parse(localStorage.getItem("applied-" + user.uid));
-                if (applyCache == null || applyCache == []) {
-                    console.log('no cache, calling firestore');
-                    if (key != '' && key != 'Selected Multiple Jobs') {
-                        const docRef = doc(collection(getDb, 'applications'), `${user.uid}+${key}`);
-                        const docSnap = await getDoc(docRef);
-                        if (docSnap.empty) {
-                            console.log('Not Applied.');
-                            setApplied(false);
-                        } else {
-                            console.log('has applied');
-                            setApplied(true);
-                        }
-                    } else if (key == 'Selected Multiple Jobs' && keys.length != 0 && selectedJobs.length != 0) {
-                        const collectionRef = collection(getDb, 'applications');
-                        for await (const key of keys) {
-                            const docId = `${user.uid}+${key}`;
-                            const docRef = doc(collectionRef, docId);
-                            const docSnap = await getDoc(docRef);
-
-                            if (docSnap.exists()) {
-                                console.log('has applied');
-                                setApplyText(prevApplyText => prevApplyText + docSnap.data().profile.JobTitle + ', ');
-                                setApplied(true);
-                            } else {
-                                console.log('Not Applied.');
-                                setApplied(false);
-                            }
-                        }
-                    }
-                } else {
-                    if (key != '' && key != 'Selected Multiple Jobs') {
-                        if (applyCache.includes(key)) {
-                            console.log('has applied');
-                            setApplied(true);
-                        } else {
-                            console.log('Not Applied.');
-                            setApplied(false);
-                        }
-                    }
-                    else if (key == 'Selected Multiple Jobs' && keys.length != 0 && selectedJobs.length != 0) {
-                        for (const key of keys) {
-                            if (applyCache.includes(key)) {
-                                console.log('has applied');
-                                setApplyText(prevApplyText => prevApplyText + data.job_profile_description[key][0][0] + ', ');
-                                setApplied(true);
-
-
-                            } else {
-                                console.log('Not Applied.');
-                                setApplied(false);
-                            }
-                        }
-                    }
-                }
-
-            }
-
-
-
-        }
+        checkResume();
         fetchData()
-    }, [user, key, keys])
+    }, [user])
 
-    const handleApply = () => {
-        if (currentUser == undefined || applied == true || (Object.keys(selectedJob).length == 0 && keys.length == 0) || hasResume == '') {
-            let errorString = '';
-            if (currentUser == undefined) {
-                errorString += "<h1> ● Please Login!";
+    const handleApply = async () => {
+        if (date == true) {
+            let alreadyApplied = false;
+            let applyTextUpdated = '';
+            setLoading(true);
+            if (user != null && user != undefined && user.uid) {
+                const userCache = JSON.parse(localStorage.getItem(user.uid));
+                // If userCache applied is empty then write the elements of keys to firestore WRITE
+                if (userCache.applied.length == 0) {
+                    const collectonRef = collection(getDb, 'users');
+                    const docRef = doc(collectonRef, user.uid);
+                    const batch = writeBatch(getDb);
+                    batch.update(docRef, { applied: arrayUnion(...keys) });
+                    // Commit the batch
+                    await batch.commit();
+                    // Update the cache
+                    userCache.applied = [...userCache.applied, ...keys];
+                    // Update the localStorage
+                    localStorage.setItem(user.uid, JSON.stringify(userCache));
+                    // If 
+                } else {
+
+                    // check if the user has already applied for the job in cache 
+                    for (const key of keys) {
+                        if (userCache.applied.includes(key)) {
+                            alreadyApplied = true;
+                            applyTextUpdated += data.job_profile_description[key][0][0] + ', ';
+                        }
+                    }
+                    if (alreadyApplied) {
+                        // Do not write to firestore
+                    } else {
+                        const collectonRef = collection(getDb, 'users');
+                        const docRef = doc(collectonRef, user.uid);
+                        const batch = writeBatch(getDb);
+                        batch.update(docRef, { applied: arrayUnion(...keys) });
+                        // Commit the batch
+                        await batch.commit();
+                        // Update the cache
+                        userCache.applied = [...userCache.applied, ...keys];
+                        // Update the localStorage
+                        localStorage.setItem(user.uid, JSON.stringify(userCache));
+                    }
+                }
             }
-            if (Object.keys(selectedJob).length == 0 && key != 'Selected Multiple Jobs') {
-                errorString += "<h1> ● Please select a Job!";
+            setLoading(false);
+            // Handle error messages
+            if (user == undefined || alreadyApplied == true || applyTextUpdated != '' || keys.length == 0 || hasResume == '') {
+                let errorString = '';
+                if (user == undefined) {
+                    errorString += "<h1> ● Please Login!";
+                }
+                if (keys.length == 0) {
+                    errorString += "<h1> ● Please select a Job!";
+                }
+                if (applyText == true) {
+                    errorString += "<h1> ● Already applied!";
+                }
+                if (hasResume == '') {
+                    errorString += "<h1> ● Missing resume!";
+                }
+                if (applyTextUpdated != '') {
+                    errorString += "<h1> ● Already applied for " + applyTextUpdated;
+                }
+                MySwal.fire({
+                    icon: "error",
+                    title: 'Error!',
+                    html: "<div class='flex flex-col items-start gap-2 font-bold text-xl text-red-500'>"
+                        + errorString
+                        + "</div>",
+                    confirmButtonColor: '#36528b', // primary-color
+                    confirmButtonText: 'Ok'
+                }).then(() => {
+                    setApplyText('');
+                    return;
+                })
+            } else {
+                // if there are no errors, go
+                backToCompanies();
             }
-            if (applied == true) {
-                errorString += "<h1> ● Already applied!";
-            }
-            if (hasResume == '') {
-                errorString += "<h1> ● Missing resume!";
-            }
-            if (applyText != '') {
-                errorString += "<h1> ● Already applied for " + applyText;
-            }
+        } else {
             MySwal.fire({
                 icon: "error",
                 title: 'Error!',
-                html: "<div class='flex flex-col items-start gap-2 font-bold text-xl text-red-500'>"
-                    + errorString
+                html: "<div class='text-xl text-red-500 font-bold'>" +
+                    " ● We start accepting applications on 17th April 2023."
                     + "</div>",
-                confirmButtonColor: '#0D9488',
-                confirmButtonText: 'Ok'
-            });
-            return;
-        }
-        document.getElementById('apply_button').disabled = true;
-        if (Object.keys(selectedJob).length != 0 && hasResume != '' && currentUser != undefined && applied == false) {
-            let docId = `${user.uid}+${key}`;
-            setDoc(doc(collection(getDb, "applications"), docId), {
-                name: user.displayName,
-                uid: user.uid,
-                profile: selectedJob,
-                resume: hasResume,
+                confirmButtonColor: '#36528b', // primary-color
+                confirmButtonText: 'Ok',
             }).then(() => {
-                // Update the "applied" value in localStorage
-                const appliedCache = JSON.parse(localStorage.getItem("applied-" + user.uid));
-                appliedCache.push(selectedJob);
-
-                console.log("Document successfully written to firestore and cache!");
-                // Get the existing "applied" value from localStorage
-                const userData = JSON.parse(localStorage.getItem(user.uid));
-                const applied = userData ? userData.applied : 0;
-                // Update the "applied" value in localStorage
-                localStorage.setItem(user.uid, JSON.stringify({
-                    ...(userData || {}),
-                    applied: applied + 1,
-                }));
-                // go to companies page
-                backToCompanies();
-            });
-        } else if (selectedJobs.length > 0 && hasResume != '' && currentUser != undefined && applied == false) {
-            const batch = writeBatch(getDb);
-            const appliedCache = JSON.parse(localStorage.getItem("applied-" + user.uid));
-            let cachedApplied = [];
-            selectedJobs.forEach(job => {
-                const newDocRef = doc(collection(getDb, "applications"), `${user.uid}+${job['JobId']}`);
-                batch.set(newDocRef, {
-                    name: user.displayName,
-                    uid: user.uid,
-                    profile: job,
-                    resume: hasResume,
-                });
-                cachedApplied.push(job['JobId']);
-            });
-            batch.commit().then(() => {
-                // Update the "applied" value in localStorage
-                localStorage.setItem("applied-" + user.uid, JSON.stringify([...appliedCache, ...cachedApplied]));
-
-                console.log("All documents successfully written to firestore and cache!");
-                // Get the existing "applied" value from localStorage
-                const userData = JSON.parse(localStorage.getItem(user.uid));
-                const applied = userData ? userData.applied : 0;
-                // Update the "applied" value in localStorage
-                localStorage.setItem(user.uid, JSON.stringify({
-                    ...(userData || {}),
-                    applied: applied + selectedJobs.length,
-                }));
-                // go to companies page
-                backToCompanies();
-            });
+                return;
+            })
         }
-
-
     }
+
+
+
     const handleDownload = () => {
         let linkText = data.pdfDescription;
         const link = document.createElement('a');
@@ -293,7 +221,10 @@ function Company() {
                     <div className='h-80 z-1 overflow-clip justify-center items-center flex-col flex'>
                         <div className='flex flex-col items-center justify-center mb-10 h-full mt-[3%]'>
                             <h1 className='text-4xl text-light-color font-medium content-center'> {data.name} </h1>
-                            <img className='rounded-md mt-7 w-[150px]' src={data.image}></img>
+                            <div className='w-[150px] h-[150px] mt-4 bg-light-color rounded-md items-center justify-center flex overflow-hidden'>
+                                <img className='object-contain h-full w-full' src={data.image}></img>
+
+                            </div>
                         </div>
                     </div>
 
@@ -317,6 +248,8 @@ function Company() {
                             <div className='flex flex-col w-full mr-4'>
                                 <button
                                     id='apply_button'
+                                    // disable this button till 12 April 2023 IST
+                                    disabled={loading}
                                     onClick={() => handleApply()}
                                     className={`
                             flex flex-col h-12 w-full items-center px-4 py-2 shadow-lg bg-primary-color text-light-color hover:bg-primary-light
@@ -433,5 +366,6 @@ function Company() {
 
     )
 }
+
 
 export default Company

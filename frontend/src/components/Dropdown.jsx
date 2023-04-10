@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Dropdown({ body, onNameChange }) {
     const newBody = {};
-
     for (const key in body) {
         if (Object.hasOwnProperty.call(body, key)) {
             newBody[key] = body[key][0][0];
@@ -16,8 +15,10 @@ export default function Dropdown({ body, onNameChange }) {
     const [selectedProfiles, setSelectedProfiles] = useState([]);
 
     function handleCheckboxClick(profileName) {
+        // Remove profile from selectedProfiles if it is already selected
         if (selectedProfiles.includes(profileName)) {
             setSelectedProfiles(selectedProfiles.filter(name => name !== profileName));
+            // Else add it
         } else {
             setSelectedProfiles([...selectedProfiles, profileName]);
         }
@@ -29,7 +30,7 @@ export default function Dropdown({ body, onNameChange }) {
     }
 
     function handleSubmitClick() {
-        onNameChange(selectedProfiles.length === 1 ? selectedProfiles[0] : selectedProfiles);
+        onNameChange(selectedProfiles);
         setShowDropdown(false);
     }
 
@@ -60,10 +61,6 @@ export default function Dropdown({ body, onNameChange }) {
                             {body.map((el, index) => (
                                 <a
                                     key={index}
-                                    onClick={(event) => {
-                                        event.preventDefault();
-                                        handleCheckboxClick(Object.keys(el)[0]);
-                                    }}
                                     className="cursor-pointer flex flex-row gap-2 px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-200 focus:outline-none focus:bg-gray-100"
                                 >
 
