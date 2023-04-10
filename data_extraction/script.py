@@ -5,8 +5,11 @@ import time
 from pymongo import MongoClient
 import json
 import os 
+import pyautogui
+pyautogui.hotkey('alt', 'enter')
 # clear the terminal
 os.system('cls' if os.name == 'nt' else 'clear')
+
 print('''
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⠛⢩⣴⣶⣶⣶⣌⠙⠫⠛⢋⣭⣤⣤⣤⣤⡙⣿⣿⣿⣿⣿⣿
@@ -81,7 +84,48 @@ mongodb_url = config['mongodb_url']
 
 firebase_admin.initialize_app(cred)
 if os.path.exists('applications.csv'):
-    os.remove('applications.csv')
+    # check if file is being used by another process
+    try:
+        os.remove('applications.csv')
+    except PermissionError:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print('''
+⠀⠀⢀⣤⣶⣶⣤⣄⡀
+⠀⢀⣿⣿⣿⣿⣿⣿⣿⡆
+⠀⠸⣿⣿⣿⣿⣿⡟⡟⡗ ⣿⠉⣿⠉⣿⡏⠹⡏⢹⡏⢹⣿⣿⠉⣿⠉⣿⡟⢋⠛⣿⠉⡟⢉⡏⠹⠏⣹⣿
+⠀⠀⠙⠏⠯⠛⣉⢲⣧⠟ ⣿⠄⣿⠄⣿⡇⡄⠁⢸⡇⢸⣿⣿⠄⣿⠄⣿⠄⣿⣿⣿⠄⡀⢻⣿⡄⢠⣿⣿
+⠀⠀⠠⢭⣝⣾⠿⣴⣿⠇ ⣿⣦⣤⣴⣿⣧⣿⣤⣼⣧⣬⣭⣿⣦⣤⣴⣿⣧⣤⣤⣿⣤⣷⣤⣿⣧⣼⣿⣿
+⠀⠀⢐⣺⡿⠁⠀⠈⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⣶⣶⣶⣶⣶⣶⠀
+⠀⠀⣚⣿⠃ ⣶⣶⣶⣶
+⢀⣿⣿⣿⣷⢒⣢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣶⣶⣄⠄
+⢰⣿⣿⡿⣿⣦⠬⢝⡄⠀⠀⠀⠀⠀⠀⢠⣿⠿⠿⠟⠛⠋⠁
+⠠⢿⣿⣷⠺⣿⣗⠒⠜⡄⠀⠀⠀⠀⣴⠟⠁
+⠀⣰⣿⣷⣍⡛⣯⣯⣙⡁⠀⠀⣠⡾⠁
+⠀⠨⢽⣿⣷⢍⣛⣶⢷⣼⣠⣾⠋
+⠀⠀⠘⢿⣿⣖⠬⣹⣶⣿⠟⠁
+⠀⠀⠀⠚⠿⠿⡒⠨⠛⠋
+⠀⠀⠀⠐⢒⣛⣷
+⠀⠀⠀⢘⣻⣭⣭
+⠀⠀⠀⡰⢚⣺⣿
+⠀⠀⢠⣿⣿⣿⣿⣦⡄
+⠀⠀⢸⡿⢿⣿⢿⡿⠃
+⠀⠀⠘⡇⣸⣿⣿⣿⣆
+⠀⠀⠀⠀⠸⣿⡿⠉⠁
+⠀⠀⠀⠀⠀⢿⡟
+
+  /$$$$$$   /$$$$$$  /$$$$$$$   /$$$$$$                   
+ /$$__  $$ /$$__  $$| $$__  $$ /$$__  $$                  
+| $$  \ $$| $$  \ $$| $$  \ $$| $$  \__/                  
+| $$  | $$| $$  | $$| $$$$$$$/|  $$$$$$                   
+| $$  | $$| $$  | $$| $$____/  \____  $$                  
+| $$  | $$| $$  | $$| $$       /$$  \ $$                  
+|  $$$$$$/|  $$$$$$/| $$      |  $$$$$$/       /$$ /$$ /$$
+ \______/  \______/ |__/       \______/       |__/|__/|__/
+                                                            
+    Please close any other applications that are using applications.csv (Microsoft Excel etc.)
+        ''')
+        input("Press Enter to exit...")
+        exit()
 
 client = MongoClient(mongodb_url)
 db = client.Collection
@@ -102,6 +146,7 @@ for application in applications:
     year = application.to_dict()['yearOfStudy'] + " Year"
     userId = application.id
     keys = application.to_dict()['applied']
+    os.system('cls' if os.name == 'nt' else 'clear')
     for key in keys:
         pipeline = [
             {"$match": {f"job_profile_description.{key}": {"$exists": True}}},
@@ -152,6 +197,8 @@ print('''
 ⣿⡽⣯⣷⢿⣞⣯⣷⡿⣯⣿⡾⣿⣽⡾⣽⢾⡽⣮⣵⢻⣬⢳⡜⣜⣣⠻⣜⡛⢶⡱⢎⡖⣦⡱⣤⢲⡰⣆⣜⣲⣜⡳⣞⡭⡞⡵⣎⡟⡼
 ⣿⣿⢯⣿⣻⣯⣿⢷⣿⣟⣷⡿⣟⣾⣟⣿⢯⣿⣳⣯⣟⡾⣧⣟⡾⣖⣟⣶⣹⢧⣛⣮⡽⡶⣝⣮⠷⣝⣮⡽⢶⡭⣷⡹⣞⡽⣳⡝⣾⡹
 ⣿⣻⡿⣯⣿⣻⣽⣿⣳⡿⣯⣿⣟⣿⢾⣻⡿⣽⣯⣷⣿⣻⣽⣯⣿⣽⣾⣳⣯⣿⣽⣾⣽⣻⣽⣞⡿⣽⡾⣽⢯⣟⣶⣻⡵⣏⡷⣹⠶⣽
+
+
  /$$$$$$$  
 | $$__  $$    
 | $$  \ $$  /$$$$$$  /$$$$$$$   /$$$$$$    
