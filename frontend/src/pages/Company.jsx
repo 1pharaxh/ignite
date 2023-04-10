@@ -18,8 +18,8 @@ import { DotLoader } from 'react-spinners';
 import { RWebShare } from 'react-web-share';
 
 function Company() {
-    // change 08 -> 17
-    const date = new Date('2023-04-17T00:00:00+05:30') < new Date();
+    // change 08 -> 20
+    const date = new Date('2023-04-20T00:00:00+05:30') < new Date();
     // scroll to top 
     window.scrollTo(0, 0);
     const carouselRef = useRef(null);
@@ -177,7 +177,7 @@ function Company() {
                 icon: "error",
                 title: 'Error!',
                 html: "<div class='text-xl text-red-500 font-bold'>" +
-                    " ● We start accepting applications on 17th April 2023."
+                    " ● We start accepting applications on 21st April 2023."
                     + "</div>",
                 confirmButtonColor: '#36528b', // primary-color
                 confirmButtonText: 'Ok',
