@@ -64,7 +64,7 @@ function HomeTopCompanies({ imageArray }) {
                     {imageArray.map((el, index) => (
 
                         < div
-                            onClick={() => window.open(el['link'], '_blank')}
+                            // onClick={() => window.open(el['link'], '_blank')}
                             key={index} className='inline-block p-2 cursor-pointer rounded-lg bg-light-color md:mx-4 mx-1 shadow-md' >
                             <img src={el['image']}
                                 alt='company' className='w-60 h-32 md:w-60 md:h-36 rounded-lg' />
