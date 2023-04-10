@@ -150,11 +150,11 @@ export default function AccountPage() {
             const currentDate = new Date();
             const diff = Math.abs(currentDate - timeOutDate);
             const diffMinutes = Math.floor((diff / 1000) / 60);
-            if (diffMinutes < 5) {
+            if (diffMinutes < 360) {
                 MySwal.fire({
                     title: 'Error',
                     html: "<div class='text-xl text-red-500 font-bold'>" +
-                        " ● You have already submitted the form. Please wait for 5 minutes before submitting again " + "</div>",
+                        " ● You have already submitted the form. Please wait for 6 hours before submitting again " + "</div>",
                     icon: 'error',
                     confirmButtonColor: '#36528b', // primary-color
                     confirmButtonText: 'Ok'
