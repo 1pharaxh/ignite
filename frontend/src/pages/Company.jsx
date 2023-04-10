@@ -14,13 +14,12 @@ import withReactContent from 'sweetalert2-react-content'
 import PerkAndEligibleCard from '../components/PerkAndEligibleCard';
 import Dropdown from '../components/Dropdown';
 import ReactElasticCarousel from 'react-elastic-carousel';
-import shareIcon from '../static/images/share-1-svgrepo-com.svg'
 import { DotLoader } from 'react-spinners';
 import { RWebShare } from 'react-web-share';
 
 function Company() {
     // change 08 -> 17
-    const date = new Date('2023-04-08T00:00:00+05:30') < new Date();
+    const date = new Date('2023-04-17T00:00:00+05:30') < new Date();
     // scroll to top 
     window.scrollTo(0, 0);
     const carouselRef = useRef(null);
@@ -102,7 +101,7 @@ function Company() {
             setLoading(true);
             if (user != null && user != undefined && user.uid) {
                 const userCache = JSON.parse(localStorage.getItem(user.uid));
-                // If userCache applied is empty then write the elements of keys to firestore WRITE
+                // If userCache applied is empty then write the elements of keys to firestore WRITE * KEYS
                 if (userCache.applied.length == 0) {
                     const collectonRef = collection(getDb, 'users');
                     const docRef = doc(collectonRef, user.uid);
@@ -114,10 +113,8 @@ function Company() {
                     userCache.applied = [...userCache.applied, ...keys];
                     // Update the localStorage
                     localStorage.setItem(user.uid, JSON.stringify(userCache));
-                    // If 
-                } else {
-
                     // check if the user has already applied for the job in cache 
+                } else {
                     for (const key of keys) {
                         if (userCache.applied.includes(key)) {
                             alreadyApplied = true;
