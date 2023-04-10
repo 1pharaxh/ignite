@@ -38,7 +38,8 @@ export default function HomeTimeline({ timelineArray }) {
                                 icon={<img className='md:h-12 md:ml-[6px] md:mt-[6px] h-8 ml-[4px] mt-[4px]' src={date} alt="date" />}
                                 // iconStyle={{ background: '#0ea5e9', color: '#0f766e' }} // default
                                 // iconStyle={{ background: '#58b368', color: '#0f766e' }} // 1
-                                iconStyle={{ background: '#2b2d42', color: '#0f766e' }} // 2
+                                // iconStyle={{ background: '#2b2d42', color: '#0f766e' }} // 2
+                                iconStyle={{ background: '#9db7ed', color: '#0f766e' }} // 3
                             >
                                 <div className='flex flex-row justify-center items-center gap-4'>
                                     <div className='flex flex-col'>
@@ -65,7 +66,7 @@ export default function HomeTimeline({ timelineArray }) {
                         // iconStyle={{ background: '#2dd4bf', color: '#fff' }} // default
                         // iconStyle={{ background: '#309975', color: '#309975' }} // 1
                         // iconStyle={{ background: '#0D1B2A', color: '#0d1b2a' }} // 2 // BLACK
-                        iconStyle={{ background: '#36528b', color: '#36528b' }} // 3
+                        iconStyle={{ background: '#36528b', color: '#0F2550' }} // 3
 
                         icon={<img className='md:h-12 md:ml-[6px] md:mt-[6px]' src={star} alt="star" />}
                     />

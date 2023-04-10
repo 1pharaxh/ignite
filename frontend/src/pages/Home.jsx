@@ -1,10 +1,11 @@
 import React from "react";
 import HomeBanner from "../components/HomeComponents/HomeBanner";
-import TheTimesOfIndia from "../static/images/testimages/The times of India.png";
-import BajajCapital from "../static/images/testimages/Bajaj capital.png";
-import Ketto from "../static/images/testimages/ketto.png";
-import LensKart from "../static/images/testimages/Lenskart.png";
-import FeedingIndia from "../static/images/testimages/feeding india by zomato.png";
+import img1 from "../static/images/Sponsors/1.jpg";
+import img2 from "../static/images/Sponsors/2.jpg";
+import img3 from "../static/images/Sponsors/3.jpg";
+import img4 from "../static/images/Sponsors/4.jpg";
+import img5 from "../static/images/Sponsors/5.jpg";
+import img6 from "../static/images/Sponsors/6.jpg";
 
 
 
@@ -14,7 +15,6 @@ import banner from "../static/images/banner_1.jpg";
 import banner2 from "../static/images/banner_2.jpg";
 import phoneBanner from "../static/images/Phone_banner_1.jpg";
 import phoneBanner2 from "../static/images/Phone_banner_2.jpg";
-import home_carousel_image from "../static/images/home_carousel_image.png";
 import HomeTimeline from "../components/HomeComponents/HomeTimeline";
 import HomeTimer from "../components/HomeComponents/HomeTimer";
 import HomeImageContinueScroll from "../components/HomeComponents/HomeImageContinueScroll";
@@ -28,15 +28,16 @@ function Home() {
       <HomeBanner imageArray={[banner, banner2]} phoneImages={[phoneBanner, phoneBanner2]} />
 
       <div className="flex items-center justify-center">
-        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Our</span><span className="text-primary-color"> Sponsors</span></h1>
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Our Sponsors </span><span className="text-primary-color"> / Media Partners</span></h1>
       </div>
 
       <HomeTopCompanies imageArray={[
-        { image: TheTimesOfIndia, link: 'https://www.google.com/' },
-        { image: BajajCapital, link: 'https://www.google.com/' },
-        { image: Ketto, link: 'https://www.google.com/' },
-        { image: LensKart, link: 'https://www.google.com/' },
-        { image: FeedingIndia, link: 'https://www.google.com/' },
+        { image: img1, link: 'https://www.google.com/' },
+        { image: img2, link: 'https://www.google.com/' },
+        { image: img3, link: 'https://www.google.com/' },
+        { image: img4, link: 'https://www.google.com/' },
+        { image: img5, link: 'https://www.google.com/' },
+        { image: img6, link: 'https://www.google.com/' },
       ]} />
 
       <div className="flex items-center justify-center">
