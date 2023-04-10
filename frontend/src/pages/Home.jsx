@@ -27,8 +27,15 @@ function Home() {
     <div className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
       <HomeBanner imageArray={[banner, banner2]} phoneImages={[phoneBanner, phoneBanner2]} />
 
+
+
       <div className="flex items-center justify-center">
-        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Our Sponsors </span><span className="text-primary-color"> / Media Partners</span></h1>
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Our top</span><span className="text-primary-color"> Companies</span></h1>
+      </div>
+      <HomeImageContinueScroll />
+
+      <div className="flex items-center justify-center">
+        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Our Media </span><span className="text-primary-color"> Partners</span></h1>
       </div>
 
       <HomeTopCompanies imageArray={[
@@ -39,11 +46,6 @@ function Home() {
         { image: img5, link: 'https://www.google.com/' },
         { image: img6, link: 'https://www.google.com/' },
       ]} />
-
-      <div className="flex items-center justify-center">
-        <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Our top</span><span className="text-primary-color"> Companies</span></h1>
-      </div>
-      <HomeImageContinueScroll />
 
       <div className="flex items-center justify-center">
         <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Past</span><span className="text-primary-color"> Statistics</span></h1>
