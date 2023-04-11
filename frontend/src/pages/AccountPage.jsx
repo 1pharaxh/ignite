@@ -91,6 +91,10 @@ export default function AccountPage() {
         if (!file) {
             return;
         }
+        const timeOut = timeout("uploadTime");
+        if (timeOut) {
+            return;
+        }
         if (file.size > 1 * 1024 * 1024) {
             MySwal.fire({
                 title: 'Error!',
@@ -138,13 +142,13 @@ export default function AccountPage() {
 
             confirmButtonText: 'Ok'
         }).then(() => {
+            localStorage.setItem("uploadTime", JSON.stringify(new Date()));
             window.location.reload();
         })
     };
 
-    const handleSubmit = () => {
-        // Check if there is a timeOut from local storage only allow the user to submit the form if we exceed the timeOut by 5 minutes
-        const timeOut = JSON.parse(localStorage.getItem("timeOut"));
+    const timeout = (val) => {
+        const timeOut = JSON.parse(localStorage.getItem(val));
         if (timeOut !== null) {
             const timeOutDate = new Date(timeOut);
             const currentDate = new Date();
@@ -159,8 +163,18 @@ export default function AccountPage() {
                     confirmButtonColor: '#36528b', // primary-color
                     confirmButtonText: 'Ok'
                 })
-                return;
+                return true;
+            } else {
+                localStorage.removeItem(val);
+                return false;
             }
+        }
+    }
+    const handleSubmit = () => {
+        // Check if there is a timeOut from local storage only allow the user to submit the form if we exceed the timeOut by 5 minutes
+        const timeOut = timeout("timeOut");
+        if (timeOut) {
+            return;
         }
         if (contactNumber === "" || course === "" || yearOfStudy === "" || college === 0 || college === "") {
             MySwal.fire({
