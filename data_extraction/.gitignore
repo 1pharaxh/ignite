@@ -9,5 +9,7 @@ venv/
 *.csv
 *.exe
 *.spec
+*.zip
+data_extraction.zip
 /dist
 /build
