@@ -36,6 +36,24 @@ import img13 from '../static/images/aboutpage/Sameeksha_Srivastava.png';
 import img14 from '../static/images/aboutpage/Sanskaar_Kulshreshtha.png';
 import img15 from '../static/images/aboutpage/Shourya_Raheja.png';
 
+import akars from '../static/images/aboutpage/akars.jpg';
+import UI_ux from '../static/images/aboutpage/Suvra Shaw.jpg';
+
+const dev = [
+  {
+    'img': akars,
+    'first': 'Akarshan',
+    'last': 'Mishra',
+    'special': "Akarshan Mishra - (Full Stack Developer)"
+  },
+  {
+    'img': UI_ux,
+    'first': 'Suvra',
+    'last': 'Shaw',
+    'special': "Suvra Shaw - (UI/UX Designer)"
+
+  }
+];
 const images2 = [{
   'img': img1,
   'first': 'Aashman',
@@ -174,6 +192,11 @@ function About() {
               <AboutBoardOfAdvisors
                 text="Executive Members"
                 images={images2}
+              />
+
+              <AboutBoardOfAdvisors
+                text="Development Team"
+                images={dev}
               />
             </div>
           </div>

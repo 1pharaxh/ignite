@@ -149,7 +149,7 @@ function Footer() {
                         () => {
                             window.open("https://www.linkedin.com/in/akarshan-m-75577122a/", "_blank")
                         }
-                    }>Akarshan Mishra</span></h1>
+                    }>Akarshan Mishra.</span></h1>
                 </div>
             </div>
             <div className="m-2"></div>

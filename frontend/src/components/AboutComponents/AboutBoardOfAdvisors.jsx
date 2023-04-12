@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactElasticCarousel from "react-elastic-carousel";
 import { motion } from 'framer-motion';
 
-export default function AboutBoardOfAdvisors({ images, text }) {
+export default function AboutBoardOfAdvisors({ images, text, special }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [imageText, setImageText] = useState(null);
@@ -90,7 +90,7 @@ export default function AboutBoardOfAdvisors({ images, text }) {
                             onClick={() => {
                                 setSelectedImage(image['img']);
                                 setIsModalOpen(true);
-                                setImageText(image['first'] + ' ' + image['last']);
+                                setImageText(image['special'] ? image['special'] : image['first'] + ' ' + image['last']);
                             }}
                         >
                             <div className='overflow-hidden md:w-[200px] md:h-[276px] 
