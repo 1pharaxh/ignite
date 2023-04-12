@@ -39,6 +39,12 @@ function HowToApply() {
                     `}
                 />
                 <Accordion
+                    title={"I can't sign up on Anubhava's website using Google email. What should I do ?"}
+                    children={`We recommend you to Google chrome browser to sign up on Anubhava's website. Otherwise you can use your personal email address to sign up
+                    through the Sign up button. If you are still facing issues, please contact us.
+                    `}
+                />
+                <Accordion
                     title={'Who all are eligible for the Internship Fair ?'}
                     children={`
                     Candidates from all universities and domains such as UG, PG and PhD, are eligible.
