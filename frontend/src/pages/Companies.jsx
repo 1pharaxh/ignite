@@ -215,8 +215,8 @@ function Companies() {
                                 <svg className={`${usersearched ? 'hidden' : 'visible'} cursor-pointer fill-primary-color`} onClick={() => handleSearch("")} width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12.5 11H11.71L11.43 10.73C12.41 9.59 13 8.11 13 6.5C13 2.91 10.09 0 6.5 0C2.91 0 0 2.91 0 6.5C0 10.09 2.91 13 6.5 13C8.11 13 9.59 12.41 10.73 11.43L11 11.71V12.5L16 17.49L17.49 16L12.5 11ZM6.5 11C4.01 11 2 8.99 2 6.5C2 4.01 4.01 2 6.5 2C8.99 2 11 4.01 11 6.5C11 8.99 8.99 11 6.5 11Z" />
                                 </svg>
-                                <svg onClick={clearSearch} className={`${usersearched ? 'visible' : 'hidden'} cursor-pointer`} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" fill="#0F6F7B" />
+                                <svg onClick={clearSearch} className={`${usersearched ? 'visible' : 'hidden'} cursor-pointer fill-primary-color`} width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z" />
                                 </svg>
                             </div>
                             <div className='h-px w-12/12 bg-primary-color my-0 mx-2'></div>
@@ -260,8 +260,8 @@ function Companies() {
                 :
                 < div className={`${!usersearched ? `hidden` : `visible`}`}>
                     <h1 className={`${!loading ? `opacity-100` : `opacity-0`} flex flex-row text-2xl md:text-4xl text-primary-color font-medium content-center md:mt-16 md:mb-8 md:mx-16 mt-16 mb-6 mx-4 `}>
-                        <svg onClick={clearSearch} className='cursor-pointer md:mr-5 mr-2 ' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" fill="#0F6F7B" />
+                        <svg onClick={clearSearch} className='cursor-pointer md:mr-5 mr-2 fill-primary-color' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" />
                         </svg>
                         Search results for "<span className='text-dark-color'>{searchString}</span>"
                     </h1>
