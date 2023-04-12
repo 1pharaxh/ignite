@@ -51,7 +51,7 @@ function Home() {
         <h1 className="text-3xl md:my-5 my-3 md:text-4xl font-bold"><span className="text-dark-color">Past</span><span className="text-primary-color"> Statistics</span></h1>
       </div>
       <HomeStatistics
-        Companies={'1000+'}
+        Companies={'100+'}
         applications={'11,000+'}
         registrations={'3,700+'}
         colleges={'1000+'}
