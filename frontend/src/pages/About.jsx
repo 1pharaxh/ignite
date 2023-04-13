@@ -44,12 +44,14 @@ const dev = [
     'img': akars,
     'first': 'Akarshan',
     'last': 'Mishra',
+    "linkedin": "https://www.linkedin.com/in/akarshan-m-75577122a/",
     'special': "Akarshan Mishra - (Full Stack Developer)"
   },
   {
     'img': UI_ux,
     'first': 'Suvra',
     'last': 'Shaw',
+    "linkedin": "https://www.linkedin.com/in/suvrashaw/",
     'special': "Suvra Shaw - (UI/UX Designer)"
 
   }

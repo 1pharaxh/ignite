@@ -6,6 +6,7 @@ export default function AboutBoardOfAdvisors({ images, text, special }) {
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [imageText, setImageText] = useState(null);
+    const [linkedIn, setLinkedIn] = useState(null);
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 700);
     useEffect(() => {
@@ -30,8 +31,20 @@ export default function AboutBoardOfAdvisors({ images, text, special }) {
                         </svg>
                     </button>
 
-                    <img src={selectedImage} alt="Selected" className="mx-auto w-[512px] h-auto" />
-                    <p className="text-center text-2xl mt-4 text-light-color">{selectedImage && `${imageText}`}</p>
+                    <img
+                        onClick={() => {
+                            if (linkedIn) {
+                                window.open(linkedIn, '_blank');
+                            }
+                        }}
+                        src={selectedImage} alt="Selected" className="cursor-pointer mx-auto w-[512px] h-auto" />
+                    <p
+                        onClick={() => {
+                            if (linkedIn) {
+                                window.open(linkedIn, '_blank');
+                            }
+                        }}
+                        className={`${linkedIn ? 'hover:underline cursor-pointer' : ''} text-center text-2xl mt-4 text-light-color`}>{selectedImage && `${imageText}`}</p>
                 </div>
             </div>
         );
@@ -91,6 +104,7 @@ export default function AboutBoardOfAdvisors({ images, text, special }) {
                                 setSelectedImage(image['img']);
                                 setIsModalOpen(true);
                                 setImageText(image['special'] ? image['special'] : image['first'] + ' ' + image['last']);
+                                setLinkedIn(image['linkedin']);
                             }}
                         >
                             <div className='overflow-hidden md:w-[200px] md:h-[276px] 

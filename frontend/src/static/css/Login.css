@@ -1,10 +1,7 @@
 .area{
-    background: #4eb6c8;  
-    background: -webkit-linear-gradient(to left, #8fdcfb, #4e54c8);  
+    @apply bg-gradient-to-r from-primary-color to-primary-dark;
     width: 100%;
     height:100vh;
-    
-   
 }
 
 .circles{
