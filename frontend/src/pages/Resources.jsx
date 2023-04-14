@@ -27,7 +27,7 @@ export default function Resources() {
 
                         <div
                             onClick={() => {
-                                window.open('https://drive.google.com/file/d/1y1t4Y8YnZ2Q2Zm1mZ9X8Zn0d0Q2Jg1jV/view?usp=sharing')
+                                window.open('https://bit.ly/Sample_Resume_Ignite')
                             }}
                             className="cursor-pointer flex rounded-xl flex-row gap-2 w-[200px] h-[48px] bg-primary-color items-center justify-center text-light-color font-semibold text-center">
                             <svg className='fill-light-color' width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -51,7 +51,7 @@ export default function Resources() {
 
                         <div
                             onClick={() => {
-                                window.open('https://drive.google.com/file/d/1y1t4Y8YnZ2Q2Zm1mZ9X8Zn0d0Q2Jg1jV/view?usp=sharing')
+                                window.open('https://drive.google.com/drive/folders/1ARKlh9s1yMDThVG9TRL9ulVcoLnRQIPt?usp=share_link')
                             }}
                             className="cursor-pointer flex rounded-xl flex-row gap-2 w-[200px] h-[48px] bg-primary-color items-center justify-center text-light-color font-semibold text-center">
                             <svg className='fill-light-color' width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
