@@ -134,7 +134,7 @@ collection = db.companies
 db = firestore.client()
 # Reference to the applications collection
 users_ref = db.collection('users')
-applications = users_ref.get()
+
 # Ask if the user wants to check applications or see registered users
 os.system('cls' if os.name == 'nt' else 'clear')
 choice  = input('''
@@ -154,11 +154,12 @@ choice  = input('''
                 `~
 1. Check Applications
 2. See Registered Users
+3. See Incomplete User Profiles
 
-Enter 1 or 2:
+Enter 1 or 2 or 3:
 ''')
 # wait till the user enters a valid choice
-while choice != "1" and choice != "2":
+while choice != "1" and choice != "2" and choice != "3":
     os.system('cls' if os.name == 'nt' else 'clear')
     choice  = input('''
                                             :
@@ -177,11 +178,14 @@ while choice != "1" and choice != "2":
                 `~
             1. Check Applications
             2. See Registered Users
+            3. See Incomplete User Profiles
 
-            Enter 1 or 2:
+            Enter 1 or 2 or 3:
             ''')
     
 if choice == "1":
+    query = users_ref.where('applied', 'not-in', [[]])
+    applications = query.stream()
     for application in applications:
         name = application.to_dict()['name']
         resume = application.to_dict()['resume']
@@ -257,6 +261,8 @@ if choice == "1":
             input("Press Enter to exit...")
             exit()
 if choice == "2":
+    query = users_ref.where('name', '!=', '')
+    applications = query.stream()
     os.system('cls' if os.name == 'nt' else 'clear')
     for application in applications:
         try: 
@@ -318,6 +324,66 @@ if choice == "2":
             ''')
             input("Press Enter to exit...")
             exit()
+if choice == "3":
+    query = users_ref.where('resume', '!=', '')
+    applications = query.stream()
+    os.system('cls' if os.name == 'nt' else 'clear')
+    for application in applications:
+        try: 
+            resume = application.to_dict()['resume']
+            userId = application.id
+            if 'name' not in application.to_dict():
+                print([userId, resume]);
+                with open('applications.csv', 'a', newline='') as file:
+                    writer = csv.writer(file)
+                    # set the header
+                    if os.stat('applications.csv').st_size == 0:
+                        writer.writerow(['userId', 'Resume'])
+                        # leave a blank line
+                        writer.writerow([])
+                    writer.writerow([userId, resume])
+                file.close()
+            time.sleep(1)
+        except:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('''
+    ⠀⠀⢀⣤⣶⣶⣤⣄⡀
+    ⠀⢀⣿⣿⣿⣿⣿⣿⣿⡆
+    ⠀⠸⣿⣿⣿⣿⣿⡟⡟⡗ ⣿⠉⣿⠉⣿⡏⠹⡏⢹⡏⢹⣿⣿⠉⣿⠉⣿⡟⢋⠛⣿⠉⡟⢉⡏⠹⠏⣹⣿
+    ⠀⠀⠙⠏⠯⠛⣉⢲⣧⠟ ⣿⠄⣿⠄⣿⡇⡄⠁⢸⡇⢸⣿⣿⠄⣿⠄⣿⠄⣿⣿⣿⠄⡀⢻⣿⡄⢠⣿⣿
+    ⠀⠀⠠⢭⣝⣾⠿⣴⣿⠇ ⣿⣦⣤⣴⣿⣧⣿⣤⣼⣧⣬⣭⣿⣦⣤⣴⣿⣧⣤⣤⣿⣤⣷⣤⣿⣧⣼⣿⣿
+    ⠀⠀⢐⣺⡿⠁⠀⠈⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⣶⣶⣶⣶⣶⣶⠀
+    ⠀⠀⣚⣿⠃ ⣶⣶⣶⣶
+    ⢀⣿⣿⣿⣷⢒⣢⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣶⣶⣄⠄
+    ⢰⣿⣿⡿⣿⣦⠬⢝⡄⠀⠀⠀⠀⠀⠀⢠⣿⠿⠿⠟⠛⠋⠁
+    ⠠⢿⣿⣷⠺⣿⣗⠒⠜⡄⠀⠀⠀⠀⣴⠟⠁
+    ⠀⣰⣿⣷⣍⡛⣯⣯⣙⡁⠀⠀⣠⡾⠁
+    ⠀⠨⢽⣿⣷⢍⣛⣶⢷⣼⣠⣾⠋
+    ⠀⠀⠘⢿⣿⣖⠬⣹⣶⣿⠟⠁
+    ⠀⠀⠀⠚⠿⠿⡒⠨⠛⠋
+    ⠀⠀⠀⠐⢒⣛⣷
+    ⠀⠀⠀⢘⣻⣭⣭
+    ⠀⠀⠀⡰⢚⣺⣿
+    ⠀⠀⢠⣿⣿⣿⣿⣦⡄
+    ⠀⠀⢸⡿⢿⣿⢿⡿⠃
+    ⠀⠀⠘⡇⣸⣿⣿⣿⣆
+    ⠀⠀⠀⠀⠸⣿⡿⠉⠁
+    ⠀⠀⠀⠀⠀⢿⡟
+
+    /$$$$$$   /$$$$$$  /$$$$$$$   /$$$$$$                   
+    /$$__  $$ /$$__  $$| $$__  $$ /$$__  $$                  
+    | $$  \ $$| $$  \ $$| $$  \ $$| $$  \__/                  
+    | $$  | $$| $$  | $$| $$$$$$$/|  $$$$$$                   
+    | $$  | $$| $$  | $$| $$____/  \____  $$                  
+    | $$  | $$| $$  | $$| $$       /$$  \ $$                  
+    |  $$$$$$/|  $$$$$$/| $$      |  $$$$$$/       /$$ /$$ /$$
+    \______/  \______/ |__/       \______/       |__/|__/|__/
+                                                                
+       This user profile is not complete.
+            ''')
+            input("Press Enter to exit...")
+            exit()
+
 
 os.system('cls' if os.name == 'nt' else 'clear')
 print('''

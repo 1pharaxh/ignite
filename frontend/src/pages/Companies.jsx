@@ -75,6 +75,11 @@ function Companies() {
     }
     const handleFilter = (e) => {
         e.preventDefault();
+        // clear the pagination index 
+        localStorage.setItem('companiesPaginationIndex', 1)
+        setCurrentPage(1)
+        // reset the pagination number
+        pagination = [];
         MySwal.fire({
             icon: 'info',
             title: 'Filter by Profile Type',
