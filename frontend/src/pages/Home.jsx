@@ -12,9 +12,7 @@ import img6 from "../static/images/Sponsors/6.jpg";
 import HomeTopCompanies from "../components/HomeComponents/HomeTopCompanies";
 import HomeStatistics from "../components/HomeComponents/HomeStatistics";
 import banner from "../static/images/banner_1.jpg";
-import banner2 from "../static/images/banner_2.jpg";
 import phoneBanner from "../static/images/Phone_banner_1.jpg";
-import phoneBanner2 from "../static/images/Phone_banner_2.jpg";
 import HomeTimeline from "../components/HomeComponents/HomeTimeline";
 import HomeTimer from "../components/HomeComponents/HomeTimer";
 import HomeImageContinueScroll from "../components/HomeComponents/HomeImageContinueScroll";
@@ -25,7 +23,7 @@ function Home() {
 
   return (
     <div className="md:mt-20 mt-[65px] flex flex-col md:gap-8 gap-4">
-      <HomeBanner imageArray={[banner, banner2]} phoneImages={[phoneBanner, phoneBanner2]} />
+      <HomeBanner imageArray={[banner]} phoneImages={[phoneBanner]} />
 
 
 
