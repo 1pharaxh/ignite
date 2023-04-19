@@ -2,7 +2,6 @@ import React from 'react'
 import QueryCards from '../components/ContactUsCards/QueryCards'
 import PageBanner from '../components/PageBanner'
 import banner from '../static/images/ContactUsBanner.jpg'
-import demoImage from '../static/images/testimages/principal.jpg'
 import Accordion from '../components/HowToApplyComponents/AccordionComponent'
 
 function ContactUs() {
@@ -65,30 +64,30 @@ function ContactUs() {
                 <QueryCards
                     dataArray={[
                         {
-                            name: 'Arpit Gupta',
-                            number: '(+91) 9540497325',
-                            image: demoImage,
+                            name: 'Jasnoor',
+                            number: '+91 9650198803',
+                            link: 'http://wa.me/+919650198803'
                         },
                         {
-                            name: 'Parv Arora',
-                            number: '(+91) 9971386254',
-                            image: demoImage,
+                            name: 'Arpit',
+                            number: '+91 9540497325',
+                            link: 'http://wa.me/+919540497325'
                         },
                         {
-                            name: 'Amandeep Chadha',
-                            number: '(+91) 8899209001',
-                            image: demoImage,
+                            name: 'Aashman',
+                            number: '+91 9205833905',
+                            link: 'http://wa.me/+919205833905'
                         },
                         {
-                            name: 'Aashman Rawat',
-                            number: '(+91) 9205833905',
-                            image: demoImage,
+                            name: 'Sameeksha',
+                            number: '+91 9958331336',
+                            link: 'http://wa.me/+919958331336'
                         },
                         {
-                            name: 'Arnav Arora',
-                            number: '(+91) 8272802249',
-                            image: demoImage,
-                        },
+                            name: 'Prabhjot',
+                            number: '+91 8929168629',
+                            link: 'http://wa.me/+918929168629'
+                        }
                     ]}
                 />
             </div>

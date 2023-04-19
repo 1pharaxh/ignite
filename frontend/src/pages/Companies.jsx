@@ -343,15 +343,23 @@ function Companies() {
                         onClick={(e) => handleClick(e, currentPage + 1)}
                     >
                         <path
-
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth={2}
                             d="M9 5l7 7-7 7"
                         />
                     </svg>
+                    <div
+                        className='h-[50px] w-[70px] flex flex-row items-center justify-center  rounded-lg'
+                    >
+                        <h1 className='
+                        text-primary-color text-lg font-semibold
+                        '>
+                            {currentPage} of {pagesCount}
+                        </h1>
+                    </div>
                 </ul>
-            </div>
+            </div >
         </div >
     )
 }
