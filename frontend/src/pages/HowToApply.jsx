@@ -17,7 +17,7 @@ function HowToApply() {
             />
             <YouTubeBanner
                 image={youtube}
-                link={'https://www.ignitesgtb.com/'}
+                link={'https://youtu.be/t-zkR6x3axo'}
             />
             <div className='flex flex-col gap-5 md:px-10 px-5 my-5 md:my-10'>
 

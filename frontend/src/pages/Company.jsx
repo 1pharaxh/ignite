@@ -19,7 +19,7 @@ import { RWebShare } from 'react-web-share';
 
 function Company() {
     // change 08 -> 20
-    const date = new Date('2023-04-20T00:00:00+05:30') < new Date();
+    const date = new Date('2023-04-08T00:00:00+05:30') < new Date();
     // scroll to top 
     window.scrollTo(0, 0);
     const carouselRef = useRef(null);

@@ -3,6 +3,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from "react-intersection-observer";
 
+import whatsapp_logo from '../../static/images/whatsapp_logo.png';
+
 function HomeJoingCommunity() {
     // make a useEffect to check screen size and detect if it is mobile or not
     const [isMobile, setIsMobile] = React.useState(false);
@@ -22,7 +24,7 @@ function HomeJoingCommunity() {
     });
     return (
         <div>
-            <div className='flex flex-row md:gap-56 gap-4 justify-center bg-primary-lighter items-center py-10 cursor-pointer'
+            <div className='flex flex-row md:gap-56 gap-4 justify-center bg-light-color items-center py-10 cursor-pointer'
                 onClick={() => window.open(' https://chat.whatsapp.com/Je7C9q0yAOXGp74Vq3tskJ', '_blank')}
             >
                 <motion.div
@@ -37,7 +39,7 @@ function HomeJoingCommunity() {
                     transition={{ duration: 1, delay: 0.5, type: 'spring', stiffness: 100 }}
 
                     className='md:w-[300px] md:h-[300px] h-[100px] w-[100px]'>
-                    <img src='https://images.unsplash.com/photo-1633354931133-27ac1ee5d853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
+                    <img src={whatsapp_logo}
                         alt='whatsapp'
                         className='object-cover rounded-xl shadow-lg' />
                 </motion.div>

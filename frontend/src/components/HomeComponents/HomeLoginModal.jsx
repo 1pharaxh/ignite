@@ -24,14 +24,14 @@ export default function HomeLoginModal() {
                     style={{
                         boxShadow: '0px 1px 2px rgba(7, 32, 51, 0.4), 0px 2px 6px 2px rgba(7, 32, 51, 0.2)'
                     }}
-                    className="bg-primary-lighter p-4 w-full fixed bottom-0 right-0 z-10 flex flex-col md:flex-row justify-center md:justify-between md:items-center px-4"
+                    className="bg-light-color p-4 w-full fixed bottom-0 right-0 z-10 flex flex-col md:flex-row justify-center md:justify-between md:items-center px-4"
                 >
                     <div className="flex-col flex items-start justify-center gap-3 md:w-1/2">
                         <h1 className="text-xl md:text-2xl font-bold text-gray-600">Take the next step in your career 💼</h1>
                         <p className="text-base text-gray-600">Looking for your dream internship? Unlock job opportunities today - log in and apply now 🚀!</p>
                     </div>
                     <div className="md:w-1/2">
-                        <p onClick={closeModal} className="underline text-primary-color font-bold md:text-center md:mt-0 mt-3">
+                        <p onClick={closeModal} className="underline text-primary-color cursor-pointer font-bold md:text-center md:mt-0 mt-3">
                             Close{" "}
                         </p>
                         <div className="flex flex-row items-center">

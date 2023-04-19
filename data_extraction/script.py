@@ -265,7 +265,10 @@ if choice == "2":
     applications = query.stream()
     os.system('cls' if os.name == 'nt' else 'clear')
     for application in applications:
-        try: 
+        name = application.to_dict()['name']
+        userId = application.id
+        # check if application.to_dict() has key 'resume'
+        if 'resume' in application.to_dict():
             name = application.to_dict()['name']
             resume = application.to_dict()['resume']
             email = application.to_dict()['email']
@@ -273,7 +276,6 @@ if choice == "2":
             college = application.to_dict()['college']
             course = application.to_dict()['course']
             year = application.to_dict()['yearOfStudy'] + " Year"
-            userId = application.id
             print([userId, name, resume, email, phone, college, course, year]);
             with open('applications.csv', 'a', newline='') as file:
                 writer = csv.writer(file)
@@ -285,7 +287,7 @@ if choice == "2":
                 writer.writerow([userId, name, resume, email, phone, college, course, year])
             file.close()
             time.sleep(1)
-        except:
+        else:
             os.system('cls' if os.name == 'nt' else 'clear')
             print('''
     ⠀⠀⢀⣤⣶⣶⣤⣄⡀
@@ -320,10 +322,11 @@ if choice == "2":
     |  $$$$$$/|  $$$$$$/| $$      |  $$$$$$/       /$$ /$$ /$$
     \______/  \______/ |__/       \______/       |__/|__/|__/
                                                                 
-       This user profile is not complete.
+       This user profile is missing Resume information.
             ''')
-            input("Press Enter to exit...")
-            exit()
+            print("User ID: " + userId)
+            print("Name: " + name)
+            input("Press Enter to continue...")
 if choice == "3":
     query = users_ref.where('resume', '!=', '')
     applications = query.stream()
