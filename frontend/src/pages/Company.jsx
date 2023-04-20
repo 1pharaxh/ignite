@@ -67,7 +67,18 @@ function Company() {
             // If it does not then logout the user
             if (userCache == null) {
                 // navigate to account page
-                navigate('/account');
+                MySwal.fire({
+                    icon: "error",
+                    title: 'Error!',
+                    html: "<div class='flex flex-col items-start gap-2 font-bold text-xl text-red-500'>"
+                        + "Please fill your details."
+                        + "</div>",
+                    confirmButtonColor: '#36528b', // primary-color
+                    confirmButtonText: 'Ok'
+                }).then(() => {
+                    navigate('/account');
+
+                })
             }
         }
     }

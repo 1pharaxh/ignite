@@ -8,6 +8,7 @@ import { UserAuth, getStorage, getDb } from "../context/AuthContext";
 import { doc, getDoc, collection, setDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { DotLoader } from "react-spinners";
+import { useNavigate } from "react-router-dom";
 
 
 export default function AccountPage() {
@@ -21,6 +22,8 @@ export default function AccountPage() {
     const { logOut, user } = UserAuth();
     const [Error, setError] = useState(false);
     const MySwal = withReactContent(Swal)
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         if (user.uid !== null && user.uid !== undefined) {
@@ -227,12 +230,15 @@ export default function AccountPage() {
             setLoading(false);
             MySwal.fire({
                 title: 'Success!',
-                text: 'Changes have been saved',
+                text: 'Changes have been saved, Please proceed to apply for the internship',
                 icon: 'success',
                 confirmButtonColor: '#36528b', // primary-color
                 confirmButtonText: 'Ok'
+            }).then(() => {
+                localStorage.setItem("timeOut", JSON.stringify(new Date()));
+                navigate("/companies")
             })
-            localStorage.setItem("timeOut", JSON.stringify(new Date()));
+
         });
 
     }
