@@ -102,8 +102,6 @@ function Company() {
 
 
                 }
-            } else {
-                setHasResume('');
             }
         } catch (error) {
             setHasResume('');
@@ -125,7 +123,7 @@ function Company() {
             let applyTextUpdated = '';
             setLoading(true);
             const userCache = JSON.parse(localStorage.getItem(user.uid));
-            if (user.uid == undefined && user != null && user != undefined) {
+            if (user.uid != undefined && user != null && user != undefined) {
                 // Check if the localStorage applied array length is more than 20
                 if (keys.length > 20 || userCache.applied.length > 20) {
                     MySwal.fire({
@@ -185,10 +183,8 @@ function Company() {
                         + "</div>",
                     confirmButtonColor: '#36528b', // primary-color
                     confirmButtonText: 'Ok'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        navigate('/account');
-                    }
+                }).then(() => {
+                    navigate('/account');
                 });
             }
             setLoading(false);
