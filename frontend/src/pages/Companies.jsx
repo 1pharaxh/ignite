@@ -123,12 +123,17 @@ function Companies() {
             },
             allowOutsideClick: false,
             allowEscapeKey: false,
+            confirmButtonColor: '#36528b', // primary-color
             allowEnterKey: false
+
         });
 
     };
 
     const handleSearch = (val) => {
+        // set the pagination index to 1
+        localStorage.setItem('companiesPaginationIndex', 1)
+        setCurrentPage(1)
         setCompanies([])
         let search
         if (val == "") {
@@ -138,6 +143,8 @@ function Companies() {
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Please enter a search term!',
+                    confirmButtonColor: '#36528b', // primary-color
+
                 })
                 return;
             }
@@ -160,6 +167,8 @@ function Companies() {
                         icon: 'error',
                         title: 'Oops...',
                         text: 'No results found!',
+                        confirmButtonColor: '#36528b', // primary-color
+
                     })
                     setCompanies([])
 

@@ -95,12 +95,27 @@ function Company() {
     }, [user])
 
     const handleApply = async () => {
+        // Check if the date is after 21st April 2023
         if (date == true) {
             let alreadyApplied = false;
             let applyTextUpdated = '';
             setLoading(true);
             if (user != null && user != undefined && user.uid) {
                 const userCache = JSON.parse(localStorage.getItem(user.uid));
+                // Check if the localStorage applied array length is more than 20
+                if (keys.length > 20 || userCache.applied.length > 20) {
+                    MySwal.fire({
+                        icon: "error",
+                        title: 'Error!',
+                        html: "<div class='flex flex-col items-start gap-2 font-bold text-xl text-red-500'>"
+                            + "Maximum 20 jobs can be applied at a time."
+                            + "</div>",
+                        confirmButtonColor: '#36528b', // primary-color
+                        confirmButtonText: 'Ok'
+                    });
+                    setLoading(false);
+                    return;
+                }
                 // If userCache applied is empty then write the elements of keys to firestore WRITE * KEYS
                 if (userCache.applied.length == 0) {
                     const collectonRef = collection(getDb, 'users');
@@ -242,7 +257,7 @@ function Company() {
                             <h1 className='text-dark-color md:text-4xl text-start md:mb-0 mb-3 text-3xl font-bold' > About the<span className='text-primary-color'> Company</span> </h1>
                         </div>
                         <div className='flex flex-row w-full md:basis-6/12 auto md:w-64 justify-between'>
-                            <div className='flex flex-col w-full mr-4'>
+                            <div className='flex flex-col w-full gap-4 mr-4'>
                                 <button
                                     id='apply_button'
                                     // disable this button till 12 April 2023 IST
@@ -253,6 +268,7 @@ function Company() {
                           mr-10 font-semibold rounded-lg text-sm`}>
                                     <i className='fa fa-check text-light-color mx-2 '></i> Apply now!
                                 </button>
+                                <h1 className='text-red-500 font-semibold text-base '>*Applicants can apply to maximum 20 companies!</h1>
 
 
                             </div>
