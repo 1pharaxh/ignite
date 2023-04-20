@@ -66,26 +66,39 @@ function Company() {
             const userCache = JSON.parse(localStorage.getItem(user.uid));
             // If it does not then logout the user
             if (userCache == null) {
-                logOut();
+                // navigate to account page
+                navigate('/account');
             }
         }
     }
     const checkResume = async () => {
-        const userCache = JSON.parse(localStorage.getItem(user.uid));
-        if (userCache != null) {
-            if (userCache.resume != undefined) {
-                setHasResume(userCache.resume);
+        try {
+            if (user.uid != undefined) {
+                const userCache = JSON.parse(localStorage.getItem(user.uid));
+                if (userCache != null) {
+                    if (userCache.resume != undefined) {
+                        setHasResume(userCache.resume);
+                    }
+                } else {
+                    // if there is no cache then get the data from firestore READ_ONLY
+                    const collectonRef2 = collection(getDb, 'users');
+                    const docRef = doc(collectonRef2, user.uid);
+                    const docSnap = await getDoc(docRef);
+                    const resume = docSnap.data().resume;
+                    if (resume != undefined) {
+                        setHasResume(resume);
+                    }
+
+
+                }
+            } else {
+                setHasResume('');
             }
-        } else {
-            // if there is no cache then get the data from firestore READ_ONLY
-            const collectonRef2 = collection(getDb, 'users');
-            const docRef = doc(collectonRef2, user.uid);
-            const docSnap = await getDoc(docRef);
-            const resume = docSnap.data().resume;
-            if (resume != undefined) {
-                setHasResume(resume);
-            }
+        } catch (error) {
+            setHasResume('');
+            console.log(error);
         }
+
     }
     // This useEffect is used to fetch data from the backend
     useEffect(() => {
@@ -100,8 +113,8 @@ function Company() {
             let alreadyApplied = false;
             let applyTextUpdated = '';
             setLoading(true);
-            if (user != null && user != undefined && user.uid) {
-                const userCache = JSON.parse(localStorage.getItem(user.uid));
+            const userCache = JSON.parse(localStorage.getItem(user.uid));
+            if (user.uid == undefined && user != null && user != undefined) {
                 // Check if the localStorage applied array length is more than 20
                 if (keys.length > 20 || userCache.applied.length > 20) {
                     MySwal.fire({
@@ -151,6 +164,21 @@ function Company() {
                         localStorage.setItem(user.uid, JSON.stringify(userCache));
                     }
                 }
+            } else {
+                // If user is not logged in
+                MySwal.fire({
+                    icon: "error",
+                    title: 'Error!',
+                    html: "<div class='flex flex-col items-start gap-2 font-bold text-xl text-red-500'>"
+                        + "Please fill details on Accounts page!"
+                        + "</div>",
+                    confirmButtonColor: '#36528b', // primary-color
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/account');
+                    }
+                });
             }
             setLoading(false);
             // Handle error messages

@@ -1,73 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import '../../static/css/home_timer.css'
 export default function HomeTimer() {
-  const countdownDate = new Date("April 21, 2023 00:00:00").getTime();
-
-  const [days, setDays] = useState(0);
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = countdownDate - now;
-      setDays(Math.floor(distance / (1000 * 60 * 60 * 24)));
-      setHours(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-      setMinutes(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-      setSeconds(Math.floor((distance % (1000 * 60)) / 1000));
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className='bg-primary-lighter md:p-10 p-5 w-full md:h-96 h-64 flex-col flex items-center justify-center gap-4 md:mt-10 mt-3'>
-      <h1 className="font-bold md:text-5xl text-3xl text-center text-primary-color">
-        LIVE-IN
+      <h1 className="font-bold md:text-5xl text-2xl text-center text-primary-color font-baloo-paaji">
+        APPLICATIONS OPEN NOW!
       </h1>
-      <div className='flex flex-row items-center justify-centermd:gap-4 gap-2'>
-        <div className='flex flex-col items-center justify-center'>
-          <h1 className='font-bold text-primary-color md:text-9xl text-6xl ' >
-            {days.toString().padStart(2, '0')}
-          </h1>
-          <h1 className='font-semibold text-primary-color'>
-            DAYS
-          </h1>
-        </div>
+      <div className='flex flex-row items-center justify-center md:gap-4 gap-2'>
 
-        <div className="h-full w-[2px] bg-primary-color"></div>
-
-        <div className='flex flex-col items-center justify-center'>
-          <h1 className='font-bold text-primary-color md:text-9xl text-6xl '>
-            {hours.toString().padStart(2, '0')}
-          </h1>
-          <h1 className='font-semibold text-primary-color'>
-            HOURS
-          </h1>
-        </div>
-        <div className="h-full w-[2px] bg-primary-color"></div>
-
-        <div className='flex flex-col items-center justify-center'>
-          <h1 className='font-bold text-primary-color md:text-9xl text-6xl '>
-            {minutes.toString().padStart(2, '0')}
-          </h1>
-          <h1 className='font-semibold text-primary-color'>
-            MINUTES
-          </h1>
-        </div>
-        <div className="h-full w-[2px] bg-primary-color"></div>
-
-        <div className='flex flex-col items-center justify-center'>
-          <h1 className='font-bold text-primary-color md:text-9xl text-6xl '>
-            {seconds.toString().padStart(2, '0')}
-          </h1>
-          <h1 className='font-semibold text-primary-color'>
-            SECONDS
-          </h1>
-        </div>
+        <h1 className='font-bold text-primary-color md:text-9xl text-5xl font-baloo-paaji'>
+          21st - 23rd April
+        </h1>
       </div>
 
-      <h1 className='mt-5 text-primary-color font-bold'>Check the schedule</h1>
+      <h1 className='mt-5 text-primary-color font-bold font-baloo-paaji'>Check the schedule</h1>
       <div>
         <svg className='transform -rotate-90 fill-primary-color' width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M32 14.5H7.66L18.84 3.32L16 0.5L0 16.5L16 32.5L18.82 29.68L7.66 18.5H32V14.5Z" />
