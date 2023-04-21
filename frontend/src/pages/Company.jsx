@@ -122,26 +122,27 @@ function Company() {
             let alreadyApplied = false;
             let applyTextUpdated = '';
             setLoading(true);
-            const userCache = JSON.parse(localStorage.getItem(user.uid));
-            if (userCache == null || userCache.applied == undefined) {
-                // If there is no cache then send the user back to account page and ask him to fill the details
-                MySwal.fire({
-                    icon: "error",
-                    title: 'Error!',
-                    html: "<div class='flex flex-col items-start gap-2 font-bold text-xl text-red-500'>"
-                        + "Please fill your details."
-                        + "</div>",
-                    confirmButtonColor: '#36528b', // primary-color
-                    confirmButtonText: 'Ok'
-                }).then(() => {
-                    navigate('/account');
 
+            if (user != null && user != undefined && user.uid != undefined) {
+                const userCache = JSON.parse(localStorage.getItem(user.uid));
+                if (userCache == null || userCache.applied == undefined) {
+                    // If there is no cache then send the user back to account page and ask him to fill the details
+                    MySwal.fire({
+                        icon: "error",
+                        title: 'Error!',
+                        html: "<div class='flex flex-col items-start gap-2 font-bold text-xl text-red-500'>"
+                            + "Please fill your details."
+                            + "</div>",
+                        confirmButtonColor: '#36528b', // primary-color
+                        confirmButtonText: 'Ok'
+                    }).then(() => {
+                        navigate('/account');
+
+                    }
+                    )
+                    setLoading(false);
+                    return;
                 }
-                )
-                setLoading(false);
-                return;
-            }
-            if (user.uid != undefined && user != null && user != undefined) {
                 // Check if the localStorage applied array length is more than 20
                 if (keys.length > 20 || (userCache.applied != undefined && userCache.applied.length > 20)) {
                     MySwal.fire({
