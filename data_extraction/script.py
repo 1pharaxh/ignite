@@ -8,6 +8,10 @@ import sys
 import os 
 import pyautogui
 pyautogui.hotkey('alt', 'enter')
+import firebase_admin
+from firebase_admin import credentials, auth
+
+
 # clear the terminal
 try:
     #check if node is installed
@@ -20,9 +24,13 @@ except subprocess.CalledProcessError:
     subprocess.run(["start", "https://nodejs.org/en/download/"], shell=True)
     sys.exit(1)
 # run command to dump the database   
-cmd = 'npx -p node-firestore-import-export firestore-export -a serviceAccountKey.json -b backup.json'
-
-result = subprocess.run(['powershell', '-Command', cmd], shell=True, stdout=subprocess.PIPE)
+inp_a = input("Want to dump the database? (y/n): ")
+if inp_a == 'y':
+    cmd = 'npx -p node-firestore-import-export firestore-export -a serviceAccountKey.json -b backup.json'
+    result = subprocess.run(['powershell', '-Command', cmd], shell=True, stdout=subprocess.PIPE)
+if inp_a == 'n':
+    print('ok')
+    time.sleep(1)
 
 os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -176,11 +184,12 @@ choice  = input('''
 2. See Registered Users
 3. See Incomplete User Profiles
 4. Number of Registered Users
+5. Emails of all Registered Users
 
-Enter 1 or 2 or 3 or 4:
+Enter 1 or 2 or 3 or 4 or 5:
 ''')
 # wait till the user enters a valid choice
-while choice != "1" and choice != "2" and choice != "3" and choice != "4":
+while choice != "1" and choice != "2" and choice != "3" and choice != "4" and choice != "5":
     os.system('cls' if os.name == 'nt' else 'clear')
     choice  = input('''
                                             :
@@ -201,10 +210,46 @@ while choice != "1" and choice != "2" and choice != "3" and choice != "4":
 2. See Registered Users
 3. See Incomplete User Profiles
 4. Number of Registered Users
+5. Emails of all Registered Users
 
-Enter 1 or 2 or 3 or 4:
+Enter 1 or 2 or 3 or 4 o 5:
 ''')
-    
+
+def dictCheck(dict, key):
+    if key in dict:
+        return dict[key]
+    else:
+        return "Not Provided"
+if choice == "5":
+    # Initialize the Firebase Admin SDK
+    cred = credentials.Certificate('serviceAccountKey.json')
+    firebase_admin.initialize_app(cred)
+
+    # Get a reference to the Firebase Authentication service
+    auth_service = auth
+
+    # Retrieve the first batch of users from Firebase Authentication
+    page = auth_service.list_users()
+
+    # Extract the email addresses of the users in the first batch
+    emails = [user.email for user in page.users]
+
+    # Continue paginating through the results until all users have been retrieved
+    while page.has_next_page:
+        page = auth_service.list_users(page_token=page.next_page_token)
+        emails += [user.email for user in page.users]
+
+    # write the emails to a csv file
+    with open('applications.csv', 'w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Email"])
+        for email in emails:
+            writer.writerow([email])
+    print('''
+    Emails of all registered users have been written to emails.csv
+    ''')
+    input("Press Enter to exit...")
+    exit()
 if choice == "1":
     applications = []
     for userId in data:
@@ -215,7 +260,7 @@ if choice == "1":
 
     for application in applications:
         name = application['name']
-        resume = application['resume']
+        resume = dictCheck(application, 'resume')
         email = application['email']
         phone = application['contactNumber']
         college = application['college']
