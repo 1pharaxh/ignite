@@ -185,11 +185,12 @@ choice  = input('''
 3. See Incomplete User Profiles
 4. Number of Registered Users
 5. Emails of all Registered Users
+6. Number of Applications
 
-Enter 1 or 2 or 3 or 4 or 5:
+Enter 1 or 2 or 3 or 4 or 5 or 6:
 ''')
 # wait till the user enters a valid choice
-while choice != "1" and choice != "2" and choice != "3" and choice != "4" and choice != "5":
+while choice != "1" and choice != "2" and choice != "3" and choice != "4" and choice != "5" and choice != "6":
     os.system('cls' if os.name == 'nt' else 'clear')
     choice  = input('''
                                             :
@@ -211,8 +212,9 @@ while choice != "1" and choice != "2" and choice != "3" and choice != "4" and ch
 3. See Incomplete User Profiles
 4. Number of Registered Users
 5. Emails of all Registered Users
+6. Number of Applications
 
-Enter 1 or 2 or 3 or 4 o 5:
+Enter 1 or 2 or 3 or 4 or 5 or 6:
 ''')
 
 def dictCheck(dict, key):
@@ -250,6 +252,19 @@ if choice == "5":
     ''')
     input("Press Enter to exit...")
     exit()
+if choice == "6":
+    os.system('cls' if os.name == 'nt' else 'clear')
+    applicationLength = 0
+    for userId in data:
+        application = data[userId]
+        if "applied" in application and application['applied'] != []:
+            applicationLength += len(application['applied'])
+    print(f'''
+    There are {applicationLength} applications
+    ''')
+    input("Press Enter to exit...")
+    exit()
+
 if choice == "1":
     applications = []
     for userId in data:

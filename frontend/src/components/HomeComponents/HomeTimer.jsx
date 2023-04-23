@@ -9,7 +9,7 @@ export default function HomeTimer() {
       <div className='flex flex-row items-center justify-center md:gap-4 gap-2'>
 
         <h1 className='font-bold text-primary-color md:text-9xl text-5xl font-baloo-paaji'>
-          21st - 23rd April
+          21st - 24th April
         </h1>
       </div>
 
