@@ -247,7 +247,7 @@ function Company() {
                 icon: "error",
                 title: 'Error!',
                 html: "<div class='text-xl text-red-500 font-bold'>" +
-                    " ● We have don't accept applications after 24th April 2023."
+                    " ● We don't accept applications after 24th April 2023."
                     + "</div>",
                 confirmButtonColor: '#36528b', // primary-color
                 confirmButtonText: 'Ok',
