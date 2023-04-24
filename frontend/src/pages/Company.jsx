@@ -289,7 +289,8 @@ function Company() {
                         <div className='flex flex-col items-center justify-center mb-10 h-full mt-[3%]'>
                             <h1 className='text-4xl text-light-color font-medium content-center'> {data.name} </h1>
                             <div className='w-[150px] h-[150px] mt-4 bg-light-color rounded-md items-center justify-center flex overflow-hidden'>
-                                <img className='object-contain h-full w-full' src={data.image}></img>
+                                {/* <img className='object-contain h-full w-full' src={data.image}></img> */}
+                                <img className='object-contain h-full w-full' src="https://th.bing.com/th/id/R.ea54db5822a3b2fdbd590b49c57d8033?rik=h7e4LIz%2bY8DMwg&riu=http%3a%2f%2fwww.clipartbest.com%2fcliparts%2fyio%2f69M%2fyio69MBoT.jpg&ehk=XuNU9Y%2fhF72ZA3cHcWcAlucA5DA0wl1zzkrLCOAL8%2bs%3d&risl=&pid=ImgRaw&r=0"></img>
 
                             </div>
                         </div>
