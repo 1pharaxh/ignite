@@ -13,7 +13,7 @@ import HomeLoginModal from "../components/HomeComponents/HomeLoginModal";
 import HomeTopCompanies from "../components/HomeComponents/HomeTopCompanies";
 import HomeStatistics from "../components/HomeComponents/HomeStatistics";
 import banner from "../static/images/banner_1.png";
-import phoneBanner from "../static/images/Phone_banner_1.jpg";
+import phoneBanner from "../static/images/Phone_banner_1.png";
 import HomeTimeline from "../components/HomeComponents/HomeTimeline";
 import HomeTimer from "../components/HomeComponents/HomeTimer";
 import HomeImageContinueScroll from "../components/HomeComponents/HomeImageContinueScroll";
