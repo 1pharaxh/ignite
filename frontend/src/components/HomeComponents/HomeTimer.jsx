@@ -4,7 +4,7 @@ export default function HomeTimer() {
   return (
     <div className='bg-primary-lighter md:p-10 p-5 w-full md:h-96 h-64 flex-col flex items-center justify-center gap-4 md:mt-10 mt-3'>
       <h1 className="font-bold md:text-5xl text-2xl text-center text-primary-color font-baloo-paaji">
-        APPLICATIONS OPEN NOW!
+        APPLICATIONS CLOSED!
       </h1>
       <div className='flex flex-row items-center justify-center md:gap-4 gap-2'>
 

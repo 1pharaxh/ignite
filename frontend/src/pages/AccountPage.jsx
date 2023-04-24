@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function AccountPage() {
+    const date = new Date('2023-04-21T00:00:00+05:30') > new Date();
     document.title = "Account"
     const [contactNumber, setContactNumber] = useState("");
     const [course, setCourse] = useState("");
@@ -91,6 +92,16 @@ export default function AccountPage() {
     // file is the file to be uploaded,key is the key 
     // in the firestore database where the download url is to be stored
     const upload = async (file, key) => {
+        if (!date) {
+            MySwal.fire({
+                title: 'Error!',
+                text: 'Registration is closed',
+                icon: 'error',
+                confirmButtonColor: '#36528b', // primary-color
+                confirmButtonText: 'Ok'
+            })
+            return;
+        }
         if (!file) {
             return;
         }
@@ -174,6 +185,16 @@ export default function AccountPage() {
         }
     }
     const handleSubmit = () => {
+        if (!date) {
+            MySwal.fire({
+                title: 'Error!',
+                text: 'Registration is closed',
+                icon: 'error',
+                confirmButtonColor: '#36528b', // primary-color
+                confirmButtonText: 'Ok'
+            })
+            return;
+        }
         // Check if there is a timeOut from local storage only allow the user to submit the form if we exceed the timeOut by 5 minutes
         const timeOut = timeout("timeOut");
         if (timeOut) {

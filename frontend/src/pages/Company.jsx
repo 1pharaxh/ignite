@@ -18,8 +18,8 @@ import { DotLoader } from 'react-spinners';
 import { RWebShare } from 'react-web-share';
 
 function Company() {
-    // change 08 -> 20
-    const date = new Date('2023-04-21T00:00:00+05:30') < new Date();
+    // change 08 -> 21
+    const date = new Date('2023-04-21T00:00:00+05:30') > new Date();
     // scroll to top 
     window.scrollTo(0, 0);
     const carouselRef = useRef(null);
@@ -242,11 +242,12 @@ function Company() {
                 backToCompanies();
             }
         } else {
+            // This error depends on the date, change the < or > accordingly to display error for before / after different dates
             MySwal.fire({
                 icon: "error",
                 title: 'Error!',
                 html: "<div class='text-xl text-red-500 font-bold'>" +
-                    " ● We start accepting applications on 21st April 2023."
+                    " ● We have don't accept applications after 24th April 2023."
                     + "</div>",
                 confirmButtonColor: '#36528b', // primary-color
                 confirmButtonText: 'Ok',
