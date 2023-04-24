@@ -330,7 +330,7 @@ export default function AccountPage() {
                 </div>
 
                 <div className="flex flex-col">
-                    <h1 className="text-red-500 text-base font-semibold mb-5" >*Profile can be updated every 1hr</h1>
+                    <h1 className="text-red-500 text-base font-semibold mb-5" >*Profile can be updated every 10 mins</h1>
 
                     <h1 className='text-lg font-semibold'>
                         Your Email
